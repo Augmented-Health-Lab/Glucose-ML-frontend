@@ -1,0 +1,84 @@
+
+/* ============================================
+   DATASET DETAIL PAGE STYLES
+   Uses CSS variables from index.css
+   ============================================ */
+
+/* Main page container - full height with background */
+.dataset-detail-page {
+  background-color: var(--teal-grey-background);
+  min-height: 100vh;
+}
+
+/* ============================================
+   DETAIL CARDS
+   White rounded containers for sections
+   ============================================ */
+.detail-card {
+  background: var(--white-background);
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* ============================================
+   DATA ROWS
+   Used for key-value pairs in Population section
+   ============================================ */
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--secondary-light-grey);
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+/* ============================================
+   ROUND ICON
+   Copied from DatasetCard.css for consistency
+   ============================================ */
+.round-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+
+.dataset-detail-page .row.g-4 > [class^="col-"],
+.dataset-detail-page .row.g-4 > [class*=" col-"] {
+  align-self: stretch;
+}
+
+
+.dataset-left-col {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+
+.dataset-left-col .detail-card {
+  padding: 24px;
+}
+
+.dataset-left-col > .detail-card:last-child {
+  flex: 1;
+}
+
+.dataset-right-col {
+  display: flex;
+  height: 100%;
+}
+
+.dataset-right-col .detail-card {
+  flex: 1;
+  min-height: 640px; 
+}

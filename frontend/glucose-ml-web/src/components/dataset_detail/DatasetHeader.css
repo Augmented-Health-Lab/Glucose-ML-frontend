@@ -1,0 +1,38 @@
+/* ============================================
+   HEADER SECTION
+   White background area at top with dataset info
+   ============================================ */
+.detail-header {
+  background-color: var(--white-background);
+  padding: 40px 0;
+  border-bottom: 1px solid var(--secondary-light-grey);
+}
+
+/* Back button styling */
+.back-button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--secondary-grey);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.back-button:hover {
+  color: var(--primary-brand);
+}
+
+/* Center ONLY the header content (title/date/desc/buttons). */
+.detail-header-content {
+  text-align: center;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.detail-header-actions {
+  justify-content: center;
+}

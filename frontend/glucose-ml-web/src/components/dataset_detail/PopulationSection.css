@@ -1,0 +1,38 @@
+
+/* HBA1C GROUP SECTION */
+
+.hba1c-section {
+  padding: 14px 0;
+  border-top: none;
+  border-bottom: 1px solid var(--secondary-light-grey);
+  margin: 10px 0;
+}
+
+.hba1c-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.hba1c-label {
+  margin: 0;
+}
+
+.hba1c-groups {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.hba1c-group-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.hba1c-group-item:last-child {
+  margin-bottom: 0;
+}

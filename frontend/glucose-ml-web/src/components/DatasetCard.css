@@ -1,0 +1,96 @@
+.dataset-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--white-background);
+  border-radius: 20px;
+  padding: 28px;
+  border: 1px solid var(--white-background);
+  max-width: 410px;
+  min-height: 386px;
+  min-width: 0;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* .dataset-card:hover {
+  box-shadow: 0 12px 32px rgba(59, 167, 161, 0.18), 0 2px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px) scale(1.025);
+  cursor: pointer;
+} */
+
+.dataset-card-selected {
+  border: 1px solid var(--primary-brand);
+}
+
+.top-section {
+  border-bottom: 1px solid var(--secondary-light-grey);
+}
+
+.dataset-card h2 {
+  overflow-wrap: anywhere;
+}
+
+.form-check-input {
+  width: 29px;
+  height: 29px;
+  border-color: var(--secondary-medium-grey);
+  accent-color: var(--primary-brand);
+}
+
+.form-check-input:checked {
+  border-color: var(--secondary-medium-grey);
+  background-color: var(--primary-brand);
+}
+
+.form-check-input:focus {
+  box-shadow: none;
+  border-color: var(--secondary-medium-grey);
+}
+
+.mb-6px {
+  margin-bottom: 6px;
+}
+
+.mb-12px {
+  margin-bottom: 12px;
+}
+
+.mb-24px {
+  margin-bottom: 24px;
+}
+
+.round-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: var(--body-weight);
+}
+
+.icon-section {
+  padding-top: 24px;
+  display: flex;
+  align-items: flex-end;
+  gap: 24px;
+}
+
+/* .icon-left {
+  display: flex;
+  flex-direction: column;
+} */
+
+.visual-bar {
+  height: 140px;
+  width: 47px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.type-text {
+  font-size: 12px;
+}

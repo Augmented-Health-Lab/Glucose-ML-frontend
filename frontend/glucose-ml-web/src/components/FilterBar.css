@@ -1,0 +1,45 @@
+.filter-label {
+  background-color: var(--white-background);
+}
+
+.filter-label:hover {
+  background-color: var(--white-background);
+}
+
+.control-btn {
+  background-color: var(--primary-brand);
+  color: var(--white-background);
+  border-radius: 50px;
+  border-color: var(--primary-brand);
+}
+
+.control-btn:disabled {
+  background-color: #e1ebea;
+  color: var(--secondary-grey);
+  cursor: not-allowed;
+  border-color: #e3e3e3;
+}
+
+.control-btn:hover {
+  background-color: var(--primary-brand-dark);
+  color: var(--white-background);
+  border-color: var(--primary-brand);
+}
+
+.control-btn:active:not(:disabled) {
+  background-color: #1b6966;
+  color: var(--white-background);
+  border-color: var(--primary-brand);
+}
+
+.legend-btn {
+  border: none;
+  color: var(--secondary-grey);
+}
+
+.legend-btn:hover,
+.legend-btn:active,
+.legend-btn:focus {
+  color: var(--secondary-grey) !important;
+  border: none;
+}

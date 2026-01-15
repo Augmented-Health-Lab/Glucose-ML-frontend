@@ -1,0 +1,182 @@
+/* ============================================
+   CHART HEADER
+   ============================================ */
+.chart-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.chart-description {
+  font-size: 13px;
+  color: var(--secondary-grey);
+  margin: 0;
+}
+
+.chart-toggle-row {
+  justify-content: flex-start;
+}
+
+/* ============================================
+   TOGGLE BUTTONS
+   For "All" vs "By HbA1c group" chart view
+   ============================================ */
+.toggle-btn {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--secondary-medium-grey);
+  background: var(--white-background);
+  color: var(--secondary-grey);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.toggle-btn.active {
+  background: var(--black);
+  color: var(--white-background);
+  border-color: var(--black);
+}
+
+.toggle-btn:hover:not(.active) {
+  border-color: var(--primary-brand);
+  color: var(--primary-brand);
+}
+
+/* ============================================
+   GLUCOSE CHART
+   Bar chart visualization for glucose ranges
+   ============================================ */
+.chart-section {
+  position: relative;
+}
+
+.chart-section {
+  margin-top: 24px !important;   
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.glucose-chart {
+  margin-bottom: 0 !important;
+  padding-bottom: 20px; 
+}
+
+
+.glucose-chart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 24px;
+
+  height: 320px;
+  padding: 24px 24px 20px 64px;
+  position: relative;
+
+  background-color: var(--teal-grey-background);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* subtle grid */
+.glucose-chart::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.06) 1px, transparent 1px),
+    linear-gradient(to top, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+  background-size: 110px 70px;
+  opacity: 0.18;
+  z-index: 0;
+}
+
+/* axes (left + bottom) */
+.glucose-chart::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.16)),
+    linear-gradient(to right, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.16));
+
+  background-size: 1px calc(100% - 64px), calc(100% - 88px) 1px;
+  background-position: 56px 24px, 56px calc(100% - 44px);
+  background-repeat: no-repeat;
+
+  z-index: 1;
+}
+
+.y-axis-label {
+  position: absolute;
+  left: 22px;
+  top: 50%;
+  transform: rotate(-90deg) translateX(-50%);
+  transform-origin: left center;
+  font-size: 12px;
+  color: var(--secondary-grey);
+  z-index: 2;
+}
+
+.bar-container {
+  width: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  position: relative;
+  z-index: 2;
+}
+
+.bar-top-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.bar {
+  width: 100%;
+  background: var(--primary-brand);
+  border-radius: 6px 6px 0 0;
+  min-height: 20px;
+  transition: all 0.3s;
+}
+
+.bar:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
+}
+
+.bar-range-label {
+  font-size: 12px;
+  color: var(--secondary-grey);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   Adjust for mobile devices
+   ============================================ */
+@media (max-width: 768px) {
+  .glucose-chart {
+    height: 260px;
+    padding: 20px 14px 18px 52px;
+    gap: 14px;
+  }
+
+  .bar-container {
+    width: 74px;
+  }
+
+  .toggle-btn {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+}
