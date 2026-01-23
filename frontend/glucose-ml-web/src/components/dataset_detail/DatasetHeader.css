@@ -1,38 +1,135 @@
-/* ============================================
-   HEADER SECTION
-   White background area at top with dataset info
-   ============================================ */
+
+
 .detail-header {
-  background-color: var(--white-background);
-  padding: 40px 0;
-  border-bottom: 1px solid var(--secondary-light-grey);
+  background: transparent;
+  border-bottom: none;
+  padding: 24px 0 28px;
 }
 
-/* Back button styling */
-.back-button {
-  background: none;
-  border: none;
+.detail-header-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 22px;
+}
+
+.detail-header-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.breadcrumb-link {
+  border: 0;
+  background: transparent;
   padding: 0;
+  cursor: pointer;
   color: var(--secondary-grey);
+  font-size: 14px;
+  font-weight: 500;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  margin-bottom: 16px;
-  cursor: pointer;
-  transition: color 0.2s;
+  gap: 6px;
 }
 
-.back-button:hover {
+.breadcrumb-link:hover {
   color: var(--primary-brand);
 }
 
-/* Center ONLY the header content (title/date/desc/buttons). */
+.legend-info-btn {
+  margin-left: auto;
+  border: 0;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--secondary-grey);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.legend-info-btn:hover {
+  color: var(--primary-black);
+}
+
+.legend-info-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid var(--secondary-medium-grey);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  line-height: 1;
+}
+
 .detail-header-content {
   text-align: center;
-  max-width: 920px;
-  margin: 0 auto;
+  max-width: 820px;
+  margin: 20px auto 0;
+}
+
+.detail-title {
+  margin: 0 0 8px;
+  font-size: 32px; 
+  font-weight: 700;
+  color: var(--primary-black);
+}
+
+.detail-duration {
+  margin: 0 0 14px;
+  color: var(--secondary-grey);
+  font-size: 14px; 
+  font-weight: 500;
+}
+
+.detail-desc {
+  margin: 0 auto 20px;
+  max-width: 720px;
+  color: var(--secondary-grey);
+  font-size: 14px;
+  line-height: 1.45;
 }
 
 .detail-header-actions {
+  display: flex;
   justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+
+.control-btn {
+  border-radius: 12px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 140ms ease, color 140ms ease, border-color 140ms ease,
+    box-shadow 140ms ease;
+}
+
+
+.control-btn-primary {
+  background: transparent;
+  border: 1px solid var(--primary-brand);
+  color: var(--primary-brand);
+}
+
+.control-btn-primary:hover {
+  background: var(--primary-brand);
+  color: var(--white-background);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+.control-btn-outline {
+  background: transparent;
+  border: 1px solid var(--secondary-medium-grey);
+  color: var(--primary-black);
+}
+
+.control-btn-outline:hover {
+  border-color: var(--primary-brand);
+  color: var(--primary-brand);
 }

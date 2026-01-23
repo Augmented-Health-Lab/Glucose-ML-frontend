@@ -1,15 +1,73 @@
+/* src/components/dataset_detail/DataSourcesSection.css */
 
-   /* DATA SOURCES ROWS
-   Includes icon, name, and detail */
+.sources {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
 
 .source-row {
+  position: relative;
+
   display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--secondary-light-grey);
+  justify-content: space-between;
+  gap: 16px;
+
+  padding: 18px 0;
+  align-items: flex-start;
+
+  /* REMOVE the border divider */
+  border: 0;
+}
+
+.source-row:first-child {
+  padding-top: 0;
 }
 
 .source-row:last-child {
-  border-bottom: none;
+  padding-bottom: 0;
+}
+
+
+
+.source-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.source-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--teal-grey-background);
+  color: var(--secondary-grey);
+  font-size: 14px;
+  font-weight: 600;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 auto;
+  text-transform: lowercase;
+}
+
+.source-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--secondary-grey);
+  line-height: 1.2;
+}
+
+.source-detail {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--secondary-grey);
+  text-align: right;
+  line-height: 1.25;
+
+  max-width: 170px;
+  white-space: normal;
 }

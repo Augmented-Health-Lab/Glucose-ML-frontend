@@ -7,12 +7,14 @@ interface FilterBarProps {
   filterSelections: { [key: string]: string[] };
   onFilterChange: (label: string, selected: string[]) => void;
   filterButtonEnabled: boolean;
+  onLegendClick?: () => void;
 }
 
 const FilterBar = ({
   filterSelections,
   onFilterChange,
   filterButtonEnabled,
+  onLegendClick,
 }: FilterBarProps) => {
   // clear all filters
   const handleClear = () => {
@@ -33,7 +35,10 @@ const FilterBar = ({
             onChange={(selected: string[]) => onFilterChange(f.label, selected)}
           />
         ))}
-        <button className="btn d-flex align-items-center gap-2 legend-btn">
+        <button className="btn d-flex align-items-center gap-2 legend-btn"
+          type="button"
+          onClick={onLegendClick}
+          >
           <LuInfo />
           <span className="metadata legend-btn">Legend & info</span>
         </button>

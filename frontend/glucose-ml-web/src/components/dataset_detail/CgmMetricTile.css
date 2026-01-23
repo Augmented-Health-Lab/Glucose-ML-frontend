@@ -1,0 +1,29 @@
+
+
+.cgm-metric-tile {
+  border: 1px solid var(--secondary-light-grey);
+  border-radius: 12px;
+
+  padding: 10px 12px;   
+  background: var(--white-background);
+
+  min-height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cgm-metric-value {
+  font-size: 28px;    
+  font-weight: 700;
+  color: var(--secondary-grey);
+  line-height: 1.05;
+}
+
+.cgm-metric-label {
+  margin-top: 2px;    
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--secondary-grey);
+  line-height: 1.2;
+}

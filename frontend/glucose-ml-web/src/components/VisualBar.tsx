@@ -9,9 +9,9 @@ const ORDER: RangeKey[] = ["very_low", "low", "target", "high", "very_high"];
 
 const LABEL: Record<RangeKey, string> = {
   very_low: "Very low (<54)",
-  low: "Low (54–69)",
-  target: "Target (70–180)",
-  high: "High (181–250)",
+  low: "Low [54–70)",
+  target: "Target [70–180)",
+  high: "High [180–250)",
   very_high: "Very high (>250)",
 };
 

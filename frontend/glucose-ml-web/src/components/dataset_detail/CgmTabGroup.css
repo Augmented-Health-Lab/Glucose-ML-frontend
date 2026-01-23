@@ -1,0 +1,26 @@
+
+
+.cgm-tab-group {
+  display: inline-flex;
+  gap: 8px;
+  padding: 4px;
+  border: 1px solid var(--secondary-light-grey);
+  border-radius: 12px;
+  background: var(--white-background);
+}
+
+.cgm-tab {
+  border: 0;
+  background: transparent;
+  color: var(--secondary-grey);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.cgm-tab.is-active {
+  background: var(--secondary-grey);
+  color: var(--white-background);
+}

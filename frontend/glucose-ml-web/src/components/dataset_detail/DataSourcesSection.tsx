@@ -1,31 +1,27 @@
-import type React from "react";
+
 import "./DataSourcesSection.css";
+import type { DataSource } from "../MockData";
 
 type Props = {
-  dataSources: { icon: string; name: string; detail: string }[];
-  RoundIcon: ({ type }: { type: string }) => React.ReactElement;
+  sources: DataSource[];
 };
 
-const DataSourcesSection = ({ dataSources, RoundIcon }: Props) => {
+export default function DataSourcesSection({ sources }: Props) {
   return (
-    <div className="detail-card">
-      <h2 className="h2 mb-3">Data sources</h2>
-      {dataSources.map((source) => (
-        <div key={source.icon} className="source-row">
-          <RoundIcon type={source.icon} />
-          <div className="flex-grow-1">
-            <div className="d-flex justify-content-between">
-              <span className="body">{source.name}</span>
-              <span className="body text-end">{source.detail}</span>
+    <section className="card">
+      <h2 className="card-title">Data sources</h2>
+
+      <div className="sources">
+        {sources.map((s) => (
+          <div key={s.name} className="source-row">
+            <div className="source-left">
+              <span className="source-icon">{s.icon}</span>
+              <span className="source-name">{s.name}</span>
             </div>
+            <div className="source-detail">{s.detail}</div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </section>
   );
-};
-
-export default DataSourcesSection;
-
-
-
+}

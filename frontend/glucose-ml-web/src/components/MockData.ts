@@ -1,3 +1,8 @@
+// src/components/MockData.ts
+
+// -------------------------
+// Filters (used by FilterBar)
+// -------------------------
 export const FILTERS = [
   {
     label: "Data types",
@@ -36,16 +41,19 @@ export const FILTERS = [
     multi: false,
     options: ["Public access", "Controlled"],
   },
-];
+] as const;
 
+// -------------------------
+// Home cards data (DatasetGrid / DatasetCard)
+// -------------------------
 export const DATASET_MOCKS = [
   {
     title: "CGMacros",
-    metadata: "50 participants • 14 days • Public access",
+    metadata: "48 participants • 22 days • Public access",
     description:
       "A CGM dataset linking glucose patterns with macronutrient intake. Useful for studying diet–glucose relationships.",
     types: ["T2D", "PreD", "ND"],
-    sources: ["G", "I", "A", "S", "Q", "M"],
+    sources: ["G", "I", "A", "S"],
   },
   {
     title: "AI-ReadI",
@@ -55,165 +63,222 @@ export const DATASET_MOCKS = [
     types: ["T1D", "PreD", "ND"],
     sources: ["G", "A", "M"],
   },
-  {
-    title: "BIG IDEAs",
-    metadata: "1000 participants • 20 days • Controlled",
-    description:
-      "A CGM dataset linking glucose patterns with macronutrient intake. Useful for studying diet–glucose relationships.",
-    types: ["T2D", "T1D", "ND"],
-    sources: ["G", "I", "S", "Q"],
-  },
-  {
-    title: "DiaTrend",
-    metadata: "250 participants • 14 days • Public access",
-    description:
-      "A multi-day CGM dataset offering detailed glucose time-series for trend and pattern analysis.",
-    types: ["T2D", "ND"],
-    sources: ["G", "I", "A", "S"],
-  },
-  {
-    title: "T1DEXI",
-    metadata: "250 participants • 14 days • Public access",
-    description:
-      "A 14-day CGM dataset focused on individuals with Type 1 diabetes, capturing daily glucose variability and insulin-related patterns.",
-    types: ["T1D"],
-    sources: ["G", "I", "M"],
-  },
-  {
-    title: "ShanghaiT2DM",
-    metadata: "250 participants • 14 days • Public access",
-    description:
-      "A CGM dataset of individuals with Type 2 diabetes collected under controlled research conditions for metabolic analysis.",
-    types: ["T2D"],
-    sources: ["G", "I", "A", "Q"],
-  },
-];
+] as const;
 
+export type DatasetCardMock = (typeof DATASET_MOCKS)[number];
 
-// DATASET DETAIL DATA
+// -------------------------
+// Types expected by dataset_detail components
+// -------------------------
+export type DiabetesType = "T1D" | "T2D" | "PreD" | "ND";
 
+// ✅ Used by GlucoseRangeChart.tsx
+export type GlucoseRangeKey = "VeryLow" | "Low" | "Target" | "High" | "VeryHigh";
+
+// ✅ Used by GlucoseRangeChart.tsx
+export type StackedBarGroup = {
+  group: "T1D" | "T2D" | "ND";
+  total: number;
+  segments: { key: GlucoseRangeKey; value: number }[];
+};
+
+// ✅ Used by DataSourcesSection.tsx
+export type DataSource = { icon: string; name: string; detail: string };
+
+// ✅ Used by PopulationSection.tsx
+export type PopulationGroup = { type: DiabetesType; count: number; label?: string };
+
+// Keeps your existing chart data shape for the older GlucoseRangeChart version
+export type GlucoseRange = {
+  range: "Very high" | "High" | "Target" | "Low" | "Very low";
+  percentage: number;
+};
+
+// -------------------------
+// Detail page model
+// -------------------------
 export interface DatasetDetail {
   id: string;
-  title: string;
+  title: string; // MUST match /dataset/${title}
   metadata: string;
-  duration: string;
+  participantsTotal: number;
+  populationGroups: PopulationGroup[];
+
+
+  // Header
+  duration: string; // e.g. "Year released: 2024"
   dateRange: string;
   fullDescription: string;
-  types: string[];
-  
+
+  // ✅ Needed by DatasetHeader.tsx in your newer code
+  actions: {
+    downloadLabel: string;
+    paperLabel: string;
+  };
+
+  // Cards (your existing structure)
   population: {
     total: number;
-    hba1cGroups: { type: string; count: number }[];
+    diabetesTypes: { type: DiabetesType; count: number }[];
     gender: string;
     ethnicities: string;
     ageRange: string;
   };
-  
-  dataSources: {
-    icon: string;
-    name: string;
-    detail: string;
-  }[];
-  
+
+  // ✅ Needed by DemographicsSection.tsx in your newer code
+  demographics: {
+    gender: string;
+    ethnicities: string;
+    ageRange: string;
+  };
+
+  // ✅ Needed by DataSourcesSection.tsx in your newer code
+  dataSources: DataSource[];
+
+  // Existing CGM summary (older components)
   cgmData: {
     device: string;
     totalDays: number;
     totalSamples: number;
     avgDaysPerParticipant: number;
   };
-  
-  glucoseRanges: {
-    range: string;
-    percentage: number;
-  }[];
+
+  // ✅ Needed by CGMDataSection.tsx in your newer code
+  cgmSummary: {
+    device: string;
+    totalDays: number;
+    glucoseSamples: number;
+    avgDaysPerParticipant: number;
+  };
+
+  // Existing chart format (older version)
+  glucoseRanges: GlucoseRange[];
+
+  // ✅ Needed by CGMDataSection.tsx + GlucoseRangeChart.tsx in your newer code
+  timeInRanges: StackedBarGroup[];
 }
 
-// Detailed data for each dataset
+// -------------------------
+// Detail data
+// -------------------------
 export const DATASET_DETAILS_MAP: Record<string, DatasetDetail> = {
-  "CGMacros": {
+  CGMacros: {
     id: "cgmacros",
     title: "CGMacros",
-    metadata: "50 participants • 14 days • Public access",
-    duration: "12 weeks",
-    dateRange: "14 September 2020 - 14 December 2020",
-    fullDescription: "A CGM dataset linking glucose patterns with macronutrient intake. Useful for studying diet-glucose relationships. A CGM dataset linking glucose patterns with macronutrient intake. Useful for studying diet-glucose relationships. A CGM dataset linking glucose patterns with macronutrient intake. Useful for studying diet-glucose relationships.",
-    types: ["T2D", "PreD", "ND"],
-    
+    metadata: "48 participants • 22 days • Public access",
+    duration: "Year released: 2024",
+    dateRange: "",
+    fullDescription:
+      "A CGM dataset linking glucose patterns with macronutrient intake. Useful for studying diet–glucose relationships. A CGM dataset linking glucose patterns with macronutrient intake.",
+
+    // ✅ for DatasetHeader
+    actions: {
+      downloadLabel: "Download dataset",
+      paperLabel: "Link to data source",
+    },
+
     population: {
       total: 48,
-      hba1cGroups: [
+      diabetesTypes: [
         { type: "T2D", count: 6 },
         { type: "PreD", count: 19 },
-        { type: "ND", count: 23 }
+        { type: "ND", count: 23 },
       ],
       gender: "23 female, 25 male",
       ethnicities: "--",
-      ageRange: "22-60"
+      ageRange: "22–60",
     },
-    
+
+    // ✅ for DemographicsSection (newer component expects dataset.demographics)
+    demographics: {
+      gender: "23 female, 25 male",
+      ethnicities: "--",
+      ageRange: "22–60 years",
+    },
+
     dataSources: [
       { icon: "I", name: "Insulin", detail: "Basal insulin only" },
       { icon: "G", name: "CGM", detail: "Dexcom" },
-      { icon: "S", name: "Self report", detail: "Meals (Carbs, proteins, fat)" },
-      { icon: "A", name: "Activity tracker", detail: "Sleep, HRV" }
+      { icon: "S", name: "Self report", detail: "Meals (carbs, protein, fat)" },
+      { icon: "A", name: "Activity tracker", detail: "Sleep, HRV" },
     ],
-    
+
+    // older field
     cgmData: {
       device: "Dexcom",
       totalDays: 22,
       totalSamples: 425,
-      avgDaysPerParticipant: 20
+      avgDaysPerParticipant: 22,
     },
-    
-    glucoseRanges: [
-      { range: "<70mg/dL", percentage: 4 },
-      { range: "70-140mg/dL", percentage: 75 },
-      { range: "140-180mg/dL", percentage: 10 },
-      { range: "180-250mg/dL", percentage: 6 },
-      { range: ">250mg/dL", percentage: 5 }
-    ]
-  },
-  
-  "AI-ReadI": {
-    id: "ai-readi",
-    title: "AI-ReadI",
-    metadata: "250 participants • 14 days • Public access",
-    duration: "14 days",
-    dateRange: "1 January 2021 - 14 January 2021",
-    fullDescription: "A 14-day real-world CGM dataset with diverse participants, supporting glucose modeling and ML research.",
-    types: ["T1D", "PreD", "ND"],
-    
-    population: {
-      total: 250,
-      hba1cGroups: [
-        { type: "T1D", count: 80 },
-        { type: "PreD", count: 90 },
-        { type: "ND", count: 80 }
-      ],
-      gender: "125 female, 125 male",
-      ethnicities: "Diverse",
-      ageRange: "18-65"
-    },
-    
-    dataSources: [
-      { icon: "G", name: "CGM", detail: "Dexcom" },
-      { icon: "A", name: "Activity tracker", detail: "Fitbit" },
-      { icon: "M", name: "Meals", detail: "Self-reported" }
-    ],
-    
-    cgmData: {
+
+    // ✅ newer field (matches your newer CGMDataSection)
+    cgmSummary: {
       device: "Dexcom",
-      totalDays: 14,
-      totalSamples: 3500,
-      avgDaysPerParticipant: 14
+      totalDays: 22,
+      glucoseSamples: 425,
+      avgDaysPerParticipant: 22,
     },
-    
+
+    // older chart field (kept so older chart code still works)
     glucoseRanges: [
-      { range: "<70mg/dL", percentage: 5 },
-      { range: "70-140mg/dL", percentage: 65 },
-      { range: "140-180mg/dL", percentage: 15 },
-      { range: "180-250mg/dL", percentage: 10 },
-      { range: ">250mg/dL", percentage: 5 }
-    ]
+      { range: "Very high", percentage: 4 },
+      { range: "High", percentage: 10 },
+      { range: "Target", percentage: 65 },
+      { range: "Low", percentage: 15 },
+      { range: "Very low", percentage: 6 },
+    ],
+    participantsTotal: 48,
+    populationGroups: [
+      { type: "T2D", count: 6, label: "T2D" },
+      { type: "PreD", count: 19, label: "PreD" },
+      { type: "ND", count: 23, label: "ND" },
+    ],
+
+
+    // ✅ newer stacked bars (15 / 65 / 20)
+    timeInRanges: [
+      {
+        group: "T1D",
+        total: 15,
+        segments: [
+          { key: "VeryLow", value: 2 },
+          { key: "Low", value: 4 },
+          { key: "Target", value: 6 },
+          { key: "High", value: 2 },
+          { key: "VeryHigh", value: 1 },
+        ],
+      },
+      {
+        group: "T2D",
+        total: 65,
+        segments: [
+          { key: "VeryLow", value: 2 },
+          { key: "Low", value: 6 },
+          { key: "Target", value: 40 },
+          { key: "High", value: 12 },
+          { key: "VeryHigh", value: 5 },
+        ],
+      },
+      {
+        group: "ND",
+        total: 20,
+        segments: [
+          { key: "VeryLow", value: 1 },
+          { key: "Low", value: 4 },
+          { key: "Target", value: 12 },
+          { key: "High", value: 2 },
+          { key: "VeryHigh", value: 1 },
+        ],
+      },
+    ],
   },
+
 };
+
+// ✅ Needed by DatasetDetail.tsx error: missing export member 'mockCGMacros'
+export const mockCGMacros = DATASET_DETAILS_MAP.CGMacros;
+
+// Optional helper
+export function getDatasetDetailByTitle(title: string): DatasetDetail | null {
+  return DATASET_DETAILS_MAP[title] ?? null;
+}

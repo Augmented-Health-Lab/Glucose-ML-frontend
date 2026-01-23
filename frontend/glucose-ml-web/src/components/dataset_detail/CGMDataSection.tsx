@@ -1,61 +1,60 @@
+
+import { useState } from "react";
 import "./CGMDataSection.css";
+import type { DatasetDetail } from "../MockData";
+
+import CgmMetricTile from "./CgmMetricTile";
+import CgmTabGroup from "./CgmTabGroup";
 import GlucoseRangeChart from "./GlucoseRangeChart";
 
 type Props = {
-  cgmData: {
-    device: string;
-    totalDays: number;
-    totalSamples: number;
-    avgDaysPerParticipant: number;
-  };
-  glucoseRanges: { range: string; percentage: number }[];
-  showByGroup: boolean;
-  setShowByGroup: (v: boolean) => void;
+  dataset: DatasetDetail;
 };
 
-const CGMDataSection = ({ cgmData, glucoseRanges, showByGroup, setShowByGroup }: Props) => {
+type TabKey = "agp" | "hist" | "tir";
+
+export default function CGMDataSection({ dataset }: Props) {
+  const [tab, setTab] = useState<TabKey>("tir");
+
+  const tiles = [
+    { value: dataset.cgmSummary.device, label: "CGM device" },
+    { value: String(dataset.cgmSummary.totalDays), label: "Total days of glucose" },
+    { value: String(dataset.cgmSummary.glucoseSamples), label: "Glucose samples" },
+    { value: String(dataset.cgmSummary.avgDaysPerParticipant), label: "Average days per participant" },
+  ];
+
+  const yLabel = tab === "tir" ? "Count" : tab === "hist" ? "Count" : "Percent (%)";
+
+  const graphTitle = tab === "tir" ? "Time in ranges" : tab === "hist" ? "Histogram" : "Ambulatory glucose profile";
+
   return (
-    <div className="detail-card">
-      {/* Header row: "CGM data" (left) + Legend (right) */}
-      <div className="cgm-header-row">
-        <h2 className="h2">CGM data</h2>
+    <section className="cgm-card">
+      <h2 className="cgm-title">CGM data</h2>
 
-        <button type="button" className="btn btn-sm btn-link metadata legend-btn">
-          <span className="legend-icon">i</span>
-          <span>Legend &amp; info</span>
-        </button>
+      <div className="cgm-metrics">
+        {tiles.map((t) => (
+          <CgmMetricTile key={t.label} value={t.value} label={t.label} />
+        ))}
       </div>
 
-      {/* Figma-style 4-column summary row */}
-      <div className="cgm-data-grid">
-        <div className="data-item">
-          <div className="metadata">Type</div>
-          <div className="body">{cgmData.device}</div>
-        </div>
-
-        <div className="data-item">
-          <div className="metadata">Total days of glucose</div>
-          <div className="body">{cgmData.totalDays}</div>
-        </div>
-
-        <div className="data-item">
-          <div className="metadata">Total glucose samples</div>
-          <div className="body">{cgmData.totalSamples}</div>
-        </div>
-
-        <div className="data-item">
-          <div className="metadata">Average days per participant</div>
-          <div className="body">{cgmData.avgDaysPerParticipant}</div>
-        </div>
+      <div className="cgm-tabs-wrap">
+        <CgmTabGroup active={tab} onChange={setTab} />
       </div>
 
-      <GlucoseRangeChart
-        glucoseRanges={glucoseRanges}
-        showByGroup={showByGroup}
-        setShowByGroup={setShowByGroup}
-      />
-    </div>
+      <div className="cgm-graph">
+        <div className="graph-head">
+          <div className="graph-title">{graphTitle}</div>
+          <div className="graph-sub">Figure showing the range of glucose values...</div>
+        </div>
+
+        <div className="graph-body">
+          {tab === "tir" && <GlucoseRangeChart bars={dataset.timeInRanges} yLabel={yLabel} />}
+
+          {tab === "hist" && <div className="placeholder">Histogram goes here</div>}
+
+          {tab === "agp" && <div className="placeholder">Ambulatory glucose profile goes here</div>}
+        </div>
+      </div>
+    </section>
   );
-};
-
-export default CGMDataSection;
+}

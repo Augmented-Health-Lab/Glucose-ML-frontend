@@ -3,6 +3,7 @@ import FilterBar from "./FilterBar";
 import CompareBar from "./CompareBar";
 import DatasetGrid from "./DatasetGrid";
 import { useState, useEffect } from "react";
+import LegendModal from "./dataset_detail/LegendModal";
 
 const HomePage = () => {
   const [filterSelections, setFilterSelections] = useState<{
@@ -17,6 +18,8 @@ const HomePage = () => {
       .then((res) => res.json())
       .then((data) => setDatasets(data));
   }, []);
+
+  const [legendOpen, setLegendOpen] = useState(false);
 
   // callback for filter
   const handleFilterChange = (label: string, selected: string[]) => {
@@ -40,10 +43,13 @@ const HomePage = () => {
         title="Explore glucose datasets used in AI research"
         text="Find CGM datasets, compare their structure, and download the right datasets for your study."
       />
+      <LegendModal open={legendOpen} onClose={() => setLegendOpen(false)} />
+
       <FilterBar
         filterSelections={filterSelections}
         onFilterChange={handleFilterChange}
         filterButtonEnabled={hasFilter}
+        onLegendClick={() => setLegendOpen(true)}
       />
       <CompareBar compareEnabled={selectedCards.length >= 2} />
       <DatasetGrid

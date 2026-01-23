@@ -1,0 +1,228 @@
+.legend-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+}
+
+.legend-modal {
+  position: relative;
+  width: min(920px, 100%);
+  max-height: calc(100vh - 56px);
+  overflow: auto;
+  background: var(--white-background);
+  border-radius: 26px;
+  box-shadow: 0 18px 70px rgba(0, 0, 0, 0.22);
+}
+/* Force ALL RoundIcons in legend modal to be true centered circles (fixes T1D) */
+.legend-modal .round-icon {
+  width: 26px !important;
+  height: 26px !important;
+  min-width: 26px !important;
+  min-height: 26px !important;
+
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  padding: 0 !important;
+  border-radius: 50% !important;
+  box-sizing: border-box !important;
+
+  font-size: 10px !important;   
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  letter-spacing: -0.2px;     
+}
+
+
+.legend-ribbon {
+  position: absolute;
+  top: 0;
+  right: 56px;
+  width: 54px;
+  height: 84px;
+  background: #35a7a3;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.18);
+}
+
+.legend-modal-close {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  border: 0;
+  background: transparent;
+  font-size: 28px;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+
+.legend-modal-close:hover {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.legend-modal-content {
+  padding: 34px 44px 40px;
+}
+
+.legend-title {
+  margin: 0 0 22px 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primary-black);
+}
+
+.legend-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 46px;
+}
+
+.legend-col {
+  min-width: 0;
+}
+
+.legend-block-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary-black);
+  margin-bottom: 4px;
+}
+
+.legend-block-subtitle {
+  font-size: 12px;
+  color: var(--secondary-grey);
+  margin-bottom: 14px;
+}
+
+.legend-divider {
+  height: 1px;
+  background: var(--secondary-light-grey);
+  margin: 18px 0;
+}
+
+/* Left: glucose ranges */
+.legend-swatch-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.legend-swatch-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+  font-size: 13px;
+  color: var(--primary-black);
+}
+
+.swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  flex: 0 0 auto;
+}
+
+.swatch-vhigh { background: #b79cff; }
+.swatch-high  { background: #d8c7ff; }
+.swatch-mod   { background: #aef1ea; }
+.swatch-low   { background: #f3b7d4; }
+.swatch-vlow  { background: #ff7fb3; }
+
+
+.population-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 6px;
+}
+
+.population-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.pop-text {
+  min-width: 0;
+}
+
+.pop-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary-black);
+  margin-bottom: 2px;
+}
+
+.pop-desc {
+  font-size: 12px;
+  color: var(--secondary-grey);
+  line-height: 1.35;
+}
+
+
+.source-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 10px;
+}
+
+.source-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.source-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.06);
+  color: rgba(0, 0, 0, 0.55);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: lowercase;
+  flex: 0 0 auto;
+  margin-top: 2px;
+}
+
+.source-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary-black);
+  margin-bottom: 3px;
+}
+
+.source-desc {
+  font-size: 12px;
+  color: var(--secondary-grey);
+  line-height: 1.35;
+}
+
+
+@media (max-width: 860px) {
+  .legend-modal-content {
+    padding: 26px 22px 28px;
+  }
+
+  .legend-columns {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .legend-ribbon {
+    right: 20px;
+  }
+}

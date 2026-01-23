@@ -9,33 +9,51 @@ type Props = {
     fullDescription: string;
   };
   onBack: () => void;
+  onLegendInfo?: () => void;
 };
 
-const DatasetHeader = ({ dataset, onBack }: Props) => {
+export default function DatasetHeader({ dataset, onBack, onLegendInfo }: Props) {
   return (
-    <div className="detail-header">
-      <div className="container-lg">
-        <button className="back-button metadata" onClick={onBack}>
-          <IoChevronBack size={20} /> Back
-        </button>
+    <header className="detail-header">
+      <div className="detail-header-inner">
+        <div className="detail-header-top">
+          <button type="button" className="breadcrumb-link" onClick={onBack}>
+            <IoChevronBack size={18} />
+            Back
+          </button>
+
+          {onLegendInfo && (
+            <button
+              type="button"
+              className="legend-info-btn"
+              onClick={onLegendInfo}
+            >
+              <span className="legend-info-icon">i</span>
+              Legend &amp; info
+            </button>
+          )}
+        </div>
 
         <div className="detail-header-content">
-          <h1 className="h1 mb-2">{dataset.title}</h1>
+          <h1 className="detail-title">{dataset.title}</h1>
 
-          <p className="metadata mb-3">
-            {dataset.duration} | {dataset.dateRange}
+          <p className="detail-duration">
+            {dataset.duration}
+            {dataset.dateRange ? ` • ${dataset.dateRange}` : ""}
           </p>
 
-          <p className="body mb-4">{dataset.fullDescription}</p>
+          <p className="detail-desc">{dataset.fullDescription}</p>
 
-          <div className="detail-header-actions d-flex gap-2 flex-wrap justify-content-center">
-            <button className="btn control-btn metadata px-4 py-2">Download dataset</button>
-            <button className="btn btn-outline-secondary metadata px-4 py-2">Link to paper</button>
+          <div className="detail-header-actions">
+            <button type="button" className="control-btn control-btn-primary">
+              Download dataset
+            </button>
+            <button type="button" className="control-btn control-btn-primary">
+              Link to dataset source
+            </button>
           </div>
         </div>
       </div>
-    </div>
+    </header>
   );
-};
-
-export default DatasetHeader;
+}

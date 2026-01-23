@@ -1,59 +1,39 @@
-import type { ReactElement } from "react";
+
 import "./PopulationSection.css";
+import { RoundIcon } from "../DatasetCard";
+import type { PopulationGroup } from "../MockData";
 
 type Props = {
-  population: {
-    total: number;
-    hba1cGroups: { type: string; count: number }[];
-    gender: string;
-    ethnicities: string;
-    ageRange: string;
-  };
-  RoundIcon: ({ type }: { type: string }) => ReactElement;
+  total: number;
+  groups: PopulationGroup[];
 };
 
-const PopulationSection = ({ population, RoundIcon }: Props) => {
+
+
+export default function PopulationSection({ total, groups }: Props) {
   return (
-    <div className="detail-card mb-4">
-      <h2 className="h2 mb-3">Population</h2>
+    <section className="card">
+      <h2 className="card-title">Participants</h2>
 
-      <div className="detail-row">
-        <span className="body">Total</span>
-        <span className="body">{population.total} participants</span>
-      </div>
+      <div className="kv">
+        <div className="kv-row">
+          <div className="kv-key">Total</div>
+          <div className="kv-val">{total} persons</div>
+        </div>
 
-      {/* HbA1c group (label left, groups right) */}
-      <div className="hba1c-section">
-        <div className="hba1c-row">
-          <p className="metadata hba1c-label">HbA1c group</p>
+        <div className="kv-row kv-row--top">
+          <div className="kv-key">Population</div>
 
-          <div className="hba1c-groups">
-            {population.hba1cGroups.map((group) => (
-              <div key={group.type} className="hba1c-group-item">
-                <RoundIcon type={group.type} />
-                <span className="body">{group.count} participants</span>
+          <div className="pop-groups">
+            {groups.map((g) => (
+              <div key={g.type} className="pop-group-item">
+                <span className="pop-count">{g.count} persons</span>
+                <RoundIcon type={g.label ?? g.type} />
               </div>
             ))}
           </div>
         </div>
       </div>
-
-      <div className="detail-row">
-        <span className="body">Gender</span>
-        <span className="body">{population.gender}</span>
-      </div>
-
-      <div className="detail-row">
-        <span className="body">Ethnicities</span>
-        <span className="body">{population.ethnicities}</span>
-      </div>
-
-      <div className="detail-row">
-        <span className="body">Age range</span>
-        <span className="body">{population.ageRange}</span>
-      </div>
-    </div>
+    </section>
   );
-};
-
-export default PopulationSection;
+}

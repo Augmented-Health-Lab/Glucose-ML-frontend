@@ -1,249 +1,142 @@
 [
   {
-    "title": "Bris-T1D",
-    "metadata": "24 participants \u2022 TBD days \u2022 TBD access",
-    "description": "Description TBD",
-    "types": [
-      "T1D"
-    ],
-    "sources": []
-  },
-  {
     "title": "T1DEXI",
     "metadata": "497 participants \u2022 TBD days \u2022 TBD access",
     "description": "Description TBD",
-    "types": [
-      "T1D"
-    ],
-    "sources": [
-      "G",
-      "I",
-      "A",
-      "S",
-      "Q",
-      "M"
-    ]
+    "types": ["T1D"],
+    "sources": ["G", "I", "A", "S", "Q", "M"]
   },
   {
     "title": "AI-READI",
     "metadata": "1049 participants \u2022 TBD days \u2022 TBD access",
     "description": "Description TBD",
-    "types": [
-      "T2D",
-      "PreD",
-      "ND"
-    ],
-    "sources": [
-      "G",
-      "A",
-      "Q",
-      "M"
-    ]
+    "types": ["T2D", "PreD", "ND"],
+    "sources": ["G", "A", "Q", "M"]
   },
   {
-    "title": "Shanghai T2DM",
+    "title": "ShanghaiT2DM",
     "metadata": "100 participants \u2022 TBD days \u2022 TBD access",
     "description": "Description TBD",
-    "types": [
-      "T2D"
-    ],
-    "sources": [
-      "G",
-      "S",
-      "Q",
-      "M"
-    ]
+    "types": ["T2D"],
+    "sources": []
   },
   {
-    "title": "UCH T1DM",
-    "metadata": "20 participants \u2022 TBD days \u2022 TBD access",
+    "title": "Park2025",
+    "metadata": "38 participants \u2022 TBD days \u2022 TBD access",
     "description": "Description TBD",
-    "types": [
-      "T1D",
-      "ND"
-    ],
-    "sources": [
-      "G",
-      "I",
-      "A",
-      "S"
-    ]
+    "types": ["T2D", "PreD", "ND"],
+    "sources": []
   },
   {
     "title": "T1DEXIP",
     "metadata": "247 participants \u2022 TBD days \u2022 TBD access",
     "description": "Description TBD",
-    "types": [
-      "T1D"
-    ],
+    "types": ["T1D"],
     "sources": []
   },
   {
     "title": "T1DiabetesGranada",
     "metadata": "736 participants \u2022 TBD days \u2022 TBD access",
     "description": "Description TBD",
-    "types": [
-      "T1D"
-    ],
-    "sources": [
-      "G",
-      "Q",
-      "M"
-    ]
+    "types": ["T1D"],
+    "sources": ["G", "Q", "M"]
   },
   {
     "title": "HUPA-UCM",
     "metadata": "25 participants \u2022 TBD days \u2022 TBD access",
     "description": "Description TBD",
-    "types": [
-      "T1D"
-    ],
+    "types": ["T1D"],
     "sources": []
   },
   {
-    "title": "BIGIDEAS",
+    "title": "BIGIDEAs",
     "metadata": "16 participants \u2022 TBD days \u2022 TBD access",
     "description": "Description TBD",
-    "types": [
-      "ND",
-      "PreD"
-    ],
-    "sources": [
-      "G",
-      "A",
-      "Q",
-      "M"
-    ]
+    "types": ["ND", "PreD"],
+    "sources": ["G", "A", "Q", "M"]
   },
   {
     "title": "T1DM-UOM",
     "metadata": "17 participants \u2022 TBD days \u2022 TBD access",
     "description": "Description TBD",
-    "types": [
-      "T1D"
-    ],
+    "types": ["T1D"],
     "sources": []
   },
   {
-    "title": "Shanghai T1DM",
+    "title": "ShanghaiT1DM",
     "metadata": "12 participants \u2022 TBD days \u2022 TBD access",
     "description": "Description TBD",
-    "types": [
-      "T1D"
-    ],
-    "sources": [
-      "G",
-      "S",
-      "Q",
-      "M"
-    ]
+    "types": ["T1D"],
+    "sources": []
   },
   {
-    "title": "Park2025",
-    "metadata": "38 participants \u2022 TBD days \u2022 TBD access",
+    "title": "Hall 2018",
+    "metadata": "57 participants \u2022 TBD days \u2022 TBD access",
     "description": "Description TBD",
-    "types": [
-      "ND"
-    ],
+    "types": ["T2D", "PreD", "ND"],
+    "sources": []
+  },
+  {
+    "title": "UCHTT1DM",
+    "metadata": "20 participants \u2022 TBD days \u2022 TBD access",
+    "description": "Description TBD",
+    "types": ["T1D", "ND"],
+    "sources": []
+  },
+  {
+    "title": "Bris-T1D Open",
+    "metadata": "20 participants \u2022 TBD days \u2022 TBD access",
+    "description": "Description TBD",
+    "types": ["T1D"],
+    "sources": []
+  },
+  {
+    "title": "D1NAMO",
+    "metadata": "29 participants \u2022 TBD days \u2022 TBD access",
+    "description": "Description TBD",
+    "types": ["T1D", "ND"],
     "sources": []
   },
   {
     "title": "Colas 2019",
     "metadata": "208 participants \u2022 TBD days \u2022 TBD access",
     "description": "Description TBD",
-    "types": [
-      "T2D",
-      "ND"
-    ],
-    "sources": []
-  },
-  {
-    "title": "D1NAMO",
-    "metadata": "58 participants \u2022 TBD days \u2022 TBD access",
-    "description": "Description TBD",
-    "types": [
-      "T1D",
-      "ND"
-    ],
-    "sources": []
-  },
-  {
-    "title": "Hall2018",
-    "metadata": "57 participants \u2022 TBD days \u2022 TBD access",
-    "description": "Description TBD",
-    "types": [],
+    "types": ["T2D", "ND"],
     "sources": []
   },
   {
     "title": "CGMacros Libre",
     "metadata": "45 participants \u2022 TBD days \u2022 TBD access",
     "description": "Description TBD",
-    "types": [
-      "T2D",
-      "ND",
-      "PreD"
-    ],
-    "sources": [
-      "G",
-      "A",
-      "S",
-      "Q",
-      "M"
-    ]
+    "types": ["T2D", "ND", "PreD"],
+    "sources": ["G", "A", "S", "Q", "M"]
   },
   {
     "title": "CGMacros Dexcom",
     "metadata": "45 participants \u2022 TBD days \u2022 TBD access",
     "description": "Description TBD",
-    "types": [
-      "T2D",
-      "ND",
-      "PreD"
-    ],
-    "sources": [
-      "G",
-      "A",
-      "S",
-      "Q",
-      "M"
-    ]
+    "types": ["T2D", "ND", "PreD"],
+    "sources": ["G", "A", "S", "Q", "M"]
   },
   {
     "title": "DiaTrend",
     "metadata": "54 participants \u2022 TBD days \u2022 TBD access",
     "description": "Description TBD",
-    "types": [
-      "T1D"
-    ],
-    "sources": [
-      "G",
-      "I",
-      "Q",
-      "M"
-    ]
+    "types": ["T1D"],
+    "sources": ["G", "I", "Q", "M"]
   },
   {
-    "title": "Ohio T1DM",
+    "title": "OhioT1DM",
     "metadata": "12 participants \u2022 TBD days \u2022 TBD access",
     "description": "Description TBD",
-    "types": [
-      "T1D"
-    ],
-    "sources": [
-      "G",
-      "I",
-      "A",
-      "S",
-      "Q"
-    ]
+    "types": ["T1D"],
+    "sources": []
   },
   {
     "title": "AZT1D",
     "metadata": "25 participants \u2022 TBD days \u2022 TBD access",
     "description": "Description TBD",
-    "types": [
-      "T1D"
-    ],
+    "types": ["T1D"],
     "sources": []
   }
 ]
