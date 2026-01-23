@@ -17,7 +17,7 @@ interface MultiSelectProps {
   label: string;
   prompt: string;
   multi: boolean;
-  options: string[];
+  options: readonly string[];
   selected: string[];
   onChange: (selected: string[]) => void;
 }
