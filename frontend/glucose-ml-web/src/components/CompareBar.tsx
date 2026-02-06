@@ -1,4 +1,4 @@
-const CompareBar = ({ compareEnabled }: { compareEnabled: boolean }) => {
+const CompareBar = () => {
   return null;
 };
 

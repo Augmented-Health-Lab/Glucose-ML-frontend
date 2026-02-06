@@ -47,7 +47,7 @@ const DatasetCard = ({
   types,
   sources,
   selected = false,
-  onSelect,
+  onSelect: _onSelect,
 }: DatasetCardProps) => {
   const visualBarFile = `${title.replace(/ /g, "_")}-visual-bar.png`;
 

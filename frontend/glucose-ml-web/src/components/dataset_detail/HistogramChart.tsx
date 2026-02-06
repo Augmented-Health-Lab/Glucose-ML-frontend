@@ -56,8 +56,6 @@ export default function HistogramChart({ data, yLabel = "Count" }: Props) {
   }
 
   const maxY = Math.max(...data.map((d) => d.y));
-  const minX = Math.min(...data.map((d) => d.bin_start));
-  const maxX = Math.max(...data.map((d) => d.bin_end));
 
   // Get unique labels for legend and sort them in the correct order
   const uniqueLabels = Array.from(new Set(data.map((d) => d.label))).sort((a, b) => {

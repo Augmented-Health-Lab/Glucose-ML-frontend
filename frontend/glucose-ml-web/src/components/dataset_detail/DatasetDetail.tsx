@@ -60,9 +60,14 @@ const DIABETES_LABEL_TO_CODE: Record<string, string> = {
   nd: "ND",
 };
 
-function normalizeDiabetesTypeLabel(raw: string): string {
+function normalizeDiabetesTypeLabel(raw: string): "T1D" | "T2D" | "ND" {
   const key = String(raw ?? "").trim().toLowerCase();
-  return DIABETES_LABEL_TO_CODE[key] || raw;
+  const normalized = DIABETES_LABEL_TO_CODE[key];
+  if (normalized === "T1D" || normalized === "T2D" || normalized === "ND") {
+    return normalized;
+  }
+  // Default to "ND" if not recognized
+  return "ND";
 }
 
 function clamp0(x: unknown): number {
@@ -78,8 +83,7 @@ function clamp0(x: unknown): number {
 function toStackedBars(
   tirByType: TirByType,
   totalsByType?: Record<string, number>
-): { group: string; total: number; segments: { key: any; value: number }[] }[] {
-  const orderKeys: RangeKey[] = ["very_low", "low", "target", "high", "very_high"];
+): { group: "T1D" | "T2D" | "ND"; total: number; segments: { key: any; value: number }[] }[] {
 
   const preferredGroupOrder = ["ND", "PreD", "T2D", "T1D"]; 
   const groupRank = (g: string) => {

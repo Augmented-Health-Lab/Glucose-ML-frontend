@@ -17,18 +17,6 @@ type TabKey = "hist" | "tir";
 export default function CGMDataSection({ dataset }: Props) {
   const [tab, setTab] = useState<TabKey>("tir");
 
-
-  const formatValue = (val: string | number, isNumber: boolean = false): string => {
-    if (isNumber) {
-
-      if (val === 0 || val === "0") return "0";
-      return val ? String(val) : "";
-    }
-
-    return val ? String(val) : "";
-  };
-
-
   const totalDaysRange = (dataset.cgmSummary as any).totalDaysRange;
   const totalDaysDisplay = totalDaysRange 
     ? totalDaysRange 

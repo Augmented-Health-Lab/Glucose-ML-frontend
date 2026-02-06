@@ -50,7 +50,6 @@ export default function GlucoseRangeChart({ bars, yLabel = "Percentage (%)"}: Pr
 
           <div className="tir-bars" style={{ height: PLOT_H }}>
             {bars.map((b) => {
-              const total = clamp0(b.total);
               const isHovered = hoveredBar === b.group;
               
               return (

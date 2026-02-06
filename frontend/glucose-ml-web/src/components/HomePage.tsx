@@ -144,7 +144,7 @@ const HomePage = () => {
         filterButtonEnabled={hasFilter}
         onLegendClick={() => setLegendOpen(true)}
       />
-      <CompareBar compareEnabled={selectedCards.length >= 2} />
+      <CompareBar />
       <DatasetGrid
         datasets={filteredDatasets}
         selectedCards={selectedCards}

@@ -45,7 +45,7 @@ export default function VisualBar({
 
   const row = useMemo(() => {
     if (!data) return null;
-    const obj = data[name];
+    const obj = data[name] as Partial<Record<RangeKey, number>> | undefined;
     if (!obj) return null;
 
     const vals = {
