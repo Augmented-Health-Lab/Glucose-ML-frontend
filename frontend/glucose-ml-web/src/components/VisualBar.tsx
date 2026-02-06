@@ -1,6 +1,6 @@
 // acknowledge chatgpt use
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 
 type RangeKey = "very_low" | "low" | "target" | "high" | "very_high";
 type VisualBarInfo = Record<string, Partial<Record<RangeKey, number>>>;
@@ -39,28 +39,9 @@ export default function VisualBar({
   height?: number;
   width?: number;
 }) {
-  const [data, setData] = useState<VisualBarInfo | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    fetch("/static_data/visual_bar_info.json")
-      .then((r) => {
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
-        return r.json();
-      })
-      .then((j) => {
-        if (!cancelled) setData(j);
-      })
-      .catch((e) => {
-        if (!cancelled) setError(String(e));
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+  // visual_bar_info.json is not provided in this project anymore.
+  // Keep the component as a no-op placeholder so callers won't crash.
+  const data: VisualBarInfo | null = null;
 
   const row = useMemo(() => {
     if (!data) return null;
@@ -91,7 +72,6 @@ export default function VisualBar({
     };
   }, [data, name]);
 
-  if (error) return <span style={{ opacity: 0.7 }}>No visual bar</span>;
   if (!row) return <span style={{ opacity: 0.7 }}>No visual bar</span>;
 
   return (

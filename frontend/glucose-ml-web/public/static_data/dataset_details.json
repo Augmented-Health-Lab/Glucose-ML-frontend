@@ -1,0 +1,1185 @@
+{
+  "AI-READI": {
+    "title": "AI-READI",
+    "subtitle": "",
+    "description": "",
+    "links": {
+      "downloadUrl": "",
+      "sourceUrl": ""
+    },
+    "dataSources": {
+      "insulin": "",
+      "cgm": "",
+      "selfReport": "",
+      "activityTracker": ""
+    },
+    "participants": {
+      "total": 2245,
+      "populationGroups": [
+        {
+          "type": "T1D",
+          "count": 0
+        },
+        {
+          "type": "T2D",
+          "count": 976
+        },
+        {
+          "type": "PreD",
+          "count": 508
+        },
+        {
+          "type": "ND",
+          "count": 761
+        }
+      ]
+    },
+    "demographics": {
+      "gender": {
+        "female": 0,
+        "male": 0,
+        "other": 0,
+        "unknown": 2245
+      },
+      "ethnicities": {
+        "Unknown": 2245
+      },
+      "ageRangeYears": {
+        "min": 40,
+        "max": 94
+      }
+    },
+    "cgmData": {
+      "cgmDevice": "Dexcom G6",
+      "totalDaysOfGlucose": 24012.0,
+      "glucoseSamples": 6194153,
+      "averageDaysPerParticipant": 10.7
+    }
+  },
+  "AZT1D": {
+    "title": "AZT1D",
+    "subtitle": "",
+    "description": "",
+    "links": {
+      "downloadUrl": "",
+      "sourceUrl": ""
+    },
+    "dataSources": {
+      "insulin": "",
+      "cgm": "",
+      "selfReport": "",
+      "activityTracker": ""
+    },
+    "participants": {
+      "total": 25,
+      "populationGroups": [
+        {
+          "type": "T1D",
+          "count": 25
+        },
+        {
+          "type": "T2D",
+          "count": 0
+        },
+        {
+          "type": "PreD",
+          "count": 0
+        },
+        {
+          "type": "ND",
+          "count": 0
+        }
+      ]
+    },
+    "demographics": {
+      "gender": {
+        "female": 13,
+        "male": 12,
+        "other": 0,
+        "unknown": 0
+      },
+      "ethnicities": {
+        "Unknown": 25
+      },
+      "ageRangeYears": {
+        "min": 27,
+        "max": 80
+      }
+    },
+    "cgmData": {
+      "cgmDevice": "Dexcom G6 Pro",
+      "totalDaysOfGlucose": null,
+      "glucoseSamples": 306712,
+      "averageDaysPerParticipant": null
+    }
+  },
+  "BIGIDEAs": {
+    "title": "BIGIDEAs",
+    "subtitle": "",
+    "description": "",
+    "links": {
+      "downloadUrl": "",
+      "sourceUrl": ""
+    },
+    "dataSources": {
+      "insulin": "",
+      "cgm": "",
+      "selfReport": "",
+      "activityTracker": ""
+    },
+    "participants": {
+      "total": 16,
+      "populationGroups": [
+        {
+          "type": "T1D",
+          "count": 0
+        },
+        {
+          "type": "T2D",
+          "count": 0
+        },
+        {
+          "type": "PreD",
+          "count": 8
+        },
+        {
+          "type": "ND",
+          "count": 8
+        }
+      ]
+    },
+    "demographics": {
+      "gender": {
+        "female": 9,
+        "male": 7,
+        "other": 0,
+        "unknown": 0
+      },
+      "ethnicities": {
+        "Unknown": 16
+      },
+      "ageRangeYears": {
+        "min": null,
+        "max": null
+      }
+    },
+    "cgmData": {
+      "cgmDevice": "Dexcom G6",
+      "totalDaysOfGlucose": null,
+      "glucoseSamples": 36898,
+      "averageDaysPerParticipant": null
+    }
+  },
+  "Bris-T1D_Open": {
+    "title": "Bris-T1D_Open",
+    "subtitle": "",
+    "description": "",
+    "links": {
+      "downloadUrl": "",
+      "sourceUrl": ""
+    },
+    "dataSources": {
+      "insulin": "",
+      "cgm": "",
+      "selfReport": "",
+      "activityTracker": ""
+    },
+    "participants": {
+      "total": 20,
+      "populationGroups": [
+        {
+          "type": "T1D",
+          "count": 20
+        },
+        {
+          "type": "T2D",
+          "count": 0
+        },
+        {
+          "type": "PreD",
+          "count": 0
+        },
+        {
+          "type": "ND",
+          "count": 0
+        }
+      ]
+    },
+    "demographics": {
+      "gender": {
+        "female": 15,
+        "male": 3,
+        "other": 2,
+        "unknown": 0
+      },
+      "ethnicities": {
+        "white british": 12,
+        "white irish": 1,
+        "white": 4,
+        "white scottish": 1,
+        "indian": 1,
+        "british": 1
+      },
+      "ageRangeYears": {
+        "min": 18,
+        "max": 26
+      }
+    },
+    "cgmData": {
+      "cgmDevice": "Dexcom G6",
+      "totalDaysOfGlucose": null,
+      "glucoseSamples": 848574,
+      "averageDaysPerParticipant": null
+    }
+  },
+  "CGMacros_Dexcom": {
+    "title": "CGMacros_Dexcom",
+    "subtitle": "",
+    "description": "",
+    "links": {
+      "downloadUrl": "",
+      "sourceUrl": ""
+    },
+    "dataSources": {
+      "insulin": "",
+      "cgm": "",
+      "selfReport": "",
+      "activityTracker": ""
+    },
+    "participants": {
+      "total": 45,
+      "populationGroups": [
+        {
+          "type": "T1D",
+          "count": 0
+        },
+        {
+          "type": "T2D",
+          "count": 14
+        },
+        {
+          "type": "PreD",
+          "count": 16
+        },
+        {
+          "type": "ND",
+          "count": 15
+        }
+      ]
+    },
+    "demographics": {
+      "gender": {
+        "female": 29,
+        "male": 16,
+        "other": 0,
+        "unknown": 0
+      },
+      "ethnicities": {
+        "Hispanic/Latino": 34,
+        "White": 7,
+        "African American": 3,
+        "Black, African American": 1
+      },
+      "ageRangeYears": {
+        "min": 18,
+        "max": 69
+      }
+    },
+    "cgmData": {
+      "cgmDevice": "Dexcom G6 Pro",
+      "totalDaysOfGlucose": null,
+      "glucoseSamples": 629825,
+      "averageDaysPerParticipant": null
+    }
+  },
+  "CGMacros_Libre": {
+    "title": "CGMacros_Libre",
+    "subtitle": "",
+    "description": "",
+    "links": {
+      "downloadUrl": "",
+      "sourceUrl": ""
+    },
+    "dataSources": {
+      "insulin": "",
+      "cgm": "",
+      "selfReport": "",
+      "activityTracker": ""
+    },
+    "participants": {
+      "total": 45,
+      "populationGroups": [
+        {
+          "type": "T1D",
+          "count": 0
+        },
+        {
+          "type": "T2D",
+          "count": 14
+        },
+        {
+          "type": "PreD",
+          "count": 16
+        },
+        {
+          "type": "ND",
+          "count": 15
+        }
+      ]
+    },
+    "demographics": {
+      "gender": {
+        "female": 29,
+        "male": 16,
+        "other": 0,
+        "unknown": 0
+      },
+      "ethnicities": {
+        "Hispanic/Latino": 34,
+        "White": 7,
+        "African American": 3,
+        "Black, African American": 1
+      },
+      "ageRangeYears": {
+        "min": 18,
+        "max": 69
+      }
+    },
+    "cgmData": {
+      "cgmDevice": "Abbott FreeStyle Libre Pro",
+      "totalDaysOfGlucose": null,
+      "glucoseSamples": 687360,
+      "averageDaysPerParticipant": null
+    }
+  },
+  "Colas_2019": {
+    "title": "Colas_2019",
+    "subtitle": "",
+    "description": "",
+    "links": {
+      "downloadUrl": "",
+      "sourceUrl": ""
+    },
+    "dataSources": {
+      "insulin": "",
+      "cgm": "",
+      "selfReport": "",
+      "activityTracker": ""
+    },
+    "participants": {
+      "total": 208,
+      "populationGroups": [
+        {
+          "type": "T1D",
+          "count": 0
+        },
+        {
+          "type": "T2D",
+          "count": 17
+        },
+        {
+          "type": "PreD",
+          "count": 0
+        },
+        {
+          "type": "ND",
+          "count": 191
+        }
+      ]
+    },
+    "demographics": {
+      "gender": {
+        "female": 105,
+        "male": 103,
+        "other": 0,
+        "unknown": 0
+      },
+      "ethnicities": {
+        "Unknown": 208
+      },
+      "ageRangeYears": {
+        "min": 29,
+        "max": 88
+      }
+    },
+    "cgmData": {
+      "cgmDevice": "Medtronic MiniMed iPro",
+      "totalDaysOfGlucose": null,
+      "glucoseSamples": 114253,
+      "averageDaysPerParticipant": null
+    }
+  },
+  "D1NAMO": {
+    "title": "D1NAMO",
+    "subtitle": "",
+    "description": "",
+    "links": {
+      "downloadUrl": "",
+      "sourceUrl": ""
+    },
+    "dataSources": {
+      "insulin": "",
+      "cgm": "",
+      "selfReport": "",
+      "activityTracker": ""
+    },
+    "participants": {
+      "total": 9,
+      "populationGroups": [
+        {
+          "type": "T1D",
+          "count": 9
+        },
+        {
+          "type": "T2D",
+          "count": 0
+        },
+        {
+          "type": "PreD",
+          "count": 0
+        },
+        {
+          "type": "ND",
+          "count": 0
+        }
+      ]
+    },
+    "demographics": {
+      "gender": {
+        "female": 0,
+        "male": 0,
+        "other": 0,
+        "unknown": 9
+      },
+      "ethnicities": {
+        "Unknown": 9
+      },
+      "ageRangeYears": {
+        "min": null,
+        "max": null
+      }
+    },
+    "cgmData": {
+      "cgmDevice": "Medtronic iPro2 Professional CGM",
+      "totalDaysOfGlucose": null,
+      "glucoseSamples": 8221,
+      "averageDaysPerParticipant": null
+    }
+  },
+  "DiaTrend": {
+    "title": "DiaTrend",
+    "subtitle": "",
+    "description": "",
+    "links": {
+      "downloadUrl": "",
+      "sourceUrl": ""
+    },
+    "dataSources": {
+      "insulin": "",
+      "cgm": "",
+      "selfReport": "",
+      "activityTracker": ""
+    },
+    "participants": {
+      "total": 54,
+      "populationGroups": [
+        {
+          "type": "T1D",
+          "count": 54
+        },
+        {
+          "type": "T2D",
+          "count": 0
+        },
+        {
+          "type": "PreD",
+          "count": 0
+        },
+        {
+          "type": "ND",
+          "count": 0
+        }
+      ]
+    },
+    "demographics": {
+      "gender": {
+        "female": 37,
+        "male": 17,
+        "other": 0,
+        "unknown": 0
+      },
+      "ethnicities": {
+        "White/Caucasian": 47,
+        "OTHERS (Mult_HiLa)": 1,
+        "Unknown": 1,
+        "Black/African American": 1,
+        "Black/African American and White": 1,
+        "Asian or Pacific Islander": 2,
+        "Others (Other_Non-Hispanic/Latino)": 1
+      },
+      "ageRangeYears": {
+        "min": 19,
+        "max": 29
+      }
+    },
+    "cgmData": {
+      "cgmDevice": "Dexcom G6",
+      "totalDaysOfGlucose": null,
+      "glucoseSamples": 7680740,
+      "averageDaysPerParticipant": null
+    }
+  },
+  "HUPA-UCM": {
+    "title": "HUPA-UCM",
+    "subtitle": "",
+    "description": "",
+    "links": {
+      "downloadUrl": "",
+      "sourceUrl": ""
+    },
+    "dataSources": {
+      "insulin": "",
+      "cgm": "",
+      "selfReport": "",
+      "activityTracker": ""
+    },
+    "participants": {
+      "total": 25,
+      "populationGroups": [
+        {
+          "type": "T1D",
+          "count": 25
+        },
+        {
+          "type": "T2D",
+          "count": 0
+        },
+        {
+          "type": "PreD",
+          "count": 0
+        },
+        {
+          "type": "ND",
+          "count": 0
+        }
+      ]
+    },
+    "demographics": {
+      "gender": {
+        "female": 13,
+        "male": 12,
+        "other": 0,
+        "unknown": 0
+      },
+      "ethnicities": {
+        "Unknown": 25
+      },
+      "ageRangeYears": {
+        "min": 18,
+        "max": 61
+      }
+    },
+    "cgmData": {
+      "cgmDevice": "Abbott FreeStyle Libre 2",
+      "totalDaysOfGlucose": null,
+      "glucoseSamples": 309392,
+      "averageDaysPerParticipant": null
+    }
+  },
+  "Hall_2018": {
+    "title": "Hall_2018",
+    "subtitle": "",
+    "description": "",
+    "links": {
+      "downloadUrl": "",
+      "sourceUrl": ""
+    },
+    "dataSources": {
+      "insulin": "",
+      "cgm": "",
+      "selfReport": "",
+      "activityTracker": ""
+    },
+    "participants": {
+      "total": 57,
+      "populationGroups": [
+        {
+          "type": "T1D",
+          "count": 0
+        },
+        {
+          "type": "T2D",
+          "count": 4
+        },
+        {
+          "type": "PreD",
+          "count": 8
+        },
+        {
+          "type": "ND",
+          "count": 45
+        }
+      ]
+    },
+    "demographics": {
+      "gender": {
+        "female": 0,
+        "male": 0,
+        "other": 0,
+        "unknown": 57
+      },
+      "ethnicities": {
+        "Unknown": 57
+      },
+      "ageRangeYears": {
+        "min": 25,
+        "max": 76
+      }
+    },
+    "cgmData": {
+      "cgmDevice": "Dexcom G4",
+      "totalDaysOfGlucose": null,
+      "glucoseSamples": 105426,
+      "averageDaysPerParticipant": null
+    }
+  },
+  "OhioT1DM": {
+    "title": "OhioT1DM",
+    "subtitle": "",
+    "description": "",
+    "links": {
+      "downloadUrl": "",
+      "sourceUrl": ""
+    },
+    "dataSources": {
+      "insulin": "",
+      "cgm": "",
+      "selfReport": "",
+      "activityTracker": ""
+    },
+    "participants": {
+      "total": 12,
+      "populationGroups": [
+        {
+          "type": "T1D",
+          "count": 12
+        },
+        {
+          "type": "T2D",
+          "count": 0
+        },
+        {
+          "type": "PreD",
+          "count": 0
+        },
+        {
+          "type": "ND",
+          "count": 0
+        }
+      ]
+    },
+    "demographics": {
+      "gender": {
+        "female": 5,
+        "male": 7,
+        "other": 0,
+        "unknown": 0
+      },
+      "ethnicities": {
+        "Unknown": 12
+      },
+      "ageRangeYears": {
+        "min": null,
+        "max": null
+      }
+    },
+    "cgmData": {
+      "cgmDevice": "Medtronic Enlite",
+      "totalDaysOfGlucose": null,
+      "glucoseSamples": 166533,
+      "averageDaysPerParticipant": null
+    }
+  },
+  "Park2025": {
+    "title": "Park2025",
+    "subtitle": "",
+    "description": "",
+    "links": {
+      "downloadUrl": "",
+      "sourceUrl": ""
+    },
+    "dataSources": {
+      "insulin": "",
+      "cgm": "",
+      "selfReport": "",
+      "activityTracker": ""
+    },
+    "participants": {
+      "total": 38,
+      "populationGroups": [
+        {
+          "type": "T1D",
+          "count": 0
+        },
+        {
+          "type": "T2D",
+          "count": 1
+        },
+        {
+          "type": "PreD",
+          "count": 16
+        },
+        {
+          "type": "ND",
+          "count": 20
+        }
+      ]
+    },
+    "demographics": {
+      "gender": {
+        "female": 19,
+        "male": 15,
+        "other": 0,
+        "unknown": 4
+      },
+      "ethnicities": {
+        "white": 28,
+        "asian": 7,
+        "hispanic or latino": 3
+      },
+      "ageRangeYears": {
+        "min": 25,
+        "max": 79
+      }
+    },
+    "cgmData": {
+      "cgmDevice": "Dexcom G4",
+      "totalDaysOfGlucose": null,
+      "glucoseSamples": 23520,
+      "averageDaysPerParticipant": null
+    }
+  },
+  "ShanghaiT1DM": {
+    "title": "ShanghaiT1DM",
+    "subtitle": "",
+    "description": "",
+    "links": {
+      "downloadUrl": "",
+      "sourceUrl": ""
+    },
+    "dataSources": {
+      "insulin": "",
+      "cgm": "",
+      "selfReport": "",
+      "activityTracker": ""
+    },
+    "participants": {
+      "total": 12,
+      "populationGroups": [
+        {
+          "type": "T1D",
+          "count": 12
+        },
+        {
+          "type": "T2D",
+          "count": 0
+        },
+        {
+          "type": "PreD",
+          "count": 0
+        },
+        {
+          "type": "ND",
+          "count": 0
+        }
+      ]
+    },
+    "demographics": {
+      "gender": {
+        "female": 7,
+        "male": 5,
+        "other": 0,
+        "unknown": 0
+      },
+      "ethnicities": {
+        "Unknown": 12
+      },
+      "ageRangeYears": {
+        "min": 37,
+        "max": 73
+      }
+    },
+    "cgmData": {
+      "cgmDevice": "Abbott FreeStyle Libre H",
+      "totalDaysOfGlucose": null,
+      "glucoseSamples": 15695,
+      "averageDaysPerParticipant": null
+    }
+  },
+  "ShanghaiT2DM": {
+    "title": "ShanghaiT2DM",
+    "subtitle": "",
+    "description": "",
+    "links": {
+      "downloadUrl": "",
+      "sourceUrl": ""
+    },
+    "dataSources": {
+      "insulin": "",
+      "cgm": "",
+      "selfReport": "",
+      "activityTracker": ""
+    },
+    "participants": {
+      "total": 100,
+      "populationGroups": [
+        {
+          "type": "T1D",
+          "count": 0
+        },
+        {
+          "type": "T2D",
+          "count": 100
+        },
+        {
+          "type": "PreD",
+          "count": 0
+        },
+        {
+          "type": "ND",
+          "count": 0
+        }
+      ]
+    },
+    "demographics": {
+      "gender": {
+        "female": 44,
+        "male": 56,
+        "other": 0,
+        "unknown": 0
+      },
+      "ethnicities": {
+        "Unknown": 100
+      },
+      "ageRangeYears": {
+        "min": 22,
+        "max": 97
+      }
+    },
+    "cgmData": {
+      "cgmDevice": "Abbott FreeStyle Libre H",
+      "totalDaysOfGlucose": null,
+      "glucoseSamples": 112462,
+      "averageDaysPerParticipant": null
+    }
+  },
+  "T1D-UOM": {
+    "title": "T1D-UOM",
+    "subtitle": "",
+    "description": "",
+    "links": {
+      "downloadUrl": "",
+      "sourceUrl": ""
+    },
+    "dataSources": {
+      "insulin": "",
+      "cgm": "",
+      "selfReport": "",
+      "activityTracker": ""
+    },
+    "participants": {
+      "total": 17,
+      "populationGroups": [
+        {
+          "type": "T1D",
+          "count": 17
+        },
+        {
+          "type": "T2D",
+          "count": 0
+        },
+        {
+          "type": "PreD",
+          "count": 0
+        },
+        {
+          "type": "ND",
+          "count": 0
+        }
+      ]
+    },
+    "demographics": {
+      "gender": {
+        "female": 10,
+        "male": 7,
+        "other": 0,
+        "unknown": 0
+      },
+      "ethnicities": {
+        "Unknown": 17
+      },
+      "ageRangeYears": {
+        "min": 23,
+        "max": 70
+      }
+    },
+    "cgmData": {
+      "cgmDevice": "Unknown",
+      "totalDaysOfGlucose": null,
+      "glucoseSamples": 356146,
+      "averageDaysPerParticipant": null
+    }
+  },
+  "T1DEXI": {
+    "title": "T1DEXI",
+    "subtitle": "",
+    "description": "",
+    "links": {
+      "downloadUrl": "",
+      "sourceUrl": ""
+    },
+    "dataSources": {
+      "insulin": "",
+      "cgm": "",
+      "selfReport": "",
+      "activityTracker": ""
+    },
+    "participants": {
+      "total": 497,
+      "populationGroups": [
+        {
+          "type": "T1D",
+          "count": 497
+        },
+        {
+          "type": "T2D",
+          "count": 0
+        },
+        {
+          "type": "PreD",
+          "count": 0
+        },
+        {
+          "type": "ND",
+          "count": 0
+        }
+      ]
+    },
+    "demographics": {
+      "gender": {
+        "female": 363,
+        "male": 134,
+        "other": 0,
+        "unknown": 0
+      },
+      "ethnicities": {
+        "white, not hispanic or latino": 434,
+        "white, do not wish to answer": 6,
+        "white, hispanic or latino": 12,
+        "black/african american, not hispanic or latino": 10,
+        "multiple, not hispanic or latino": 8,
+        "american indian/alaskan native, not hispanic or latino": 2,
+        "not reported, do not wish to answer": 7,
+        "asian, not hispanic or latino": 10,
+        "not reported, not hispanic or latino": 3,
+        "unknown, hispanic or latino": 1,
+        "not reported, hispanic or latino": 1,
+        "white, don't know": 2,
+        "unknown, not hispanic or latino": 1
+      },
+      "ageRangeYears": {
+        "min": 18,
+        "max": 70
+      }
+    },
+    "cgmData": {
+      "cgmDevice": "Dexcom G6",
+      "totalDaysOfGlucose": null,
+      "glucoseSamples": 3785253,
+      "averageDaysPerParticipant": null
+    }
+  },
+  "T1DEXIP": {
+    "title": "T1DEXIP",
+    "subtitle": "",
+    "description": "",
+    "links": {
+      "downloadUrl": "",
+      "sourceUrl": ""
+    },
+    "dataSources": {
+      "insulin": "",
+      "cgm": "",
+      "selfReport": "",
+      "activityTracker": ""
+    },
+    "participants": {
+      "total": 247,
+      "populationGroups": [
+        {
+          "type": "T1D",
+          "count": 247
+        },
+        {
+          "type": "T2D",
+          "count": 0
+        },
+        {
+          "type": "PreD",
+          "count": 0
+        },
+        {
+          "type": "ND",
+          "count": 0
+        }
+      ]
+    },
+    "demographics": {
+      "gender": {
+        "female": 104,
+        "male": 143,
+        "other": 0,
+        "unknown": 0
+      },
+      "ethnicities": {
+        "white, not hispanic or latino": 205,
+        "asian, not hispanic or latino": 4,
+        "white, hispanic or latino": 15,
+        "not reported, do not wish to answer": 2,
+        "not reported, not hispanic or latino": 2,
+        "multiple, not hispanic or latino": 7,
+        "american indian/alaskan native, not hispanic or latino": 1,
+        "multiple, hispanic or latino": 6,
+        "asian, don't know": 1,
+        "unknown, hispanic or latino": 1,
+        "not reported, hispanic or latino": 1,
+        "black/african american, hispanic or latino": 1,
+        "black/african american, not hispanic or latino": 1
+      },
+      "ageRangeYears": {
+        "min": 12,
+        "max": 17
+      }
+    },
+    "cgmData": {
+      "cgmDevice": "Dexcom G6",
+      "totalDaysOfGlucose": null,
+      "glucoseSamples": 685136,
+      "averageDaysPerParticipant": null
+    }
+  },
+  "T1DiabetesGranada": {
+    "title": "T1DiabetesGranada",
+    "subtitle": "",
+    "description": "",
+    "links": {
+      "downloadUrl": "",
+      "sourceUrl": ""
+    },
+    "dataSources": {
+      "insulin": "",
+      "cgm": "",
+      "selfReport": "",
+      "activityTracker": ""
+    },
+    "participants": {
+      "total": 736,
+      "populationGroups": [
+        {
+          "type": "T1D",
+          "count": 736
+        },
+        {
+          "type": "T2D",
+          "count": 0
+        },
+        {
+          "type": "PreD",
+          "count": 0
+        },
+        {
+          "type": "ND",
+          "count": 0
+        }
+      ]
+    },
+    "demographics": {
+      "gender": {
+        "female": 373,
+        "male": 363,
+        "other": 0,
+        "unknown": 0
+      },
+      "ethnicities": {
+        "Unknown": 736
+      },
+      "ageRangeYears": {
+        "min": 14,
+        "max": 85
+      }
+    },
+    "cgmData": {
+      "cgmDevice": "Abbott Freestyle Libre 2",
+      "totalDaysOfGlucose": null,
+      "glucoseSamples": 22671708,
+      "averageDaysPerParticipant": null
+    }
+  },
+  "UCHTT1DM": {
+    "title": "UCHTT1DM",
+    "subtitle": "",
+    "description": "",
+    "links": {
+      "downloadUrl": "",
+      "sourceUrl": ""
+    },
+    "dataSources": {
+      "insulin": "",
+      "cgm": "",
+      "selfReport": "",
+      "activityTracker": ""
+    },
+    "participants": {
+      "total": 20,
+      "populationGroups": [
+        {
+          "type": "T1D",
+          "count": 9
+        },
+        {
+          "type": "T2D",
+          "count": 0
+        },
+        {
+          "type": "PreD",
+          "count": 0
+        },
+        {
+          "type": "ND",
+          "count": 11
+        }
+      ]
+    },
+    "demographics": {
+      "gender": {
+        "female": 0,
+        "male": 0,
+        "other": 0,
+        "unknown": 20
+      },
+      "ethnicities": {
+        "Unknown": 20
+      },
+      "ageRangeYears": {
+        "min": null,
+        "max": null
+      }
+    },
+    "cgmData": {
+      "cgmDevice": "",
+      "totalDaysOfGlucose": null,
+      "glucoseSamples": 29174,
+      "averageDaysPerParticipant": null
+    }
+  }
+}

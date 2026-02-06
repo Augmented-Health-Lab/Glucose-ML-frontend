@@ -12,11 +12,11 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* .dataset-card:hover {
+.dataset-card:hover {
   box-shadow: 0 12px 32px rgba(59, 167, 161, 0.18), 0 2px 8px rgba(0, 0, 0, 0.1);
   transform: translateY(-4px) scale(1.025);
   cursor: pointer;
-} */
+}
 
 .dataset-card-selected {
   border: 1px solid var(--primary-brand);

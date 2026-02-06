@@ -9,7 +9,7 @@
   justify-content: space-between;
   gap: 12px;
   padding: 12px 20px;
-  background: white;
+  background: transparent;
   border: 1px solid #d1d5db;
   border-radius: 12px;
   cursor: pointer;
@@ -22,7 +22,7 @@
 
 .multiselect-button:hover {
   border-color: var(--secondary-medium-grey);
-  background: #fafafa;
+  background: transparent;
 }
 
 .multiselect-button.has-selection {

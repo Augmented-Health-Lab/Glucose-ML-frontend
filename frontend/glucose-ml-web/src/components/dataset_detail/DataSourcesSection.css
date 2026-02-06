@@ -3,20 +3,19 @@
 .sources {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  margin-top: 16px;
 }
 
+
 .source-row {
-  position: relative;
+  display: grid;
+  grid-template-columns: minmax(130px, 1fr) minmax(0, 1.2fr);
+  align-items: start;
+  column-gap: 18px;
 
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-
-  padding: 18px 0;
-  align-items: flex-start;
-
-  /* REMOVE the border divider */
+  padding: 12px 0;
+  width: 100%;
+  box-sizing: border-box;
   border: 0;
 }
 
@@ -28,8 +27,6 @@
   padding-bottom: 0;
 }
 
-
-
 .source-left {
   display: inline-flex;
   align-items: center;
@@ -38,12 +35,13 @@
 }
 
 .source-icon {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  background: var(--teal-grey-background);
+  background: #eaf0f7;
+  border: 0.59px solid #00000010;
   color: var(--secondary-grey);
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
 
   display: inline-flex;
@@ -51,23 +49,31 @@
   justify-content: center;
 
   flex: 0 0 auto;
-  text-transform: lowercase;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
+
 .source-name {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--secondary-grey);
   line-height: 1.2;
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.source-detail {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--secondary-grey);
-  text-align: right;
-  line-height: 1.25;
 
-  max-width: 170px;
+.source-detail {
+  font-size: 13px;
+  font-weight: 400;
+  color: #82888f;
+  line-height: 1.3;
+  text-align: right;
+
+ 
+  min-width: 0;
   white-space: normal;
+  overflow-wrap: anywhere;
 }

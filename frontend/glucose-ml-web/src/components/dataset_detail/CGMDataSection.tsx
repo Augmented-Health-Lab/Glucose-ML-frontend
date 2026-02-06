@@ -6,26 +6,50 @@ import type { DatasetDetail } from "../MockData";
 import CgmMetricTile from "./CgmMetricTile";
 import CgmTabGroup from "./CgmTabGroup";
 import GlucoseRangeChart from "./GlucoseRangeChart";
+import HistogramChart from "./HistogramChart";
 
 type Props = {
   dataset: DatasetDetail;
 };
 
-type TabKey = "agp" | "hist" | "tir";
+type TabKey = "hist" | "tir";
 
 export default function CGMDataSection({ dataset }: Props) {
   const [tab, setTab] = useState<TabKey>("tir");
 
+
+  const formatValue = (val: string | number, isNumber: boolean = false): string => {
+    if (isNumber) {
+
+      if (val === 0 || val === "0") return "0";
+      return val ? String(val) : "";
+    }
+
+    return val ? String(val) : "";
+  };
+
+
+  const totalDaysRange = (dataset.cgmSummary as any).totalDaysRange;
+  const totalDaysDisplay = totalDaysRange 
+    ? totalDaysRange 
+    : dataset.cgmSummary.totalDays > 0 
+    ? String(dataset.cgmSummary.totalDays)
+    : "";
+
   const tiles = [
-    { value: dataset.cgmSummary.device, label: "CGM device" },
-    { value: String(dataset.cgmSummary.totalDays), label: "Total days of glucose" },
-    { value: String(dataset.cgmSummary.glucoseSamples), label: "Glucose samples" },
-    { value: String(dataset.cgmSummary.avgDaysPerParticipant), label: "Average days per participant" },
+    { value: dataset.cgmSummary.device || "", label: "CGM device" },
+    { value: totalDaysDisplay || "", label: "Total days of glucose" },
+    { value: dataset.cgmSummary.glucoseSamples > 0 ? String(dataset.cgmSummary.glucoseSamples) : "", label: "Glucose samples" },
+    { value: dataset.cgmSummary.avgDaysPerParticipant > 0 ? String(dataset.cgmSummary.avgDaysPerParticipant) : "", label: "Average days per participant" },
   ];
 
-  const yLabel = tab === "tir" ? "Count" : tab === "hist" ? "Count" : "Percent (%)";
+  const yLabel = tab === "tir" ? "Percentage (%)" : "Count";
 
-  const graphTitle = tab === "tir" ? "Time in ranges" : tab === "hist" ? "Histogram" : "Ambulatory glucose profile";
+  const graphTitle = tab === "tir" ? "Time in ranges" : "Histogram";
+  
+  const graphSubtitle = tab === "hist" 
+    ? "Distribution of glucose measurements across clinically defined glucose ranges"
+    : "Figure showing the range of glucose values...";
 
   return (
     <section className="cgm-card">
@@ -44,15 +68,17 @@ export default function CGMDataSection({ dataset }: Props) {
       <div className="cgm-graph">
         <div className="graph-head">
           <div className="graph-title">{graphTitle}</div>
-          <div className="graph-sub">Figure showing the range of glucose values...</div>
+          <div className="graph-sub">{graphSubtitle}</div>
         </div>
 
         <div className="graph-body">
           {tab === "tir" && <GlucoseRangeChart bars={dataset.timeInRanges} yLabel={yLabel} />}
 
-          {tab === "hist" && <div className="placeholder">Histogram goes here</div>}
-
-          {tab === "agp" && <div className="placeholder">Ambulatory glucose profile goes here</div>}
+          {tab === "hist" && dataset.histogramData ? (
+            <HistogramChart data={dataset.histogramData} yLabel={yLabel} />
+          ) : tab === "hist" ? (
+            <div className="placeholder">Histogram data not available</div>
+          ) : null}
         </div>
       </div>
     </section>

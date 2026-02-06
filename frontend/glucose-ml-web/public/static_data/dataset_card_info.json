@@ -4,7 +4,13 @@
     "metadata": "497 participants \u2022 TBD days \u2022 TBD access",
     "description": "Description TBD",
     "types": ["T1D"],
-    "sources": ["G", "I", "A", "S", "Q", "M"]
+    "sources": ["G", "I", "A", "S", "Q", "M"],
+    "populationGroups": [
+        { "type": "T1D", "count": 247 },
+        { "type": "T2D", "count": 120 },
+        { "type": "PreD", "count": 55 },
+        { "type": "ND", "count": 75 }
+      ]
   },
   {
     "title": "AI-READI",

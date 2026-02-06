@@ -1,7 +1,7 @@
 
 import "./CgmTabGroup.css";
 
-type TabKey = "agp" | "hist" | "tir";
+type TabKey = "hist" | "tir";
 
 type Props = {
   active: TabKey;
@@ -11,13 +11,6 @@ type Props = {
 export default function CgmTabGroup({ active, onChange }: Props) {
   return (
     <div className="cgm-tab-group">
-      <button
-        type="button"
-        className={`cgm-tab ${active === "agp" ? "is-active" : ""}`}
-        onClick={() => onChange("agp")}
-      >
-        Ambulatory glucose profile
-      </button>
       <button
         type="button"
         className={`cgm-tab ${active === "hist" ? "is-active" : ""}`}

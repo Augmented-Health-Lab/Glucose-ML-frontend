@@ -1,10 +1,11 @@
-import VisualBar from "./VisualBar";
 import "./DatasetCard.css";
 import { useNavigate } from "react-router-dom";
 
 export interface DatasetCardProps {
   title: string;
-  metadata: string;
+  participants: number;
+  days: number;
+  access: string;
   description: string;
   types: string[];
   sources: string[];
@@ -39,22 +40,22 @@ export const RoundIcon = ({ type }: { type: string }) => {
 
 const DatasetCard = ({
   title,
-  metadata,
+  participants,
+  days,
+  access,
   description,
   types,
   sources,
   selected = false,
   onSelect,
 }: DatasetCardProps) => {
+  const visualBarFile = `${title.replace(/ /g, "_")}-visual-bar.png`;
+
   //add to make clickable
   const navigate = useNavigate();
 
   const handleCardClick = () => {
     navigate(`/dataset/${title}`);
-  };
-
-  const handleCheckboxClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
   };
 
   return (
@@ -65,18 +66,11 @@ const DatasetCard = ({
       <div className="top-section mb-6px">
         <div className="d-flex align-items-start">
           <h2 className="h2">{title}</h2>
-
-          {/* checkbox */}
-          <input
-            type="checkbox"
-            className="form-check-input ms-auto"
-            checked={selected}
-            onClick={handleCheckboxClick}
-            onChange={(e) => onSelect?.(e.target.checked)}
-          />
         </div>
 
-        <p className="metadata mb-12px">{metadata}</p>
+        <p className="metadata mb-12px">
+          {participants} participants · {days} days · {access} access
+        </p>
         <p className="body mb-24px">{description}</p>
       </div>
 
@@ -98,8 +92,11 @@ const DatasetCard = ({
           </div>
         </div>
 
-        <div className="ms-auto">
-          <VisualBar name={title} />
+        <div className="ms-auto visual-bar">
+          <img
+            src={`/homepage_visual_bar/${visualBarFile}`}
+            alt={`${title} visual bar`}
+          />
         </div>
       </div>
     </div>

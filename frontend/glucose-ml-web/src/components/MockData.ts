@@ -9,12 +9,12 @@ export const FILTERS = [
     prompt: "Select data type(s)",
     multi: true,
     options: [
-      "CGM",
-      "Insulin delivery",
-      "Activity tracker",
-      "Self report",
+      "Glucose Monitor",
+      "Insulin system",
+      "Wearable Tracker",
+      "Manual Logs",
       "Questionnaire",
-      "Lab measurements",
+      "Clinical Measurements",
     ],
   },
   {
@@ -27,7 +27,7 @@ export const FILTERS = [
     label: "Study duration",
     prompt: "Select duration",
     multi: false,
-    options: ["7+ days", "14+ days", "1 month", "2+ months"],
+    options: ["7+ days", "14+ days", "1+ month", "2+ months"],
   },
   {
     label: "Sample size",
@@ -73,7 +73,12 @@ export type DatasetCardMock = (typeof DATASET_MOCKS)[number];
 export type DiabetesType = "T1D" | "T2D" | "PreD" | "ND";
 
 // ✅ Used by GlucoseRangeChart.tsx
-export type GlucoseRangeKey = "VeryLow" | "Low" | "Target" | "High" | "VeryHigh";
+export type GlucoseRangeKey =
+  | "VeryLow"
+  | "Low"
+  | "Target"
+  | "High"
+  | "VeryHigh";
 
 // ✅ Used by GlucoseRangeChart.tsx
 export type StackedBarGroup = {
@@ -86,7 +91,11 @@ export type StackedBarGroup = {
 export type DataSource = { icon: string; name: string; detail: string };
 
 // ✅ Used by PopulationSection.tsx
-export type PopulationGroup = { type: DiabetesType; count: number; label?: string };
+export type PopulationGroup = {
+  type: DiabetesType;
+  count: number;
+  label?: string;
+};
 
 // Keeps your existing chart data shape for the older GlucoseRangeChart version
 export type GlucoseRange = {
@@ -104,7 +113,6 @@ export interface DatasetDetail {
   participantsTotal: number;
   populationGroups: PopulationGroup[];
 
-
   // Header
   duration: string; // e.g. "Year released: 2024"
   dateRange: string;
@@ -115,6 +123,7 @@ export interface DatasetDetail {
     downloadLabel: string;
     paperLabel: string;
   };
+  datasetLink?: string; // Link to dataset source
 
   // Cards (your existing structure)
   population: {
@@ -156,6 +165,15 @@ export interface DatasetDetail {
 
   // ✅ Needed by CGMDataSection.tsx + GlucoseRangeChart.tsx in your newer code
   timeInRanges: StackedBarGroup[];
+
+  // ✅ Needed by CGMDataSection.tsx + HistogramChart.tsx
+  histogramData?: Array<{
+    bin_start: number;
+    bin_end: number;
+    x: number;
+    y: number;
+    label: string;
+  }>;
 }
 
 // -------------------------
@@ -234,7 +252,6 @@ export const DATASET_DETAILS_MAP: Record<string, DatasetDetail> = {
       { type: "ND", count: 23, label: "ND" },
     ],
 
-
     // ✅ newer stacked bars (15 / 65 / 20)
     timeInRanges: [
       {
@@ -272,7 +289,6 @@ export const DATASET_DETAILS_MAP: Record<string, DatasetDetail> = {
       },
     ],
   },
-
 };
 
 // ✅ Needed by DatasetDetail.tsx error: missing export member 'mockCGMacros'

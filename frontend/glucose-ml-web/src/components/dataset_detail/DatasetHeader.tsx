@@ -7,6 +7,7 @@ type Props = {
     duration: string;
     dateRange: string;
     fullDescription: string;
+    datasetLink?: string;
   };
   onBack: () => void;
   onLegendInfo?: () => void;
@@ -45,12 +46,20 @@ export default function DatasetHeader({ dataset, onBack, onLegendInfo }: Props) 
           <p className="detail-desc">{dataset.fullDescription}</p>
 
           <div className="detail-header-actions">
-            <button type="button" className="control-btn control-btn-primary">
-              Download dataset
-            </button>
-            <button type="button" className="control-btn control-btn-primary">
-              Link to dataset source
-            </button>
+            {dataset.datasetLink ? (
+              <a
+                href={dataset.datasetLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="control-btn control-btn-primary"
+              >
+                Link to dataset source
+              </a>
+            ) : (
+              <button type="button" className="control-btn control-btn-primary" disabled>
+                Link to dataset source
+              </button>
+            )}
           </div>
         </div>
       </div>

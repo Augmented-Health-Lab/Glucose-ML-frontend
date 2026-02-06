@@ -13,7 +13,7 @@
   margin: 0 auto;
   padding: 0 22px;
   display: grid;
-  grid-template-columns: 320px 1fr;
+  grid-template-columns: 420px 1fr;
   gap: 24px;
   align-items: start;
 }

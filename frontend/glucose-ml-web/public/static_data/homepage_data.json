@@ -1,0 +1,191 @@
+[
+  {
+    "title": "Hall 2018",
+    "participants": 57,
+    "days": 8,
+    "access": "Open",
+    "description": "TBD",
+    "types": ["T2D", "PreD", "ND"],
+    "sources": ["G", "M", "Q", "C"]
+  },
+  {
+    "title": "D1NAMO",
+    "participants": 9,
+    "days": 4,
+    "access": "Open",
+    "description": "TBD",
+    "types": ["T1D"],
+    "sources": ["G", "I", "W", "M", "C"]
+  },
+  {
+    "title": "Colas 2019",
+    "participants": 208,
+    "days": 2,
+    "access": "Open",
+    "description": "TBD",
+    "types": ["T2D", "ND"],
+    "sources": ["G", "C"]
+  },
+  {
+    "title": "OhioT1DM",
+    "participants": 12,
+    "days": 54,
+    "access": "Controlled",
+    "description": "TBD",
+    "types": ["T1D"],
+    "sources": ["G", "I", "W", "M", "Q"]
+  },
+  {
+    "title": "T1DEXI",
+    "participants": 497,
+    "days": 27,
+    "access": "Controlled",
+    "description": "TBD",
+    "types": ["T1D"],
+    "sources": ["G", "I", "W", "M", "Q", "C"]
+  },
+  {
+    "title": "T1DEXIP",
+    "participants": 247,
+    "days": 10,
+    "access": "Controlled",
+    "description": "TBD",
+    "types": ["T1D"],
+    "sources": ["G", "I", "W", "M", "Q", "C"]
+  },
+  {
+    "title": "BIGIDEAs",
+    "participants": 16,
+    "days": 9,
+    "access": "Open",
+    "description": "TBD",
+    "types": ["PreD", "ND"],
+    "sources": ["G", "W", "Q", "C"]
+  },
+  {
+    "title": "DiaTrend",
+    "participants": 54,
+    "days": 512,
+    "access": "Controlled",
+    "description": "TBD",
+    "types": ["T1D"],
+    "sources": ["G", "I", "Q", "C"]
+  },
+  {
+    "title": "ShanghaiT1DM",
+    "participants": 12,
+    "days": 15,
+    "access": "Open",
+    "description": "TBD",
+    "types": ["T1D"],
+    "sources": ["G", "I", "M", "Q", "C"]
+  },
+  {
+    "title": "ShanghaiT2DM",
+    "participants": 100,
+    "days": 13,
+    "access": "Open",
+    "description": "TBD",
+    "types": ["T2D"],
+    "sources": ["G", "I", "M", "Q", "C"]
+  },
+  {
+    "title": "T1DiabetesGranada",
+    "participants": 736,
+    "days": 350,
+    "access": "Controlled",
+    "description": "TBD",
+    "types": ["T1D"],
+    "sources": ["G", "Q", "C"]
+  },
+  {
+    "title": "AI-READI",
+    "participants": 2280,
+    "days": 11,
+    "access": "Controlled",
+    "description": "TBD",
+    "types": ["T2D", "PreD", "ND"],
+    "sources": ["G", "W", "Q", "C"]
+  },
+  {
+    "title": "UCHTT1DM",
+    "participants": 20,
+    "days": 6,
+    "access": "Open",
+    "description": "TBD",
+    "types": ["T1D", "ND"],
+    "sources": ["G", "I", "W", "M"]
+  },
+  {
+    "title": "HUPA-UCM",
+    "participants": 25,
+    "days": 44,
+    "access": "Open",
+    "description": "TBD",
+    "types": ["T1D"],
+    "sources": ["G", "I", "W", "M", "C"]
+  },
+  {
+    "title": "CGMacros Dexcom",
+    "participants": 45,
+    "days": 11,
+    "access": "Open",
+    "description": "TBD",
+    "types": ["T2D", "PreD", "ND"],
+    "sources": ["G", "W", "M", "Q", "C"]
+  },
+  {
+    "title": "CGMacros Libre",
+    "participants": 45,
+    "days": 12,
+    "access": "Open",
+    "description": "TBD",
+    "types": ["T2D", "PreD", "ND"],
+    "sources": ["G", "W", "M", "Q", "C"]
+  },
+  {
+    "title": "T1D-UOM",
+    "participants": 17,
+    "days": 96,
+    "access": "Open",
+    "description": "TBD",
+    "types": ["T1D"],
+    "sources": ["G", "I", "W", "M", "Q", "C"]
+  },
+  {
+    "title": "Bris-T1D Open",
+    "participants": 20,
+    "days": 183,
+    "access": "Open",
+    "description": "TBD",
+    "types": ["T1D"],
+    "sources": ["G", "I", "W", "Q"]
+  },
+  {
+    "title": "AZT1D",
+    "participants": 25,
+    "days": 42,
+    "access": "Open",
+    "description": "TBD",
+    "types": ["T1D"],
+    "sources": ["G", "I", "Q", "C"]
+  },
+  {
+    "title": "Park 2025",
+    "participants": 38,
+    "days": "TBD",
+    "access": "Open",
+    "description": "TBD",
+    "types": ["T2D", "PreD", "ND"],
+    "sources": ["G", "I", "Q", "C"]
+  },
+  {
+    "title": "PhysioCGM",
+    "participants": 10,
+    "days": 80,
+    "access": "Open",
+    "description": "TBD",
+    "types": ["T1D"],
+    "sources": ["G", "Q", "C"]
+  }
+]

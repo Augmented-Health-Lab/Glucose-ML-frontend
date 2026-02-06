@@ -1,6 +1,17 @@
 .dataset-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 40px;
-  justify-content: center;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 704px) {
+  .dataset-grid {
+    grid-template-columns: repeat(2, minmax(320px, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .dataset-grid {
+    grid-template-columns: repeat(3, minmax(320px, 1fr));
+  }
 }

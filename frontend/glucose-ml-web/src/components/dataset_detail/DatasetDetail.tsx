@@ -13,7 +13,7 @@ import DemographicsSection from "./DemographicsSection";
 import "./DatasetDetail.css";
 
 type Props = {
-  dataset?: DatasetDetailType; // allow passing real data later
+  dataset?: DatasetDetailType;
   onBack?: () => void | Promise<void>;
 };
 
@@ -25,6 +25,7 @@ type CardInfo = {
   sources: string[];
 };
 
+
 type TirMap = Record<
   string,
   {
@@ -35,6 +36,129 @@ type TirMap = Record<
     very_low?: number;
   }
 >;
+
+
+type RangeKey = "very_low" | "low" | "target" | "high" | "very_high";
+type TirByType = Record<string, Partial<Record<RangeKey, number>>>;
+type TirByDataset = Record<string, TirByType>;
+
+const DIABETES_LABEL_TO_CODE: Record<string, string> = {
+  "type 1 diabetes": "T1D",
+  "type i diabetes": "T1D",
+  t1d: "T1D",
+
+  "type 2 diabetes": "T2D",
+  "type ii diabetes": "T2D",
+  t2d: "T2D",
+
+  prediabetes: "PreD",
+  pred: "PreD",
+
+  "no diabetes": "ND",
+  "non-diabetic": "ND",
+  nondiabetic: "ND",
+  nd: "ND",
+};
+
+function normalizeDiabetesTypeLabel(raw: string): string {
+  const key = String(raw ?? "").trim().toLowerCase();
+  return DIABETES_LABEL_TO_CODE[key] || raw;
+}
+
+function clamp0(x: unknown): number {
+  const n = typeof x === "number" ? x : Number(x);
+  return Number.isFinite(n) && n > 0 ? n : 0;
+}
+
+/**
+ * IMPORTANT:
+ * - segments are % within a type (sum to 100)
+ * - total controls bar HEIGHT in GlucoseRangeChart (so pass participant counts per type here if you want Figma-like different heights)
+ */
+function toStackedBars(
+  tirByType: TirByType,
+  totalsByType?: Record<string, number>
+): { group: string; total: number; segments: { key: any; value: number }[] }[] {
+  const orderKeys: RangeKey[] = ["very_low", "low", "target", "high", "very_high"];
+
+  const preferredGroupOrder = ["ND", "PreD", "T2D", "T1D"]; 
+  const groupRank = (g: string) => {
+    const idx = preferredGroupOrder.indexOf(g);
+    return idx === -1 ? 999 : idx;
+  };
+
+  const bars = Object.entries(tirByType).map(([rawGroup, vals]) => {
+    const group = normalizeDiabetesTypeLabel(rawGroup);
+
+    const raw = {
+      very_low: clamp0(vals.very_low),
+      low: clamp0(vals.low),
+      target: clamp0(vals.target),
+      high: clamp0(vals.high),
+      very_high: clamp0(vals.very_high),
+    };
+
+    const normalized = {
+      VeryLow: raw.very_low,
+      Low: raw.low,
+      Target: raw.target,
+      High: raw.high,
+      VeryHigh: raw.very_high,
+    };
+
+    const totalFromCounts = totalsByType?.[group];
+    const total = Number.isFinite(totalFromCounts as any) && (totalFromCounts as number) > 0 ? (totalFromCounts as number) : 100;
+
+    return {
+      group,
+      total,
+      segments: [
+        { key: "VeryLow", value: normalized.VeryLow },
+        { key: "Low", value: normalized.Low },
+        { key: "Target", value: normalized.Target },
+        { key: "High", value: normalized.High },
+        { key: "VeryHigh", value: normalized.VeryHigh },
+      ],
+    };
+  });
+
+  bars.sort((a, b) => {
+    const ra = groupRank(a.group);
+    const rb = groupRank(b.group);
+    if (ra !== rb) return ra - rb;
+    return a.group.localeCompare(b.group);
+  });
+
+  return bars;
+}
+
+type Table1DetailData = {
+  name: string;
+  "year release": string;
+  total: number;
+  male: number | null;
+  female: number | null;
+  "age range": string;
+  Ethinicities: string;
+  "CGM Device": string;
+  "Total days of glucose": string;
+  "Glucose samples": number;
+  "average days per participant": number | null;
+  data_source?: Record<string, string>;
+  populationGroups?: { type: string; count: number | null }[];
+  "Link to dataset"?: string;
+};
+
+type HistogramDataItem = {
+  name: string;
+  data: Array<{
+    bin_start: number;
+    bin_end: number;
+    x: number;
+    y: number;
+    label: string;
+  }>;
+};
 
 type LoadState =
   | { status: "loading"; data: null; error: null }
@@ -52,14 +176,14 @@ async function fetchJsonStrict<T>(relativePath: string, signal: AbortSignal): Pr
   const url = baseUrlJoin(relativePath);
   const res = await fetch(url, { signal });
 
-  const text = await res.text();
   if (!res.ok) throw new Error(`Failed to fetch ${url} (${res.status})`);
 
+  const text = await res.text();
   try {
-    return JSON.parse(text) as T;
-  } catch {
-    const preview = text.slice(0, 80).replace(/\s+/g, " ");
-    throw new Error(`Expected JSON from ${url}, got: "${preview}..."`);
+    const cleanedText = text.trim().replace(/^\uFEFF/, "");
+    return JSON.parse(cleanedText) as T;
+  } catch (e) {
+    throw new Error(`Failed to parse JSON from ${url}: ${e instanceof Error ? e.message : String(e)}`);
   }
 }
 
@@ -70,72 +194,227 @@ function parseParticipants(metadata: string): number | null {
   return Number.isFinite(n) ? n : null;
 }
 
-function mapSourceLetter(letter: string): { icon: string; name: string; detail: string } {
+type DataSourceMap = Record<string, string>;
+
+async function loadDataSourceMap(signal: AbortSignal): Promise<DataSourceMap | null> {
+  try {
+    return await fetchJsonStrict<DataSourceMap>("static_data/data_source_map.json", signal);
+  } catch {
+    return null;
+  }
+}
+
+function mapSourceLetter(letter: string, dataSourceMap: DataSourceMap | null, dataSourceDetail?: string) {
   const L = letter.toUpperCase();
-  const nameByLetter: Record<string, string> = {
-    G: "CGM",
+
+  const fallback: Record<string, string> = {
+    G: "Glucose",
     I: "Insulin",
     A: "Activity",
     S: "Self report",
     Q: "Questionnaire",
     M: "Meals",
+    W: "Wearables",
+    C: "Characteristics",
   };
+
+  const fullName = dataSourceMap?.[L] || fallback[L] || "Source";
 
   return {
     icon: L,
-    name: nameByLetter[L] ?? "Source",
-    detail: "TBD",
+    name: fullName,
+    detail: dataSourceDetail || "",
   };
 }
 
-function buildDetailFromStatic(card: CardInfo, tir?: TirMap[string]): DatasetDetailType {
-  const participantsTotal = parseParticipants(card.metadata) ?? 0;
+const nameMapping: Record<string, string> = {
+  Park2025: "Park 2025",
+  "T1DM-UOM": "T1D-UOM",
+};
+
+function normalizeName(name: string): string {
+  return String(name ?? "")
+    .replace(/[\s_-]+/g, "")
+    .toLowerCase()
+    .trim();
+}
+
+function findTable1Data(table1Data: Table1DetailData[], title: string): Table1DetailData | null {
+  const mappedName = nameMapping[title] || title;
+
+  const exactMatches = table1Data.filter((item) => item.name === mappedName);
+  if (exactMatches.length > 0) return exactMatches.find((x) => x.data_source) || exactMatches[0];
+
+  const normalizedTitle = normalizeName(mappedName);
+  const normalizedMatches = table1Data.filter((item) => normalizeName(item.name) === normalizedTitle);
+  if (normalizedMatches.length > 0) return normalizedMatches.find((x) => x.data_source) || normalizedMatches[0];
+
+  const caseMatches = table1Data.filter((item) => item.name.toLowerCase() === mappedName.toLowerCase());
+  if (caseMatches.length > 0) return caseMatches.find((x) => x.data_source) || caseMatches[0];
+
+  return null;
+}
+
+function handleNR(value: string | null | undefined): string {
+  if (!value || value === "NR" || value === "Nah") return "";
+  return String(value);
+}
+
+function handleNaN(value: number | null | undefined): number {
+  if (value === null || value === undefined || Number.isNaN(value)) return 0;
+  return value;
+}
+
+function buildDetailFromStatic(
+  card: CardInfo,
+  legacyTir?: TirMap[string],
+  table1Data?: Table1DetailData | null,
+  dataSourceMap?: DataSourceMap | null,
+  histogramData?: HistogramDataItem["data"] | null,
+  barsFromTir?: DatasetDetailType["timeInRanges"] | null
+): DatasetDetailType {
+  const participantsTotal = table1Data?.total ?? parseParticipants(card.metadata) ?? 0;
 
   const types = Array.isArray(card.types) ? card.types : [];
   const groups = types.length ? types : ["All"];
 
-  const segments = [
-    { key: "VeryLow", value: tir?.very_low ?? 0 },
-    { key: "Low", value: tir?.low ?? 0 },
-    { key: "Target", value: tir?.target ?? 0 },
-    { key: "High", value: tir?.high ?? 0 },
-    { key: "VeryHigh", value: tir?.very_high ?? 0 },
+  const populationGroups = (table1Data?.populationGroups?.length
+    ? table1Data.populationGroups.map((g) => ({
+        type: g.type,
+        label: g.type,
+        count: g.count ?? 0,
+      }))
+    : groups.map((t) => ({
+        type: t,
+        label: t,
+        count: 0,
+      }))) as any;
+
+  
+  const legacySegments = [
+    { key: "VeryLow", value: legacyTir?.very_low ?? 0 },
+    { key: "Low", value: legacyTir?.low ?? 0 },
+    { key: "Target", value: legacyTir?.target ?? 0 },
+    { key: "High", value: legacyTir?.high ?? 0 },
+    { key: "VeryHigh", value: legacyTir?.very_high ?? 0 },
   ];
 
+ 
+  let genderStr = "";
+  if (table1Data) {
+    const male = handleNaN(table1Data.male);
+    const female = handleNaN(table1Data.female);
+    if (male > 0 || female > 0) {
+      const parts: string[] = [];
+      if (female > 0) parts.push(`${Math.round(female)} female`);
+      if (male > 0) parts.push(`${Math.round(male)} male`);
+      genderStr = parts.join(", ");
+    }
+  }
+
+  const demographics = {
+    gender: genderStr || "",
+    ethnicities: table1Data ? handleNR(table1Data.Ethinicities) : "",
+    ageRange: table1Data ? handleNR(table1Data["age range"]) : "",
+  };
+
+  const cgmDevice = table1Data ? handleNR(table1Data["CGM Device"]) : "";
+  const totalDaysStr = table1Data ? handleNR(table1Data["Total days of glucose"]) : "";
+  const glucoseSamples = table1Data ? handleNaN(table1Data["Glucose samples"]) : 0;
+  const avgDays = table1Data ? handleNaN(table1Data["average days per participant"]) : 0;
+
+  const yearRelease = table1Data ? handleNR(table1Data["year release"]) : "";
+  const duration = yearRelease ? `Year released: ${yearRelease}` : "";
+
+  const datasetLink = table1Data?.["Link to dataset"] || undefined;
+
+  
+  let dataSources: { icon: string; name: string; detail: string }[] = [];
+  if (table1Data?.data_source) {
+    dataSources = Object.entries(table1Data.data_source).map(([letter, detail]) =>
+      mapSourceLetter(letter, dataSourceMap || null, String(detail))
+    );
+    dataSources.sort((a, b) => a.icon.localeCompare(b.icon));
+  } else {
+    dataSources = (card.sources ?? []).map((letter) =>
+      mapSourceLetter(letter, dataSourceMap || null, cgmDevice && letter.toUpperCase() === "G" ? cgmDevice : undefined)
+    );
+  }
+
+
+  let totalDays = 0;
+  if (totalDaysStr) {
+    const rangeMatch = totalDaysStr.match(/(\d+)\s*[–-]\s*(\d+)/);
+    if (rangeMatch) {
+      totalDays = Math.max(parseFloat(rangeMatch[1]) || 0, parseFloat(rangeMatch[2]) || 0);
+    } else {
+      const num = parseFloat(totalDaysStr);
+      if (!Number.isNaN(num)) totalDays = num;
+    }
+  }
+
+
+  const timeInRanges =
+    barsFromTir && barsFromTir.length
+      ? barsFromTir
+      : groups.map((g) => ({
+          group: g,
+          total: 100,
+          segments: legacySegments,
+        }));
+
   return {
+    id: card.title.toLowerCase().replace(/\s+/g, "-"),
     title: card.title,
-    duration: "TBD",
+    metadata: card.metadata,
+    duration,
     dateRange: "",
-    fullDescription: card.description || "Description TBD",
+    fullDescription: card.description && card.description !== "Description TBD" ? card.description : "",
+    actions: {
+      downloadLabel: "Download dataset",
+      paperLabel: "Link to dataset source",
+    },
+    datasetLink,
 
     participantsTotal,
-    populationGroups: groups.map((t) => ({
-      type: t,
-      label: t,
-      count: 0,
-    })) as any,
+    populationGroups,
 
-    demographics: { gender: "TBD", ethnicities: "TBD", ageRange: "TBD" },
+    population: {
+      total: participantsTotal,
+      diabetesTypes: groups.map((t) => ({ type: t as any, count: 0 })),
+      gender: demographics.gender,
+      ethnicities: demographics.ethnicities,
+      ageRange: demographics.ageRange,
+    },
 
-    dataSources: (card.sources ?? []).map(mapSourceLetter),
+    demographics,
 
-    cgmSummary: { device: "TBD", totalDays: 0, glucoseSamples: 0, avgDaysPerParticipant: 0 },
+    dataSources,
 
-    timeInRanges: groups.map((g) => ({
-      group: g,
-      total: 100,
-      segments,
-    })),
+    cgmData: {
+      device: cgmDevice || "",
+      totalDays,
+      totalSamples: glucoseSamples,
+      avgDaysPerParticipant: avgDays,
+    },
+
+    cgmSummary: {
+      device: cgmDevice || "",
+      totalDays,
+      glucoseSamples,
+      avgDaysPerParticipant: avgDays,
+      totalDaysRange: totalDaysStr || (totalDays > 0 ? String(totalDays) : undefined),
+    } as any,
+
+    glucoseRanges: [],
+
+    timeInRanges,
+
+    histogramData: histogramData || undefined,
   } as DatasetDetailType;
 }
 
-function isCardInfoArray(x: unknown): x is CardInfo[] {
-  return Array.isArray(x);
-}
-
-function isTirMap(x: unknown): x is TirMap {
-  return !!x && typeof x === "object" && !Array.isArray(x);
-}
+// visual_bar_info.json is intentionally not used (file is not provided).
 
 export default function DatasetDetail({ dataset, onBack }: Props) {
   const navigate = useNavigate();
@@ -157,27 +436,94 @@ export default function DatasetDetail({ dataset, onBack }: Props) {
 
     (async () => {
       try {
-        // Always load the main card list
         const cardsA = await fetchJsonStrict<CardInfo[]>("static_data/dataset_card_info.json", ac.signal);
 
-        // visual_bar_info.json could be either:
-        // - an ARRAY of cards (like your teammate list)
-        // - an OBJECT map of TIR percentages (like the big map you pasted earlier)
-        const vb = await fetchJsonStrict<unknown>("static_data/visual_bar_info.json", ac.signal);
+        // Load Table1 detail data
+        let table1Data: Table1DetailData[] | null = null;
+        try {
+          table1Data = await fetchJsonStrict<Table1DetailData[]>("static_data/table1_detail_data.json", ac.signal);
+        } catch {
+          
+        }
 
-        const extraCards = isCardInfoArray(vb) ? vb : [];
-        const tirMap: TirMap | null = isTirMap(vb) ? (vb as TirMap) : null;
+        const dataSourceMap = await loadDataSourceMap(ac.signal);
 
-        // Merge cards from both lists
+        
+        let matchedHistogramData: HistogramDataItem["data"] | null = null;
+        try {
+          const histogramDataAll = await fetchJsonStrict<HistogramDataItem[]>(
+            "static_data/all-projects-histogram_data_fixed.json",
+            ac.signal
+          );
+          const matched = histogramDataAll.find((item) => normalizeName(item.name) === normalizeName(id) || item.name === id);
+          matchedHistogramData = matched?.data || null;
+        } catch {
+          
+        }
+
+        
+        const tirByDataset = await fetchJsonStrict<TirByDataset>("static_data/time_in_ranges_by_type.json", ac.signal).catch(
+          () => null
+        );
+
+        // We no longer use visual_bar_info.json (not provided).
+        // Cards come solely from dataset_card_info.json.
         const merged = new Map<string, CardInfo>();
-        for (const c of [...cardsA, ...extraCards]) merged.set(c.title, c);
+        for (const c of cardsA) merged.set(c.title, c);
 
         const card = merged.get(id);
         if (!card) throw new Error(`Dataset not found in static card lists: ${id}`);
 
-        const tirForThis = tirMap?.[card.title]; // may be undefined (ok)
+        const matchedTable1Data = table1Data ? findTable1Data(table1Data, card.title) : null;
 
-        const detail = buildDetailFromStatic(card, tirForThis);
+        
+        const datasetKeyCandidates = [
+          card.title,
+          matchedTable1Data?.name,
+          id,
+          nameMapping[card.title],
+          nameMapping[id],
+        ].filter(Boolean) as string[];
+
+        let tirForDataset: TirByType | null = null;
+        for (const k of datasetKeyCandidates) {
+          if (tirByDataset?.[k]) {
+            tirForDataset = tirByDataset[k];
+            break;
+          }
+          if (tirByDataset) {
+            const foundKey = Object.keys(tirByDataset).find((key) => normalizeName(key) === normalizeName(k));
+            if (foundKey) {
+              tirForDataset = tirByDataset[foundKey];
+              break;
+            }
+          }
+        }
+
+        
+        const totalsByType: Record<string, number> = {};
+        if (matchedTable1Data?.populationGroups?.length) {
+          for (const g of matchedTable1Data.populationGroups) {
+            const code = normalizeDiabetesTypeLabel(g.type);
+            const n = Number(g.count);
+            if (Number.isFinite(n) && n > 0) totalsByType[code] = n;
+          }
+        }
+
+        const barsFromTir = tirForDataset ? toStackedBars(tirForDataset, totalsByType) : null;
+
+
+        const detail = buildDetailFromStatic(
+          card,
+          undefined,
+          matchedTable1Data,
+          dataSourceMap,
+          matchedHistogramData,
+          barsFromTir
+        );
+
+        setLoad({ status: "success", data: detail, error: null });
+
         setLoad({ status: "success", data: detail, error: null });
       } catch (err) {
         if (ac.signal.aborted) return;
@@ -200,7 +546,6 @@ export default function DatasetDetail({ dataset, onBack }: Props) {
     navigate(-1);
   };
 
-  // If dataset prop exists, render immediately
   if (dataset) {
     return (
       <div className="detail-page">
@@ -271,12 +616,19 @@ export default function DatasetDetail({ dataset, onBack }: Props) {
 
   return (
     <div className="detail-page">
-      <DatasetHeader dataset={resolvedDataset} onBack={handleBack} onLegendInfo={() => setLegendOpen(true)} />
+      <DatasetHeader
+        dataset={resolvedDataset}
+        onBack={handleBack}
+        onLegendInfo={() => setLegendOpen(true)}
+      />
 
       <main className="detail-main">
         <div className="detail-grid">
           <div className="detail-left">
-            <PopulationSection total={resolvedDataset.participantsTotal} groups={resolvedDataset.populationGroups} />
+            <PopulationSection
+              total={resolvedDataset.participantsTotal}
+              groups={resolvedDataset.populationGroups}
+            />
             <DemographicsSection demographics={resolvedDataset.demographics} />
             <DataSourcesSection sources={resolvedDataset.dataSources} />
           </div>

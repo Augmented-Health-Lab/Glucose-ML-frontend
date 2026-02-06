@@ -8,6 +8,14 @@ interface Props {
 }
 
 const DatasetGrid = ({ datasets, selectedCards, onCardSelect }: Props) => {
+  if (datasets.length === 0) {
+    return (
+      <div className="dataset-grid">
+        <p className="subtitle">No results match your filters.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="dataset-grid">
       {datasets.map((dataset) => (

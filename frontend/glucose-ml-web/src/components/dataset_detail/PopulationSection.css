@@ -1,20 +1,30 @@
-.kv-row--top {
+/* src/components/dataset_detail/PopulationSection.css */
+
+/* Force top alignment for the Population row (beats .kv-row in DatasetDetail.css) */
+.kv-row.kv-row--top {
   align-items: flex-start;
 }
 
+.kv-row.kv-row--top .kv-key {
+  padding-top: 2px;
+}
 
+/* Right column list */
 .pop-groups {
   display: flex;
   flex-direction: column;
-  gap: 16px; 
+  gap: 12px;
   align-items: flex-end;
   text-align: right;
+  margin: 0;
+  padding: 0;
 }
 
 .pop-group-item {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 8px; 
+  justify-content: flex-end;
+  gap: 12px;
 }
 
 .pop-count {

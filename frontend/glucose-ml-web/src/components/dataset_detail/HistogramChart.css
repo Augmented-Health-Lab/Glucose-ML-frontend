@@ -1,0 +1,185 @@
+.histogram-wrap {
+  width: 100%;
+}
+
+.histogram-legend {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  white-space: nowrap;
+  padding: 0 6px 12px;
+  overflow: visible;
+}
+
+.histogram-legend::-webkit-scrollbar {
+  display: none;
+}
+
+.histogram-legend-item {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.histogram-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex: 0 0 auto;
+  margin-top: 2px;
+}
+
+.histogram-legend-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.histogram-legend-title {
+  font-size: var(--metadata-size);
+  font-weight: var(--metadata-weight);
+  color: var(--secondary-grey);
+  line-height: 1.2;
+}
+
+.histogram-legend-range {
+  font-size: var(--metadata-size);
+  font-weight: var(--metadata-weight);
+  color: var(--secondary-grey);
+  line-height: 1.2;
+  padding-left: 0;
+  opacity: 0.7;
+}
+
+.histogram-frame {
+  background: transparent;
+  border: 0;
+  border-radius: 12px;
+  padding: 14px 16px 12px;
+  position: relative;
+}
+
+.histogram-plot-area {
+  position: relative;
+  padding: 18px 12px 0 54px;
+}
+
+.histogram-y-label {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+  transform-origin: left center;
+  font-size: var(--metadata-size);
+  font-weight: 600;
+  color: rgba(89, 99, 110, 0.45);
+  pointer-events: none;
+}
+
+.histogram-y-axis {
+  position: absolute;
+  left: 54px;
+  top: 18px;
+  bottom: 0;
+  width: 1px;
+  background: var(--secondary-light-grey);
+}
+
+.histogram-bars-container {
+  display: flex;
+  align-items: flex-end;
+  height: 240px;
+  gap: 2px;
+  padding: 0 8px 0 0;
+}
+
+.histogram-bar-wrapper {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  flex: 1;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+
+.histogram-bar-wrapper:hover {
+  transform: scaleY(1.3) scaleX(1.2) translateY(-10px);
+  z-index: 10;
+}
+
+.histogram-bar {
+  width: 100%;
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+  min-width: 1px;
+  transform-origin: bottom center;
+}
+
+.histogram-tooltip {
+  position: absolute;
+  background: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  z-index: 1000;
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+
+.histogram-plot-area {
+  position: relative;
+}
+
+.histogram-tooltip-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary-black);
+  margin-bottom: 4px;
+}
+
+.histogram-tooltip-count {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--secondary-grey);
+}
+
+.histogram-x-axis {
+  height: 1px;
+  background: var(--secondary-light-grey);
+  margin: 0 12px 0 54px;
+}
+
+.histogram-xlabels {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 12px 0 54px;
+  padding: 0 0 0 0;
+}
+
+.histogram-xlabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--secondary-grey);
+  flex: 0 0 auto;
+}
+
+.histogram-x-unit {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--secondary-grey);
+  margin-top: 4px;
+  padding-left: 54px;
+  padding-right: 12px;
+}
+
+.histogram-empty {
+  text-align: center;
+  padding: 40px;
+  color: var(--secondary-grey);
+}

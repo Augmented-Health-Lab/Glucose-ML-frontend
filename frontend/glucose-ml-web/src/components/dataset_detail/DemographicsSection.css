@@ -1,2 +1,37 @@
 /* src/components/dataset_detail/DemographicsSection.css */
 /* Uses shared .card/.card-title/.kv from DatasetDetail.css */
+
+.kv-row {
+  display: grid;
+  grid-template-columns: 120px 1fr; 
+  column-gap: 18px;
+  align-items: start;
+}
+
+.kv-key {
+  color: var(--secondary-grey);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+
+.kv-val {
+  color: var(--secondary-grey);
+  font-size: 14px;
+  font-weight: 600;
+
+  text-align: right;
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+
+.empty-value {
+  display: inline-block;
+  width: 100%;
+  text-align: right;
+
+  color: rgba(130, 136, 143, 0.6);
+  font-style: italic;
+}

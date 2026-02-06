@@ -4,26 +4,26 @@
   border: 1px solid var(--secondary-light-grey);
   border-radius: 12px;
 
-  padding: 10px 12px;   
+  padding: 16px 14px;   
   background: var(--white-background);
 
-  min-height: 60px;
+  min-height: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .cgm-metric-value {
-  font-size: 28px;    
+  font-size: 20px;    
   font-weight: 700;
-  color: var(--secondary-grey);
-  line-height: 1.05;
+  color: #59636E;
+  line-height: 1.1;
+  margin-bottom: 4px;
 }
 
 .cgm-metric-label {
-  margin-top: 2px;    
   font-size: 14px;
   font-weight: 500;
-  color: var(--secondary-grey);
+  color: #82888F;
   line-height: 1.2;
 }

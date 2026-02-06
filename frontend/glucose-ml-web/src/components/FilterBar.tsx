@@ -35,10 +35,11 @@ const FilterBar = ({
             onChange={(selected: string[]) => onFilterChange(f.label, selected)}
           />
         ))}
-        <button className="btn d-flex align-items-center gap-2 legend-btn"
+        <button
+          className="btn d-flex align-items-center gap-2 legend-btn"
           type="button"
           onClick={onLegendClick}
-          >
+        >
           <LuInfo />
           <span className="metadata legend-btn">Legend & info</span>
         </button>

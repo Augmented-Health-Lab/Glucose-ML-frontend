@@ -1,0 +1,512 @@
+[
+  {
+    "name": "Hall 2018",
+    "year release": "2018",
+    "total": 57,
+    "male": 25.0,
+    "female": 32.0,
+    "age range": "25 – 76",
+    "Ethinicities": "--",
+    "CGM Device": "Dexcom G4",
+    "Total days of glucose": "473",
+    "Glucose samples": 105426,
+    "average days per participant": 8.3,
+    "data_source": {
+      "G": "Glucose",
+      "M": "Meals",
+      "Q": "Age, BMI",
+      "C": "Fasting Blood Glucose, Oral Glucose Tolerance Test, Steady-State Plasma Glucose Test, HbA1C, Triglyceride, Cholesterol"
+    },
+    "populationGroups": [
+      { "type": "T2D", "count": 4 },
+      { "type": "PreD", "count": 8 },
+      { "type": "ND", "count": 45 }
+    ],
+    "Link to dataset": "https://pubmed.ncbi.nlm.nih.gov/30040822/"
+  },
+  {
+    "name": "D1NAMO",
+    "year release": "2018",
+    "total": 9,
+    "male": 6.0,
+    "female": 3.0,
+    "age range": "20 – 79",
+    "Ethinicities": "--",
+    "CGM Device": "Medtronic iPro2 Professional CGM",
+    "Total days of glucose": "42",
+    "Glucose samples": 8691,
+    "average days per participant": 4.3,
+    "data_source": {
+      "G": "Glucose",
+      "I": "Insulin doses (basal, boluses)",
+      "W": "ECG, Breathing Signal, Accelerometer",
+      "M": "Meals",
+      "C": "Sex, Weight, Height"
+    },
+    "populationGroups": [
+      { "type": "T1D", "count": 9 }
+    ],
+    "Link to dataset": "https://zenodo.org/records/5651217"
+  },
+  {
+    "name": "Colas 2019",
+    "year release": "2019",
+    "total": 208,
+    "male": 103.0,
+    "female": 105.0,
+    "age range": "29 – 88",
+    "Ethinicities": "--",
+    "CGM Device": "Medtronic MiniMed iPro",
+    "Total days of glucose": "399",
+    "Glucose samples": 114253,
+    "average days per participant": 1.9,
+    "data_source": {
+      "G": "Glucose",
+      "C": "Age, Sex/Gender, BMI, Basal Glycemia, HbA1C, Diabetes Diagnosis"
+    },
+    "populationGroups": [
+      { "type": "T2D", "count": 17 },
+      { "type": "ND", "count": 191 }
+    ],
+    "Link to dataset": "https://pubmed.ncbi.nlm.nih.gov/31851681/"
+  },
+  {
+    "name": "OhioT1DM",
+    "year release": "2018 & 2020",
+    "total": 12,
+    "male": 7.0,
+    "female": 5.0,
+    "age range": "20 – 80",
+    "Ethinicities": "--",
+    "CGM Device": "Medtronic Enlite",
+    "Total days of glucose": "652",
+    "Glucose samples": 166533,
+    "average days per participant": 54.3,
+    "data_source": {
+      "G": "Glucose",
+      "I": "Insulin (Basal, Bolus)",
+      "W": "Steps, Acceleration, Heart Rate, Skin Temperature, Sleep",
+      "M": "Meals, Carbohydrate Estimate, Stressors, Illness, Exercise",
+      "Q": "Sex/Gender, Age"
+    },
+    "populationGroups": [
+      { "type": "T1D", "count": 12 }
+    ],
+    "Link to dataset": "https://webpages.charlotte.edu/rbunescu/data/ohiot1dm/OhioT1DM-dataset.html"
+  },
+  {
+    "name": "T1DEXI",
+    "year release": "2022",
+    "total": 497,
+    "male": 134.0,
+    "female": 363.0,
+    "age range": "18 – 70",
+    "Ethinicities": "91.3% White",
+    "CGM Device": "Dexcom G6",
+    "Total days of glucose": "13522",
+    "Glucose samples": 3785253,
+    "average days per participant": 27.2,
+    "data_source": {
+      "G": "Glucose",
+      "I": "Insulin pump data, multiple daily injections",
+      "W": "Step count, Sleep Metrics, Heart Rate",
+      "M": "Exercise events, Meals, Menstrual Cycles",
+      "Q": "Age, Sex, Race, Ethnicity, Weight, Height, Diabetes History",
+      "C": "HbA1C"
+    },
+    "populationGroups": [
+      { "type": "T2D", "count": 4 },
+      { "type": "PreD", "count": 8 },
+      { "type": "ND", "count": 45 }
+    ],
+    "Link to dataset": "https://doi.org/10.25934/PR00008428"
+  },
+  {
+    "name": "T1DEXIP",
+    "year release": "2022",
+    "total": 247,
+    "male": 143.0,
+    "female": 104.0,
+    "age range": "12 – 17",
+    "Ethinicities": "89.1% White",
+    "CGM Device": "Dexcom G6",
+    "Total days of glucose": "2492",
+    "Glucose samples": 685136,
+    "average days per participant": 10.1,
+    "data_source": {
+      "G": "Glucose",
+      "I": "Insulin pump data",
+      "W": "Step count, Sleep Metrics, Heart Rate",
+      "M": "Exercise events, Meals",
+      "Q": "Age, Sex, Race, Ethnicity",
+      "C": "HbA1C"
+    },
+    "populationGroups": [
+      { "type": "T1D", "count": 247 }
+    ],
+    "Link to dataset": "https://doi.org/10.25934/PR00008429"
+  },
+  {
+    "name": "BIGIDEAs",
+    "year release": "2023",
+    "total": 16,
+    "male": 7,
+    "female": 9,
+    "age range": "35 – 65",
+    "Ethinicities": "68.75% White, 25% Black/African Am., 6.25% Bi–racial",
+    "CGM Device": "Dexcom G6",
+    "Total days of glucose": "150",
+    "Glucose samples": 36898,
+    "average days per participant": 9.4,
+    "data_source": {
+      "G": "Glucose",
+      "W": "Accelerometry, Blood Volume Pulse",
+      "Q": "Age, Sex",
+      "C": "BMI, Blood Pressure"
+    }
+    ,
+    "populationGroups": [
+      { "type": "PreD", "count": 8 },
+      { "type": "ND", "count": 8 }
+    ],
+    "Link to dataset": "https://doi.org/10.13026/zthx-5212"
+  },
+  {
+    "name": "DiaTrend",
+    "year release": "2023",
+    "total": 54,
+    "male": 17.0,
+    "female": 37.0,
+    "age range": "19 – 74",
+    "Ethinicities": "88.9% White",
+    "CGM Device": "Dexcom G5/G6, Medtronic Guardian/MiniMed",
+    "Total days of glucose": "27663",
+    "Glucose samples": 7680740,
+    "average days per participant": 512.3,
+    "data_source": {
+      "G": "Glucose",
+      "I": "Insulin pump data",
+      "Q": "Age, Sex/Gender",
+      "C": "BMI, HbA1C"
+    },
+    "populationGroups": [
+      { "type": "T1D", "count": 54 }
+    ],
+    "Link to dataset": "https://doi.org/10.7303/syn38187184"
+  },
+  {
+    "name": "ShanghaiT1DM",
+    "year release": "2023",
+    "total": 12,
+    "male": 5.0,
+    "female": 7.0,
+    "age range": "37 – 73",
+    "Ethinicities": "--",
+    "CGM Device": "Abbott FreeStyle Libre H",
+    "Total days of glucose": "181",
+    "Glucose samples": 15695,
+    "average days per participant": 15.1,
+    "data_source": {
+      "G": "Glucose",
+      "I": "Insulin data",
+      "M": "Meals",
+      "Q": "Age, Sex",
+      "C": "BMI, HbA1C"
+    }
+    ,
+    "populationGroups": [
+      { "type": "T1D", "count": 12 }
+    ],
+    "Link to dataset": "https://doi.org/10.6084/m9.figshare.c.6310860"
+  },
+  {
+    "name": "ShanghaiT2DM",
+    "year release": "2023",
+    "total": 100,
+    "male": 44.0,
+    "female": 56.0,
+    "age range": "22 – 97",
+    "Ethinicities": "--",
+    "CGM Device": "Abbott FreeStyle Libre H",
+    "Total days of glucose": "1292",
+    "Glucose samples": 112462,
+    "average days per participant": 12.9,
+    "data_source": {
+      "G": "Glucose",
+      "I": "Insulin data",
+      "M": "Meals",
+      "Q": "Age, Sex",
+      "C": "BMI, HbA1C"
+    },
+    "populationGroups": [
+      { "type": "T2D", "count": 100 }
+    ],
+    "Link to dataset": "https://doi.org/10.6084/m9.figshare.c.6310860"
+  },
+  {
+    "name": "T1DiabetesGranada",
+    "year release": "2024",
+    "total": 736,
+    "male": 363.0,
+    "female": 373.0,
+    "age range": "12 – 85",
+    "Ethinicities": "--",
+    "CGM Device": "Abbott FreeStyle Libre 2, Abbott FreeStyle Libre",
+    "Total days of glucose": "257782",
+    "Glucose samples": 22671708,
+    "average days per participant": 350.3,
+    "data_source": {
+      "G": "Glucose",
+      "Q": "Sex/Gender, Age, Birth Year",
+      "C": "HbA1C"
+    },
+    "populationGroups": [
+      { "type": "T1D", "count": 736 }
+    ],
+    "Link to dataset": "https://zenodo.org/records/10050944"
+  },
+  {
+    "name": "AI-READI",
+    "year release": "2024",
+    "total": 2280,
+    "male": 951.0,
+    "female": 1329.0,
+    "age range": "40 – 94",
+    "Ethinicities": "36.7% White, 22.8% Black, 23.9% Asian, 16.7% Hispanic",
+    "CGM Device": "Dexcom G6",
+    "Total days of glucose": "24012",
+    "Glucose samples": 6194153,
+    "average days per participant": 10.7,
+    "data_source": {
+      "G": "Glucose",
+      "W": "Heart rate, Physical activity, Oxygen saturation, Sleep, Stress",
+      "Q": "Age, Sex, Health & Dietary Surveys",
+      "C": "Weight, Height, Blood Pressure, ECG, Retina Imaging, Lab Measurements"
+    },
+    "populationGroups": [
+      { "type": "T2D", "count": 976 },
+      { "type": "PreD", "count": 508},
+      { "type": "ND", "count": 761 }
+    ],
+    "Link to dataset": "https://fairhub.io/datasets/2"
+  },
+  {
+    "name": "UCHTT1DM",
+    "year release": "2024",
+    "total": 20,
+    "male": 10.0,
+    "female": 10.0,
+    "age range": "NR",
+    "Ethinicities": "NR",
+    "CGM Device": "Medtronic Guardian 3",
+    "Total days of glucose": "127",
+    "Glucose samples": 29174,
+    "average days per participant": 6.4,
+    "data_source": {
+      "G": "Glucose",
+      "I": "Insulin data",
+      "W": "Heart Rate, Step count",
+      "M": "Meals"
+    },
+    "populationGroups": [
+      { "type": "T1D", "count": 9 },
+      { "type": "ND", "count": 11 }
+    ],
+    "Link to dataset": "https://github.com/fisiologiacuantitativauc/UC_HT_T1DM"
+  },
+  {
+    "name": "HUPA-UCM",
+    "year release": "2024",
+    "total": 25,
+    "male": 12.0,
+    "female": 13.0,
+    "age range": "18 – 62",
+    "Ethinicities": "--",
+    "CGM Device": "Abbott Freestyle Libre 2",
+    "Total days of glucose": "1093",
+    "Glucose samples": 309392,
+    "average days per participant": 43.7,
+    "data_source": {
+      "G": "Glucose",
+      "I": "Insulin Pump",
+      "W": "Heart Rate, Steps",
+      "M": "Meals",
+      "C": "HbA1C"
+    },
+    "populationGroups": [
+      { "type": "T1D", "count": 25 }
+    ],
+    "Link to dataset": "https://data.mendeley.com/datasets/3hbcscwz44/1"
+  },
+  {
+    "name": "CGMacros Dexcom",
+    "year release": "2025",
+    "total": 45,
+    "male": 16.0,
+    "female": 29.0,
+    "age range": "18 – 69",
+    "Ethinicities": "75.5% Hispanic/Latino, 15.5% White, 8.8% Black/African Am.",
+    "CGM Device": "Dexcom G6 Pro",
+    "Total days of glucose": "493",
+    "Glucose samples": 629825,
+    "average days per participant": 11.0,
+    "data_source": {
+      "G": "Glucose",
+      "W": "Heart rate, Activity calories, Steps",
+      "M": "Meals",
+      "Q": "Age, Sex",
+      "C": "BMI"
+    },
+    "populationGroups": [
+      { "type": "T2D", "count": 14 },
+      { "type": "PreD", "count": 16 },
+      { "type": "ND", "count": 15 }
+    ],
+    "Link to dataset": "https://doi.org/10.13026/3z8q-x658"
+  },
+  {
+    "name": "CGMacros Libre",
+    "year release": "2025",
+    "total": 45,
+    "male": 16.0,
+    "female": 29.0,
+    "age range": "18 – 69",
+    "Ethinicities": "75.5% Hispanic/Latino, 15.5% White, 8.8% Black/African Am.",
+    "CGM Device": "Abbott FreeStyle Libre Pro",
+    "Total days of glucose": "533",
+    "Glucose samples": 687360,
+    "average days per participant": 11.8,
+    "data_source": {
+      "G": "Glucose",
+      "W": "Heart rate, Activity calories, Steps",
+      "M": "Meals",
+      "Q": "Age, Sex",
+      "C": "BMI"
+    },
+    "populationGroups": [
+      { "type": "T2D", "count": 14 },
+      { "type": "PreD", "count": 16 },
+      { "type": "ND", "count": 15 }
+    ],
+    "Link to dataset": "https://doi.org/10.13026/3z8q-x658"
+  },
+  {
+    "name": "T1D-UOM",
+    "year release": "2025",
+    "total": 17,
+    "male": 7.0,
+    "female": 10.0,
+    "age range": "23 – 70",
+    "Ethinicities": "--",
+    "CGM Device": "Dexcom, Freestyle, Medtronic",
+    "Total days of glucose": "1636",
+    "Glucose samples": 356146,
+    "average days per participant": 96.2,
+    "data_source": {
+      "G": "Glucose",
+      "I": "Insulin data",
+      "W": "Heart rate, Steps",
+      "M": "Meals",
+      "Q": "Age, Sex",
+      "C": "HbA1C"
+    },
+    "populationGroups": [
+      { "type": "T1D", "count": 17 }
+    ],
+    "Link to dataset": "https://zenodo.org/records/15806142"
+  },
+  {
+    "name": "Bris-T1D Open",
+    "year release": "2025",
+    "total": 20,
+    "male": 3.0,
+    "female": 15.0,
+    "age range": "18 – 26",
+    "Ethinicities": "85% White",
+    "CGM Device": "Dexcom G6 / Freestyle Libre 2 / Medtronic Guardian 4 / Dexcom One",
+    "Total days of glucose": "3656",
+    "Glucose samples": 848574,
+    "average days per participant": 182.8,
+    "data_source": {
+      "G": "Glucose",
+      "I": "Insulin pump data",
+      "W": "Heart rate, Steps",
+      "Q": "Age, Sex"
+    },
+    "populationGroups": [
+      { "type": "T1D", "count": 20 }
+    ],
+    "Link to dataset": "https://data.bris.ac.uk/data/dataset/33z5jc8fa6tob21ptrugzqog08"
+  },
+  {
+    "name": "AZT1D",
+    "year release": "2025",
+    "total": 25,
+    "male": 12.0,
+    "female": 13.0,
+    "age range": "27 – 80",
+    "Ethinicities": "--",
+    "CGM Device": "Dexcom G6 Pro",
+    "Total days of glucose": "1063",
+    "Glucose samples": 306712,
+    "average days per participant": 42.5,
+    "data_source": {
+      "G": "Glucose",
+      "I": "Insulin Pump Data",
+      "Q": "Age, Sex",
+      "C": "HbA1C"
+    },
+    "populationGroups": [
+      { "type": "T1D", "count": 25 }
+    ],
+    "Link to dataset": "https://data.mendeley.com/datasets/gk9m674wcx/1"
+  },
+  {
+    "name": "Park 2025",
+    "year release": "2025",
+    "total": 38,
+    "male": 15.0,
+    "female": 19.0,
+    "Unknown":4,
+    "age range": "25 – 79",
+    "Ethinicities": "73.7% White, 18.4% Asian, 7.9% Hispanic/Latino",
+    "CGM Device": "Dexcom G4",
+    "Total days of glucose": "--",
+    "Glucose samples": 23520,
+    "average days per participant": "--",
+    "data_source": {
+      "G": "Glucose",
+      "I": "Insulin Pump Data",
+      "Q": "Age, Sex",
+      "C": "HbA1C"
+    },
+    "populationGroups": [
+      { "type": "T2D", "count": 1},
+      { "type": "PreD", "count": 16 },
+      { "type": "ND", "count": 20 }
+    ],
+    "Link to dataset": "https://cgmdb.stanford.edu/data/"
+  },
+  {
+    "name": "PhysioCGM",
+    "year release": "2025",
+    "total": 10,
+    "male": 6.0,
+    "female": 4.0,
+    "age range": "24 – 41",
+    "Ethinicities": "--",
+    "CGM Device": "Dexcom G6",
+    "Total days of glucose": "723",
+    "Glucose samples": 201586,
+    "average days per participant": 80.3,
+    "data_source": {
+      "G": "Glucose",
+      "Q": "Age, Sex",
+      "C": "BMI, Blood Pressure"
+    },
+    "populationGroups": [
+      { "type": "T2D", "count": 10 }
+    ],
+    "Link to dataset": "https://doi.org/10.6084/m9.figshare.28136294"
+  }
+]
