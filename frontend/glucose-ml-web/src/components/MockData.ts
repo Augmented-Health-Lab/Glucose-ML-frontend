@@ -39,7 +39,7 @@ export const FILTERS = [
     label: "Access",
     prompt: "Select access type",
     multi: false,
-    options: ["Public access", "Controlled"],
+    options: ["Open", "Controlled"],
   },
 ] as const;
 
