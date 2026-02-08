@@ -4,9 +4,9 @@ import StatsCard from "./StatsCard";
 const PageTitle = ({ title, text }: { title: string; text: string }) => {
   const stats = [
     { value: "20+", label: "datasets" },
-    { value: "3200", label: "participants" },
-    { value: "Y", label: "days of CGM" },
-    { value: "41.4M", label: "glucose samples" },
+    { value: "4393", label: "participants" },
+    { value: "337984", label: "days of CGM" },
+    { value: "44.9M", label: "glucose samples" },
   ];
 
   return (
