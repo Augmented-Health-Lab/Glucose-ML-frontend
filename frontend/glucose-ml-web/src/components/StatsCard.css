@@ -1,7 +1,7 @@
 .stats-card {
   background: white;
   border-radius: 20px;
-  padding: 40px 60px;
+  padding: 20px 60px;
   margin: 40px auto;
   width: 100%;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -17,7 +17,7 @@
 }
 
 .stats-subtitle {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
   color: #59636E;
   margin-bottom: 40px;
@@ -42,7 +42,7 @@
 }
 
 .stat-value {
-  font-size: 48px;
+  font-size: 24px;
   font-weight: 700;
   color: #3BA7A1;
   line-height: 1.2;
@@ -50,7 +50,7 @@
 }
 
 .stat-label {
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 400;
   color: #59636E;
   line-height: 1.2;
@@ -92,6 +92,6 @@
   }
   
   .stat-value {
-    font-size: 36px;
+    font-size: 24px;
   }
 }

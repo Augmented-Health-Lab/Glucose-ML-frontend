@@ -22,7 +22,7 @@ const FilterBar = ({
   };
 
   return (
-    <div className="d-flex my-5 align-items-end flex-wrap">
+    <div className="filter-bar d-flex align-items-end flex-wrap">
       <div className="d-flex gap-2 flex-wrap metadata">
         {FILTERS.map((f) => (
           <MultiSelect
@@ -46,8 +46,9 @@ const FilterBar = ({
       </div>
       <div className="ms-auto">
         <button
+          type="button"
           disabled={!filterButtonEnabled}
-          className="btn metadata control-btn"
+          className="clear-filters-btn metadata"
           onClick={handleClear}
         >
           Clear all filters

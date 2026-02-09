@@ -77,10 +77,8 @@ const MultiSelect = ({
     if (selected.length === 0) {
       return label;
     }
-    if (multi) {
-      return selected.join(", ");
-    }
-    return selected[0];
+    const optionsText = multi ? selected.join(", ") : selected[0];
+    return `${label}: ${optionsText}`;
   };
 
   return (

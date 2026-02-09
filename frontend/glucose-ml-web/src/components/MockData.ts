@@ -82,7 +82,7 @@ export type GlucoseRangeKey =
 
 // ✅ Used by GlucoseRangeChart.tsx
 export type StackedBarGroup = {
-  group: "T1D" | "T2D" | "ND";
+  group: "T1D" | "T2D" | "PreD" | "ND";
   total: number;
   segments: { key: GlucoseRangeKey; value: number }[];
 };
