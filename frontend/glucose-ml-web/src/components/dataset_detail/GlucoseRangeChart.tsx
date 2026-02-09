@@ -11,11 +11,11 @@ type Props = {
 const ORDER: GlucoseRangeKey[] = ["VeryLow", "Low", "Target", "High", "VeryHigh"];
 
 const LEGEND: Record<GlucoseRangeKey, { title: string; range: string }> = {
-  VeryLow: { title: "Very low glucose", range: "<54mg/dL" },
-  Low: { title: "Low glucose", range: "54-69mg/dL" },
-  Target: { title: "Target glucose", range: "70-180mg/dL" },
-  High: { title: "High glucose", range: "181-250mg/dL" },
-  VeryHigh: { title: "Very high glucose", range: ">250mg/dL" },
+  VeryLow: { title: "Very low glucose", range: "< 54 mg/dL" },
+  Low: { title: "Low glucose", range: "[54-69) mg/dL" },
+  Target: { title: "Target glucose", range: "[70-180) mg/dL" },
+  High: { title: "High glucose", range: "[180-250) mg/dL" },
+  VeryHigh: { title: "Very high glucose", range: "≥ 250 mg/dL" },
 };
 
 function clamp0(n: unknown) {
@@ -32,15 +32,28 @@ export default function GlucoseRangeChart({ bars, yLabel = "Percentage (%)"}: Pr
   return (
     <div className="tir-wrap">
       <div className="tir-legend" aria-label="Legend">
-        {ORDER.map((k) => (
-          <div key={k} className="tir-legend-item">
-            <span className={`tir-swatch tir-${k}`} />
-            <div className="tir-legend-text-wrapper">
-              <div className="tir-legend-title">{LEGEND[k].title}</div>
-              <div className="tir-legend-range">{LEGEND[k].range}</div>
+        <div className="tir-legend-row">
+          {ORDER.slice(0, 3).map((k) => (
+            <div key={k} className="tir-legend-item">
+              <span className={`tir-swatch tir-${k}`} />
+              <div className="tir-legend-text-wrapper">
+                <div className="tir-legend-title">{LEGEND[k].title}</div>
+                <div className="tir-legend-range">{LEGEND[k].range}</div>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+        <div className="tir-legend-row">
+          {ORDER.slice(3, 5).map((k) => (
+            <div key={k} className="tir-legend-item">
+              <span className={`tir-swatch tir-${k}`} />
+              <div className="tir-legend-text-wrapper">
+                <div className="tir-legend-title">{LEGEND[k].title}</div>
+                <div className="tir-legend-range">{LEGEND[k].range}</div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="tir-frame">

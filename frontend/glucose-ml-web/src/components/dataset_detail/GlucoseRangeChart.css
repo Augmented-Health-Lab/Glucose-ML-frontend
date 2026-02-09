@@ -7,13 +7,19 @@
 
 .tir-legend {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 0 6px 12px;
+  overflow: visible;
+}
+
+.tir-legend-row {
+  display: flex;
   justify-content: center;
   align-items: flex-start;
   gap: 16px;
-  flex-wrap: wrap;
   white-space: nowrap;
-  padding: 0 6px 12px;
-  overflow: visible;
 }
 
 .tir-legend-item {

@@ -131,11 +131,11 @@
   flex: 0 0 auto;
 }
 
-.swatch-vhigh { background: #b79cff; }
-.swatch-high  { background: #d8c7ff; }
-.swatch-mod   { background: #aef1ea; }
-.swatch-low   { background: #f3b7d4; }
-.swatch-vlow  { background: #ff7fb3; }
+.swatch-vlow   { background: #ff7fb3; }
+.swatch-low    { background: #f3b7d4; }
+.swatch-target { background: #aef1ea; }
+.swatch-high   { background: #d8c7ff; }
+.swatch-vhigh  { background: #b79cff; }
 
 
 .population-list {

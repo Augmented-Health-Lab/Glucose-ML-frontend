@@ -37,7 +37,7 @@ export default function CGMDataSection({ dataset }: Props) {
   
   const graphSubtitle = tab === "hist" 
     ? "Distribution of glucose measurements across clinically defined glucose ranges"
-    : "Figure showing the range of glucose values...";
+    : "Stacked bar plot showing the percent of CGM readings spent in clinically defined glucose ranges, stratified by diabetes status.";
 
   return (
     <section className="cgm-card">

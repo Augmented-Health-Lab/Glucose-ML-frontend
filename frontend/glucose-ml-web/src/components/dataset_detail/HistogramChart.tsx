@@ -33,15 +33,15 @@ function getColorForLabel(label: string): string {
 // Format legend text based on label - returns title and range separately
 function formatLegendText(label: string): { title: string; range: string } {
   if (label.includes("Very low glucose")) {
-    return { title: "Very low glucose", range: "<54mg/dL" };
+    return { title: "Very low glucose", range: "< 54 mg/dL" };
   } else if (label.includes("Low glucose")) {
-    return { title: "Low glucose", range: "54-69mg/dL" };
+    return { title: "Low glucose", range: "[54-69) mg/dL" };
   } else if (label.includes("Target glucose")) {
-    return { title: "Target glucose", range: "70-180mg/dL" };
+    return { title: "Target glucose", range: "[70-180) mg/dL" };
   } else if (label.includes("High glucose") && !label.includes("Very high")) {
-    return { title: "High glucose", range: "181-250mg/dL" };
+    return { title: "High glucose", range: "[180-250) mg/dL" };
   } else if (label.includes("Very high glucose")) {
-    return { title: "Very high glucose", range: ">250mg/dL" };
+    return { title: "Very high glucose", range: "≥ 250 mg/dL" };
   }
   return { title: label, range: "" }; // Fallback to original label
 }

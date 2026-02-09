@@ -56,31 +56,31 @@ export default function LegendModal({ open, onClose }: Props) {
           <div className="legend-columns">
             <div className="legend-col">
               <section className="legend-block">
-                <div className="legend-block-title">Glucose value ranges</div>
+                <div className="legend-block-title">Glucose Value Ranges ranges</div>
                 <div className="legend-block-subtitle">
-                  The total range of values in which...
+                  Glucose values are classified into clinically defined categories as follows:
                 </div>
 
                 <ul className="legend-swatch-list">
                   <li>
-                    <span className="swatch swatch-vhigh" aria-hidden="true" />
-                    <span>Very high glucose (100+ mg/dL)</span>
-                  </li>
-                  <li>
-                    <span className="swatch swatch-high" aria-hidden="true" />
-                    <span>High glucose (80-100 mg/dL)</span>
-                  </li>
-                  <li>
-                    <span className="swatch swatch-mod" aria-hidden="true" />
-                    <span>Moderate glucose (60-80 mg/dL)</span>
+                    <span className="swatch swatch-vlow" aria-hidden="true" />
+                    <span>Very low glucose &lt; 54 mg/dL</span>
                   </li>
                   <li>
                     <span className="swatch swatch-low" aria-hidden="true" />
-                    <span>Low glucose (40-60 mg/dL)</span>
+                    <span>Low glucose [54-69) mg/dL</span>
                   </li>
                   <li>
-                    <span className="swatch swatch-vlow" aria-hidden="true" />
-                    <span>Very low glucose (&lt;40 mg/dL)</span>
+                    <span className="swatch swatch-target" aria-hidden="true" />
+                    <span>Target glucose [70-180) mg/dL</span>
+                  </li>
+                  <li>
+                    <span className="swatch swatch-high" aria-hidden="true" />
+                    <span>High glucose [180-250) mg/dL</span>
+                  </li>
+                  <li>
+                    <span className="swatch swatch-vhigh" aria-hidden="true" />
+                    <span>Very high glucose ≥ 250 mg/dL</span>
                   </li>
                 </ul>
               </section>
@@ -90,8 +90,7 @@ export default function LegendModal({ open, onClose }: Props) {
               <section className="legend-block">
                 <div className="legend-block-title">Population</div>
                 <div className="legend-block-subtitle">
-                  Diabetes groups in a study as determined by their HbA1c lab
-                  measurement.
+                  Diabetes status of participants
                 </div>
 
                 <div className="population-list">
@@ -100,8 +99,7 @@ export default function LegendModal({ open, onClose }: Props) {
                     <div className="pop-text">
                       <div className="pop-name">Type I diabetes</div>
                       <div className="pop-desc">
-                        Individuals with inability to produce insulin, causing
-                        high blood sugar (glucose) levels
+                        Dataset includes participants with Type 1 Diabetes.
                       </div>
                     </div>
                   </div>
@@ -110,7 +108,7 @@ export default function LegendModal({ open, onClose }: Props) {
                     <RoundIcon type="T2D" />
                     <div className="pop-text">
                       <div className="pop-name">Type II diabetes</div>
-                      <div className="pop-desc">Individuals with...</div>
+                      <div className="pop-desc">Dataset includes participants with Type 2 Diabetes.</div>
                     </div>
                   </div>
 
@@ -118,7 +116,7 @@ export default function LegendModal({ open, onClose }: Props) {
                     <RoundIcon type="PreD" />
                     <div className="pop-text">
                       <div className="pop-name">Prediabetes</div>
-                      <div className="pop-desc">Individuals with...</div>
+                      <div className="pop-desc">Dataset includes participants with prediabetes.</div>
                     </div>
                   </div>
 
@@ -126,7 +124,7 @@ export default function LegendModal({ open, onClose }: Props) {
                     <RoundIcon type="ND" />
                     <div className="pop-text">
                       <div className="pop-name">No diabetes</div>
-                      <div className="pop-desc">Individuals with...</div>
+                      <div className="pop-desc">Dataset includes participants without diabetes or prediabetes.</div>
                     </div>
                   </div>
                 </div>
