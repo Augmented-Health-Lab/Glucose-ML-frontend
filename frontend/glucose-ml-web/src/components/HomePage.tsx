@@ -131,7 +131,7 @@ const HomePage = () => {
   );
 
   return (
-    <div className="container-lg my-5">
+    <div className="container-lg my-1">
       <PageTitle
         title="Explore glucose datasets used in AI research"
         text="Find CGM datasets, compare their structure, and download the right datasets for your study."
