@@ -32,28 +32,15 @@ export default function GlucoseRangeChart({ bars, yLabel = "Percentage (%)"}: Pr
   return (
     <div className="tir-wrap">
       <div className="tir-legend" aria-label="Legend">
-        <div className="tir-legend-row">
-          {ORDER.slice(0, 3).map((k) => (
-            <div key={k} className="tir-legend-item">
-              <span className={`tir-swatch tir-${k}`} />
-              <div className="tir-legend-text-wrapper">
-                <div className="tir-legend-title">{LEGEND[k].title}</div>
-                <div className="tir-legend-range">{LEGEND[k].range}</div>
-              </div>
+        {ORDER.map((k) => (
+          <div key={k} className="tir-legend-item">
+            <span className={`tir-swatch tir-${k}`} />
+            <div className="tir-legend-text-wrapper">
+              <div className="tir-legend-title">{LEGEND[k].title}</div>
+              <div className="tir-legend-range">{LEGEND[k].range}</div>
             </div>
-          ))}
-        </div>
-        <div className="tir-legend-row">
-          {ORDER.slice(3, 5).map((k) => (
-            <div key={k} className="tir-legend-item">
-              <span className={`tir-swatch tir-${k}`} />
-              <div className="tir-legend-text-wrapper">
-                <div className="tir-legend-title">{LEGEND[k].title}</div>
-                <div className="tir-legend-range">{LEGEND[k].range}</div>
-              </div>
-            </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
 
       <div className="tir-frame">
@@ -73,20 +60,18 @@ export default function GlucoseRangeChart({ bars, yLabel = "Percentage (%)"}: Pr
                     setHoveredBar(b.group);
                     if (plotAreaRef.current) {
                       const rect = plotAreaRef.current.getBoundingClientRect();
-                      const barRect = e.currentTarget.getBoundingClientRect();
                       setTooltipPosition({
-                        x: barRect.left + barRect.width / 2 - rect.left,
-                        y: barRect.top - rect.top - 150,
+                        x: e.clientX - rect.left + 12,
+                        y: e.clientY - rect.top - 8,
                       });
                     }
                   }}
                   onMouseMove={(e) => {
                     if (plotAreaRef.current) {
                       const rect = plotAreaRef.current.getBoundingClientRect();
-                      const barRect = e.currentTarget.getBoundingClientRect();
                       setTooltipPosition({
-                        x: barRect.left + barRect.width / 2 - rect.left,
-                        y: barRect.top - rect.top - 150,
+                        x: e.clientX - rect.left + 12,
+                        y: e.clientY - rect.top - 8,
                       });
                     }
                   }}
@@ -133,6 +118,7 @@ export default function GlucoseRangeChart({ bars, yLabel = "Percentage (%)"}: Pr
                 style={{
                   left: `${tooltipPosition.x}px`,
                   top: `${tooltipPosition.y}px`,
+                  transform: "translateY(-100%)",
                 }}
               >
                 <div className="tir-tooltip-title">{hoveredBarData.group}</div>

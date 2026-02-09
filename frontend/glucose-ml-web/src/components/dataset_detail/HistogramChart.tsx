@@ -76,20 +76,18 @@ export default function HistogramChart({ data, yLabel = "Count" }: Props) {
       const rect = plotAreaRef.current.getBoundingClientRect();
       const barRect = e.currentTarget.getBoundingClientRect();
       const barElement = e.currentTarget.querySelector('.histogram-bar') as HTMLElement;
-      
-      // Calculate position relative to histogram-frame
+
       const centerX = barRect.left - rect.left + barRect.width / 2;
-      
-      // Calculate the top of the bar (bar is aligned to bottom, so top = bottom - height)
+
       let topY = barRect.top - rect.top;
       if (barElement) {
         const barHeight = barElement.offsetHeight;
         topY = barRect.bottom - rect.top - barHeight;
       }
-      
+
       setTooltipPosition({
         x: centerX,
-        y: topY - 150, // 150px above the bar top to avoid blocking
+        y: topY - 150,
       });
     }
     setHoveredBar({

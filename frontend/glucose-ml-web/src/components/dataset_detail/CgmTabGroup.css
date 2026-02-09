@@ -12,15 +12,26 @@
 .cgm-tab {
   border: 0;
   background: transparent;
-  color: var(--secondary-grey);
+  color: #82888F;
   font-size: 14px;
   font-weight: 600;
   padding: 10px 16px;
   border-radius: 12px;
   cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.cgm-tab:hover {
+  background: rgba(89, 99, 110, 0.08);
+  color: #82888F;
 }
 
 .cgm-tab.is-active {
   background: var(--secondary-grey);
+  color: var(--white-background);
+}
+
+.cgm-tab.is-active:hover {
+  background: rgba(89, 99, 110, 0.85);
   color: var(--white-background);
 }

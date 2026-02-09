@@ -50,7 +50,7 @@
 
 .cgm-graph {
   margin-top: 16px;
-  background: rgba(59, 167, 161, 0.08); 
+  background: #F7F7F7;
   border-radius: 20px;
   padding: 20px;
 }
@@ -79,6 +79,21 @@
   border: 0;
   padding: 16px;
   min-height: 380px;
+}
+
+.graph-body-fade {
+  animation: graphSlideIn 0.5s ease forwards;
+}
+
+@keyframes graphSlideIn {
+  from {
+    transform: translateX(32px);
+    opacity: 0.6;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 .placeholder {

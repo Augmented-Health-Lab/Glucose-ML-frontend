@@ -60,13 +60,15 @@ export default function CGMDataSection({ dataset }: Props) {
         </div>
 
         <div className="graph-body">
-          {tab === "tir" && <GlucoseRangeChart bars={dataset.timeInRanges} yLabel={yLabel} />}
+          <div key={tab} className="graph-body-fade">
+            {tab === "tir" && <GlucoseRangeChart bars={dataset.timeInRanges} yLabel={yLabel} />}
 
-          {tab === "hist" && dataset.histogramData ? (
-            <HistogramChart data={dataset.histogramData} yLabel={yLabel} />
-          ) : tab === "hist" ? (
-            <div className="placeholder">Histogram data not available</div>
-          ) : null}
+            {tab === "hist" && dataset.histogramData ? (
+              <HistogramChart data={dataset.histogramData} yLabel={yLabel} />
+            ) : tab === "hist" ? (
+              <div className="placeholder">Histogram data not available</div>
+            ) : null}
+          </div>
         </div>
       </div>
     </section>
