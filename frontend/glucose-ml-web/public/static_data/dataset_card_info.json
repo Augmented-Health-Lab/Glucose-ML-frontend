@@ -1,148 +1,23 @@
 [
-  {
-    "title": "T1DEXI",
-    "metadata": "497 participants \u2022 TBD days \u2022 TBD access",
-    "description": "Description TBD",
-    "types": ["T1D"],
-    "sources": ["G", "I", "A", "S", "Q", "M"],
-    "populationGroups": [
-        { "type": "T1D", "count": 247 },
-        { "type": "T2D", "count": 120 },
-        { "type": "PreD", "count": 55 },
-        { "type": "ND", "count": 75 }
-      ]
-  },
-  {
-    "title": "AI-READI",
-    "metadata": "1049 participants \u2022 TBD days \u2022 TBD access",
-    "description": "Description TBD",
-    "types": ["T2D", "PreD", "ND"],
-    "sources": ["G", "A", "Q", "M"]
-  },
-  {
-    "title": "ShanghaiT2DM",
-    "metadata": "100 participants \u2022 TBD days \u2022 TBD access",
-    "description": "Description TBD",
-    "types": ["T2D"],
-    "sources": []
-  },
-  {
-    "title": "Park 2025",
-    "metadata": "38 participants \u2022 TBD days \u2022 TBD access",
-    "description": "Description TBD",
-    "types": ["T2D", "PreD", "ND"],
-    "sources": []
-  },
-  {
-    "title": "T1DEXIP",
-    "metadata": "247 participants \u2022 TBD days \u2022 TBD access",
-    "description": "Description TBD",
-    "types": ["T1D"],
-    "sources": []
-  },
-  {
-    "title": "T1DiabetesGranada",
-    "metadata": "736 participants \u2022 TBD days \u2022 TBD access",
-    "description": "Description TBD",
-    "types": ["T1D"],
-    "sources": ["G", "Q", "M"]
-  },
-  {
-    "title": "HUPA-UCM",
-    "metadata": "25 participants \u2022 TBD days \u2022 TBD access",
-    "description": "Description TBD",
-    "types": ["T1D"],
-    "sources": []
-  },
-  {
-    "title": "BIGIDEAs",
-    "metadata": "16 participants \u2022 TBD days \u2022 TBD access",
-    "description": "Description TBD",
-    "types": ["ND", "PreD"],
-    "sources": ["G", "A", "Q", "M"]
-  },
-  {
-    "title": "T1DM-UOM",
-    "metadata": "17 participants \u2022 TBD days \u2022 TBD access",
-    "description": "Description TBD",
-    "types": ["T1D"],
-    "sources": []
-  },
-  {
-    "title": "ShanghaiT1DM",
-    "metadata": "12 participants \u2022 TBD days \u2022 TBD access",
-    "description": "Description TBD",
-    "types": ["T1D"],
-    "sources": []
-  },
-  {
-    "title": "Hall 2018",
-    "metadata": "57 participants \u2022 TBD days \u2022 TBD access",
-    "description": "Description TBD",
-    "types": ["T2D", "PreD", "ND"],
-    "sources": []
-  },
-  {
-    "title": "UCHTT1DM",
-    "metadata": "20 participants \u2022 TBD days \u2022 TBD access",
-    "description": "Description TBD",
-    "types": ["T1D", "ND"],
-    "sources": []
-  },
-  {
-    "title": "Bris-T1D Open",
-    "metadata": "20 participants \u2022 TBD days \u2022 TBD access",
-    "description": "Description TBD",
-    "types": ["T1D"],
-    "sources": []
-  },
-  {
-    "title": "D1NAMO",
-    "metadata": "29 participants \u2022 TBD days \u2022 TBD access",
-    "description": "Description TBD",
-    "types": ["T1D", "ND"],
-    "sources": []
-  },
-  {
-    "title": "Colas 2019",
-    "metadata": "208 participants \u2022 TBD days \u2022 TBD access",
-    "description": "Description TBD",
-    "types": ["T2D", "ND"],
-    "sources": []
-  },
-  {
-    "title": "CGMacros Libre",
-    "metadata": "45 participants \u2022 TBD days \u2022 TBD access",
-    "description": "Description TBD",
-    "types": ["T2D", "ND", "PreD"],
-    "sources": ["G", "A", "S", "Q", "M"]
-  },
-  {
-    "title": "CGMacros Dexcom",
-    "metadata": "45 participants \u2022 TBD days \u2022 TBD access",
-    "description": "Description TBD",
-    "types": ["T2D", "ND", "PreD"],
-    "sources": ["G", "A", "S", "Q", "M"]
-  },
-  {
-    "title": "DiaTrend",
-    "metadata": "54 participants \u2022 TBD days \u2022 TBD access",
-    "description": "Description TBD",
-    "types": ["T1D"],
-    "sources": ["G", "I", "Q", "M"]
-  },
-  {
-    "title": "OhioT1DM",
-    "metadata": "12 participants \u2022 TBD days \u2022 TBD access",
-    "description": "Description TBD",
-    "types": ["T1D"],
-    "sources": []
-  },
-  {
-    "title": "AZT1D",
-    "metadata": "25 participants \u2022 TBD days \u2022 TBD access",
-    "description": "Description TBD",
-    "types": ["T1D"],
-    "sources": []
-  }
+  {"title":"Hall 2018","participants":57,"days":8,"access":"Open","metadata":"57 participants • 8 days • Open access","description":"TBD","types":["T2D","PreD","ND"],"sources":["G","M","Q","C"]},
+  {"title":"D1NAMO","participants":9,"days":4,"access":"Open","metadata":"9 participants • 4 days • Open access","description":"TBD","types":["T1D"],"sources":["G","I","W","M","C"]},
+  {"title":"Colas 2019","participants":208,"days":2,"access":"Open","metadata":"208 participants • 2 days • Open access","description":"TBD","types":["T2D","ND"],"sources":["G","C"]},
+  {"title":"OhioT1DM","participants":12,"days":54,"access":"Controlled","metadata":"12 participants • 54 days • Controlled access","description":"TBD","types":["T1D"],"sources":["G","I","W","M","Q"]},
+  {"title":"T1DEXI","participants":497,"days":27,"access":"Controlled","metadata":"497 participants • 27 days • Controlled access","description":"TBD","types":["T1D"],"sources":["G","I","W","M","Q","C"],"populationGroups":[{"type":"T1D","count":247},{"type":"T2D","count":120},{"type":"PreD","count":55},{"type":"ND","count":75}]},
+  {"title":"T1DEXIP","participants":247,"days":10,"access":"Controlled","metadata":"247 participants • 10 days • Controlled access","description":"TBD","types":["T1D"],"sources":["G","I","W","M","Q","C"]},
+  {"title":"BIGIDEAs","participants":16,"days":9,"access":"Open","metadata":"16 participants • 9 days • Open access","description":"TBD","types":["PreD","ND"],"sources":["G","W","Q","C"]},
+  {"title":"DiaTrend","participants":54,"days":512,"access":"Controlled","metadata":"54 participants • 512 days • Controlled access","description":"TBD","types":["T1D"],"sources":["G","I","Q","C"]},
+  {"title":"ShanghaiT1DM","participants":12,"days":15,"access":"Open","metadata":"12 participants • 15 days • Open access","description":"TBD","types":["T1D"],"sources":["G","I","M","Q","C"]},
+  {"title":"ShanghaiT2DM","participants":100,"days":13,"access":"Open","metadata":"100 participants • 13 days • Open access","description":"TBD","types":["T2D"],"sources":["G","I","M","Q","C"]},
+  {"title":"T1DiabetesGranada","participants":736,"days":350,"access":"Controlled","metadata":"736 participants • 350 days • Controlled access","description":"TBD","types":["T1D"],"sources":["G","Q","C"]},
+  {"title":"AI-READI","participants":2280,"days":11,"access":"Controlled","metadata":"2280 participants • 11 days • Controlled access","description":"TBD","types":["T2D","PreD","ND"],"sources":["G","W","Q","C"]},
+  {"title":"UCHTT1DM","participants":20,"days":6,"access":"Open","metadata":"20 participants • 6 days • Open access","description":"TBD","types":["T1D","ND"],"sources":["G","I","W","M"]},
+  {"title":"HUPA-UCM","participants":25,"days":44,"access":"Open","metadata":"25 participants • 44 days • Open access","description":"TBD","types":["T1D"],"sources":["G","I","W","M","C"]},
+  {"title":"CGMacros Dexcom","participants":45,"days":11,"access":"Open","metadata":"45 participants • 11 days • Open access","description":"TBD","types":["T2D","PreD","ND"],"sources":["G","W","M","Q","C"]},
+  {"title":"CGMacros Libre","participants":45,"days":12,"access":"Open","metadata":"45 participants • 12 days • Open access","description":"TBD","types":["T2D","PreD","ND"],"sources":["G","W","M","Q","C"]},
+  {"title":"T1D-UOM","participants":17,"days":96,"access":"Open","metadata":"17 participants • 96 days • Open access","description":"TBD","types":["T1D"],"sources":["G","I","W","M","Q","C"]},
+  {"title":"Bris-T1D Open","participants":20,"days":183,"access":"Open","metadata":"20 participants • 183 days • Open access","description":"TBD","types":["T1D"],"sources":["G","I","W","Q"]},
+  {"title":"AZT1D","participants":25,"days":42,"access":"Open","metadata":"25 participants • 42 days • Open access","description":"TBD","types":["T1D"],"sources":["G","I","Q","C"]},
+  {"title":"Park 2025","participants":38,"days":"TBD","access":"Open","metadata":"38 participants • TBD days • Open access","description":"TBD","types":["T2D","PreD","ND"],"sources":["G","I","Q","C"]},
+  {"title":"PhysioCGM","participants":10,"days":80,"access":"Open","metadata":"10 participants • 80 days • Open access","description":"TBD","types":["T1D"],"sources":["G","Q","C"]}
 ]

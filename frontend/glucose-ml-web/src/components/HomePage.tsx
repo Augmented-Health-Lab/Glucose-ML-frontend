@@ -14,9 +14,9 @@ const HomePage = () => {
   const [filteredDatasets, setFilteredDatasets] = useState<any[]>([]);
   const [legendOpen, setLegendOpen] = useState(false);
 
-  // load static datasets info
+  // load static datasets info (unified with detail page)
   useEffect(() => {
-    fetch("/static_data/homepage_data.json")
+    fetch("/static_data/dataset_card_info.json")
       .then((res) => res.json())
       .then((data) => setDatasets(data));
   }, []);
