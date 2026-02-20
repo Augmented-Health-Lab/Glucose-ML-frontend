@@ -140,6 +140,7 @@ type Table1DetailData = {
   name: string;
   "year release": string;
   total: number;
+  fullDescription?: string;
   male: number | null;
   female: number | null;
   "age range": string;
@@ -373,7 +374,7 @@ function buildDetailFromStatic(
     metadata: card.metadata,
     duration,
     dateRange: "",
-    fullDescription: card.description && card.description !== "Description TBD" ? card.description : "",
+    fullDescription: table1Data?.fullDescription ?? (card.description && card.description !== "Description TBD" ? card.description : ""),
     actions: {
       downloadLabel: "Download dataset",
       paperLabel: "Link to dataset source",

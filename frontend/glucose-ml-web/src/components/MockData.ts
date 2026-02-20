@@ -10,7 +10,7 @@ export const FILTERS = [
     multi: true,
     options: [
       "Glucose Monitor",
-      "Insulin system",
+      "Insulin Delivery System",
       "Wearable Tracker",
       "Manual Logs",
       "Questionnaire",
@@ -21,7 +21,7 @@ export const FILTERS = [
     label: "Population",
     prompt: "Select population group(s)",
     multi: true,
-    options: ["T1D", "T2D", "Prediabetic", "Non diabetic"],
+    options: ["Type 1 Diabetes", "Type 2 Diabetes", "Pre-Diabetes", "No Diabetes"],
   },
   {
     label: "Study duration",

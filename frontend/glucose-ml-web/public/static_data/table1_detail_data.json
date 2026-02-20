@@ -2,6 +2,7 @@
   {
     "name": "Hall 2018",
     "year release": "2018",
+    "fullDescription":"The Hall_2018 dataset was collected in the U.S. and released in 2018. It comprises an average of 8 days of continuous glucose data from partiticipants with no diabetes, prediabetes, and type 2 diabetes. This dataset also contextual information from other data sources including manual user logs of meals, questionnaires, and clinical measurements such as HbA1C and fasting glucose.",
     "total": 57,
     "male": 25.0,
     "female": 32.0,
@@ -27,6 +28,7 @@
   {
     "name": "D1NAMO",
     "year release": "2018",
+    "fullDescription":"The D1NAMO dataset was collected in Switzerland and released in 2018. It comprises as an average of 4 days of continuous glucose data from participants with type 1 diabetes. This dataset also contains contextual  information from other data sources including insulin delivery systems, manual user logs of meals, and wearable tracker data such as electrocardiogram and respiratory data.",
     "total": 9,
     "male": 6.0,
     "female": 3.0,
@@ -51,6 +53,7 @@
   {
     "name": "Colas 2019",
     "year release": "2019",
+    "fullDescription":"The Colas_2019 dataset was collected in Spain and released in 2019. It comprises an average of 2 days of continuous glucose data from participants with no diabetes and type 2 diabetes. This dataset also contains contextual information from clinical and other measurements such as body mass index and HbA1C.",
     "total": 208,
     "male": 103.0,
     "female": 105.0,
@@ -73,6 +76,7 @@
   {
     "name": "OhioT1DM",
     "year release": "2018 & 2020",
+    "fullDescription":"The OhioT1DM dataset was collected in the U.S. and first released in 2018, followed by a second release in 2020. It comprises an average of 54 days of continuous glucose data from participants with type 1 diabetes. This dataset also contains contextual information from other data sources including insulin delivery systems, wearable trackers, manual user logs, and questionnaires.",
     "total": 12,
     "male": 7.0,
     "female": 5.0,
@@ -97,6 +101,7 @@
   {
     "name": "T1DEXI",
     "year release": "2022",
+    "fullDescription":"The T1DEXI dataset was collected in the U.S. and released in 2022. It comprises an average of 27 days of continuous glucose data from participants with type 1 diabetes. This dataset also contains other contextual data from insulin delivery systems, wearable trackers, manual logging of meals and exercise, and questionnaires. ",
     "total": 497,
     "male": 134.0,
     "female": 363.0,
@@ -124,6 +129,7 @@
   {
     "name": "T1DEXIP",
     "year release": "2022",
+    "fullDescription":"The T1DEXIP dataset was collected in the U.S. and released in 2022. It comprises an average of 10 days of continuous glucose data from participants with type 1 diabetes. This dataset also contains other contextual data from insulin delivery systems, wearable trackers, manual logging of meals and exercise, and questionnaire data. ",
     "total": 247,
     "male": 143.0,
     "female": 104.0,
@@ -149,6 +155,7 @@
   {
     "name": "BIGIDEAs",
     "year release": "2023",
+    "fullDescription":"The BIG IDEAs dataset was collected in the U.S. and released in 2023. It comprises an average of 9 days of continuous glucose data from participants with no diabetes and prediabetes. This dataset also contains other contextual data from wearable trackers, questionnaires, and clinical measurements such as blood pressure and body mass index.",
     "total": 16,
     "male": 7,
     "female": 9,
@@ -174,6 +181,7 @@
   {
     "name": "DiaTrend",
     "year release": "2023",
+    "fullDescription":"The DiaTrend dataset was collected in the U.S. and released in 2023. It comprises between 31 to 1,907 days of continuous glucose data from participants with type 1 diabetes. This dataset also contains other contextual data from insulin delivery systems, questionnaires, and clinical measurements such as HbA1C.",
     "total": 54,
     "male": 17.0,
     "female": 37.0,
@@ -197,6 +205,7 @@
   {
     "name": "ShanghaiT1DM",
     "year release": "2023",
+    "fullDescription":"The ShanghaiT1DM dataset was collected in China and released in 2023. It comprises between 7 to 42 days of continuous glucose data from participants with type 1 diabetes. This dataset also contains other contextual data from insulin delivery systems, manual user logs of meals, questionnaires, and clinical measurements such as body mass index and HbA1C.",
     "total": 12,
     "male": 5.0,
     "female": 7.0,
@@ -222,6 +231,7 @@
   {
     "name": "ShanghaiT2DM",
     "year release": "2023",
+    "fullDescription":"The ShanghaiT2DM dataset as collected in China and released in 2024. It comprises between 4 to 41 days of glucose data from participants with type 2 diabetes. This dataset also contains other contextual data from insulin delivery systems, manual user logs of meals, questionnaires, and clinical measurements such as body mass index and HbA1C.",
     "total": 100,
     "male": 44.0,
     "female": 56.0,
@@ -246,6 +256,7 @@
   {
     "name": "T1DiabetesGranada",
     "year release": "2024",
+    "fullDescription":"The T1DiabetesGranada was collected in Spain and released in 2024. It comprises between 8 to 1,463 days of continuous glucose data from participants with type 1 diabetes. This dataset also contains other contextual data from questionnaires such as age and clinical measurements such as HbA1C.",
     "total": 736,
     "male": 363.0,
     "female": 373.0,
@@ -268,6 +279,7 @@
   {
     "name": "AI-READI",
     "year release": "2024",
+    "fullDescription":"The AI-READI v3.0.0 dataset was collected in the U.S and released in 2025. It comprises an average of 10 days of continuoug glucose data from participants with type 2 diabetes, prediabetes, and no diabetes. This dataset also contains contextual information from other data sources including wearable trackers, questionnaires, and clinical/other measurements such as electrocardiograms and retina imaging.",
     "total": 2280,
     "male": 951.0,
     "female": 1329.0,
@@ -293,6 +305,7 @@
   {
     "name": "UCHTT1DM",
     "year release": "2024",
+    "fullDescription":"The UCHTT1DM was collected in Chile and released in 2024. It comprises an average of 6 days of continuous glucose data from participants with type 1 diabetes. This dataset also contains other contextual data from insulin delivery systems, wearable trackers, and manual user logs of meals.",
     "total": 20,
     "male": 10.0,
     "female": 10.0,
@@ -317,6 +330,7 @@
   {
     "name": "HUPA-UCM",
     "year release": "2024",
+    "fullDescription":"The HUPA-UCM was collected in Spain and released in 2024. It comprises between 9 to 575 days of continuous glucose data from participants with type 1 diabetes. This dataset also contains other contextual data from insulin delivery systems, wearable trackers, manual user logs and clinical measurements such as HbA1C.",
     "total": 25,
     "male": 12.0,
     "female": 13.0,
@@ -341,6 +355,7 @@
   {
     "name": "CGMacros Dexcom",
     "year release": "2025",
+    "fullDescription":"The CGMacros_Dexcom was collected in the U.S. and released in 2025. It comprises an average of 11 days of continuous glucose data from participants with type 2 diabetes, prediabetes, and no diabetes. This dataset also contains other contextual data from wearable trackers, manual user logs of meals, questionnaires, and clinical measurements such as HbA1C.",
     "total": 45,
     "male": 16.0,
     "female": 29.0,
@@ -367,6 +382,7 @@
   {
     "name": "CGMacros Libre",
     "year release": "2025",
+    "fullDescription":"The CGMacros_Libre was collected in the U.S. and released in 2025. It comprises an average of 11 days of continuous glucose data from participants with type 2 diabetes, prediabetes, and no diabetes. This dataset also contains other contextual data from wearable trackers, manual user logs of meals, questionnaires, and clinical measurements such as HbA1C.",
     "total": 45,
     "male": 16.0,
     "female": 29.0,
@@ -393,6 +409,7 @@
   {
     "name": "T1D-UOM",
     "year release": "2025",
+    "fullDescription":"The T1D-UOM was collected in the U.K. and released in 2025. It comprises between 30 to 178 days of continuous glucose data from participants with type 1 diabetes. This dataset also contains other contextual information from insulin delivery systems, wearable trackers, manual user logs of meals, questionnaire, and clinical measurements such as HbA1C.",
     "total": 17,
     "male": 7.0,
     "female": 10.0,
@@ -418,6 +435,7 @@
   {
     "name": "Bris-T1D Open",
     "year release": "2025",
+    "fullDescription":"The Bris-T1D dataset was collected in the U.K. and released in 2025. It comprises between 67 to 223 days of continuous glucose data from participants with type 1 diabetes. This dataset also contains other contextual data from insulin delivery systems, wearable trackers, questionnaires and qualitative interviews.",
     "total": 20,
     "male": 3.0,
     "female": 15.0,
@@ -441,6 +459,7 @@
   {
     "name": "AZT1D",
     "year release": "2025",
+    "fullDescription":"The AZT1D dataset was collected in the U.S. and released in 2025. It comprises an average of 43 days of continuous glucose data from participants with type 1 diabetes. This dataset also contains other contextual data from insulin delivery systems, questionnaires, and clinical measurements such as HbA1C.",
     "total": 25,
     "male": 12.0,
     "female": 13.0,
@@ -464,6 +483,7 @@
   {
     "name": "Park 2025",
     "year release": "2025",
+    "fullDescription":"The Park_2025 dataset was collected in the U.S. and released in 2025. It comprises continuous glucose data only around oral glucose tolerance tests (~3 hours) each day from participants with no diabetes, prediabetes, and type 2 diabetes, This dataset also contains other contextual data from questionnaires and clinical measurements such as fasting plasma glucose and HbA1C.",
     "total": 38,
     "male": 15.0,
     "female": 19.0,
@@ -490,6 +510,7 @@
   {
     "name": "PhysioCGM",
     "year release": "2025",
+    "fullDescription":"The PhysioCGM dataset was ollected in the U.S. and released in 2025. It comprises an average of 80 days of continuous glucose data from participants with type 1 diabetes. This dataset also contains other contextual data from questionnaires and clinical measurements such as blood pressure and body mass index.",
     "total": 10,
     "male": 6.0,
     "female": 4.0,

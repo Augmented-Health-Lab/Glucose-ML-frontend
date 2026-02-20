@@ -90,16 +90,16 @@ export default function LegendModal({ open, onClose }: Props) {
               <section className="legend-block">
                 <div className="legend-block-title">Population</div>
                 <div className="legend-block-subtitle">
-                  Diabetes status of participants
+                  Population groups included in Glucose-ML
                 </div>
 
                 <div className="population-list">
                   <div className="population-item">
                     <RoundIcon type="T1D" />
                     <div className="pop-text">
-                      <div className="pop-name">Type I diabetes</div>
+                      <div className="pop-name">Type 1 diabetes</div>
                       <div className="pop-desc">
-                        Dataset includes participants with Type 1 Diabetes.
+                        Dataset includes participants with type 1 Diabetes.
                       </div>
                     </div>
                   </div>
@@ -107,15 +107,15 @@ export default function LegendModal({ open, onClose }: Props) {
                   <div className="population-item">
                     <RoundIcon type="T2D" />
                     <div className="pop-text">
-                      <div className="pop-name">Type II diabetes</div>
-                      <div className="pop-desc">Dataset includes participants with Type 2 Diabetes.</div>
+                      <div className="pop-name">Type 2 diabetes</div>
+                      <div className="pop-desc">Dataset includes participants with type 2 Diabetes.</div>
                     </div>
                   </div>
 
                   <div className="population-item">
                     <RoundIcon type="PreD" />
                     <div className="pop-text">
-                      <div className="pop-name">Prediabetes</div>
+                      <div className="pop-name">Pre-Diabetes</div>
                       <div className="pop-desc">Dataset includes participants with prediabetes.</div>
                     </div>
                   </div>
@@ -123,8 +123,8 @@ export default function LegendModal({ open, onClose }: Props) {
                   <div className="population-item">
                     <RoundIcon type="ND" />
                     <div className="pop-text">
-                      <div className="pop-name">No diabetes</div>
-                      <div className="pop-desc">Dataset includes participants without diabetes or prediabetes.</div>
+                      <div className="pop-name">No Diabetes</div>
+                      <div className="pop-desc">Dataset includes participants without diabetes.</div>
                     </div>
                   </div>
                 </div>
@@ -137,21 +137,21 @@ export default function LegendModal({ open, onClose }: Props) {
 
                 <div className="source-list">
                   <div className="source-item">
-                    <span className="source-icon">c</span>
+                    <span className="source-icon">G</span>
                     <div className="source-text">
                       <div className="source-title">
-                        Continuous Glucose Monitoring
+                        Glucose Monitoring via a CGM
                       </div>
-                      <div className="source-desc">Glucose.</div>
+                      <div className="source-desc">CGMs are wearable devices that measure real-time glucose readings through a minimally-invasive sensor in the interstitial fluid</div>
                     </div>
                   </div>
 
                   <div className="source-item">
                     <span className="source-icon">I</span>
                     <div className="source-text">
-                      <div className="source-title">Insulin Delivery</div>
+                      <div className="source-title">Insulin Delivery System</div>
                       <div className="source-desc">
-                        Insulin does Carbohydrate input.
+                        Insulin delivery systems include insulin pumps or devices used for multiple daily injections of insulin
                       </div>
                     </div>
                   </div>
@@ -161,9 +161,8 @@ export default function LegendModal({ open, onClose }: Props) {
                     <div className="source-text">
                       <div className="source-title">Wearable Tracker</div>
                       <div className="source-desc">
-                        Activity / physiological data (e.g. step count,
-                        accelerometry, hear rate, life sleep metrics, skin
-                        temperature, galvanic skin response, ECG, respiration).
+                        Wearable trackers include physiological and activity trackers for continuous sensing of factors such as steps, accelerometry, heart rate, sleep, skin temperature, galvanic skin response, respiration, and more.
+
                       </div>
                     </div>
                   </div>
@@ -173,7 +172,7 @@ export default function LegendModal({ open, onClose }: Props) {
                     <div className="source-text">
                       <div className="source-title">Manual Logs</div>
                       <div className="source-desc">
-                        User logs (e.g. meal, exercise, medication, life events, etc.).
+                        User logs through mobile applications or other means for tracking factors such as meals, exercise, medication use, life events, and more. 
                       </div>
                     </div>
                   </div>
@@ -183,8 +182,7 @@ export default function LegendModal({ open, onClose }: Props) {
                     <div className="source-text">
                       <div className="source-title">Questionnaire</div>
                       <div className="source-desc">
-                        Self-disclosed data (e.g. age, sex, diabetes duration,
-                        ethnicity, general health).
+                        Questionnaire refers to data collected via surveys or interviews about self-disclosed information such as age, sex, race/ethnicity, general health reporting, and more.
                       </div>
                     </div>
                   </div>
@@ -192,10 +190,9 @@ export default function LegendModal({ open, onClose }: Props) {
                   <div className="source-item">
                     <span className="source-icon">C</span>
                     <div className="source-text">
-                      <div className="source-title">Clinical Measurement</div>
+                      <div className="source-title">Clinical Measurements</div>
                       <div className="source-desc">
-                        Lab / vital signs / imaging(e.g. oral glucose test, hemoglobin A1C, 
-                        cholesterol, triglycerides, cardiac ECG, retinal imaging, etc.).
+                        Clinical measurements refers to any data collections from labs, measurement of vital signs, imaging, electronic health records and more. Examples include oral glucose test, glycated hemoglobin (HbA1C), cholesterol, cardiac EGC, retinal imaging, and more. 
                       </div>
                     </div>
                   </div>

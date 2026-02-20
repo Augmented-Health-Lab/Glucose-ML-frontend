@@ -3,7 +3,7 @@
 
 .kv-row {
   display: grid;
-  grid-template-columns: 120px 1fr; 
+  grid-template-columns: 120px 1fr;
   column-gap: 18px;
   align-items: start;
 }
@@ -14,18 +14,23 @@
   font-weight: 500;
 }
 
-
 .kv-val {
   color: var(--secondary-grey);
   font-size: 14px;
   font-weight: 600;
 
+  justify-self: end;
   text-align: right;
-  min-width: 0;
+  max-width: 360px;
   white-space: normal;
-  overflow-wrap: anywhere;
+
+  overflow-wrap: normal;   
+  word-break: normal;      
 }
 
+.kv-val--multiline {
+  white-space: pre-line;   
+}
 
 .empty-value {
   display: inline-block;

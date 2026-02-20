@@ -1,3 +1,40 @@
-# macOS
-.DS_Store
+.vscode
 **/.DS_Store
+Auto-scripts/Original-Glucose-ML-datasets/
+/Glucose-ML-collection/README_template.md
+Auto-scripts/Standardized-datasets/
+Auto-scripts/Standardized-metadata/
+glucose_dist_hist_loop.py
+glucose_dist_hist.py.bak
+proportion_diabetic.py
+Tables/Table1_latex.csv
+Tables/barplot.py
+# dependencies
+node_modules/
+
+# Vite cache 
+.vite/
+
+# build output
+dist/
+dist-ssr/
+
+# logs
+*.log
+logs/
+
+# env
+.env
+.env.*
+*.local
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/
+
+# pycache
+**/__pycache__/glucose_dist_hist.py
+
+# too big of a file
+backend/box_plot_data.json
