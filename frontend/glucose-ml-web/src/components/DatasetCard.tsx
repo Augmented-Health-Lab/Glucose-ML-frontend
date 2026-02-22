@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 export interface DatasetCardProps {
   title: string;
-  participants: number;
+  participants: number | string;
   days: number;
   access: string;
   description: string;
@@ -69,7 +69,7 @@ const DatasetCard = ({
         </div>
 
         <p className="metadata mb-12px">
-          {participants} participants · {days} days · {access} access
+          {typeof participants === "number" ? participants.toLocaleString("en-US") : participants} participants · {days} days · {access} access
         </p>
         <p className="body mb-24px">{description}</p>
       </div>

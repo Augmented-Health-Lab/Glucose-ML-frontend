@@ -139,7 +139,7 @@ function toStackedBars(
 type Table1DetailData = {
   name: string;
   "year release": string;
-  total: number;
+  total: number ;
   fullDescription?: string;
   male: number | null;
   female: number | null;
@@ -265,10 +265,18 @@ function handleNR(value: string | null | undefined): string {
   return String(value);
 }
 
-function handleNaN(value: number | null | undefined): number {
-  if (value === null || value === undefined || Number.isNaN(value)) return 0;
-  return value;
+function handleNaN(value: number | string | null | undefined): number {
+  if (value === null || value === undefined) return 0;
+
+  if (typeof value === "string") {
+    const cleaned = value.replace(/,/g, "").trim();
+    const n = Number(cleaned);
+    return Number.isFinite(n) ? n : 0;
+  }
+
+  return Number.isFinite(value) ? value : 0;
 }
+
 
 function buildDetailFromStatic(
   card: CardInfo,
@@ -278,7 +286,7 @@ function buildDetailFromStatic(
   histogramData?: HistogramDataItem["data"] | null,
   barsFromTir?: DatasetDetailType["timeInRanges"] | null
 ): DatasetDetailType {
-  const participantsTotal = table1Data?.total ?? parseParticipants(card.metadata) ?? 0;
+  const participantsTotal = table1Data ? handleNaN(table1Data.total as any) : parseParticipants(card.metadata) ?? 0;
 
   const types = Array.isArray(card.types) ? card.types : [];
   const groups = types.length ? types : ["All"];

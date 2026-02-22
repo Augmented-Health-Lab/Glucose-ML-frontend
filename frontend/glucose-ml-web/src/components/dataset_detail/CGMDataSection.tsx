@@ -27,7 +27,7 @@ export default function CGMDataSection({ dataset }: Props) {
   const tiles = [
     { value: dataset.cgmSummary.device || "", label: "CGM device" },
     { value: totalDaysDisplay || "", label: "Total days of glucose" },
-    { value: dataset.cgmSummary.glucoseSamples > 0 ? String(dataset.cgmSummary.glucoseSamples) : "", label: "Glucose samples" },
+    { value: Number.isFinite(dataset.cgmSummary.glucoseSamples) ? new Intl.NumberFormat("en-US").format(dataset.cgmSummary.glucoseSamples) : "", label: "Glucose samples" },
     { value: dataset.cgmSummary.avgDaysPerParticipant > 0 ? String(dataset.cgmSummary.avgDaysPerParticipant) : "", label: "Average days per participant" },
   ];
 
