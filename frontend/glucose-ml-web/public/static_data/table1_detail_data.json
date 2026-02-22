@@ -193,9 +193,9 @@
     "average days per participant": 512.3,
     "data_source": {
       "G": "Glucose",
-      "I": "Insulin pump data",
-      "Q": "Age, Sex/Gender",
-      "C": "BMI, HbA1C"
+      "I": "Insulin pump data (e.g. basal rate, boluses, carbohydrate input)",
+      "Q": "Age, Sex/Gender, Race",
+      "C": "HbA1C"
     },
     "populationGroups": [
       { "type": "T1D", "count": 54 }
@@ -367,10 +367,10 @@
     "average days per participant": 11.0,
     "data_source": {
       "G": "Glucose",
-      "W": "Heart rate, Activity calories, Steps",
-      "M": "Meals",
-      "Q": "Age, Sex",
-      "C": "BMI"
+      "W": "Heart rate, Activity calories, metabolic equivalent of task (Fitbit Sense)",
+      "M": "Meal timing, calories, carbs, protein, fat, fiber, meal photo",
+      "Q": "Age, Sex/Gender, Race",
+      "C": "Weight, Height, HbA1C, fasting glucose, fasting insulin, triglyceride, cholesterol"
     },
     "populationGroups": [
       { "type": "T2D", "count": 14 },
@@ -447,9 +447,9 @@
     "average days per participant": 182.8,
     "data_source": {
       "G": "Glucose",
-      "I": "Insulin pump data",
-      "W": "Heart rate, Steps",
-      "Q": "Age, Sex"
+      "I": "Insulin pump data (e.g. basal rate, carbohydrate input)",
+      "W": "Heart rate, step count, calories burned",
+      "Q": "Age, sex/gender, ethnicity, diabetes duration, qualititive interview and focus group transcripts"
     },
     "populationGroups": [
       { "type": "T1D", "count": 20 }
@@ -496,9 +496,8 @@
     "average days per participant": "--",
     "data_source": {
       "G": "Glucose",
-      "I": "Insulin Pump Data",
-      "Q": "Age, Sex",
-      "C": "HbA1C"
+      "Q": "Age, Sex/Gender",
+      "C": "BMI, Blood Pressure, Lab measurements (HbA1C, fasting plasma glucose, OGTT, triglyceride, cholesterol, fasting insulin, etc.)"
     },
     "populationGroups": [
       { "type": "T2D", "count": 1},

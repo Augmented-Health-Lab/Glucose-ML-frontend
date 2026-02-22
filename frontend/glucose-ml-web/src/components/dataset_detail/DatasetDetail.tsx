@@ -339,7 +339,8 @@ function buildDetailFromStatic(
     dataSources = Object.entries(table1Data.data_source).map(([letter, detail]) =>
       mapSourceLetter(letter, dataSourceMap || null, String(detail))
     );
-    dataSources.sort((a, b) => a.icon.localeCompare(b.icon));
+    const order = ["G", "I", "W", "M", "Q", "C"];
+    dataSources.sort((a, b) => order.indexOf(a.icon) - order.indexOf(b.icon));
   } else {
     dataSources = (card.sources ?? []).map((letter) =>
       mapSourceLetter(letter, dataSourceMap || null, cgmDevice && letter.toUpperCase() === "G" ? cgmDevice : undefined)

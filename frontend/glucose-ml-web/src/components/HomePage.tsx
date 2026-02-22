@@ -37,7 +37,7 @@ const HomePage = () => {
             case "Data types": {
               const sourceMap: Record<string, string> = {
                 "Glucose Monitor": "G",
-                "Insulin system": "I",
+                "Insulin Delivery System": "I",
                 "Wearable Tracker": "W",
                 "Manual Logs": "M",
                 Questionnaire: "Q",
@@ -50,10 +50,10 @@ const HomePage = () => {
 
             case "Population": {
               const typeMap: Record<string, string> = {
-                T1D: "T1D",
-                T2D: "T2D",
-                Prediabetic: "PreD",
-                "Non diabetic": "ND",
+                "Type 1 Diabetes": "T1D",
+                "Type 2 Diabetes": "T2D",
+                "Pre-Diabetes": "PreD",
+                "No Diabetes": "ND",
               };
 
               return selectedValues.every((filterValue) =>
@@ -62,8 +62,9 @@ const HomePage = () => {
             }
 
             case "Study duration": {
-              if (dataset.days === "TBD") return false;
-              const numDays = Number(dataset.days);
+              const match = String(dataset.metadata ?? "").match(/(\d+)\s*days/i);
+              if (!match) return false;
+              const numDays = Number(match[1]);
               const filterValue = selectedValues[0];
 
               switch (filterValue) {
@@ -133,8 +134,8 @@ const HomePage = () => {
   return (
     <div className="container-lg my-1">
       <PageTitle
-        title="Explore glucose datasets used in AI research"
-        text="Find CGM datasets, compare their structure, and download the right datasets for your study."
+        title="Glucose-ML: Accelerating data-centric research to transform diabetes outcomes"
+        text="Explore, discover and download continuous glucose datasets to support development of next-generation solutions for diabetes prevention and care."
       />
       <LegendModal open={legendOpen} onClose={() => setLegendOpen(false)} />
 

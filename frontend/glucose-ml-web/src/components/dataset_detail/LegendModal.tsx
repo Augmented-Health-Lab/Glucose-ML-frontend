@@ -56,9 +56,9 @@ export default function LegendModal({ open, onClose }: Props) {
           <div className="legend-columns">
             <div className="legend-col">
               <section className="legend-block">
-                <div className="legend-block-title">Glucose Value Ranges ranges</div>
+                <div className="legend-block-title">Continuous glucose data ranges</div>
                 <div className="legend-block-subtitle">
-                  Glucose values are classified into clinically defined categories as follows:
+                  Clinical targets for continuous glucose monitoring data
                 </div>
 
                 <ul className="legend-swatch-list">

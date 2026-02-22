@@ -5,10 +5,10 @@ import "./MultiSelect.css";
 import { RoundIcon } from "./DatasetCard";
 
 const type_short_code_map = {
-  T1D: "T1D",
-  T2D: "T2D",
-  Prediabetic: "PreD",
-  "Non diabetic": "ND",
+  "Type 1 Diabetes": "T1D",
+  "Type 2 Diabetes": "T2D",
+  "Pre-Diabetes": "PreD",
+  "No Diabetes": "ND",
 };
 
 type TypeKey = keyof typeof type_short_code_map;
