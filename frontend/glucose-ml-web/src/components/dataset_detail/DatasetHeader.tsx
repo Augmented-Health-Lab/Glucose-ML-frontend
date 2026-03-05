@@ -48,18 +48,43 @@ export default function DatasetHeader({ dataset, onBack, onLegendInfo }: Props) 
 
           <div className="detail-header-actions">
             {dataset.datasetLink ? (
-              <a
-                href={dataset.datasetLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="control-btn control-btn-primary"
-              >
-                Link to dataset source
-              </a>
+              <>
+                <a
+                  href={dataset.datasetLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="control-btn control-btn-primary"
+                >
+                  Original dataset source
+                </a>
+
+                <a
+                  href={dataset.datasetLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="control-btn control-btn-primary"
+                >
+                  Standardized CGM dataset.
+                </a>
+              </>
             ) : (
-              <button type="button" className="control-btn control-btn-primary" disabled>
-                Link to dataset source
-              </button>
+              <>
+                <button
+                  type="button"
+                  className="control-btn control-btn-primary"
+                  disabled
+                >
+                  Original dataset source
+                </button>
+
+                <button
+                  type="button"
+                  className="control-btn control-btn-primary"
+                  disabled
+                >
+                  Standardized CGM dataset.
+                </button>
+              </>
             )}
           </div>
         </div>
