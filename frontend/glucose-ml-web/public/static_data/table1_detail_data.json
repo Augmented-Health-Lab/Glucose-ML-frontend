@@ -11,7 +11,7 @@
     "CGM Device": "Dexcom G4",
     "Total days of glucose": "473",
     "Glucose samples": "105,426",
-    "average days per participant": 8.3,
+    "average days per participant": 8,
     "data_source": {
       "G": "Glucose",
       "M": "Meals",
@@ -34,13 +34,13 @@
     "female": 3.0,
     "age range": "20 – 79",
     "Ethinicities": "--",
-    "CGM Device": "Medtronic iPro2 Professional CGM",
+    "CGM Device": "Medtronic iPro2",
     "Total days of glucose": "42",
     "Glucose samples": "8,691",
-    "average days per participant": 4.3,
+    "average days per participant": 4,
     "data_source": {
       "G": "Glucose",
-      "I": "Insulin doses (basal, boluses)",
+      "I": "insulin doses (basal, bolus)",
       "W": "ECG, Breathing Signal, Accelerometer",
       "M": "Meals",
       "C": "Sex, Weight, Height"
@@ -62,7 +62,7 @@
     "CGM Device": "Medtronic MiniMed iPro",
     "Total days of glucose": "399",
     "Glucose samples": "114,253",
-    "average days per participant": 1.9,
+    "average days per participant": 2,
     "data_source": {
       "G": "Glucose",
       "C": "Age, Sex/Gender, BMI, Basal Glycemia, HbA1C, Diabetes Diagnosis"
@@ -85,7 +85,7 @@
     "CGM Device": "Medtronic Enlite",
     "Total days of glucose": "652",
     "Glucose samples": "166,533",
-    "average days per participant": 54.3,
+    "average days per participant": 54,
     "data_source": {
       "G": "Glucose",
       "I": "Insulin (Basal, Bolus)",
@@ -110,7 +110,7 @@
     "CGM Device": "Dexcom G6",
     "Total days of glucose": "13,522",
     "Glucose samples": "3,785,253",
-    "average days per participant": 27.2,
+    "average days per participant": 27,
     "data_source": {
       "G": "Glucose",
       "I": "Insulin pump data, multiple daily injections",
@@ -138,7 +138,7 @@
     "CGM Device": "Dexcom G6",
     "Total days of glucose": "2,492",
     "Glucose samples": "685,136",
-    "average days per participant": 10.1,
+    "average days per participant": 10,
     "data_source": {
       "G": "Glucose",
       "I": "Insulin pump data",
@@ -164,7 +164,7 @@
     "CGM Device": "Dexcom G6",
     "Total days of glucose": "150",
     "Glucose samples": "36,898",
-    "average days per participant": 9.4,
+    "average days per participant": 9,
     "data_source": {
       "G": "Glucose",
       "W": "Accelerometry, Blood Volume Pulse",
@@ -190,7 +190,7 @@
     "CGM Device": "Dexcom G5/G6, Medtronic Guardian/MiniMed",
     "Total days of glucose": "27,663",
     "Glucose samples": "7,680,740",
-    "average days per participant": 512.3,
+    "average days per participant": 512,
     "data_source": {
       "G": "Glucose",
       "I": "Insulin pump data (e.g. basal rate, boluses, carbohydrate input)",
@@ -214,7 +214,7 @@
     "CGM Device": "Abbott FreeStyle Libre H",
     "Total days of glucose": "181",
     "Glucose samples": "15,695",
-    "average days per participant": 15.1,
+    "average days per participant": 15,
     "data_source": {
       "G": "Glucose",
       "I": "Insulin data",
@@ -240,7 +240,7 @@
     "CGM Device": "Abbott FreeStyle Libre H",
     "Total days of glucose": "1,292",
     "Glucose samples": "112,462",
-    "average days per participant": 12.9,
+    "average days per participant": 13,
     "data_source": {
       "G": "Glucose",
       "I": "Insulin data",
@@ -265,7 +265,7 @@
     "CGM Device": "Abbott FreeStyle Libre 2, Abbott FreeStyle Libre",
     "Total days of glucose": "257,782",
     "Glucose samples": "22,671,708",
-    "average days per participant": 350.3,
+    "average days per participant": 350,
     "data_source": {
       "G": "Glucose",
       "Q": "Sex/Gender, Age, Birth Year",
@@ -278,7 +278,7 @@
   },
   {
     "name": "AI-READI",
-    "year release": "2024",
+    "year release": "2025",
     "fullDescription":"The AI-READI v3.0.0 dataset was collected in the U.S and released in 2025. It comprises an average of 10 days of continuoug glucose data from participants with type 2 diabetes, prediabetes, and no diabetes. This dataset also contains contextual information from other data sources including wearable trackers, questionnaires, and clinical/other measurements such as electrocardiograms and retina imaging.",
     "total": "2,280",
     "male": 951.0,
@@ -288,7 +288,7 @@
     "CGM Device": "Dexcom G6",
     "Total days of glucose": "24,012",
     "Glucose samples": "6,194,153",
-    "average days per participant": 10.7,
+    "average days per participant": 11,
     "data_source": {
       "G": "Glucose",
       "W": "Heart rate, Physical activity, Oxygen saturation, Sleep, Stress",
@@ -314,7 +314,7 @@
     "CGM Device": "Medtronic Guardian 3",
     "Total days of glucose": "127",
     "Glucose samples": "29,174",
-    "average days per participant": 6.4,
+    "average days per participant": 6,
     "data_source": {
       "G": "Glucose",
       "I": "Insulin data",
@@ -339,7 +339,7 @@
     "CGM Device": "Abbott Freestyle Libre 2",
     "Total days of glucose": "1,093",
     "Glucose samples": "309,392",
-    "average days per participant": 43.7,
+    "average days per participant": 44,
     "data_source": {
       "G": "Glucose",
       "I": "Insulin Pump",
@@ -364,7 +364,7 @@
     "CGM Device": "Dexcom G6 Pro",
     "Total days of glucose": "493",
     "Glucose samples": "629,825",
-    "average days per participant": 11.0,
+    "average days per participant": 11,
     "data_source": {
       "G": "Glucose",
       "W": "Heart rate, Activity calories, metabolic equivalent of task (Fitbit Sense)",
@@ -391,7 +391,7 @@
     "CGM Device": "Abbott FreeStyle Libre Pro",
     "Total days of glucose": "533",
     "Glucose samples": "687,360",
-    "average days per participant": 11.8,
+    "average days per participant": 12,
     "data_source": {
       "G": "Glucose",
       "W": "Heart rate, Activity calories, Steps",
@@ -418,7 +418,7 @@
     "CGM Device": "Dexcom, Freestyle, Medtronic",
     "Total days of glucose": "1,636",
     "Glucose samples": "356,146",
-    "average days per participant": 96.2,
+    "average days per participant": 96,
     "data_source": {
       "G": "Glucose",
       "I": "Insulin data",
@@ -444,7 +444,7 @@
     "CGM Device": "Dexcom G6 / Freestyle Libre 2 / Medtronic Guardian 4 / Dexcom One",
     "Total days of glucose": "3,656",
     "Glucose samples": "848,574",
-    "average days per participant": 182.8,
+    "average days per participant": 183,
     "data_source": {
       "G": "Glucose",
       "I": "Insulin pump data (e.g. basal rate, carbohydrate input)",
@@ -468,7 +468,7 @@
     "CGM Device": "Dexcom G6 Pro",
     "Total days of glucose": "1,063",
     "Glucose samples": "306,712",
-    "average days per participant": 42.5,
+    "average days per participant": 43,
     "data_source": {
       "G": "Glucose",
       "I": "Insulin Pump Data",
@@ -518,7 +518,7 @@
     "CGM Device": "Dexcom G6",
     "Total days of glucose": "723",
     "Glucose samples": "201,586",
-    "average days per participant": 80.3,
+    "average days per participant": 80,
     "data_source": {
       "G": "Glucose",
       "Q": "Age, Sex",

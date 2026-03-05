@@ -36,12 +36,12 @@ export default function CGMDataSection({ dataset }: Props) {
   const graphTitle = tab === "tir" ? "Time in ranges" : "Histogram";
   
   const graphSubtitle = tab === "hist" 
-    ? "Distribution of glucose measurements across clinically defined glucose ranges"
-    : "Stacked bar plot showing the percent of CGM readings spent in clinically defined glucose ranges, stratified by diabetes status.";
+    ? "Distribution of CGM samples showing the spread across clinically-relevant glucose ranges"
+    : "Stacked bar plot showing the percent of CGM samples in clinically-relevant glucose ranges stratified by diabetes population.";
 
   return (
     <section className="cgm-card">
-      <h2 className="cgm-title">CGM data</h2>
+      <h2 className="cgm-title">Continuous Glucose Monitor (CGM) dataset</h2>
 
       <div className="cgm-metrics">
         {tiles.map((t) => (
