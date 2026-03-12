@@ -134,8 +134,8 @@ const HomePage = () => {
   return (
     <div className="container-lg my-1">
       <PageTitle
-        title="Glucose-ML: Accelerating data-centric research to transform diabetes outcomes"
-        text="Explore, discover and download continuous glucose datasets to support development of next-generation solutions for diabetes prevention and care."
+        title="Accelerating data-driven research for diabetes"
+        text="Explore, discover, and access public continuous glucose monitoring datasets to develop next-generation solutions for diabetes prevention and care."
       />
       <LegendModal open={legendOpen} onClose={() => setLegendOpen(false)} />
 
