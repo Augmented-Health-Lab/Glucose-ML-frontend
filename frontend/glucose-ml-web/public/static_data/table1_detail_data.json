@@ -2,7 +2,7 @@
   {
     "name": "Hall 2018",
     "year release": "2018",
-    "fullDescription":"The Hall_2018 dataset was collected in the U.S. and released in 2018. It comprises an average of 8 days of continuous glucose data from partiticipants with no diabetes, prediabetes, and type 2 diabetes. This dataset also contextual information from other data sources including manual user logs of meals, questionnaires, and clinical measurements such as HbA1C and fasting glucose.",
+    "fullDescription":"The Hall_2018 dataset was collected in the U.S. and released in 2018. It comprises an average of 8 days of continuous glucose data from participants with no diabetes, prediabetes, and type 2 diabetes. This dataset also contextual information from other data sources including manual user logs of meals, questionnaires, and clinical measurements such as HbA1C and fasting glucose.",
     "total": 57,
     "male": 25.0,
     "female": 32.0,

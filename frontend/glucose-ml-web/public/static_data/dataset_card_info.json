@@ -19,5 +19,5 @@
   {"title":"Bris-T1D Open","participants":20,"days":"Average 183","access":"Open","metadata":"20 participants • 183 days • Open access","description":"The Bris-T1D dataset was collected in the U.K.","types":["T1D"],"sources":["G","I","W","Q"]},
   {"title":"AZT1D","participants":25,"days":"Average 42","access":"Open","metadata":"25 participants • 42 days • Open access","description":"The AZT1D dataset was collected in the U.S. and released in 2025.","types":["T1D"],"sources":["G","I","Q","C"]},
   {"title":"Park 2025","participants":38,"days":"TBD","access":"Open","metadata":"38 participants • TBD days • Open access","description":"The Park_2025 dataset was collected in the U.S. and released in 2025","types":["T2D","PreD","ND"],"sources":["G","I","Q","C"]},
-  {"title":"PhysioCGM","participants":10,"days":"Average 80","access":"Open","metadata":"10 participants • 80 days • Open access","description":"The PhysioCGM dataset was ollected in the U.S. and released in 2025. ","types":["T1D"],"sources":["G","Q","C"]}
+  {"title":"PhysioCGM","participants":10,"days":"Average 80","access":"Open","metadata":"10 participants • 80 days • Open access","description":"The PhysioCGM dataset was collected in the U.S. and released in 2025. ","types":["T1D"],"sources":["G","Q","C"]}
 ]
