@@ -55,7 +55,7 @@ export default function DatasetHeader({ dataset, onBack, onLegendInfo }: Props) 
                   rel="noopener noreferrer"
                   className="control-btn control-btn-primary"
                 >
-                  Original dataset source
+                  View dataset reference
                 </a>
 
                 <a
@@ -64,7 +64,7 @@ export default function DatasetHeader({ dataset, onBack, onLegendInfo }: Props) 
                   rel="noopener noreferrer"
                   className="control-btn control-btn-primary"
                 >
-                  View Glucose Dataset
+                  Access glucose dataset
                 </a>
               </>
             ) : (
@@ -74,7 +74,7 @@ export default function DatasetHeader({ dataset, onBack, onLegendInfo }: Props) 
                   className="control-btn control-btn-primary"
                   disabled
                 >
-                  Original dataset source
+                  View dataset reference
                 </button>
 
                 <button
@@ -82,7 +82,7 @@ export default function DatasetHeader({ dataset, onBack, onLegendInfo }: Props) 
                   className="control-btn control-btn-primary"
                   disabled
                 >
-                  View Glucose Dataset
+                  Access glucose dataset
                 </button>
               </>
             )}
