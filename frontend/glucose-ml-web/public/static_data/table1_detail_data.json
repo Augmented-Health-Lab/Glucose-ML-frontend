@@ -285,7 +285,7 @@
   {
     "name": "AI-READI",
     "year release": "2025",
-    "fullDescription":"The AI-READI v3.0.0 dataset was collected in the U.S and released in 2025. It comprises an average of 10 days of continuoug glucose data from participants with type 2 diabetes, prediabetes, and no diabetes. This dataset also contains contextual information from other data sources including wearable trackers, questionnaires, and clinical/other measurements such as electrocardiograms and retina imaging.",
+    "fullDescription":"The AI-READI v3.0.0 dataset was collected in the U.S and released in 2025. It comprises an average of 11 days of continuous glucose data from participants with type 2 diabetes, prediabetes, and no diabetes. This dataset also contains contextual information from other data sources including wearable trackers, questionnaires, and clinical/other measurements such as electrocardiograms and retina imaging.",
     "total": "2,280",
     "male": 951.0,
     "female": "1,329.0",
