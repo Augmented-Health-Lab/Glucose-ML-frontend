@@ -23,7 +23,8 @@
       { "type": "PreD", "count": 8 },
       { "type": "ND", "count": 45 }
     ],
-    "Link to dataset": "https://pubmed.ncbi.nlm.nih.gov/30040822/"
+    "Link to dataset": "https://pubmed.ncbi.nlm.nih.gov/30040822/",
+    "GitHub glucose dataset": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/Hall_2018"
   },
   {
     "name": "D1NAMO",
@@ -48,7 +49,8 @@
     "populationGroups": [
       { "type": "T1D", "count": 9 }
     ],
-    "Link to dataset": "https://zenodo.org/records/5651217"
+    "Link to dataset": "https://zenodo.org/records/5651217",
+    "GitHub glucose dataset": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/D1NAMO"
   },
   {
     "name": "Colas 2019",
@@ -71,7 +73,8 @@
       { "type": "T2D", "count": 17 },
       { "type": "ND", "count": 191 }
     ],
-    "Link to dataset": "https://pubmed.ncbi.nlm.nih.gov/31851681/"
+    "Link to dataset": "https://pubmed.ncbi.nlm.nih.gov/31851681/",
+    "GitHub glucose dataset":"https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/Colas_2019"
   },
   {
     "name": "OhioT1DM",
@@ -176,7 +179,8 @@
       { "type": "PreD", "count": 8 },
       { "type": "ND", "count": 8 }
     ],
-    "Link to dataset": "https://doi.org/10.13026/zthx-5212"
+    "Link to dataset": "https://doi.org/10.13026/zthx-5212",
+    "GitHub glucose dataset": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/BIGIDEAs"
   },
   {
     "name": "DiaTrend",
@@ -226,7 +230,8 @@
     "populationGroups": [
       { "type": "T1D", "count": 12 }
     ],
-    "Link to dataset": "https://doi.org/10.6084/m9.figshare.c.6310860"
+    "Link to dataset": "https://doi.org/10.6084/m9.figshare.c.6310860",
+    "GitHub glucose dataset": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/ShanghaiT1DM"
   },
   {
     "name": "ShanghaiT2DM",
@@ -251,7 +256,8 @@
     "populationGroups": [
       { "type": "T2D", "count": 100 }
     ],
-    "Link to dataset": "https://doi.org/10.6084/m9.figshare.c.6310860"
+    "Link to dataset": "https://doi.org/10.6084/m9.figshare.c.6310860",
+    "GitHub glucose dataset": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/ShanghaiT2DM"
   },
   {
     "name": "T1DiabetesGranada",
@@ -325,7 +331,8 @@
       { "type": "T1D", "count": 9 },
       { "type": "ND", "count": 11 }
     ],
-    "Link to dataset": "https://github.com/fisiologiacuantitativauc/UC_HT_T1DM"
+    "Link to dataset": "https://github.com/fisiologiacuantitativauc/UC_HT_T1DM",
+    "GitHub glucose dataset":"https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/UCHTT1DM"
   },
   {
     "name": "HUPA-UCM",
@@ -350,7 +357,8 @@
     "populationGroups": [
       { "type": "T1D", "count": 25 }
     ],
-    "Link to dataset": "https://data.mendeley.com/datasets/3hbcscwz44/1"
+    "Link to dataset": "https://data.mendeley.com/datasets/3hbcscwz44/1",
+    "GitHub glucose dataset": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/HUPA-UCM"
   },
   {
     "name": "CGMacros Dexcom",
@@ -377,7 +385,8 @@
       { "type": "PreD", "count": 16 },
       { "type": "ND", "count": 15 }
     ],
-    "Link to dataset": "https://doi.org/10.13026/3z8q-x658"
+    "Link to dataset": "https://doi.org/10.13026/3z8q-x658",
+    "GitHub glucose dataset": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/CGMacros_Dexcom"
   },
   {
     "name": "CGMacros Libre",
@@ -404,7 +413,8 @@
       { "type": "PreD", "count": 16 },
       { "type": "ND", "count": 15 }
     ],
-    "Link to dataset": "https://doi.org/10.13026/3z8q-x658"
+    "Link to dataset": "https://doi.org/10.13026/3z8q-x658",
+    "GitHub glucose dataset": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/CGMacros_Libre"
   },
   {
     "name": "T1D-UOM",
@@ -430,7 +440,8 @@
     "populationGroups": [
       { "type": "T1D", "count": 17 }
     ],
-    "Link to dataset": "https://zenodo.org/records/15806142"
+    "Link to dataset": "https://zenodo.org/records/15806142",
+    "GitHub glucose dataset":"https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/T1D-UOM"
   },
   {
     "name": "Bris-T1D Open",
@@ -454,7 +465,8 @@
     "populationGroups": [
       { "type": "T1D", "count": 20 }
     ],
-    "Link to dataset": "https://data.bris.ac.uk/data/dataset/33z5jc8fa6tob21ptrugzqog08"
+    "Link to dataset": "https://data.bris.ac.uk/data/dataset/33z5jc8fa6tob21ptrugzqog08",
+    "GitHub glucose dataset":"https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/Bris-T1D_Open"
   },
   {
     "name": "AZT1D",
@@ -478,7 +490,8 @@
     "populationGroups": [
       { "type": "T1D", "count": 25 }
     ],
-    "Link to dataset": "https://data.mendeley.com/datasets/gk9m674wcx/1"
+    "Link to dataset": "https://data.mendeley.com/datasets/gk9m674wcx/1",
+    "GitHub glucose dataset": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/AZT1D"
   },
   {
     "name": "Park 2025",
@@ -504,7 +517,8 @@
       { "type": "PreD", "count": 16 },
       { "type": "ND", "count": 20 }
     ],
-    "Link to dataset": "https://cgmdb.stanford.edu/data/"
+    "Link to dataset": "https://cgmdb.stanford.edu/data/",
+    "GitHub glucose dataset": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/Park_2025"
   },
   {
     "name": "PhysioCGM",
@@ -527,6 +541,7 @@
     "populationGroups": [
       { "type": "T2D", "count": 10 }
     ],
-    "Link to dataset": "https://doi.org/10.6084/m9.figshare.28136294"
+    "Link to dataset": "https://doi.org/10.6084/m9.figshare.28136294",
+    "GitHub glucose dataset": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/PhysioCGM"
   }
 ]

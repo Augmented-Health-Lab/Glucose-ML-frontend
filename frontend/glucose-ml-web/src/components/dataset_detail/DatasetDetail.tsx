@@ -152,6 +152,7 @@ type Table1DetailData = {
   data_source?: Record<string, string>;
   populationGroups?: { type: string; count: number | null }[];
   "Link to dataset"?: string;
+  "GitHub glucose dataset"?: string;
 };
 
 type HistogramDataItem = {
@@ -340,6 +341,7 @@ function buildDetailFromStatic(
   const duration = yearRelease ? `Year released: ${yearRelease}` : "";
 
   const datasetLink = table1Data?.["Link to dataset"] || undefined;
+  const githubGlucoseDatasetLink = table1Data?.["GitHub glucose dataset"];
 
   
   let dataSources: { icon: string; name: string; detail: string }[] = [];
@@ -389,6 +391,7 @@ function buildDetailFromStatic(
       paperLabel: "Link to dataset source",
     },
     datasetLink,
+    githubGlucoseDatasetLink,
 
     participantsTotal,
     populationGroups,

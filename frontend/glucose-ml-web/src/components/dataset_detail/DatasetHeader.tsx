@@ -9,6 +9,7 @@ type Props = {
     dateRange: string;
     fullDescription: string;
     datasetLink?: string;
+    githubGlucoseDatasetLink?: string;
   };
   onBack: () => void;
   onLegendInfo?: () => void;
@@ -47,45 +48,42 @@ export default function DatasetHeader({ dataset, onBack, onLegendInfo }: Props) 
           <p className="detail-desc">{dataset.fullDescription}</p>
 
           <div className="detail-header-actions">
-            {dataset.datasetLink ? (
-              <>
-                <a
-                  href={dataset.datasetLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="control-btn control-btn-primary"
-                >
-                  View dataset reference
-                </a>
-
-                <a
-                  href={dataset.datasetLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="control-btn control-btn-primary"
-                >
-                  Access glucose dataset
-                </a>
-              </>
+            {dataset.githubGlucoseDatasetLink ? (
+              <a
+                href={dataset.githubGlucoseDatasetLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="control-btn"
+              >
+                Access glucose dataset
+              </a>
             ) : (
-              <>
-                <button
-                  type="button"
-                  className="control-btn control-btn-primary"
-                  disabled
-                >
-                  View dataset reference
-                </button>
-
-                <button
-                  type="button"
-                  className="control-btn control-btn-primary"
-                  disabled
-                >
-                  Access glucose dataset
-                </button>
-              </>
+              <button
+                type="button"
+                className="control-btn"
+                disabled
+              >
+                Access glucose dataset
+              </button>
             )}
+
+            {dataset.datasetLink ? (
+              <a
+                href={dataset.datasetLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="control-btn control-btn-primary"
+              >
+                View dataset reference
+              </a>) : (
+                <button
+                type="button"
+                className="control-btn control-btn-primary"
+                disabled
+              >
+                View dataset reference
+              </button>
+              )}
           </div>
         </div>
       </div>
