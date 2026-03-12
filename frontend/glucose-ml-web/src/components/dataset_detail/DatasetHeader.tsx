@@ -64,7 +64,7 @@ export default function DatasetHeader({ dataset, onBack, onLegendInfo }: Props) 
                   rel="noopener noreferrer"
                   className="control-btn control-btn-primary"
                 >
-                  Standardized CGM dataset.
+                  View Glucose Dataset
                 </a>
               </>
             ) : (
@@ -82,7 +82,7 @@ export default function DatasetHeader({ dataset, onBack, onLegendInfo }: Props) 
                   className="control-btn control-btn-primary"
                   disabled
                 >
-                  Standardized CGM dataset.
+                  View Glucose Dataset
                 </button>
               </>
             )}
