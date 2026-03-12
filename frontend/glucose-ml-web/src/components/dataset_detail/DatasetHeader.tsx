@@ -74,14 +74,14 @@ export default function DatasetHeader({ dataset, onBack, onLegendInfo }: Props) 
                 rel="noopener noreferrer"
                 className="control-btn control-btn-primary"
               >
-                View dataset reference
+                View dataset source
               </a>) : (
                 <button
                 type="button"
                 className="control-btn control-btn-primary"
                 disabled
               >
-                View dataset reference
+                View dataset source
               </button>
               )}
           </div>
