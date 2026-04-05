@@ -6,6 +6,7 @@ import MultiSelect from "./MultiSelect";
 interface FilterBarProps {
   filterSelections: { [key: string]: string[] };
   onFilterChange: (label: string, selected: string[]) => void;
+  onClear: () => void;
   filterButtonEnabled: boolean;
   onLegendClick?: () => void;
 }
@@ -13,14 +14,10 @@ interface FilterBarProps {
 const FilterBar = ({
   filterSelections,
   onFilterChange,
+  onClear,
   filterButtonEnabled,
   onLegendClick,
 }: FilterBarProps) => {
-  // clear all filters
-  const handleClear = () => {
-    Object.keys(filterSelections).forEach((label) => onFilterChange(label, []));
-  };
-
   return (
     <div className="filter-bar d-flex align-items-end flex-wrap">
       <div className="d-flex gap-2 flex-wrap metadata">
@@ -49,7 +46,7 @@ const FilterBar = ({
           type="button"
           disabled={!filterButtonEnabled}
           className="clear-filters-btn metadata"
-          onClick={handleClear}
+          onClick={onClear}
         >
           Clear all filters
         </button>

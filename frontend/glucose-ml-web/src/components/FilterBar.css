@@ -50,21 +50,28 @@
   border: none;
 }
 
-/* Text-only clear filters, underline on hover */
+/* Clear filters — visible solid button when active, hidden when not */
 .clear-filters-btn {
   background: none;
-  border: none;
-  padding: 0;
+  border: 1.5px solid transparent;
+  padding: 6px 14px;
+  border-radius: 20px;
+  color: transparent;
+  cursor: default;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  pointer-events: none;
+}
+
+.clear-filters-btn:not(:disabled) {
   color: var(--secondary-grey);
+  border-color: var(--secondary-grey);
   cursor: pointer;
-  text-decoration: none;
+  pointer-events: auto;
 }
 
 .clear-filters-btn:hover:not(:disabled) {
-  text-decoration: underline;
-}
-
-.clear-filters-btn:disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
+  background: var(--secondary-grey);
+  color: white;
 }

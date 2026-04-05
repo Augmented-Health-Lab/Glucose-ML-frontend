@@ -9,6 +9,7 @@ import DataSourcesSection from "./DataSourcesSection";
 import CGMDataSection from "./CGMDataSection";
 import LegendModal from "./LegendModal";
 import DemographicsSection from "./DemographicsSection";
+import { useSaveScroll, restoreScroll, clearScroll } from "../../hooks/useScrollRestoration";
 
 import "./DatasetDetail.css";
 
@@ -85,7 +86,7 @@ function toStackedBars(
   totalsByType?: Record<string, number>
 ): { group: "T1D" | "T2D" | "PreD" | "ND"; total: number; segments: { key: any; value: number }[] }[] {
 
-  const preferredGroupOrder = ["ND", "PreD", "T2D", "T1D"]; 
+  const preferredGroupOrder = ["ND", "PreD", "T2D", "T1D"];
   const groupRank = (g: string) => {
     const idx = preferredGroupOrder.indexOf(g);
     return idx === -1 ? 999 : idx;
@@ -304,7 +305,7 @@ function buildDetailFromStatic(
         count: 0,
       }))) as any;
 
-  
+
   const legacySegments = [
     { key: "VeryLow", value: legacyTir?.very_low ?? 0 },
     { key: "Low", value: legacyTir?.low ?? 0 },
@@ -313,7 +314,7 @@ function buildDetailFromStatic(
     { key: "VeryHigh", value: legacyTir?.very_high ?? 0 },
   ];
 
- 
+
   let genderStr = "";
   if (table1Data) {
     const male = handleNaN(table1Data.male);
@@ -343,7 +344,7 @@ function buildDetailFromStatic(
   const datasetLink = table1Data?.["Link to dataset"] || undefined;
   const githubGlucoseDatasetLink = table1Data?.["GitHub glucose dataset"];
 
-  
+
   let dataSources: { icon: string; name: string; detail: string }[] = [];
   if (table1Data?.data_source) {
     dataSources = Object.entries(table1Data.data_source).map(([letter, detail]) =>
@@ -431,14 +432,22 @@ function buildDetailFromStatic(
   } as DatasetDetailType;
 }
 
-// visual_bar_info.json is intentionally not used (file is not provided).
-
 export default function DatasetDetail({ dataset, onBack }: Props) {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
+  const scrollKey = `scroll:/dataset/${id}`;
 
   const [legendOpen, setLegendOpen] = useState(false);
   const [load, setLoad] = useState<LoadState>({ status: "loading", data: null, error: null });
+
+  useSaveScroll(scrollKey);
+
+  // Restore scroll only once content is in the DOM
+  useEffect(() => {
+    if (load.status === "success" || dataset) {
+      restoreScroll(scrollKey);
+    }
+  }, [load.status, dataset, scrollKey]);
 
   useEffect(() => {
     if (dataset) return;
@@ -460,12 +469,11 @@ export default function DatasetDetail({ dataset, onBack }: Props) {
         try {
           table1Data = await fetchJsonStrict<Table1DetailData[]>("static_data/table1_detail_data.json", ac.signal);
         } catch {
-          
+          // optional — continue without it
         }
 
         const dataSourceMap = await loadDataSourceMap(ac.signal);
 
-        
         let matchedHistogramData: HistogramDataItem["data"] | null = null;
         try {
           const histogramDataAll = await fetchJsonStrict<HistogramDataItem[]>(
@@ -475,16 +483,13 @@ export default function DatasetDetail({ dataset, onBack }: Props) {
           const matched = histogramDataAll.find((item) => normalizeName(item.name) === normalizeName(id) || item.name === id);
           matchedHistogramData = matched?.data || null;
         } catch {
-          
+          // optional — continue without it
         }
 
-        
         const tirByDataset = await fetchJsonStrict<TirByDataset>("static_data/time_in_ranges_by_type.json", ac.signal).catch(
           () => null
         );
 
-        // We no longer use visual_bar_info.json (not provided).
-        // Cards come solely from dataset_card_info.json.
         const merged = new Map<string, CardInfo>();
         for (const c of cardsA) merged.set(c.title, c);
 
@@ -493,7 +498,6 @@ export default function DatasetDetail({ dataset, onBack }: Props) {
 
         const matchedTable1Data = table1Data ? findTable1Data(table1Data, card.title) : null;
 
-        
         const datasetKeyCandidates = [
           card.title,
           matchedTable1Data?.name,
@@ -517,7 +521,6 @@ export default function DatasetDetail({ dataset, onBack }: Props) {
           }
         }
 
-        
         const totalsByType: Record<string, number> = {};
         if (matchedTable1Data?.populationGroups?.length) {
           for (const g of matchedTable1Data.populationGroups) {
@@ -529,7 +532,6 @@ export default function DatasetDetail({ dataset, onBack }: Props) {
 
         const barsFromTir = tirForDataset ? toStackedBars(tirForDataset, totalsByType) : null;
 
-
         const detail = buildDetailFromStatic(
           card,
           undefined,
@@ -538,8 +540,6 @@ export default function DatasetDetail({ dataset, onBack }: Props) {
           matchedHistogramData,
           barsFromTir
         );
-
-        setLoad({ status: "success", data: detail, error: null });
 
         setLoad({ status: "success", data: detail, error: null });
       } catch (err) {
@@ -556,6 +556,7 @@ export default function DatasetDetail({ dataset, onBack }: Props) {
   }, [dataset, id]);
 
   const handleBack = async () => {
+    clearScroll(scrollKey);  // don't restore detail scroll on next visit
     if (onBack) {
       await onBack();
       return;
@@ -605,7 +606,7 @@ export default function DatasetDetail({ dataset, onBack }: Props) {
         <main className="detail-main">
           <div style={{ maxWidth: 1240, margin: "0 auto", padding: "0 22px", color: "var(--secondary-grey)" }}>
             <div style={{ marginBottom: 12 }}>
-              Couldn’t load dataset details for <b>{id}</b>.
+              Couldn't load dataset details for <b>{id}</b>.
             </div>
             <div style={{ marginBottom: 16 }}>{load.error.message}</div>
             <button

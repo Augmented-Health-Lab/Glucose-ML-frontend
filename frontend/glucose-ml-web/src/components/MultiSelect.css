@@ -60,6 +60,7 @@
   animation: dropdownSlide 0.2s ease;
 }
 
+
 @keyframes dropdownSlide {
   from {
     opacity: 0;

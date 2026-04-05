@@ -15,3 +15,39 @@
     grid-template-columns: repeat(3, minmax(320px, 1fr));
   }
 }
+
+/* Animate cards in when filters change */
+.dataset-grid > * {
+  animation: card-fade-in 0.2s ease both;
+}
+
+@keyframes card-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Stagger each card slightly */
+.dataset-grid > *:nth-child(1) { animation-delay: 0ms; }
+.dataset-grid > *:nth-child(2) { animation-delay: 30ms; }
+.dataset-grid > *:nth-child(3) { animation-delay: 60ms; }
+.dataset-grid > *:nth-child(4) { animation-delay: 90ms; }
+.dataset-grid > *:nth-child(5) { animation-delay: 120ms; }
+.dataset-grid > *:nth-child(6) { animation-delay: 150ms; }
+.dataset-grid > *:nth-child(n+7) { animation-delay: 180ms; }
+
+/* Results count pill */
+.results-count {
+  font-size: 13px;
+  color: var(--secondary-grey);
+  margin-bottom: 16px;
+  padding: 6px 12px;
+  background: #eaf0f7;
+  border-radius: 20px;
+  display: inline-block;
+}

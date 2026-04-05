@@ -2,26 +2,59 @@ import PageTitle from "./PageTitle";
 import FilterBar from "./FilterBar";
 import CompareBar from "./CompareBar";
 import DatasetGrid from "./DatasetGrid";
-import { useState, useEffect } from "react";
 import LegendModal from "./dataset_detail/LegendModal";
+import { useSaveScroll, restoreScroll } from "../hooks/useScrollRestoration";
+import { useState, useEffect, useRef } from "react";
+
+const FILTER_STORAGE_KEY = "homepage:filters";
+
+function loadSavedFilters(): { [key: string]: string[] } {
+  try {
+    const raw = sessionStorage.getItem(FILTER_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
+
+function saveFilters(filters: { [key: string]: string[] }) {
+  try {
+    sessionStorage.setItem(FILTER_STORAGE_KEY, JSON.stringify(filters));
+  } catch {
+    // ignore
+  }
+}
 
 const HomePage = () => {
+  // Restore filters from sessionStorage on mount (survives back-navigation)
   const [filterSelections, setFilterSelections] = useState<{
     [key: string]: string[];
-  }>({});
+  }>(loadSavedFilters);
+
   const [selectedCards, setSelectedCards] = useState<string[]>([]);
   const [datasets, setDatasets] = useState<any[]>([]);
   const [filteredDatasets, setFilteredDatasets] = useState<any[]>([]);
   const [legendOpen, setLegendOpen] = useState(false);
 
-  // load static datasets info (unified with detail page)
+  useSaveScroll("scroll:/");
+
+  const hasRestoredScroll = useRef(false);
+  // Restore scroll position once cards are in the DOM
+  useEffect(() => {
+    if (filteredDatasets.length > 0 && !hasRestoredScroll.current) {
+      hasRestoredScroll.current = true;
+      restoreScroll("scroll:/");
+    }
+  }, [filteredDatasets]);
+
+  // Load static datasets info
   useEffect(() => {
     fetch("/static_data/dataset_card_info.json")
       .then((res) => res.json())
       .then((data) => setDatasets(data));
   }, []);
 
-  // filter!!
+  // Filter datasets
   useEffect(() => {
     if (Object.values(filterSelections).every((arr) => arr.length === 0)) {
       setFilteredDatasets(datasets);
@@ -55,7 +88,6 @@ const HomePage = () => {
                 "Pre-Diabetes": "PreD",
                 "No Diabetes": "ND",
               };
-
               return selectedValues.every((filterValue) =>
                 dataset.types.includes(typeMap[filterValue])
               );
@@ -66,42 +98,29 @@ const HomePage = () => {
               if (!match) return false;
               const numDays = Number(match[1]);
               const filterValue = selectedValues[0];
-
               switch (filterValue) {
-                case "7+ days":
-                  return numDays >= 7;
-                case "14+ days":
-                  return numDays >= 14;
-                case "1+ month":
-                  return numDays >= 30;
-                case "2+ months":
-                  return numDays >= 60;
-                default:
-                  return false;
+                case "7+ days":   return numDays >= 7;
+                case "14+ days":  return numDays >= 14;
+                case "1+ month":  return numDays >= 30;
+                case "2+ months": return numDays >= 60;
+                default:          return false;
               }
             }
 
             case "Sample size": {
               const filterValue = selectedValues[0];
               switch (filterValue) {
-                case "20+":
-                  return dataset.participants >= 20;
-                case "50+":
-                  return dataset.participants >= 50;
-                case "100+":
-                  return dataset.participants >= 100;
-                case "500+":
-                  return dataset.participants >= 500;
-                case "1000+":
-                  return dataset.participants >= 1000;
-                default:
-                  return false;
+                case "20+":   return dataset.participants >= 20;
+                case "50+":   return dataset.participants >= 50;
+                case "100+":  return dataset.participants >= 100;
+                case "500+":  return dataset.participants >= 500;
+                case "1000+": return dataset.participants >= 1000;
+                default:      return false;
               }
             }
 
             case "Access": {
-              const filterValue = selectedValues[0];
-              return dataset.access === filterValue;
+              return dataset.access === selectedValues[0];
             }
 
             default:
@@ -114,13 +133,21 @@ const HomePage = () => {
     setFilteredDatasets(filtered);
   }, [filterSelections, datasets]);
 
-  // callback for filter
+  // Save filters immediately inside the setter so they're persisted
+  // before React navigates away (useEffect would be too late)
   const handleFilterChange = (label: string, selected: string[]) => {
-    setFilterSelections((prev) => ({ ...prev, [label]: selected }));
-    console.log(filterSelections);
+    setFilterSelections((prev) => {
+      const next = { ...prev, [label]: selected };
+      saveFilters(next);
+      return next;
+    });
   };
 
-  // callback for card
+  const handleClear = () => {
+    sessionStorage.removeItem(FILTER_STORAGE_KEY);
+    setFilterSelections({});
+  };
+
   const handleCardSelect = (title: string, checked: boolean) => {
     setSelectedCards((prev) =>
       checked ? [...prev, title] : prev.filter((t) => t !== title)
@@ -142,12 +169,15 @@ const HomePage = () => {
       <FilterBar
         filterSelections={filterSelections}
         onFilterChange={handleFilterChange}
+        onClear={handleClear}
         filterButtonEnabled={hasFilter}
         onLegendClick={() => setLegendOpen(true)}
       />
       <CompareBar />
       <DatasetGrid
         datasets={filteredDatasets}
+        totalDatasets={datasets.length}
+        isFiltered={hasFilter}
         selectedCards={selectedCards}
         onCardSelect={handleCardSelect}
       />

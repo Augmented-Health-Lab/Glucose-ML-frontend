@@ -53,25 +53,25 @@ const MultiSelect = ({
   };
 
   const handleOptionClick = (option: string) => {
-    let newSelected: string[];
+  let newSelected: string[];
 
-    if (multi) {
-      if (selected.includes(option)) {
-        newSelected = selected.filter((item) => item !== option);
-      } else {
-        newSelected = [...selected, option];
-      }
+  if (multi) {
+    if (selected.includes(option)) {
+      newSelected = selected.filter((item) => item !== option);
     } else {
-      if (selected.includes(option)) {
-        newSelected = [];
-      } else {
-        newSelected = [option];
-      }
-      setIsOpen(false);
+      newSelected = [...selected, option];
     }
+  } else {
+    if (selected.includes(option)) {
+      newSelected = [];
+    } else {
+      newSelected = [option];
+    }
+    setTimeout(() => setIsOpen(false), 250); // ← was setIsOpen(false) immediately
+  }
 
-    onChange(newSelected);
-  };
+  onChange(newSelected);
+};
 
   const getButtonLabel = () => {
     if (selected.length === 0) {
