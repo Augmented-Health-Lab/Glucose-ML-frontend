@@ -5,11 +5,12 @@ interface Props {
   datasets: DatasetCardProps[];
   totalDatasets: number;
   isFiltered: boolean;
+  filterKey: string;
   selectedCards: string[];
   onCardSelect: (title: string, checked: boolean) => void;
 }
 
-const DatasetGrid = ({ datasets, totalDatasets, isFiltered, selectedCards, onCardSelect }: Props) => {
+const DatasetGrid = ({ datasets, totalDatasets, isFiltered, filterKey, selectedCards, onCardSelect }: Props) => {
   return (
     <div>
       {isFiltered && (
@@ -23,7 +24,7 @@ const DatasetGrid = ({ datasets, totalDatasets, isFiltered, selectedCards, onCar
           <p className="subtitle">No results match your filters.</p>
         </div>
       ) : (
-        <div className="dataset-grid">
+        <div className="dataset-grid" key={filterKey}>
           {datasets.map((dataset) => (
             <DatasetCard
               key={dataset.title}

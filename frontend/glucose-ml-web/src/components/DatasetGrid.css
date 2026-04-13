@@ -18,7 +18,7 @@
 
 /* Animate cards in when filters change */
 .dataset-grid > * {
-  animation: card-fade-in 0.2s ease both;
+  animation: card-fade-in 0.45s ease both;
 }
 
 @keyframes card-fade-in {
