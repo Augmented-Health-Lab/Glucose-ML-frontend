@@ -1,0 +1,1562 @@
+{
+  "synthetic": true,
+  "description": "Deterministic synthetic examples created for interface illustration; these points do not represent study participants.",
+  "series": [
+    {
+      "key": "t1d",
+      "points": [
+        {
+          "hour": 0,
+          "glucose": 129.2
+        },
+        {
+          "hour": 0.25,
+          "glucose": 132.1
+        },
+        {
+          "hour": 0.5,
+          "glucose": 134.7
+        },
+        {
+          "hour": 0.75,
+          "glucose": 136.7
+        },
+        {
+          "hour": 1,
+          "glucose": 138
+        },
+        {
+          "hour": 1.25,
+          "glucose": 138.4
+        },
+        {
+          "hour": 1.5,
+          "glucose": 138.2
+        },
+        {
+          "hour": 1.75,
+          "glucose": 137.5
+        },
+        {
+          "hour": 2,
+          "glucose": 136.7
+        },
+        {
+          "hour": 2.25,
+          "glucose": 136.2
+        },
+        {
+          "hour": 2.5,
+          "glucose": 136.3
+        },
+        {
+          "hour": 2.75,
+          "glucose": 137.3
+        },
+        {
+          "hour": 3,
+          "glucose": 139.2
+        },
+        {
+          "hour": 3.25,
+          "glucose": 141.9
+        },
+        {
+          "hour": 3.5,
+          "glucose": 145.3
+        },
+        {
+          "hour": 3.75,
+          "glucose": 149
+        },
+        {
+          "hour": 4,
+          "glucose": 152.7
+        },
+        {
+          "hour": 4.25,
+          "glucose": 156
+        },
+        {
+          "hour": 4.5,
+          "glucose": 158.9
+        },
+        {
+          "hour": 4.75,
+          "glucose": 161.2
+        },
+        {
+          "hour": 5,
+          "glucose": 163.1
+        },
+        {
+          "hour": 5.25,
+          "glucose": 165.2
+        },
+        {
+          "hour": 5.5,
+          "glucose": 167.8
+        },
+        {
+          "hour": 5.75,
+          "glucose": 171.9
+        },
+        {
+          "hour": 6,
+          "glucose": 177.9
+        },
+        {
+          "hour": 6.25,
+          "glucose": 186.3
+        },
+        {
+          "hour": 6.5,
+          "glucose": 197.2
+        },
+        {
+          "hour": 6.75,
+          "glucose": 210.1
+        },
+        {
+          "hour": 7,
+          "glucose": 224.2
+        },
+        {
+          "hour": 7.25,
+          "glucose": 238
+        },
+        {
+          "hour": 7.5,
+          "glucose": 250
+        },
+        {
+          "hour": 7.75,
+          "glucose": 258.8
+        },
+        {
+          "hour": 8,
+          "glucose": 263.1
+        },
+        {
+          "hour": 8.25,
+          "glucose": 262.5
+        },
+        {
+          "hour": 8.5,
+          "glucose": 257
+        },
+        {
+          "hour": 8.75,
+          "glucose": 247.7
+        },
+        {
+          "hour": 9,
+          "glucose": 235.7
+        },
+        {
+          "hour": 9.25,
+          "glucose": 222.7
+        },
+        {
+          "hour": 9.5,
+          "glucose": 210.3
+        },
+        {
+          "hour": 9.75,
+          "glucose": 199.8
+        },
+        {
+          "hour": 10,
+          "glucose": 192.3
+        },
+        {
+          "hour": 10.25,
+          "glucose": 188.4
+        },
+        {
+          "hour": 10.5,
+          "glucose": 188.4
+        },
+        {
+          "hour": 10.75,
+          "glucose": 192.4
+        },
+        {
+          "hour": 11,
+          "glucose": 200.1
+        },
+        {
+          "hour": 11.25,
+          "glucose": 210.9
+        },
+        {
+          "hour": 11.5,
+          "glucose": 224.1
+        },
+        {
+          "hour": 11.75,
+          "glucose": 238.5
+        },
+        {
+          "hour": 12,
+          "glucose": 252.7
+        },
+        {
+          "hour": 12.25,
+          "glucose": 265.2
+        },
+        {
+          "hour": 12.5,
+          "glucose": 274.4
+        },
+        {
+          "hour": 12.75,
+          "glucose": 279
+        },
+        {
+          "hour": 13,
+          "glucose": 278.4
+        },
+        {
+          "hour": 13.25,
+          "glucose": 272.7
+        },
+        {
+          "hour": 13.5,
+          "glucose": 262.4
+        },
+        {
+          "hour": 13.75,
+          "glucose": 249
+        },
+        {
+          "hour": 14,
+          "glucose": 233.9
+        },
+        {
+          "hour": 14.25,
+          "glucose": 218.7
+        },
+        {
+          "hour": 14.5,
+          "glucose": 204.7
+        },
+        {
+          "hour": 14.75,
+          "glucose": 192.7
+        },
+        {
+          "hour": 15,
+          "glucose": 182.9
+        },
+        {
+          "hour": 15.25,
+          "glucose": 175.2
+        },
+        {
+          "hour": 15.5,
+          "glucose": 169.3
+        },
+        {
+          "hour": 15.75,
+          "glucose": 164.7
+        },
+        {
+          "hour": 16,
+          "glucose": 161.3
+        },
+        {
+          "hour": 16.25,
+          "glucose": 159
+        },
+        {
+          "hour": 16.5,
+          "glucose": 158.1
+        },
+        {
+          "hour": 16.75,
+          "glucose": 159
+        },
+        {
+          "hour": 17,
+          "glucose": 162.3
+        },
+        {
+          "hour": 17.25,
+          "glucose": 168.2
+        },
+        {
+          "hour": 17.5,
+          "glucose": 176.9
+        },
+        {
+          "hour": 17.75,
+          "glucose": 187.9
+        },
+        {
+          "hour": 18,
+          "glucose": 200.1
+        },
+        {
+          "hour": 18.25,
+          "glucose": 212.4
+        },
+        {
+          "hour": 18.5,
+          "glucose": 222.9
+        },
+        {
+          "hour": 18.75,
+          "glucose": 230.1
+        },
+        {
+          "hour": 19,
+          "glucose": 232.9
+        },
+        {
+          "hour": 19.25,
+          "glucose": 230.5
+        },
+        {
+          "hour": 19.5,
+          "glucose": 223.2
+        },
+        {
+          "hour": 19.75,
+          "glucose": 211.8
+        },
+        {
+          "hour": 20,
+          "glucose": 197.6
+        },
+        {
+          "hour": 20.25,
+          "glucose": 182.3
+        },
+        {
+          "hour": 20.5,
+          "glucose": 167.4
+        },
+        {
+          "hour": 20.75,
+          "glucose": 154.1
+        },
+        {
+          "hour": 21,
+          "glucose": 143.4
+        },
+        {
+          "hour": 21.25,
+          "glucose": 135.6
+        },
+        {
+          "hour": 21.5,
+          "glucose": 130.7
+        },
+        {
+          "hour": 21.75,
+          "glucose": 128.2
+        },
+        {
+          "hour": 22,
+          "glucose": 127.7
+        },
+        {
+          "hour": 22.25,
+          "glucose": 128.4
+        },
+        {
+          "hour": 22.5,
+          "glucose": 129.8
+        },
+        {
+          "hour": 22.75,
+          "glucose": 131.1
+        },
+        {
+          "hour": 23,
+          "glucose": 132
+        },
+        {
+          "hour": 23.25,
+          "glucose": 132.2
+        },
+        {
+          "hour": 23.5,
+          "glucose": 131.8
+        },
+        {
+          "hour": 23.75,
+          "glucose": 130.7
+        }
+      ]
+    },
+    {
+      "key": "t2d",
+      "points": [
+        {
+          "hour": 0,
+          "glucose": 118.1
+        },
+        {
+          "hour": 0.25,
+          "glucose": 121.6
+        },
+        {
+          "hour": 0.5,
+          "glucose": 124.5
+        },
+        {
+          "hour": 0.75,
+          "glucose": 126.3
+        },
+        {
+          "hour": 1,
+          "glucose": 127
+        },
+        {
+          "hour": 1.25,
+          "glucose": 126.4
+        },
+        {
+          "hour": 1.5,
+          "glucose": 124.8
+        },
+        {
+          "hour": 1.75,
+          "glucose": 122.7
+        },
+        {
+          "hour": 2,
+          "glucose": 120.8
+        },
+        {
+          "hour": 2.25,
+          "glucose": 119.5
+        },
+        {
+          "hour": 2.5,
+          "glucose": 119.4
+        },
+        {
+          "hour": 2.75,
+          "glucose": 120.7
+        },
+        {
+          "hour": 3,
+          "glucose": 123.2
+        },
+        {
+          "hour": 3.25,
+          "glucose": 126.8
+        },
+        {
+          "hour": 3.5,
+          "glucose": 130.7
+        },
+        {
+          "hour": 3.75,
+          "glucose": 134.6
+        },
+        {
+          "hour": 4,
+          "glucose": 137.8
+        },
+        {
+          "hour": 4.25,
+          "glucose": 139.9
+        },
+        {
+          "hour": 4.5,
+          "glucose": 140.8
+        },
+        {
+          "hour": 4.75,
+          "glucose": 140.7
+        },
+        {
+          "hour": 5,
+          "glucose": 140.1
+        },
+        {
+          "hour": 5.25,
+          "glucose": 139.7
+        },
+        {
+          "hour": 5.5,
+          "glucose": 140.5
+        },
+        {
+          "hour": 5.75,
+          "glucose": 143
+        },
+        {
+          "hour": 6,
+          "glucose": 148
+        },
+        {
+          "hour": 6.25,
+          "glucose": 155.7
+        },
+        {
+          "hour": 6.5,
+          "glucose": 165.9
+        },
+        {
+          "hour": 6.75,
+          "glucose": 177.7
+        },
+        {
+          "hour": 7,
+          "glucose": 190.1
+        },
+        {
+          "hour": 7.25,
+          "glucose": 201.6
+        },
+        {
+          "hour": 7.5,
+          "glucose": 210.7
+        },
+        {
+          "hour": 7.75,
+          "glucose": 216.3
+        },
+        {
+          "hour": 8,
+          "glucose": 217.6
+        },
+        {
+          "hour": 8.25,
+          "glucose": 214.6
+        },
+        {
+          "hour": 8.5,
+          "glucose": 207.9
+        },
+        {
+          "hour": 8.75,
+          "glucose": 198.7
+        },
+        {
+          "hour": 9,
+          "glucose": 188.4
+        },
+        {
+          "hour": 9.25,
+          "glucose": 178.6
+        },
+        {
+          "hour": 9.5,
+          "glucose": 170.4
+        },
+        {
+          "hour": 9.75,
+          "glucose": 164.8
+        },
+        {
+          "hour": 10,
+          "glucose": 162
+        },
+        {
+          "hour": 10.25,
+          "glucose": 162
+        },
+        {
+          "hour": 10.5,
+          "glucose": 164.5
+        },
+        {
+          "hour": 10.75,
+          "glucose": 168.9
+        },
+        {
+          "hour": 11,
+          "glucose": 174.8
+        },
+        {
+          "hour": 11.25,
+          "glucose": 181.8
+        },
+        {
+          "hour": 11.5,
+          "glucose": 189.4
+        },
+        {
+          "hour": 11.75,
+          "glucose": 197.4
+        },
+        {
+          "hour": 12,
+          "glucose": 205.1
+        },
+        {
+          "hour": 12.25,
+          "glucose": 212.2
+        },
+        {
+          "hour": 12.5,
+          "glucose": 217.9
+        },
+        {
+          "hour": 12.75,
+          "glucose": 221.7
+        },
+        {
+          "hour": 13,
+          "glucose": 223
+        },
+        {
+          "hour": 13.25,
+          "glucose": 221.5
+        },
+        {
+          "hour": 13.5,
+          "glucose": 217.3
+        },
+        {
+          "hour": 13.75,
+          "glucose": 210.6
+        },
+        {
+          "hour": 14,
+          "glucose": 202
+        },
+        {
+          "hour": 14.25,
+          "glucose": 192
+        },
+        {
+          "hour": 14.5,
+          "glucose": 181.3
+        },
+        {
+          "hour": 14.75,
+          "glucose": 170.5
+        },
+        {
+          "hour": 15,
+          "glucose": 160
+        },
+        {
+          "hour": 15.25,
+          "glucose": 150.5
+        },
+        {
+          "hour": 15.5,
+          "glucose": 142.3
+        },
+        {
+          "hour": 15.75,
+          "glucose": 136
+        },
+        {
+          "hour": 16,
+          "glucose": 131.8
+        },
+        {
+          "hour": 16.25,
+          "glucose": 130.3
+        },
+        {
+          "hour": 16.5,
+          "glucose": 131.6
+        },
+        {
+          "hour": 16.75,
+          "glucose": 135.7
+        },
+        {
+          "hour": 17,
+          "glucose": 142.4
+        },
+        {
+          "hour": 17.25,
+          "glucose": 151.2
+        },
+        {
+          "hour": 17.5,
+          "glucose": 161.2
+        },
+        {
+          "hour": 17.75,
+          "glucose": 171.6
+        },
+        {
+          "hour": 18,
+          "glucose": 181.2
+        },
+        {
+          "hour": 18.25,
+          "glucose": 188.9
+        },
+        {
+          "hour": 18.5,
+          "glucose": 193.8
+        },
+        {
+          "hour": 18.75,
+          "glucose": 195.3
+        },
+        {
+          "hour": 19,
+          "glucose": 193.3
+        },
+        {
+          "hour": 19.25,
+          "glucose": 188.2
+        },
+        {
+          "hour": 19.5,
+          "glucose": 180.8
+        },
+        {
+          "hour": 19.75,
+          "glucose": 172
+        },
+        {
+          "hour": 20,
+          "glucose": 163.1
+        },
+        {
+          "hour": 20.25,
+          "glucose": 154.7
+        },
+        {
+          "hour": 20.5,
+          "glucose": 147.6
+        },
+        {
+          "hour": 20.75,
+          "glucose": 141.9
+        },
+        {
+          "hour": 21,
+          "glucose": 137.2
+        },
+        {
+          "hour": 21.25,
+          "glucose": 133.3
+        },
+        {
+          "hour": 21.5,
+          "glucose": 129.6
+        },
+        {
+          "hour": 21.75,
+          "glucose": 125.9
+        },
+        {
+          "hour": 22,
+          "glucose": 122
+        },
+        {
+          "hour": 22.25,
+          "glucose": 118.2
+        },
+        {
+          "hour": 22.5,
+          "glucose": 114.7
+        },
+        {
+          "hour": 22.75,
+          "glucose": 112
+        },
+        {
+          "hour": 23,
+          "glucose": 110.6
+        },
+        {
+          "hour": 23.25,
+          "glucose": 110.5
+        },
+        {
+          "hour": 23.5,
+          "glucose": 111.9
+        },
+        {
+          "hour": 23.75,
+          "glucose": 114.4
+        }
+      ]
+    },
+    {
+      "key": "pred",
+      "points": [
+        {
+          "hour": 0,
+          "glucose": 99.3
+        },
+        {
+          "hour": 0.25,
+          "glucose": 103.5
+        },
+        {
+          "hour": 0.5,
+          "glucose": 106.7
+        },
+        {
+          "hour": 0.75,
+          "glucose": 108.4
+        },
+        {
+          "hour": 1,
+          "glucose": 108.3
+        },
+        {
+          "hour": 1.25,
+          "glucose": 106.5
+        },
+        {
+          "hour": 1.5,
+          "glucose": 103.5
+        },
+        {
+          "hour": 1.75,
+          "glucose": 100.2
+        },
+        {
+          "hour": 2,
+          "glucose": 97.4
+        },
+        {
+          "hour": 2.25,
+          "glucose": 95.9
+        },
+        {
+          "hour": 2.5,
+          "glucose": 96.3
+        },
+        {
+          "hour": 2.75,
+          "glucose": 98.6
+        },
+        {
+          "hour": 3,
+          "glucose": 102.3
+        },
+        {
+          "hour": 3.25,
+          "glucose": 106.8
+        },
+        {
+          "hour": 3.5,
+          "glucose": 111.1
+        },
+        {
+          "hour": 3.75,
+          "glucose": 114.4
+        },
+        {
+          "hour": 4,
+          "glucose": 116.1
+        },
+        {
+          "hour": 4.25,
+          "glucose": 116
+        },
+        {
+          "hour": 4.5,
+          "glucose": 114.3
+        },
+        {
+          "hour": 4.75,
+          "glucose": 111.7
+        },
+        {
+          "hour": 5,
+          "glucose": 109.1
+        },
+        {
+          "hour": 5.25,
+          "glucose": 107.6
+        },
+        {
+          "hour": 5.5,
+          "glucose": 108.2
+        },
+        {
+          "hour": 5.75,
+          "glucose": 111.2
+        },
+        {
+          "hour": 6,
+          "glucose": 116.9
+        },
+        {
+          "hour": 6.25,
+          "glucose": 124.9
+        },
+        {
+          "hour": 6.5,
+          "glucose": 134.3
+        },
+        {
+          "hour": 6.75,
+          "glucose": 143.9
+        },
+        {
+          "hour": 7,
+          "glucose": 152.5
+        },
+        {
+          "hour": 7.25,
+          "glucose": 159.1
+        },
+        {
+          "hour": 7.5,
+          "glucose": 162.7
+        },
+        {
+          "hour": 7.75,
+          "glucose": 163.2
+        },
+        {
+          "hour": 8,
+          "glucose": 160.9
+        },
+        {
+          "hour": 8.25,
+          "glucose": 156.4
+        },
+        {
+          "hour": 8.5,
+          "glucose": 150.8
+        },
+        {
+          "hour": 8.75,
+          "glucose": 145.2
+        },
+        {
+          "hour": 9,
+          "glucose": 140.4
+        },
+        {
+          "hour": 9.25,
+          "glucose": 137.2
+        },
+        {
+          "hour": 9.5,
+          "glucose": 135.4
+        },
+        {
+          "hour": 9.75,
+          "glucose": 134.8
+        },
+        {
+          "hour": 10,
+          "glucose": 134.9
+        },
+        {
+          "hour": 10.25,
+          "glucose": 135
+        },
+        {
+          "hour": 10.5,
+          "glucose": 134.9
+        },
+        {
+          "hour": 10.75,
+          "glucose": 134.4
+        },
+        {
+          "hour": 11,
+          "glucose": 133.9
+        },
+        {
+          "hour": 11.25,
+          "glucose": 134.1
+        },
+        {
+          "hour": 11.5,
+          "glucose": 135.7
+        },
+        {
+          "hour": 11.75,
+          "glucose": 139.1
+        },
+        {
+          "hour": 12,
+          "glucose": 144.4
+        },
+        {
+          "hour": 12.25,
+          "glucose": 151.2
+        },
+        {
+          "hour": 12.5,
+          "glucose": 158.5
+        },
+        {
+          "hour": 12.75,
+          "glucose": 165.2
+        },
+        {
+          "hour": 13,
+          "glucose": 169.8
+        },
+        {
+          "hour": 13.25,
+          "glucose": 171.3
+        },
+        {
+          "hour": 13.5,
+          "glucose": 169.2
+        },
+        {
+          "hour": 13.75,
+          "glucose": 163.4
+        },
+        {
+          "hour": 14,
+          "glucose": 154.6
+        },
+        {
+          "hour": 14.25,
+          "glucose": 143.9
+        },
+        {
+          "hour": 14.5,
+          "glucose": 132.9
+        },
+        {
+          "hour": 14.75,
+          "glucose": 122.9
+        },
+        {
+          "hour": 15,
+          "glucose": 114.9
+        },
+        {
+          "hour": 15.25,
+          "glucose": 109.9
+        },
+        {
+          "hour": 15.5,
+          "glucose": 107.8
+        },
+        {
+          "hour": 15.75,
+          "glucose": 108.3
+        },
+        {
+          "hour": 16,
+          "glucose": 110.8
+        },
+        {
+          "hour": 16.25,
+          "glucose": 114.3
+        },
+        {
+          "hour": 16.5,
+          "glucose": 117.9
+        },
+        {
+          "hour": 16.75,
+          "glucose": 121
+        },
+        {
+          "hour": 17,
+          "glucose": 123.2
+        },
+        {
+          "hour": 17.25,
+          "glucose": 124.7
+        },
+        {
+          "hour": 17.5,
+          "glucose": 125.9
+        },
+        {
+          "hour": 17.75,
+          "glucose": 127.2
+        },
+        {
+          "hour": 18,
+          "glucose": 129.2
+        },
+        {
+          "hour": 18.25,
+          "glucose": 132.1
+        },
+        {
+          "hour": 18.5,
+          "glucose": 135.8
+        },
+        {
+          "hour": 18.75,
+          "glucose": 139.8
+        },
+        {
+          "hour": 19,
+          "glucose": 143.4
+        },
+        {
+          "hour": 19.25,
+          "glucose": 145.7
+        },
+        {
+          "hour": 19.5,
+          "glucose": 145.9
+        },
+        {
+          "hour": 19.75,
+          "glucose": 143.7
+        },
+        {
+          "hour": 20,
+          "glucose": 138.8
+        },
+        {
+          "hour": 20.25,
+          "glucose": 131.8
+        },
+        {
+          "hour": 20.5,
+          "glucose": 123.3
+        },
+        {
+          "hour": 20.75,
+          "glucose": 114.3
+        },
+        {
+          "hour": 21,
+          "glucose": 106
+        },
+        {
+          "hour": 21.25,
+          "glucose": 99.2
+        },
+        {
+          "hour": 21.5,
+          "glucose": 94.7
+        },
+        {
+          "hour": 21.75,
+          "glucose": 92.8
+        },
+        {
+          "hour": 22,
+          "glucose": 93.5
+        },
+        {
+          "hour": 22.25,
+          "glucose": 96
+        },
+        {
+          "hour": 22.5,
+          "glucose": 99.5
+        },
+        {
+          "hour": 22.75,
+          "glucose": 103
+        },
+        {
+          "hour": 23,
+          "glucose": 105.6
+        },
+        {
+          "hour": 23.25,
+          "glucose": 106.6
+        },
+        {
+          "hour": 23.5,
+          "glucose": 105.8
+        },
+        {
+          "hour": 23.75,
+          "glucose": 103.4
+        }
+      ]
+    },
+    {
+      "key": "nd",
+      "points": [
+        {
+          "hour": 0,
+          "glucose": 85.9
+        },
+        {
+          "hour": 0.25,
+          "glucose": 90.9
+        },
+        {
+          "hour": 0.5,
+          "glucose": 94.7
+        },
+        {
+          "hour": 0.75,
+          "glucose": 96.2
+        },
+        {
+          "hour": 1,
+          "glucose": 95.3
+        },
+        {
+          "hour": 1.25,
+          "glucose": 92.2
+        },
+        {
+          "hour": 1.5,
+          "glucose": 87.8
+        },
+        {
+          "hour": 1.75,
+          "glucose": 83.4
+        },
+        {
+          "hour": 2,
+          "glucose": 80.3
+        },
+        {
+          "hour": 2.25,
+          "glucose": 79.4
+        },
+        {
+          "hour": 2.5,
+          "glucose": 81
+        },
+        {
+          "hour": 2.75,
+          "glucose": 84.9
+        },
+        {
+          "hour": 3,
+          "glucose": 90.1
+        },
+        {
+          "hour": 3.25,
+          "glucose": 95.3
+        },
+        {
+          "hour": 3.5,
+          "glucose": 99.3
+        },
+        {
+          "hour": 3.75,
+          "glucose": 101.1
+        },
+        {
+          "hour": 4,
+          "glucose": 100.4
+        },
+        {
+          "hour": 4.25,
+          "glucose": 97.5
+        },
+        {
+          "hour": 4.5,
+          "glucose": 93.4
+        },
+        {
+          "hour": 4.75,
+          "glucose": 89.3
+        },
+        {
+          "hour": 5,
+          "glucose": 86.6
+        },
+        {
+          "hour": 5.25,
+          "glucose": 86.4
+        },
+        {
+          "hour": 5.5,
+          "glucose": 89
+        },
+        {
+          "hour": 5.75,
+          "glucose": 94.3
+        },
+        {
+          "hour": 6,
+          "glucose": 101.4
+        },
+        {
+          "hour": 6.25,
+          "glucose": 109.2
+        },
+        {
+          "hour": 6.5,
+          "glucose": 116.3
+        },
+        {
+          "hour": 6.75,
+          "glucose": 121.6
+        },
+        {
+          "hour": 7,
+          "glucose": 124.5
+        },
+        {
+          "hour": 7.25,
+          "glucose": 124.9
+        },
+        {
+          "hour": 7.5,
+          "glucose": 123.3
+        },
+        {
+          "hour": 7.75,
+          "glucose": 120.7
+        },
+        {
+          "hour": 8,
+          "glucose": 118
+        },
+        {
+          "hour": 8.25,
+          "glucose": 116.1
+        },
+        {
+          "hour": 8.5,
+          "glucose": 115.6
+        },
+        {
+          "hour": 8.75,
+          "glucose": 116.2
+        },
+        {
+          "hour": 9,
+          "glucose": 117.7
+        },
+        {
+          "hour": 9.25,
+          "glucose": 119
+        },
+        {
+          "hour": 9.5,
+          "glucose": 119.3
+        },
+        {
+          "hour": 9.75,
+          "glucose": 117.9
+        },
+        {
+          "hour": 10,
+          "glucose": 114.7
+        },
+        {
+          "hour": 10.25,
+          "glucose": 110.2
+        },
+        {
+          "hour": 10.5,
+          "glucose": 105.2
+        },
+        {
+          "hour": 10.75,
+          "glucose": 101.1
+        },
+        {
+          "hour": 11,
+          "glucose": 99.2
+        },
+        {
+          "hour": 11.25,
+          "glucose": 100.3
+        },
+        {
+          "hour": 11.5,
+          "glucose": 104.8
+        },
+        {
+          "hour": 11.75,
+          "glucose": 112.1
+        },
+        {
+          "hour": 12,
+          "glucose": 120.9
+        },
+        {
+          "hour": 12.25,
+          "glucose": 129.6
+        },
+        {
+          "hour": 12.5,
+          "glucose": 136.5
+        },
+        {
+          "hour": 12.75,
+          "glucose": 140
+        },
+        {
+          "hour": 13,
+          "glucose": 139.4
+        },
+        {
+          "hour": 13.25,
+          "glucose": 135
+        },
+        {
+          "hour": 13.5,
+          "glucose": 127.8
+        },
+        {
+          "hour": 13.75,
+          "glucose": 119.1
+        },
+        {
+          "hour": 14,
+          "glucose": 110.9
+        },
+        {
+          "hour": 14.25,
+          "glucose": 104.5
+        },
+        {
+          "hour": 14.5,
+          "glucose": 100.7
+        },
+        {
+          "hour": 14.75,
+          "glucose": 99.7
+        },
+        {
+          "hour": 15,
+          "glucose": 100.8
+        },
+        {
+          "hour": 15.25,
+          "glucose": 102.7
+        },
+        {
+          "hour": 15.5,
+          "glucose": 104.3
+        },
+        {
+          "hour": 15.75,
+          "glucose": 104.4
+        },
+        {
+          "hour": 16,
+          "glucose": 102.7
+        },
+        {
+          "hour": 16.25,
+          "glucose": 99.2
+        },
+        {
+          "hour": 16.5,
+          "glucose": 94.9
+        },
+        {
+          "hour": 16.75,
+          "glucose": 91.1
+        },
+        {
+          "hour": 17,
+          "glucose": 89
+        },
+        {
+          "hour": 17.25,
+          "glucose": 89.7
+        },
+        {
+          "hour": 17.5,
+          "glucose": 93.6
+        },
+        {
+          "hour": 17.75,
+          "glucose": 100.2
+        },
+        {
+          "hour": 18,
+          "glucose": 108.3
+        },
+        {
+          "hour": 18.25,
+          "glucose": 116.4
+        },
+        {
+          "hour": 18.5,
+          "glucose": 122.8
+        },
+        {
+          "hour": 18.75,
+          "glucose": 126.2
+        },
+        {
+          "hour": 19,
+          "glucose": 125.6
+        },
+        {
+          "hour": 19.25,
+          "glucose": 121.5
+        },
+        {
+          "hour": 19.5,
+          "glucose": 114.6
+        },
+        {
+          "hour": 19.75,
+          "glucose": 106.4
+        },
+        {
+          "hour": 20,
+          "glucose": 98.7
+        },
+        {
+          "hour": 20.25,
+          "glucose": 92.9
+        },
+        {
+          "hour": 20.5,
+          "glucose": 89.7
+        },
+        {
+          "hour": 20.75,
+          "glucose": 89.3
+        },
+        {
+          "hour": 21,
+          "glucose": 91
+        },
+        {
+          "hour": 21.25,
+          "glucose": 93.5
+        },
+        {
+          "hour": 21.5,
+          "glucose": 95.6
+        },
+        {
+          "hour": 21.75,
+          "glucose": 96.2
+        },
+        {
+          "hour": 22,
+          "glucose": 94.6
+        },
+        {
+          "hour": 22.25,
+          "glucose": 91.1
+        },
+        {
+          "hour": 22.5,
+          "glucose": 86.3
+        },
+        {
+          "hour": 22.75,
+          "glucose": 81.4
+        },
+        {
+          "hour": 23,
+          "glucose": 77.6
+        },
+        {
+          "hour": 23.25,
+          "glucose": 76
+        },
+        {
+          "hour": 23.5,
+          "glucose": 76.9
+        },
+        {
+          "hour": 23.75,
+          "glucose": 80.1
+        }
+      ]
+    }
+  ]
+}

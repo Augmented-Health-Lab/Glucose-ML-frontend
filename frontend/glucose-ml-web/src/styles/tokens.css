@@ -1,0 +1,69 @@
+:root {
+  --glm-color-brand: #3ba7a1;
+  --glm-color-brand-dark: #2f8c88;
+  --glm-color-black: #1e1f22;
+  --glm-color-text: #59636e;
+  --glm-color-muted: #848e99;
+  --glm-color-grey-border: #e1e8e7;
+  --glm-color-card-border: #d8dee2;
+  --glm-color-medium-grey: #bac5c4;
+  --glm-color-page: #fafafa;
+  --glm-color-teal-page: #f5f8f8;
+  --glm-color-white: #ffffff;
+  --glm-color-section: #e6eded;
+  --glm-color-chip-bg: #ddf0ef;
+  --glm-color-filter-bg: #f5f8f8;
+  --glm-pop-t1d: #f2bbbb;
+  --glm-pop-t2d: #f2d3bb;
+  --glm-pop-pred: #e6f0b5;
+  --glm-pop-nd: #c0eecb;
+  --glm-range-very-low: #f85ea2;
+  --glm-range-low: #f593c4;
+  --glm-range-target: #91efde;
+  --glm-range-high: #c7a6f4;
+  --glm-range-very-high: #ab75f6;
+  --glm-font: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --glm-nav-height: 74px;
+  --glm-frame-width: 1440px;
+  --glm-content-width: 1298px;
+  --glm-home-content-width: 1313px;
+  --glm-page-gutter: 63px;
+  --glm-home-left: 63px;
+  --glm-page-left: 71px;
+  --glm-radius-card: 10px;
+  --glm-radius-panel: 12px;
+  --glm-radius-table: 16px;
+  --glm-radius-chip: 8px;
+  --glm-shadow-card: 0 1px 3.5px rgba(58, 58, 59, 0.15);
+  --glm-shadow-button: 0 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--glm-font);
+  background: var(--glm-color-page);
+  color: var(--glm-color-black);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}

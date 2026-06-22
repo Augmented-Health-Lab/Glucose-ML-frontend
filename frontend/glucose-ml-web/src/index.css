@@ -1,53 +1,49 @@
+@import "./styles/tokens.css";
+@import "./styles/primitives.css";
+
 :root {
-  /* colors */
-  --primary-brand: #3ba7a1;
-  --primary-brand-dark: #2f8c88;
-
-  --black: #1e1f22;
-  --secondary-grey: #59636e;
-  --secondary-light-grey: #e1e8e7;
-  --secondary-medium-grey: #bac5c4;
-
-  --teal-grey-background: #f5f8f8;
-  --white-background: #ffffff;
+  --primary-brand: var(--glm-color-brand);
+  --primary-brand-dark: var(--glm-color-brand-dark);
+  --black: var(--glm-color-black);
+  --primary-black: var(--glm-color-black);
+  --secondary-grey: var(--glm-color-text);
+  --secondary-light-grey: var(--glm-color-grey-border);
+  --secondary-medium-grey: var(--glm-color-medium-grey);
+  --teal-grey-background: var(--glm-color-teal-page);
+  --white-background: var(--glm-color-white);
 
   --light-blue: #eaf0f7;
-  --light-orange: #edd4c1;
-  --light-red: #edc1c1;
-  --light-yellow: #e3ebbc;
-  --light-green: #c5eace;
+  --light-orange: var(--glm-pop-t2d);
+  --light-red: var(--glm-pop-t1d);
+  --light-yellow: var(--glm-pop-pred);
+  --light-green: var(--glm-pop-nd);
 
-  --dark-purple: #b489f0;
-  --light-purple: #cab0ee;
-  --teal: #91efde;
-  --light-pink: #efa1c8;
-  --dark-pink: #f276ad;
+  --dark-purple: var(--glm-range-very-high);
+  --light-purple: var(--glm-range-high);
+  --teal: var(--glm-range-target);
+  --light-pink: var(--glm-range-low);
+  --dark-pink: var(--glm-range-very-low);
 
-  /* font */
-  --bs-body-font-family: "Inter", sans-serif;
+  --dist-very-low: var(--glm-range-very-low);
+  --dist-low: var(--glm-range-low);
+  --dist-target: var(--glm-range-target);
+  --dist-high: var(--glm-range-high);
+  --dist-very-high: var(--glm-range-very-high);
+
+  --bs-body-font-family: var(--glm-font);
 
   --h1-size: 32px;
   --h1-weight: 700;
-
   --h2-size: 22px;
   --h2-weight: 600;
-
   --h3-size: 16px;
   --h3-weight: 500;
-
   --subtitle-size: 16px;
   --subtitle-weight: 500;
-
   --metadata-size: 14px;
   --metadata-weight: 500;
-
   --body-size: 14px;
   --body-weight: 400;
-}
-
-body {
-  background-color: var(--teal-grey-background);
-  color: var(--black);
 }
 
 .h1 {

@@ -1,0 +1,90 @@
+.page-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 161px;
+  gap: 20px;
+  padding: 20px 97px;
+  border: 1px solid var(--glm-color-grey-border);
+  border-radius: 20px;
+  background: var(--glm-color-white);
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.page-title__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(1131px, 100%);
+  gap: 4px;
+}
+
+.page-title__copy h1 {
+  margin: 0;
+  color: var(--glm-color-black);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: normal;
+  max-width: 100%;
+  white-space: normal;
+}
+
+.page-title__copy p {
+  width: 100%;
+  margin: 0;
+  color: var(--glm-color-text);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: normal;
+  white-space: normal;
+}
+
+.page-title__metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: min(800px, 100%);
+  height: 44px;
+}
+
+.page-title__metric {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.page-title__metric:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 44px;
+  background: var(--glm-color-grey-border);
+}
+
+.page-title__metric strong {
+  color: var(--glm-color-brand-dark);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.page-title__metric span {
+  color: var(--glm-color-text);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: normal;
+}
+
+@media (max-width: 1180px) {
+  .page-title {
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+
+}

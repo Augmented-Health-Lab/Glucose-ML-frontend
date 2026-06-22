@@ -1,0 +1,109 @@
+.detail-header {
+  width: min(1288.942px, 100%);
+  margin: 0 auto;
+}
+
+.detail-header__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  height: 19px;
+  margin: 0 0 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #757f8a;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.detail-header__back img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  opacity: 0.5;
+  transform: rotate(90deg);
+}
+
+.detail-header__main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.detail-header__metadata {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: #3c3d41;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.detail-header__metadata span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.detail-header__metadata img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.detail-header__metadata span:nth-child(2) img {
+  opacity: 0.6;
+}
+
+.detail-header__access-icon--controlled {
+  transform: rotate(180deg);
+}
+
+.detail-header__description {
+  width: 100%;
+  margin: 0;
+  color: var(--glm-color-muted);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
+}
+
+.detail-header__source-button {
+  background: #f5f8f8;
+}
+
+.detail-header__source-button img {
+  width: 16px;
+  height: 16px;
+}
+
+.detail-header__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.detail-header__request-icon {
+  background: currentColor;
+  mask: url("/figma-assets/icon-key-controlled.png") center / contain no-repeat;
+  -webkit-mask: url("/figma-assets/icon-key-controlled.png") center / contain no-repeat;
+  transform: rotate(180deg);
+}
+
+.detail-header__helper-link {
+  color: #59636e;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: normal;
+  text-decoration: underline;
+  text-underline-position: from-font;
+  white-space: nowrap;
+}

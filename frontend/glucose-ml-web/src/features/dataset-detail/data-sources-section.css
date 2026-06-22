@@ -1,0 +1,37 @@
+.sources {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.source-row {
+  display: grid;
+  grid-template-columns: minmax(112px, 1fr) minmax(0, 1.2fr);
+  align-items: start;
+  column-gap: 18px;
+  width: 100%;
+}
+
+.source-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.source-name {
+  color: var(--glm-color-muted);
+  font-size: 14.471px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.source-detail {
+  min-width: 0;
+  color: var(--glm-color-text);
+  font-size: 16.539px;
+  font-weight: 600;
+  line-height: normal;
+  text-align: right;
+  overflow-wrap: anywhere;
+}

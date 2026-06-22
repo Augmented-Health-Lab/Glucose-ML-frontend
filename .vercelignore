@@ -1,0 +1,13 @@
+.git
+.github
+.idea
+.vscode
+.vercel
+**/.DS_Store
+**/*.log
+**/node_modules
+**/.vite
+**/dist
+**/dist-ssr
+**/test-results
+**/playwright-report

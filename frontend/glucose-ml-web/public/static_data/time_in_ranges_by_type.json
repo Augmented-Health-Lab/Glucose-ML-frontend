@@ -1,8 +1,8 @@
 {
   "T1DEXI": {
     "T1D": {
-      "very_low": 0.62,
-      "low": 2.46,
+      "very_low": 0.69,
+      "low": 2.39,
       "target": 74.65,
       "high": 16.76,
       "very_high": 5.51
@@ -10,22 +10,22 @@
   },
   "AI-READI": {
     "PreD": {
-      "very_low": 0.11,
-      "low": 0.46,
+      "very_low": 0.12,
+      "low": 0.44,
       "target": 95.62,
       "high": 3.6,
       "very_high": 0.22
     },
     "ND": {
-      "very_low": 0.16,
-      "low": 0.67,
+      "very_low": 0.18,
+      "low": 0.65,
       "target": 96.68,
       "high": 2.22,
       "very_high": 0.28
     },
     "T2D": {
-      "very_low": 0.1,
-      "low": 0.49,
+      "very_low": 0.11,
+      "low": 0.48,
       "target": 75.72,
       "high": 16.69,
       "very_high": 6.99
@@ -33,8 +33,8 @@
   },
   "ShanghaiT2DM": {
     "T2D": {
-      "very_low": 0.77,
-      "low": 1.57,
+      "very_low": 0.82,
+      "low": 1.53,
       "target": 78.76,
       "high": 15.06,
       "very_high": 3.84
@@ -42,31 +42,31 @@
   },
   "Park_2025": {
     "PreD": {
-      "very_low": 0.15,
-      "low": 1.82,
+      "very_low": 0.17,
+      "low": 2.08,
       "target": 91.92,
-      "high": 5.01,
-      "very_high": 1.1
+      "high": 5.23,
+      "very_high": 0.61
     },
     "ND": {
-      "very_low": 0.22,
-      "low": 3.69,
+      "very_low": 0.25,
+      "low": 4.42,
       "target": 93.73,
-      "high": 1.54,
-      "very_high": 0.82
+      "high": 1.6,
+      "very_high": 0.0
     },
     "T2D": {
       "very_low": 0.0,
-      "low": 1.45,
+      "low": 1.84,
       "target": 76.05,
-      "high": 21.45,
-      "very_high": 1.05
+      "high": 21.58,
+      "very_high": 0.53
     }
   },
   "PhysioCGM": {
     "T1D": {
-      "very_low": 0.49,
-      "low": 3.04,
+      "very_low": 0.57,
+      "low": 2.96,
       "target": 83.09,
       "high": 11.11,
       "very_high": 2.27
@@ -74,8 +74,8 @@
   },
   "T1DEXIP": {
     "T1D": {
-      "very_low": 0.47,
-      "low": 1.94,
+      "very_low": 0.53,
+      "low": 1.88,
       "target": 67.29,
       "high": 19.94,
       "very_high": 10.36
@@ -83,8 +83,8 @@
   },
   "T1DiabetesGranada": {
     "T1D": {
-      "very_low": 0.99,
-      "low": 3.76,
+      "very_low": 1.2,
+      "low": 3.55,
       "target": 59.58,
       "high": 23.78,
       "very_high": 11.89
@@ -92,11 +92,11 @@
   },
   "HUPA-UCM": {
     "T1D": {
-      "very_low": 1.5,
-      "low": 4.89,
+      "very_low": 1.75,
+      "low": 4.83,
       "target": 71.72,
-      "high": 16.34,
-      "very_high": 5.56
+      "high": 16.56,
+      "very_high": 5.13
     }
   },
   "BIGIDEAs": {
@@ -108,8 +108,8 @@
       "very_high": 0.0
     },
     "PreD": {
-      "very_low": 0.04,
-      "low": 0.24,
+      "very_low": 0.05,
+      "low": 0.23,
       "target": 96.82,
       "high": 2.86,
       "very_high": 0.04
@@ -117,8 +117,8 @@
   },
   "ShanghaiT1DM": {
     "T1D": {
-      "very_low": 2.82,
-      "low": 4.82,
+      "very_low": 3.01,
+      "low": 4.64,
       "target": 53.62,
       "high": 25.25,
       "very_high": 13.48
@@ -126,8 +126,8 @@
   },
   "T1D-UOM": {
     "T1D": {
-      "very_low": 0.3,
-      "low": 2.22,
+      "very_low": 0.4,
+      "low": 2.12,
       "target": 75.25,
       "high": 16.08,
       "very_high": 6.15
@@ -135,22 +135,22 @@
   },
   "Hall_2018": {
     "T2D": {
-      "very_low": 0.4,
-      "low": 1.49,
+      "very_low": 0.44,
+      "low": 1.45,
       "target": 97.38,
       "high": 0.74,
       "very_high": 0.0
     },
     "PreD": {
-      "very_low": 0.41,
-      "low": 5.88,
+      "very_low": 0.47,
+      "low": 5.82,
       "target": 92.94,
       "high": 0.77,
       "very_high": 0.0
     },
     "ND": {
-      "very_low": 0.24,
-      "low": 3.8,
+      "very_low": 0.28,
+      "low": 3.76,
       "target": 95.17,
       "high": 0.75,
       "very_high": 0.04
@@ -158,15 +158,15 @@
   },
   "UCHTT1DM": {
     "ND": {
-      "very_low": 0.34,
-      "low": 5.5,
+      "very_low": 0.38,
+      "low": 5.46,
       "target": 94.16,
       "high": 0.0,
       "very_high": 0.0
     },
     "T1D": {
-      "very_low": 2.06,
-      "low": 3.96,
+      "very_low": 2.31,
+      "low": 3.71,
       "target": 71.97,
       "high": 17.26,
       "very_high": 4.75
@@ -174,8 +174,8 @@
   },
   "Bris-T1D_Open": {
     "T1D": {
-      "very_low": 0.33,
-      "low": 1.51,
+      "very_low": 0.38,
+      "low": 1.46,
       "target": 70.7,
       "high": 20.1,
       "very_high": 7.37
@@ -183,8 +183,8 @@
   },
   "D1NAMO": {
     "T1D": {
-      "very_low": 3.86,
-      "low": 3.66,
+      "very_low": 4.03,
+      "low": 3.49,
       "target": 56.89,
       "high": 21.98,
       "very_high": 13.61
@@ -192,15 +192,15 @@
   },
   "Colas_2019": {
     "ND": {
-      "very_low": 0.58,
-      "low": 3.36,
+      "very_low": 0.66,
+      "low": 3.28,
       "target": 95.67,
       "high": 0.37,
       "very_high": 0.01
     },
     "T2D": {
-      "very_low": 0.14,
-      "low": 1.03,
+      "very_low": 0.23,
+      "low": 0.95,
       "target": 96.11,
       "high": 2.71,
       "very_high": 0.0
@@ -208,63 +208,63 @@
   },
   "CGMacros_Libre": {
     "ND": {
-      "very_low": 9.18,
-      "low": 13.34,
+      "very_low": 9.61,
+      "low": 14.08,
       "target": 75.63,
-      "high": 0.52,
-      "very_high": 1.33
+      "high": 0.53,
+      "very_high": 0.14
     },
     "T2D": {
-      "very_low": 0.43,
-      "low": 1.03,
+      "very_low": 0.46,
+      "low": 1.12,
       "target": 82.39,
-      "high": 12.48,
-      "very_high": 3.66
+      "high": 12.74,
+      "very_high": 3.28
     },
     "PreD": {
-      "very_low": 2.02,
-      "low": 3.06,
+      "very_low": 2.08,
+      "low": 3.34,
       "target": 91.85,
-      "high": 2.48,
-      "very_high": 0.6
+      "high": 2.57,
+      "very_high": 0.15
     }
   },
   "CGMacros_Dexcom": {
     "ND": {
-      "very_low": 0.1,
-      "low": 0.34,
+      "very_low": 0.11,
+      "low": 0.38,
       "target": 96.47,
-      "high": 2.71,
-      "very_high": 0.38
+      "high": 2.8,
+      "very_high": 0.24
     },
     "T2D": {
       "very_low": 0.02,
-      "low": 0.11,
+      "low": 0.13,
       "target": 68.06,
-      "high": 24.48,
-      "very_high": 7.33
+      "high": 24.88,
+      "very_high": 6.91
     },
     "PreD": {
       "very_low": 0.22,
-      "low": 0.23,
+      "low": 0.24,
       "target": 90.24,
-      "high": 8.33,
-      "very_high": 0.99
+      "high": 8.5,
+      "very_high": 0.8
     }
   },
   "DiaTrend": {
     "T1D": {
-      "very_low": 0.46,
-      "low": 1.37,
+      "very_low": 0.5,
+      "low": 1.34,
       "target": 50.89,
-      "high": 28.56,
-      "very_high": 18.72
+      "high": 28.59,
+      "very_high": 18.68
     }
   },
   "OhioT1DM": {
     "T1D": {
-      "very_low": 0.69,
-      "low": 2.59,
+      "very_low": 0.78,
+      "low": 2.51,
       "target": 63.42,
       "high": 25.01,
       "very_high": 8.29
@@ -272,11 +272,11 @@
   },
   "AZT1D": {
     "T1D": {
-      "very_low": 0.29,
-      "low": 1.26,
+      "very_low": 0.32,
+      "low": 1.23,
       "target": 78.27,
-      "high": 16.5,
-      "very_high": 3.68
+      "high": 16.51,
+      "very_high": 3.67
     }
   }
 }

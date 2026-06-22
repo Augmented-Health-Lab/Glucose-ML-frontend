@@ -1,0 +1,170 @@
+{
+  "Hall 2018": {
+    "very_low": 336,
+    "low": 4101,
+    "target": 100154,
+    "high": 793,
+    "very_high": 33,
+    "total": 105417
+  },
+  "D1NAMO": {
+    "very_low": 331,
+    "low": 287,
+    "target": 4677,
+    "high": 1807,
+    "very_high": 1119,
+    "total": 8221
+  },
+  "Colas 2019": {
+    "very_low": 713,
+    "low": 3522,
+    "target": 109349,
+    "high": 654,
+    "very_high": 15,
+    "total": 114253
+  },
+  "OhioT1DM": {
+    "very_low": 1294,
+    "low": 4173,
+    "target": 105611,
+    "high": 41643,
+    "very_high": 13812,
+    "total": 166533
+  },
+  "T1DEXI": {
+    "very_low": 26178,
+    "low": 90401,
+    "target": 2825808,
+    "high": 634389,
+    "very_high": 208477,
+    "total": 3785253
+  },
+  "T1DEXIP": {
+    "very_low": 3641,
+    "low": 12875,
+    "target": 461055,
+    "high": 136612,
+    "very_high": 70953,
+    "total": 685136
+  },
+  "BIGIDEAs": {
+    "very_low": 28,
+    "low": 183,
+    "target": 36031,
+    "high": 649,
+    "very_high": 7,
+    "total": 36898
+  },
+  "DiaTrend": {
+    "very_low": 38477,
+    "low": 102719,
+    "target": 3908494,
+    "high": 2195996,
+    "very_high": 1435054,
+    "total": 7680740
+  },
+  "ShanghaiT1DM": {
+    "very_low": 472,
+    "low": 728,
+    "target": 8416,
+    "high": 3963,
+    "very_high": 2116,
+    "total": 15695
+  },
+  "ShanghaiT2DM": {
+    "very_low": 919,
+    "low": 1716,
+    "target": 88573,
+    "high": 16934,
+    "very_high": 4320,
+    "total": 112462
+  },
+  "T1DiabetesGranada": {
+    "very_low": 271417,
+    "low": 805003,
+    "target": 13506999,
+    "high": 5392360,
+    "very_high": 2695929,
+    "total": 22671708
+  },
+  "AI-READI": {
+    "very_low": 8388,
+    "low": 32709,
+    "target": 5382895,
+    "high": 537369,
+    "very_high": 193160,
+    "total": 6154521
+  },
+  "UCHTT1DM": {
+    "very_low": 331,
+    "low": 1394,
+    "target": 24943,
+    "high": 1965,
+    "very_high": 541,
+    "total": 29174
+  },
+  "HUPA-UCM": {
+    "very_low": 5422,
+    "low": 14955,
+    "target": 221892,
+    "high": 51245,
+    "very_high": 15878,
+    "total": 309392
+  },
+  "CGMacros Dexcom": {
+    "very_low": 757,
+    "low": 1583,
+    "target": 537257,
+    "high": 74168,
+    "very_high": 16060,
+    "total": 629825
+  },
+  "CGMacros Libre": {
+    "very_low": 27926,
+    "low": 42603,
+    "target": 573719,
+    "high": 35246,
+    "very_high": 7866,
+    "total": 687360
+  },
+  "T1D-UOM": {
+    "very_low": 1426,
+    "low": 7564,
+    "target": 268004,
+    "high": 57263,
+    "very_high": 21889,
+    "total": 356146
+  },
+  "Bris-T1D Open": {
+    "very_low": 3186,
+    "low": 12377,
+    "target": 599947,
+    "high": 170536,
+    "very_high": 62528,
+    "total": 848574
+  },
+  "AZT1D": {
+    "very_low": 979,
+    "low": 3764,
+    "target": 240070,
+    "high": 50651,
+    "very_high": 11248,
+    "total": 306712
+  },
+  "Park 2025": {
+    "very_low": 58,
+    "low": 788,
+    "target": 21697,
+    "high": 908,
+    "very_high": 69,
+    "total": 23520
+  },
+  "PhysioCGM": {
+    "very_low": 860,
+    "low": 4508,
+    "target": 126393,
+    "high": 16898,
+    "very_high": 3457,
+    "total": 152116
+  }
+}

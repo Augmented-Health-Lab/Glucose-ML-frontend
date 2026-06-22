@@ -1,0 +1,191 @@
+.glm-page {
+  min-height: 100vh;
+  background: var(--glm-color-page);
+}
+
+.glm-content {
+  width: min(var(--glm-content-width), calc(100vw - (2 * var(--glm-page-gutter))));
+  margin: 0 auto;
+}
+
+.glm-title {
+  margin: 0;
+  color: var(--glm-color-black);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0;
+}
+
+.glm-subtitle {
+  margin: 0;
+  color: var(--glm-color-muted);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0;
+}
+
+.glm-body {
+  margin: 0;
+  color: var(--glm-color-text);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0;
+}
+
+.glm-card {
+  background: var(--glm-color-white);
+  border: 1.081px solid var(--glm-color-card-border);
+  border-radius: var(--glm-radius-card);
+  box-shadow: var(--glm-shadow-card);
+}
+
+.glm-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 49px;
+  padding: 16px 20px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: normal;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: var(--glm-shadow-button);
+}
+
+.glm-button-primary {
+  background: var(--glm-color-brand-dark);
+  border-color: var(--glm-color-brand-dark);
+  color: var(--glm-color-white);
+}
+
+.glm-button-primary:not(:disabled):hover {
+  background: var(--glm-color-grey-border);
+  border-color: var(--glm-color-brand-dark);
+  color: var(--glm-color-brand-dark);
+}
+
+.glm-button-primary:disabled {
+  background: var(--glm-color-medium-grey);
+  border-color: var(--glm-color-grey-border);
+  color: var(--glm-color-white);
+  cursor: default;
+  transition: none;
+}
+
+.glm-button__icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+}
+
+.glm-button__download-icon {
+  background: currentColor;
+  mask: url("/figma-assets/icon-download.svg") center / contain no-repeat;
+  -webkit-mask: url("/figma-assets/icon-download.svg") center / contain no-repeat;
+}
+
+.glm-button-secondary {
+  background: var(--glm-color-white);
+  border-color: var(--glm-color-brand-dark);
+  color: var(--glm-color-brand-dark);
+}
+
+.glm-button-secondary:hover {
+  background: var(--glm-color-teal-page);
+  border-color: var(--glm-color-brand);
+  color: var(--glm-color-brand);
+}
+
+.glm-button-secondary:active {
+  background: var(--glm-color-medium-grey);
+  border-color: var(--glm-color-brand-dark);
+  color: var(--glm-color-brand);
+}
+
+.glm-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 38px;
+  padding: 12px 16px;
+  border: 1px solid var(--glm-color-brand-dark);
+  border-radius: var(--glm-radius-chip);
+  background: var(--glm-color-chip-bg);
+  color: var(--glm-color-black);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.glm-chip-dashed {
+  background: var(--glm-color-filter-bg);
+  border-color: var(--glm-color-brand-dark);
+  border-style: dashed;
+  color: var(--glm-color-brand-dark);
+}
+
+.glm-pop-badge,
+.glm-pop-badge-small {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: #000000;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.glm-pop-badge {
+  width: 34px;
+  height: 34px;
+  border: 0.794px solid rgba(0, 0, 0, 0.06);
+  font-size: 12px;
+}
+
+.glm-pop-badge-small {
+  width: 27px;
+  height: 27px;
+  border: 0.794px solid rgba(0, 0, 0, 0.06);
+  font-size: 9.53px;
+}
+
+.glm-pop-t1d {
+  background: var(--glm-pop-t1d);
+}
+
+.glm-pop-t2d {
+  background: var(--glm-pop-t2d);
+}
+
+.glm-pop-pred {
+  background: var(--glm-pop-pred);
+}
+
+.glm-pop-nd {
+  background: var(--glm-pop-nd);
+}
+
+.glm-section-title {
+  margin: 0;
+  color: #27292d;
+  font-size: 21.629px;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.glm-empty {
+  color: var(--glm-color-muted);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+}

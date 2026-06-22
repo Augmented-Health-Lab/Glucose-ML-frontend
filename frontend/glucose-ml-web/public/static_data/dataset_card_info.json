@@ -1,23 +1,259 @@
 [
-  {"title":"Hall 2018","participants":57,"days":"Average 8","access":"Open","metadata":"57 participants • 8 days • Open access","description":"The Hall_2018 dataset was collected in the U.S.","types":["T2D","PreD","ND"],"sources":["G","M","Q","C"]},
-  {"title":"D1NAMO","participants":9,"days":"Average 4","access":"Open","metadata":"9 participants • 4 days • Open access","description":"The D1NAMO dataset was collected in Switzerland and released in 2018.","types":["T1D"],"sources":["G","I","W","M","C"]},
-  {"title":"Colas 2019","participants":208,"days":"Average 2","access":"Open","metadata":"208 participants • 2 days • Open access","description":"The Colas_2019 dataset was collected in Spain and released in 2019.","types":["T2D","ND"],"sources":["G","C"]},
-  {"title":"OhioT1DM","participants":12,"days":"Average 54","access":"Controlled","metadata":"12 participants • 54 days • Controlled access","description":"The OhioT1DM dataset was collected in the U.S. and first released in 2018, followed by a second release in 2020. ","types":["T1D"],"sources":["G","I","W","M","Q"]},
-  {"title":"T1DEXI","participants":497,"days":"Average 27","access":"Controlled","metadata":"497 participants • 27 days • Controlled access","description":"The T1DEXI dataset was collected in the U.S. and released in 2022.","types":["T1D"],"sources":["G","I","W","M","Q","C"],"populationGroups":[{"type":"T1D","count":247},{"type":"T2D","count":120},{"type":"PreD","count":55},{"type":"ND","count":75}]},
-  {"title":"T1DEXIP","participants":247,"days":"Average 10","access":"Controlled","metadata":"247 participants • 10 days • Controlled access","description":"The T1DEXIP dataset was collected in the U.S. and released in 2022.","types":["T1D"],"sources":["G","I","W","M","Q","C"]},
-  {"title":"BIGIDEAs","participants":16,"days":"Average 9","access":"Open","metadata":"16 participants • 9 days • Open access","description":"The BIG IDEAs dataset was collected in the U.S. and released in 2023.","types":["PreD","ND"],"sources":["G","W","Q","C"]},
-  {"title":"DiaTrend","participants":54,"days":"Average 512","access":"Controlled","metadata":"54 participants • 512 days • Controlled access","description":"The DiaTrend dataset was collected in the U.S. and released in 2023.","types":["T1D"],"sources":["G","I","Q","C"]},
-  {"title":"ShanghaiT1DM","participants":12,"days":"Average 15","access":"Open","metadata":"12 participants • 15 days • Open access","description":"The ShanghaiT1DM dataset was collected in China and released in 2023.","types":["T1D"],"sources":["G","I","M","Q","C"]},
-  {"title":"ShanghaiT2DM","participants":100,"days":"Average 13","access":"Open","metadata":"100 participants • 13 days • Open access","description":"The ShanghaiT2DM dataset as collected in China and released in 2024.","types":["T2D"],"sources":["G","I","M","Q","C"]},
-  {"title":"T1DiabetesGranada","participants":736,"days":"Average 350","access":"Controlled","metadata":"736 participants • 350 days • Controlled access","description":"The T1DiabetesGranada was collected in Spain and released in 2024.","types":["T1D"],"sources":["G","Q","C"]},
-  {"title":"AI-READI","participants":"2,280","days":"Average 11","access":"Controlled","metadata":"2,280 participants • 11 days • Controlled access","description":"The AI-READI v3.0.0 dataset was collected in the U.S and released in 2025.","types":["T2D","PreD","ND"],"sources":["G","W","Q","C"]},
-  {"title":"UCHTT1DM","participants":20,"days":"Average 6","access":"Open","metadata":"20 participants • 6 days • Open access","description":"The UCHTT1DM was collected in Chile and released in 2024.","types":["T1D","ND"],"sources":["G","I","W","M"]},
-  {"title":"HUPA-UCM","participants":25,"days":"Average 44","access":"Open","metadata":"25 participants • 44 days • Open access","description":"The HUPA-UCM was collected in Spain and released in 2024.","types":["T1D"],"sources":["G","I","W","M","C"]},
-  {"title":"CGMacros Dexcom","participants":45,"days":"Average 11","access":"Open","metadata":"45 participants • 11 days • Open access","description":"The CGMacros_Dexcom was collected in the U.S. and released in 2025.","types":["T2D","PreD","ND"],"sources":["G","W","M","Q","C"]},
-  {"title":"CGMacros Libre","participants":45,"days":"Average 12","access":"Open","metadata":"45 participants • 12 days • Open access","description":"The CGMacros_Libre was collected in the U.S. and released in 2025.","types":["T2D","PreD","ND"],"sources":["G","W","M","Q","C"]},
-  {"title":"T1D-UOM","participants":17,"days":"Average 96","access":"Open","metadata":"17 participants • 96 days • Open access","description":"The T1D-UOM was collected in the U.K. and released in 2025.","types":["T1D"],"sources":["G","I","W","M","Q","C"]},
-  {"title":"Bris-T1D Open","participants":20,"days":"Average 183","access":"Open","metadata":"20 participants • 183 days • Open access","description":"The Bris-T1D dataset was collected in the U.K.","types":["T1D"],"sources":["G","I","W","Q"]},
-  {"title":"AZT1D","participants":25,"days":"Average 42","access":"Open","metadata":"25 participants • 42 days • Open access","description":"The AZT1D dataset was collected in the U.S. and released in 2025.","types":["T1D"],"sources":["G","I","Q","C"]},
-  {"title":"Park 2025","participants":38,"days":"TBD","access":"Open","metadata":"38 participants • TBD days • Open access","description":"The Park_2025 dataset was collected in the U.S. and released in 2025","types":["T2D","PreD","ND"],"sources":["G","I","Q","C"]},
-  {"title":"PhysioCGM","participants":10,"days":"Average 80","access":"Open","metadata":"10 participants • 80 days • Open access","description":"The PhysioCGM dataset was collected in the U.S. and released in 2025. ","types":["T1D"],"sources":["G","Q","C"]}
+  {
+    "title": "T1DEXI",
+    "metadata": "497 participants • TBD days • TBD access",
+    "description": "T1DEXI is a controlled-access CGM dataset released in 2022 and collected in the US. This dataset was collected from 497 participants with type 1 diabetes. The dataset was originally developed to support a real-world study of the acute glycemic effects of structured exercise in adults with type 1 diabetes. T1DEXI contains CGM data, insulin-related data, self-reported food intake logs, wearable activity tracker data such as step count, heart rate, sleep, and more from a Verily Study Watch, and data on structured exercise sessions including exercise type, duration, and intensity.",
+    "types": [
+      "T1D"
+    ],
+    "sources": [
+      "G",
+      "I",
+      "A",
+      "S",
+      "Q",
+      "M"
+    ],
+    "populationGroups": [
+      {
+        "type": "T1D",
+        "count": 497
+      }
+    ]
+  },
+  {
+    "title": "AI-READI",
+    "metadata": "1049 participants • TBD days • TBD access",
+    "description": "AI-READI is a controlled-access CGM dataset originally released in 2024 with v3.0.0 released in 2025. This dataset is being collected in the United States. AI-READI v3.0.0 was collected from 2280 participants with type 2 diabetes, prediabetes, and no diabetes. This dataset is actively being collected to support future generations of artificial intelligence/machine learning (AI/ML) research to provide critical insights into type 2 diabetes. AI-READI contains data from multiple modalities including CGMs, wearable activity trackers, electrocardiograms, environmental sensors, retinal photography, optical coherence tophography, fluorescence lifetime imaging ophthalmoscopy, clinical data, and more. ",
+    "types": [
+      "T2D",
+      "PreD",
+      "ND"
+    ],
+    "sources": [
+      "G",
+      "A",
+      "Q",
+      "M"
+    ]
+  },
+  {
+    "title": "ShanghaiT2DM",
+    "metadata": "100 participants • TBD days • TBD access",
+    "description": "ShanghaiT2DM is an open-access CGM dataset released in 2023 and collected in China. This dataset was collected from 100 participants with type 2 diabetes. The dataset was originally developed to support data-driven machine learning research in diabetes management. ShanghaiT2DM contains CGM data, insulin-related data such as basal rate, bolus, and insulin type, and self-reported meal logs.",
+    "types": [
+      "T2D"
+    ],
+    "sources": []
+  },
+  {
+    "title": "Park2025",
+    "metadata": "38 participants • TBD days • TBD access",
+    "description": "Park 2025 is an open-access CGM dataset released in 2025 and collected in the US. The dataset was originally developed to support research on the relationships between real-world lifestyle behaviors, glucose dynamics, and metabolic risk factors underlying the development of type 2 diabetes. Park 2025 contains CGM data, clinical data such as glycated hemoglobin, fasting glucose, fasting insulin, blood pressure, cholesterol, and more.",
+    "types": [
+      "T2D",
+      "PreD",
+      "ND"
+    ],
+    "sources": []
+  },
+  {
+    "title": "T1DEXIP",
+    "metadata": "247 participants • TBD days • TBD access",
+    "description": "T1DEXIP is a controlled-access CGM dataset released in 2022 and collected in the US. This dataset was collected from 251 participants with type 1 diabetes. The dataset was originally developed to support analysis of the acute effects of real-world physical activity on glycemia in adolescents with type 1 diabetes. T1DEXIP contains CGM data, insulin-related data, self-reported food intake logs, wearable activity tracker data such as step count, heart rate, sleep, and more from a Verily Study Watch, and data on structured exercise sessions including exercise type, duration, and intensity.",
+    "types": [
+      "T1D"
+    ],
+    "sources": []
+  },
+  {
+    "title": "T1DiabetesGranada",
+    "metadata": "736 participants • TBD days • TBD access",
+    "description": "T1DiabetesGranada is a controlled-access CGM dataset released in 2024 and collected in Spain. This dataset was collected from 736 participants with type 1 diabetes. The dataset was originally developed to support overcoming data scarcity for AI models that characterize disease evolution and predict glucose levels in type 1 diabetes. T1DiabetesGranada  contains CGM data and clinical data such as glycated hemoglobin, cholesterol, triglycerides and more. No insulin, meal, or activity logs are included.",
+    "types": [
+      "T1D"
+    ],
+    "sources": [
+      "G",
+      "Q",
+      "M"
+    ]
+  },
+  {
+    "title": "HUPA-UCM",
+    "metadata": "25 participants • TBD days • TBD access",
+    "description": "HUPA-UCM is an open-access CGM dataset released in 2024 and collected in Spain. This dataset was collected from 25 participants with type 1 diabetes. This dataset was collected to support research on glucose prediction, hypoglycemia and hyperglycemia prediction, and to analyze the influence of quality and quantity of sleep and other variables on glucose trends. HUPA-UCM contains CGM data, insulin dose administration, and self-reported meal data in carbohydrate grams, and wearable activity tracker data such as steps, calories burned, heart rate, and sleep quantity and quality assessments.",
+    "types": [
+      "T1D"
+    ],
+    "sources": []
+  },
+  {
+    "title": "BIGIDEAs",
+    "metadata": "16 participants • TBD days • TBD access",
+    "description": "BIGIDEAs is an open-access CGM dataset originally released in 2022 and collected in the US. This dataset was collected from 16 participants with prediabetes and no diabetes. The dataset was originally developed to support testing whether wearable devices can detect early physiological changes and generate digital biomarkers for prediabetes and hyperglycemia risk. BIGIDEAs contains CGM data, meal logs, and wearable activity data from an Empatica E4 wristband, including data on accelerometry, skin temperature, heart rate, and more. ",
+    "types": [
+      "ND",
+      "PreD"
+    ],
+    "sources": [
+      "G",
+      "A",
+      "Q",
+      "M"
+    ]
+  },
+  {
+    "title": "T1D-UOM",
+    "metadata": "17 participants • TBD days • TBD access",
+    "description": "T1D-UOM is an open-access CGM dataset released in 2025 and collected in the UK. This dataset was collected from 17 participants with type 1 diabetes. The dataset was originally developed to support research on algorithm development to improve diabetes management, particularly in settings where automated insulin delivery (AID) technology is less accessible. T1D-UOM contains CGM data, insulin-related data such as basal and bolus insulin doses, nutritional information, including carbohydrates, protein, fat, and fiber content, and wearable activity data from Garmin Forerunner 45 such as step count, active calories, discover covered, and sleep data.",
+    "types": [
+      "T1D"
+    ],
+    "sources": []
+  },
+  {
+    "title": "ShanghaiT1DM",
+    "metadata": "12 participants • TBD days • TBD access",
+    "description": "ShanghaiT1DM is an open-access CGM dataset released in 2023 and collected in China. This dataset was collected from 12 participants with type 1 diabetes. The dataset was originally developed to support data-driven machine learning research in diabetes management. ShanghaiT1DM contains CGM data, insulin-related data such as basal rate, bolus, and insulin type, and self-reported meal logs.",
+    "types": [
+      "T1D"
+    ],
+    "sources": []
+  },
+  {
+    "title": "Hall 2018",
+    "metadata": "57 participants • TBD days • TBD access",
+    "description": "Hall 2018 is an open-access CGM dataset released in 2018 and collected in the US. This dataset was collected from 57 participants with type 2 diabetes, prediabetes, and no diabetes. The dataset was originally developed to support characterizing patterns of glucose dysregulation and the variability in glycemic responses to an identical nutrient challenge. Hall 2018 contains CGM data, standardized meals, and other clinical measurements such as fasting blood glucose, fasting insulin, steady-state plasma glucose, and more.",
+    "types": [
+      "T2D",
+      "PreD",
+      "ND"
+    ],
+    "sources": []
+  },
+  {
+    "title": "UCHTT1DM",
+    "metadata": "20 participants • TBD days • TBD access",
+    "description": "UCHTT1DM is an open-access CGM dataset released in 2024 and collected in Chile. This dataset was collected from 20 participants with type 1 diabetes and no diabetes. The dataset was originally created to support research in glucose prediction using deep learning techniques. UCHTT1DM contains CGM data, insulin-relevant data, and wearable activity tracker data from Fitbit Charge 4 such as steps, heart rate, sleep, and more.",
+    "types": [
+      "T1D",
+      "ND"
+    ],
+    "sources": []
+  },
+  {
+    "title": "Bris-T1D Open",
+    "metadata": "20 participants • TBD days • TBD access",
+    "description": "Bris-T1D Open is an open-access CGM dataset released in 2025 and collected in the UK. This dataset was collected from 24 young adults with type 1 diabetes. The dataset was originally developed to support research on blood glucose prediction, hypoglycaemia prediction, closed-loop algorithm development as well as broader mixed-methods research into the role of smartwatches in type 1 diabetes management. Bris-T1D Open contains CGM data, insulin pump data, wearable activity tracker data such as step count, calories burned, an heart rate, and qualitative interview and focus-group transcripts.",
+    "types": [
+      "T1D"
+    ],
+    "sources": []
+  },
+  {
+    "title": "D1NAMO",
+    "metadata": "29 participants • TBD days • TBD access",
+    "description": "D1NAMO is an open-access CGM dataset released in 2018 and collected in Switzerland. This dataset was collected from 9 participants with type 1 diabetes. The dataset was originally developed to support non-invasive type 1 diabetes management and detection of glycemic events from wearable physiological signals in real-life conditions. D1NAMO contains CGM data, insulin pump data, annotated food photographs, and wearable activity tracker data.",
+    "types": [
+      "T1D",
+      "ND"
+    ],
+    "sources": []
+  },
+  {
+    "title": "Colas 2019",
+    "metadata": "208 participants • TBD days • TBD access",
+    "description": "Colas 2019 is an open-access CGM dataset released in 2019 and collected in Spain. This dataset was collected from 208 participants with no diabetes and type 2 diabetes. The dataset was originally developed to support prediction of type 2 diabetes onset in at-risk patients using complexity analysis of glucose time series. Colas 2019 contains CGM data.",
+    "types": [
+      "T2D",
+      "ND"
+    ],
+    "sources": []
+  },
+  {
+    "title": "CGMacros Libre",
+    "metadata": "45 participants • TBD days • TBD access",
+    "description": "CGMacros is an open-access CGM dataset released in 2025 and collected in the US. This dataset was collected from 45 participants with type 2 diabetes, prediabetes, and no diabetes. The dataset was originally developed to support research on personalized nutrition and algorithmic approaches to automated diet monitoring. CGMacros contains CGM data from Dexcom & Freestyle Libre sensors, food macronutrient information, food photographs, physical activity and wearable activity tracker data from Fitbit Sense, demographic information, anthropometric measurements, blood biomarkers, and gut microbiome profiles.",
+    "types": [
+      "T2D",
+      "ND",
+      "PreD"
+    ],
+    "sources": [
+      "G",
+      "A",
+      "S",
+      "Q",
+      "M"
+    ]
+  },
+  {
+    "title": "CGMacros Dexcom",
+    "metadata": "45 participants • TBD days • TBD access",
+    "description": "CGMacros is an open-access CGM dataset released in 2025 and collected in the US. This dataset was collected from 45 participants with type 2 diabetes, prediabetes, and no diabetes. The dataset was originally developed to support research on personalized nutrition and algorithmic approaches to automated diet monitoring. CGMacros contains CGM data from Dexcom & Freestyle Libre sensors, food macronutrient information, food photographs, physical activity and wearable activity tracker data from Fitbit Sense, demographic information, anthropometric measurements, blood biomarkers, and gut microbiome profiles.",
+    "types": [
+      "T2D",
+      "ND",
+      "PreD"
+    ],
+    "sources": [
+      "G",
+      "A",
+      "S",
+      "Q",
+      "M"
+    ]
+  },
+  {
+    "title": "DiaTrend",
+    "metadata": "54 participants • TBD days • TBD access",
+    "description": "DiaTrend is a controlled-access CGM dataset released in 2023 and collected in the US. This dataset was collected from 54 participants with type 1 diabetes. The dataset was originally developed to support development of analytic solutions for diabetes management. DiaTrend contains CGM data, insulin pump data such as basal and bolus doses, and meal estimates from carbohydrate intake logs.",
+    "types": [
+      "T1D"
+    ],
+    "sources": [
+      "G",
+      "I",
+      "Q",
+      "M"
+    ]
+  },
+  {
+    "title": "OhioT1DM",
+    "metadata": "12 participants • TBD days • TBD access",
+    "description": "OhioT1DM is a controlled-access CGM dataset originally released in 2018 then updated in 2020 and collected in the US. This dataset was collected from 12 participants with T1D. The dataset was originally developed to support research in blood glucose level prediction. OhioT1DM contains CGM data, insulin pump data, self-reported data such as meals and stressors, and wearable tracker data such as steps, heart rate, and sleep.",
+    "types": [
+      "T1D"
+    ],
+    "sources": []
+  },
+  {
+    "title": "AZT1D",
+    "metadata": "25 participants • TBD days • TBD access",
+    "description": "AZT1D is an open-access CGM dataset released in 2025 and collected in the US. This dataset was collected from 25 participants with type 1 diabetes on automated insulin delivery (AID) systems. The dataset was originally developed to support research on artificial intelligence and machine learning applications aimed at improving clinical decision making and individualized care in type 1 diabetes. AZT1D contains CGM data, insulin pump and insulin administration data such as basal and bolus insulin doses, carbohydrate intake, and and device mode (regular, sleep, and exercise modes).",
+    "types": [
+      "T1D"
+    ],
+    "sources": []
+  },
+  {
+    "title": "PhysioCGM",
+    "metadata": "10 participants • TBD days • TBD access",
+    "description": "PhysioCGM is an open-access CGM dataset released in 2025 and collected in the US. This dataset was collected from 10 participants with type 1 diabetes. The dataset was originally developed to support research on the development of non-invasive methods for glucose monitoring. PhysioCGM contains CGM data and physiological data from electrocardiography (ECG), photoplethysmography (PPG), electrodermal activity (EDA) sensors, including skin temperature, accelerometry, heart rate, respiration rate, and more.",
+    "types": [
+      "T1D"
+    ],
+    "sources": [
+      "G",
+      "Q",
+      "C"
+    ],
+    "populationGroups": [
+      {
+        "type": "T1D",
+        "count": 10
+      }
+    ]
+  }
 ]

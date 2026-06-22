@@ -1,0 +1,204 @@
+.dataset-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 410px);
+  max-width: 410px;
+  min-height: 433px;
+  height: 100%;
+  padding: 28px;
+  background: var(--glm-color-white);
+  border: 1px solid var(--glm-color-grey-border);
+  border-radius: 12px;
+  box-shadow: var(--glm-shadow-card);
+}
+
+.dataset-card:hover {
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(58, 58, 59, 0.18);
+}
+
+.dataset-card-selected {
+  border-color: var(--glm-color-brand-dark);
+}
+
+.dataset-card__heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.dataset-card__checkbox {
+  appearance: none;
+  display: grid;
+  place-content: center;
+  flex: 0 0 auto;
+  width: 29px;
+  height: 29px;
+  margin: 0;
+  border: 1px solid var(--glm-color-medium-grey);
+  border-radius: 6px;
+  background: var(--glm-color-white);
+  cursor: pointer;
+}
+
+.dataset-card__checkbox::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  background: var(--glm-color-white);
+  mask: url("/figma-assets/icon-checkbox-check.svg") center / 24px 24px no-repeat;
+  -webkit-mask: url("/figma-assets/icon-checkbox-check.svg") center / 24px 24px no-repeat;
+  transform: scale(0);
+  transform-origin: center;
+}
+
+.dataset-card__checkbox:checked {
+  border-color: var(--glm-color-brand-dark);
+  background: var(--glm-color-brand-dark);
+}
+
+.dataset-card__checkbox:checked::before {
+  transform: scale(1);
+}
+
+.dataset-card h2 {
+  width: min(294px, calc(100% - 45px));
+  margin: 0;
+  color: var(--glm-color-black);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: normal;
+  overflow-wrap: anywhere;
+}
+
+.top-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--glm-color-grey-border);
+}
+
+.dataset-card__metadata {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.dataset-card__metadata-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+
+.dataset-card__meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #3c3d41;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.dataset-card__meta-icon {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  background: var(--glm-color-meta-icon, #59636e);
+  mask: var(--dataset-card-meta-icon-url) center / contain no-repeat;
+  -webkit-mask: var(--dataset-card-meta-icon-url) center / contain no-repeat;
+}
+
+.dataset-card__meta-icon--people {
+  width: 18px;
+  height: 18px;
+}
+
+.dataset-card__meta-icon--controlled {
+  transform: rotate(180deg);
+}
+
+.dataset-card__sections {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 24px;
+  padding-top: 16px;
+}
+
+.dataset-card__section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.dataset-card__section--distribution {
+  gap: 8px;
+  margin-top: auto;
+  width: 100%;
+}
+
+.dataset-card__section-label {
+  margin: 0;
+  color: var(--glm-color-text);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.dataset-card__badge-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0.8;
+}
+
+.round-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 27px;
+  padding: 6px 10px;
+  border: 0.794px solid rgba(0, 0, 0, 0.06);
+  border-radius: 21.185px;
+  color: #000000;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.dataset-card__source-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.dataset-card__source-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 8px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 21.185px;
+  background: var(--light-blue);
+  color: #000000;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: normal;
+  white-space: nowrap;
+}

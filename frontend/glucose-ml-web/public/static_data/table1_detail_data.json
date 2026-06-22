@@ -1,200 +1,237 @@
 [
   {
     "name": "Hall 2018",
+    "access": "Open",
     "year release": "2018",
-    "fullDescription":"The Hall_2018 dataset was collected in the U.S. and released in 2018. It comprises an average of 8 days of continuous glucose data from participants with no diabetes, prediabetes, and type 2 diabetes. This dataset also contextual information from other data sources including manual user logs of meals, questionnaires, and clinical measurements such as HbA1C and fasting glucose.",
     "total": 57,
     "male": 25.0,
     "female": 32.0,
-    "age range": "25 – 76",
-    "Ethinicities": "--",
+    "age range": "25 \u2013 76",
+    "Ethinicities": "NR",
     "CGM Device": "Dexcom G4",
-    "Total days of glucose": "473",
-    "Glucose samples": "105,426",
-    "average days per participant": 8,
+    "Total days of glucose": 473,
+    "Glucose samples": 105426,
+    "average days per participant": 8.3,
     "data_source": {
       "G": "Glucose",
       "M": "Meals",
       "Q": "Age, BMI",
-      "C": "Fasting Blood Glucose, Oral Glucose Tolerance Test, Steady-State Plasma Glucose Test, HbA1C, Triglyceride, Cholesterol"
+      "C": "Fasting Blood Glucose, Oral Glucose Tolerance Test, Steady-State Plasma Glucose Test, HbA1C, Triglyceride, Cholesterol, etc."
     },
     "populationGroups": [
-      { "type": "T2D", "count": 4 },
-      { "type": "PreD", "count": 8 },
-      { "type": "ND", "count": 45 }
+      {
+        "type": "T2D",
+        "count": 4
+      },
+      {
+        "type": "PreD",
+        "count": 8
+      },
+      {
+        "type": "ND",
+        "count": 45
+      }
     ],
+    "Links to paper": "https://pubmed.ncbi.nlm.nih.gov/30040822/",
     "Link to dataset": "https://pubmed.ncbi.nlm.nih.gov/30040822/",
-    "GitHub glucose dataset": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/Hall_2018"
+    "Link to Git": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/Hall_2018"
   },
   {
     "name": "D1NAMO",
+    "access": "Open",
     "year release": "2018",
-    "fullDescription":"The D1NAMO dataset was collected in Switzerland and released in 2018. It comprises as an average of 4 days of continuous glucose data from participants with type 1 diabetes. This dataset also contains contextual  information from other data sources including insulin delivery systems, manual user logs of meals, and wearable tracker data such as electrocardiogram and respiratory data.",
     "total": 9,
     "male": 6.0,
     "female": 3.0,
-    "age range": "20 – 79",
-    "Ethinicities": "--",
+    "age range": "20 \u2013 79",
+    "Ethinicities": "NR",
     "CGM Device": "Medtronic iPro2",
-    "Total days of glucose": "42",
-    "Glucose samples": "8,691",
-    "average days per participant": 4,
+    "Total days of glucose": 42,
+    "Glucose samples": 8691,
+    "average days per participant": 4.3,
     "data_source": {
       "G": "Glucose",
-      "I": "insulin doses (basal, bolus)",
-      "W": "ECG, Breathing Signal, Accelerometer",
-      "M": "Meals",
+      "I": "Insulin doses (e.g. basal, bolus)",
+      "W": "ECG, Breathing Signal, Accelerometer (Zephyr BioHarness 3)",
+      "M": "Meals (i.e., timing, description, calories, food quality and photos)",
       "C": "Sex, Weight, Height"
     },
     "populationGroups": [
-      { "type": "T1D", "count": 9 }
+      {
+        "type": "T1D",
+        "count": 9
+      }
     ],
+    "Links to paper": "https://doi.org/10.1016/j.imu.2018.09.003",
     "Link to dataset": "https://zenodo.org/records/5651217",
-    "GitHub glucose dataset": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/D1NAMO"
+    "Link to Git": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/D1NAMO"
   },
   {
     "name": "Colas 2019",
+    "access": "Open",
     "year release": "2019",
-    "fullDescription":"The Colas_2019 dataset was collected in Spain and released in 2019. It comprises an average of 2 days of continuous glucose data from participants with no diabetes and type 2 diabetes. This dataset also contains contextual information from clinical and other measurements such as body mass index and HbA1C.",
     "total": 208,
     "male": 103.0,
     "female": 105.0,
-    "age range": "29 – 88",
-    "Ethinicities": "--",
+    "age range": "29 \u2013 88",
+    "Ethinicities": "NR",
     "CGM Device": "Medtronic MiniMed iPro",
-    "Total days of glucose": "399",
-    "Glucose samples": "114,253",
-    "average days per participant": 2,
+    "Total days of glucose": 399,
+    "Glucose samples": 114253,
+    "average days per participant": 1.9,
     "data_source": {
       "G": "Glucose",
       "C": "Age, Sex/Gender, BMI, Basal Glycemia, HbA1C, Diabetes Diagnosis"
     },
     "populationGroups": [
-      { "type": "T2D", "count": 17 },
-      { "type": "ND", "count": 191 }
+      {
+        "type": "T2D",
+        "count": 17
+      },
+      {
+        "type": "ND",
+        "count": 191
+      }
     ],
+    "Links to paper": "https://pubmed.ncbi.nlm.nih.gov/31851681/",
     "Link to dataset": "https://pubmed.ncbi.nlm.nih.gov/31851681/",
-    "GitHub glucose dataset":"https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/Colas_2019"
+    "Link to Git": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/Colas_2019"
   },
   {
     "name": "OhioT1DM",
-    "year release": "2018 & 2020",
-    "fullDescription":"The OhioT1DM dataset was collected in the U.S. and first released in 2018, followed by a second release in 2020. It comprises an average of 54 days of continuous glucose data from participants with type 1 diabetes. This dataset also contains contextual information from other data sources including insulin delivery systems, wearable trackers, manual user logs, and questionnaires.",
+    "access": "Controlled",
+    "year release": "2018",
     "total": 12,
     "male": 7.0,
     "female": 5.0,
-    "age range": "20 – 80",
-    "Ethinicities": "--",
+    "age range": "20 \u2013 80",
+    "Ethinicities": "NR",
     "CGM Device": "Medtronic Enlite",
-    "Total days of glucose": "652",
-    "Glucose samples": "166,533",
-    "average days per participant": 54,
+    "Total days of glucose": 652,
+    "Glucose samples": 166533,
+    "average days per participant": 54.3,
     "data_source": {
       "G": "Glucose",
-      "I": "Insulin (Basal, Bolus)",
-      "W": "Steps, Acceleration, Heart Rate, Skin Temperature, Sleep",
+      "I": "Insulin (Basal, Bolus) (Medtronic Insulin Pumps)",
+      "W": "Steps, Acceleration, Heart Rate, Galvanic Skin Temperature, Sleep, etc. (Empatica | Basis Peak Fitness Band)",
       "M": "Meals, Carbohydrate Estimate, Stressors, Illness, Exercise",
       "Q": "Sex/Gender, Age"
     },
     "populationGroups": [
-      { "type": "T1D", "count": 12 }
+      {
+        "type": "T1D",
+        "count": 12
+      }
     ],
+    "Links to paper": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7881904/",
     "Link to dataset": "https://webpages.charlotte.edu/rbunescu/data/ohiot1dm/OhioT1DM-dataset.html"
   },
   {
     "name": "T1DEXI",
+    "access": "Controlled",
     "year release": "2022",
-    "fullDescription":"The T1DEXI dataset was collected in the U.S. and released in 2022. It comprises an average of 27 days of continuous glucose data from participants with type 1 diabetes. This dataset also contains other contextual data from insulin delivery systems, wearable trackers, manual logging of meals and exercise, and questionnaires. ",
     "total": 497,
     "male": 134.0,
     "female": 363.0,
-    "age range": "18 – 70",
+    "age range": "18 \u2013 70",
     "Ethinicities": "91.3% White",
     "CGM Device": "Dexcom G6",
-    "Total days of glucose": "13,522",
-    "Glucose samples": "3,785,253",
-    "average days per participant": 27,
+    "Total days of glucose": 13522,
+    "Glucose samples": 3785253,
+    "average days per participant": 27.2,
     "data_source": {
       "G": "Glucose",
-      "I": "Insulin pump data, multiple daily injections",
-      "W": "Step count, Sleep Metrics, Heart Rate",
+      "I": "Insulin pump data (e.g. basal rate, boluses, carbohydrate input), multiple daily injections",
+      "W": "Step count, Sleep Metrics, Heart Rate, etc. (Verily)",
       "M": "Exercise events, Meals, Menstrual Cycles",
-      "Q": "Age, Sex, Race, Ethnicity, Weight, Height, Diabetes History",
+      "Q": "Age, Sex, Race, Ethnicity, Weight, Height, Diabetes History, Medications, validated questionnaires, e.g. Pittsburg Sleep Quality Index (PSQI), etc.",
       "C": "HbA1C"
     },
     "populationGroups": [
-      { "type": "T2D", "count": 4 },
-      { "type": "PreD", "count": 8 },
-      { "type": "ND", "count": 45 }
+      {
+        "type": "T1D",
+        "count": 497
+      }
     ],
+    "Links to paper": "https://pubmed.ncbi.nlm.nih.gov/36795053/",
     "Link to dataset": "https://doi.org/10.25934/PR00008428"
   },
   {
     "name": "T1DEXIP",
+    "access": "Controlled",
     "year release": "2022",
-    "fullDescription":"The T1DEXIP dataset was collected in the U.S. and released in 2022. It comprises an average of 10 days of continuous glucose data from participants with type 1 diabetes. This dataset also contains other contextual data from insulin delivery systems, wearable trackers, manual logging of meals and exercise, and questionnaire data. ",
     "total": 247,
     "male": 143.0,
     "female": 104.0,
-    "age range": "12 – 17",
+    "age range": "12 \u2013 17",
     "Ethinicities": "89.1% White",
     "CGM Device": "Dexcom G6",
-    "Total days of glucose": "2,492",
-    "Glucose samples": "685,136",
-    "average days per participant": 10,
+    "Total days of glucose": 2492,
+    "Glucose samples": 685136,
+    "average days per participant": 10.1,
     "data_source": {
       "G": "Glucose",
-      "I": "Insulin pump data",
-      "W": "Step count, Sleep Metrics, Heart Rate",
-      "M": "Exercise events, Meals",
-      "Q": "Age, Sex, Race, Ethnicity",
+      "I": "Insulin pump data (e.g. basal rate, boluses, carbohydrate input), multiple daily injections",
+      "W": "Step count, Sleep Metrics, Heart Rate, etc. (Verily)",
+      "M": "Exercise events, Meals, Menstrual Cycles",
+      "Q": "Age, Sex, Race, Ethnicity, Weight, Height, Diabetes History, Medications, validated questionnaires, e.g. Pittsburg Sleep Quality Index (PSQI), etc.",
       "C": "HbA1C"
     },
     "populationGroups": [
-      { "type": "T1D", "count": 247 }
+      {
+        "type": "T1D",
+        "count": 247
+      }
     ],
+    "Links to paper": "https://doi.org/10.2337/dc23-1548",
     "Link to dataset": "https://doi.org/10.25934/PR00008429"
   },
   {
     "name": "BIGIDEAs",
-    "year release": "2023",
-    "fullDescription":"The BIG IDEAs dataset was collected in the U.S. and released in 2023. It comprises an average of 9 days of continuous glucose data from participants with no diabetes and prediabetes. This dataset also contains other contextual data from wearable trackers, questionnaires, and clinical measurements such as blood pressure and body mass index.",
+    "access": "Open",
+    "year release": "2022",
     "total": 16,
     "male": 7,
     "female": 9,
-    "age range": "35 – 65",
-    "Ethinicities": "68.75% White, 25% Black/African Am., 6.25% Bi–racial",
+    "age range": "35 \u2013 65",
+    "Ethinicities": "68.75% White, 25% Black/African Am., 6.25% Bi\u2013racial",
     "CGM Device": "Dexcom G6",
-    "Total days of glucose": "150",
-    "Glucose samples": "36,898",
-    "average days per participant": 9,
+    "Total days of glucose": 150,
+    "Glucose samples": 36898,
+    "average days per participant": 9.4,
     "data_source": {
       "G": "Glucose",
-      "W": "Accelerometry, Blood Volume Pulse",
-      "Q": "Age, Sex",
-      "C": "BMI, Blood Pressure"
-    }
-    ,
+      "W": "Accelerometry, Blood Volume Pulse, Electrodermal Activity, Skin Temperature, Interbeat Interval, Heart Rate",
+      "M": "Gender, Meals",
+      "C": "HbA1C"
+    },
     "populationGroups": [
-      { "type": "PreD", "count": 8 },
-      { "type": "ND", "count": 8 }
+      {
+        "type": "PreD",
+        "count": 8
+      },
+      {
+        "type": "ND",
+        "count": 8
+      }
     ],
-    "Link to dataset": "https://doi.org/10.13026/zthx-5212",
-    "GitHub glucose dataset": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/BIGIDEAs"
+    "Links to paper": "https://www.nature.com/articles/s41746-021-00465-w",
+    "Link to dataset": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+    "Link to Git": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/BIGIDEAs"
   },
   {
     "name": "DiaTrend",
+    "access": "Controlled",
     "year release": "2023",
-    "fullDescription":"The DiaTrend dataset was collected in the U.S. and released in 2023. It comprises between 31 to 1,907 days of continuous glucose data from participants with type 1 diabetes. This dataset also contains other contextual data from insulin delivery systems, questionnaires, and clinical measurements such as HbA1C.",
     "total": 54,
     "male": 17.0,
     "female": 37.0,
-    "age range": "19 – 74",
+    "age range": "19 \u2013 74",
     "Ethinicities": "88.9% White",
     "CGM Device": "Dexcom G5/G6, Medtronic Guardian/MiniMed",
-    "Total days of glucose": "27,663",
-    "Glucose samples": "7,680,740",
-    "average days per participant": 512,
+    "Total days of glucose": 27663,
+    "Glucose samples": 7680740,
+    "average days per participant": 512.3,
     "data_source": {
       "G": "Glucose",
       "I": "Insulin pump data (e.g. basal rate, boluses, carbohydrate input)",
@@ -202,176 +239,211 @@
       "C": "HbA1C"
     },
     "populationGroups": [
-      { "type": "T1D", "count": 54 }
+      {
+        "type": "T1D",
+        "count": 54
+      }
     ],
+    "Links to paper": "https://www.nature.com/articles/s41597-023-02469-5",
     "Link to dataset": "https://doi.org/10.7303/syn38187184"
   },
   {
     "name": "ShanghaiT1DM",
+    "access": "Open",
     "year release": "2023",
-    "fullDescription":"The ShanghaiT1DM dataset was collected in China and released in 2023. It comprises between 7 to 42 days of continuous glucose data from participants with type 1 diabetes. This dataset also contains other contextual data from insulin delivery systems, manual user logs of meals, questionnaires, and clinical measurements such as body mass index and HbA1C.",
     "total": 12,
     "male": 5.0,
     "female": 7.0,
-    "age range": "37 – 73",
-    "Ethinicities": "--",
+    "age range": "37 \u2013 73",
+    "Ethinicities": "NR",
     "CGM Device": "Abbott FreeStyle Libre H",
-    "Total days of glucose": "181",
-    "Glucose samples": "15,695",
-    "average days per participant": 15,
+    "Total days of glucose": 181,
+    "Glucose samples": 15695,
+    "average days per participant": 15.1,
     "data_source": {
       "G": "Glucose",
-      "I": "Insulin data",
+      "I": "Insulin data (e.g. basal rate, boluses, insulin type)",
       "M": "Meals",
-      "Q": "Age, Sex",
-      "C": "BMI, HbA1C"
-    }
-    ,
+      "Q": "Gender, Smoking History, Alcohol History",
+      "C": "diabetes type, diabetes duration, complications, lab measurements (e.g. fasting glucose, fasting c-peptide, fasting insulin, glycated albumin, cholesterol, triglyceride, etc.)"
+    },
     "populationGroups": [
-      { "type": "T1D", "count": 12 }
+      {
+        "type": "T1D",
+        "count": 12
+      }
     ],
+    "Links to paper": "https://www.nature.com/articles/s41597-023-01940-7",
     "Link to dataset": "https://doi.org/10.6084/m9.figshare.c.6310860",
-    "GitHub glucose dataset": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/ShanghaiT1DM"
+    "Link to Git": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/ShanghaiT1DM"
   },
   {
     "name": "ShanghaiT2DM",
+    "access": "Open",
     "year release": "2023",
-    "fullDescription":"The ShanghaiT2DM dataset as collected in China and released in 2024. It comprises between 4 to 41 days of glucose data from participants with type 2 diabetes. This dataset also contains other contextual data from insulin delivery systems, manual user logs of meals, questionnaires, and clinical measurements such as body mass index and HbA1C.",
     "total": 100,
     "male": 44.0,
     "female": 56.0,
-    "age range": "22 – 97",
-    "Ethinicities": "--",
+    "age range": "22 \u2013 97",
+    "Ethinicities": "NR",
     "CGM Device": "Abbott FreeStyle Libre H",
-    "Total days of glucose": "1,292",
-    "Glucose samples": "112,462",
-    "average days per participant": 13,
+    "Total days of glucose": 1292,
+    "Glucose samples": 112462,
+    "average days per participant": 12.9,
     "data_source": {
       "G": "Glucose",
-      "I": "Insulin data",
+      "I": "Insulin data (e.g. basal rate, boluses, insulin type)",
       "M": "Meals",
-      "Q": "Age, Sex",
-      "C": "BMI, HbA1C"
+      "Q": "Gender, Smoking History, Alcohol History",
+      "C": "diabetes type, diabetes duration, complications, lab measurements (e.g. fasting glucose, fasting c-peptide, fasting insulin, glycated albumin, cholesterol, triglyceride, etc.)"
     },
     "populationGroups": [
-      { "type": "T2D", "count": 100 }
+      {
+        "type": "T2D",
+        "count": 100
+      }
     ],
+    "Links to paper": "https://www.nature.com/articles/s41597-023-01940-7",
     "Link to dataset": "https://doi.org/10.6084/m9.figshare.c.6310860",
-    "GitHub glucose dataset": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/ShanghaiT2DM"
+    "Link to Git": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/ShanghaiT2DM"
   },
   {
     "name": "T1DiabetesGranada",
+    "access": "Controlled",
     "year release": "2024",
-    "fullDescription":"The T1DiabetesGranada was collected in Spain and released in 2024. It comprises between 8 to 1,463 days of continuous glucose data from participants with type 1 diabetes. This dataset also contains other contextual data from questionnaires such as age and clinical measurements such as HbA1C.",
     "total": 736,
     "male": 363.0,
     "female": 373.0,
-    "age range": "12 – 85",
-    "Ethinicities": "--",
+    "age range": "12 \u2013 85",
+    "Ethinicities": "NR",
     "CGM Device": "Abbott FreeStyle Libre 1 & 2",
-    "Total days of glucose": "257,782",
-    "Glucose samples": "22,671,708",
-    "average days per participant": 350,
+    "Total days of glucose": 257782,
+    "Glucose samples": 22671708,
+    "average days per participant": 350.3,
     "data_source": {
       "G": "Glucose",
       "Q": "Sex/Gender, Age, Birth Year",
-      "C": "HbA1C"
+      "C": "Diagnosis, lab measurements (e.g. Potassium, Cholesterol, Creatinine, Glucose, Uric Acid, Triglyceride, Chlorine, Sodium, etc.)"
     },
     "populationGroups": [
-      { "type": "T1D", "count": 736 }
+      {
+        "type": "T1D",
+        "count": 736
+      }
     ],
+    "Links to paper": "https://www.nature.com/articles/s41597-023-02737-4",
     "Link to dataset": "https://zenodo.org/records/10050944"
   },
   {
     "name": "AI-READI",
+    "access": "Controlled",
     "year release": "2025",
-    "fullDescription":"The AI-READI v3.0.0 dataset was collected in the U.S and released in 2025. It comprises an average of 11 days of continuous glucose data from participants with type 2 diabetes, prediabetes, and no diabetes. This dataset also contains contextual information from other data sources including wearable trackers, questionnaires, and clinical/other measurements such as electrocardiograms and retina imaging.",
-    "total": "2,280",
+    "total": 2280,
     "male": 951.0,
-    "female": "1,329.0",
-    "age range": "40 – 94",
+    "female": 1329.0,
+    "age range": "40 \u2013 94",
     "Ethinicities": "36.7% White, 22.8% Black, 23.9% Asian, 16.7% Hispanic",
     "CGM Device": "Dexcom G6",
-    "Total days of glucose": "24,012",
-    "Glucose samples": "6,194,153",
-    "average days per participant": 11,
+    "Total days of glucose": 24012,
+    "Glucose samples": 6194153,
+    "average days per participant": 10.7,
     "data_source": {
       "G": "Glucose",
-      "W": "Heart rate, Physical activity, Oxygen saturation, Sleep, Stress",
-      "Q": "Age, Sex, Health & Dietary Surveys",
-      "C": "Weight, Height, Blood Pressure, ECG, Retina Imaging, Lab Measurements"
+      "W": "Heart rate, physical activity, oxygen saturation, respiration rate, sleep, stress (Garmin Vivosmart 5)",
+      "Q": "Age, Sex, Health Survey, Diabetes Self-Care Survey, Dietary Survey, etc.)",
+      "C": "Weight, Height, Waist Circumference, Blood Pressure, Cardiac ECG, Vision (autorefraction), Retina Imaging (Fundus Photo, OCT, OCTA), Lab Measurements (C-peptide, Cholesterol, Triglyceride, Insulin, Glucose, Sodium, etc.)"
     },
     "populationGroups": [
-      { "type": "T2D", "count": 976 },
-      { "type": "PreD", "count": 508},
-      { "type": "ND", "count": 761 }
+      {
+        "type": "T2D",
+        "count": 976
+      },
+      {
+        "type": "PreD",
+        "count": 508
+      },
+      {
+        "type": "ND",
+        "count": 761
+      }
     ],
+    "Links to paper": "https://docs.aireadi.org/",
     "Link to dataset": "https://fairhub.io/datasets/2"
   },
   {
     "name": "UCHTT1DM",
+    "access": "Open",
     "year release": "2024",
-    "fullDescription":"The UCHTT1DM was collected in Chile and released in 2024. It comprises an average of 6 days of continuous glucose data from participants with type 1 diabetes. This dataset also contains other contextual data from insulin delivery systems, wearable trackers, and manual user logs of meals.",
     "total": 20,
     "male": 10.0,
     "female": 10.0,
     "age range": "NR",
     "Ethinicities": "NR",
     "CGM Device": "Medtronic Guardian 3",
-    "Total days of glucose": "127",
-    "Glucose samples": "29,174",
-    "average days per participant": 6,
+    "Total days of glucose": 127,
+    "Glucose samples": 29174,
+    "average days per participant": 6.4,
     "data_source": {
       "G": "Glucose",
       "I": "Insulin data",
-      "W": "Heart Rate, Step count",
-      "M": "Meals"
+      "W": "Heart Rate, Steps (Fitbit Charge 4)",
+      "M": "Carbohydrates"
     },
     "populationGroups": [
-      { "type": "T1D", "count": 9 },
-      { "type": "ND", "count": 11 }
+      {
+        "type": "T1D",
+        "count": 9
+      },
+      {
+        "type": "ND",
+        "count": 11
+      }
     ],
+    "Links to paper": "https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10433750",
     "Link to dataset": "https://github.com/fisiologiacuantitativauc/UC_HT_T1DM",
-    "GitHub glucose dataset":"https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/UCHTT1DM"
+    "Link to Git": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/UCHTT1DM"
   },
   {
     "name": "HUPA-UCM",
+    "access": "Open",
     "year release": "2024",
-    "fullDescription":"The HUPA-UCM was collected in Spain and released in 2024. It comprises between 9 to 575 days of continuous glucose data from participants with type 1 diabetes. This dataset also contains other contextual data from insulin delivery systems, wearable trackers, manual user logs and clinical measurements such as HbA1C.",
     "total": 25,
     "male": 12.0,
     "female": 13.0,
-    "age range": "18 – 62",
-    "Ethinicities": "--",
+    "age range": "18 \u2013 62",
+    "Ethinicities": "NR",
     "CGM Device": "Abbott Freestyle Libre 2",
-    "Total days of glucose": "1,093",
-    "Glucose samples": "309,392",
-    "average days per participant": 44,
+    "Total days of glucose": 1093,
+    "Glucose samples": 309392,
+    "average days per participant": 43.7,
     "data_source": {
       "G": "Glucose",
-      "I": "Insulin Pump",
-      "W": "Heart Rate, Steps",
-      "M": "Meals",
-      "C": "HbA1C"
+      "I": "Insulin Pump (e.g. basal rate, boluses, carbohydrate input)",
+      "W": "Heart rate, Steps, Calories",
+      "C": "Age, Weight, Height, HbA1C, Diabetes Duration, Insulin Delivery Mode"
     },
     "populationGroups": [
-      { "type": "T1D", "count": 25 }
+      {
+        "type": "T1D",
+        "count": 25
+      }
     ],
+    "Links to paper": "https://doi.org/10.1016/j.dib.2024.110559",
     "Link to dataset": "https://data.mendeley.com/datasets/3hbcscwz44/1",
-    "GitHub glucose dataset": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/HUPA-UCM"
+    "Link to Git": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/HUPA-UCM"
   },
   {
     "name": "CGMacros Dexcom",
+    "access": "Open",
     "year release": "2025",
-    "fullDescription":"The CGMacros_Dexcom was collected in the U.S. and released in 2025. It comprises an average of 11 days of continuous glucose data from participants with type 2 diabetes, prediabetes, and no diabetes. This dataset also contains other contextual data from wearable trackers, manual user logs of meals, questionnaires, and clinical measurements such as HbA1C.",
     "total": 45,
     "male": 16.0,
     "female": 29.0,
-    "age range": "18 – 69",
+    "age range": "18 \u2013 69",
     "Ethinicities": "75.5% Hispanic/Latino, 15.5% White, 8.8% Black/African Am.",
     "CGM Device": "Dexcom G6 Pro",
-    "Total days of glucose": "493",
-    "Glucose samples": "629,825",
+    "Total days of glucose": 493,
+    "Glucose samples": 629825,
     "average days per participant": 11,
     "data_source": {
       "G": "Glucose",
@@ -381,167 +453,213 @@
       "C": "Weight, Height, HbA1C, fasting glucose, fasting insulin, triglyceride, cholesterol"
     },
     "populationGroups": [
-      { "type": "T2D", "count": 14 },
-      { "type": "PreD", "count": 16 },
-      { "type": "ND", "count": 15 }
+      {
+        "type": "T2D",
+        "count": 14
+      },
+      {
+        "type": "PreD",
+        "count": 16
+      },
+      {
+        "type": "ND",
+        "count": 15
+      }
     ],
+    "Links to paper": "https://www.nature.com/articles/s41597-025-05851-7",
     "Link to dataset": "https://doi.org/10.13026/3z8q-x658",
-    "GitHub glucose dataset": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/CGMacros_Dexcom"
+    "Link to Git": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/CGMacros_Dexcom"
   },
   {
     "name": "CGMacros Libre",
+    "access": "Open",
     "year release": "2025",
-    "fullDescription":"The CGMacros_Libre was collected in the U.S. and released in 2025. It comprises an average of 11 days of continuous glucose data from participants with type 2 diabetes, prediabetes, and no diabetes. This dataset also contains other contextual data from wearable trackers, manual user logs of meals, questionnaires, and clinical measurements such as HbA1C.",
     "total": 45,
     "male": 16.0,
     "female": 29.0,
-    "age range": "18 – 69",
+    "age range": "18 \u2013 69",
     "Ethinicities": "75.5% Hispanic/Latino, 15.5% White, 8.8% Black/African Am.",
     "CGM Device": "Abbott FreeStyle Libre Pro",
-    "Total days of glucose": "533",
-    "Glucose samples": "687,360",
-    "average days per participant": 12,
+    "Total days of glucose": 533,
+    "Glucose samples": 687360,
+    "average days per participant": 11.8,
     "data_source": {
       "G": "Glucose",
-      "W": "Heart rate, Activity calories, Steps",
-      "M": "Meals",
-      "Q": "Age, Sex",
-      "C": "BMI"
+      "W": "Heart rate, Activity calories, metabolic equivalent of task (Fitbit Sense)",
+      "M": "Meal timing, calories, carbs, protein, fat, fiber, meal photo",
+      "Q": "Age, Sex/Gender, Race",
+      "C": "Weight, Height, HbA1C, fasting glucose, fasting insulin, triglyceride, cholesterol"
     },
     "populationGroups": [
-      { "type": "T2D", "count": 14 },
-      { "type": "PreD", "count": 16 },
-      { "type": "ND", "count": 15 }
+      {
+        "type": "T2D",
+        "count": 14
+      },
+      {
+        "type": "PreD",
+        "count": 16
+      },
+      {
+        "type": "ND",
+        "count": 15
+      }
     ],
+    "Links to paper": "https://www.nature.com/articles/s41597-025-05851-7",
     "Link to dataset": "https://doi.org/10.13026/3z8q-x658",
-    "GitHub glucose dataset": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/CGMacros_Libre"
+    "Link to Git": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/CGMacros_Libre"
   },
   {
     "name": "T1D-UOM",
+    "access": "Open",
     "year release": "2025",
-    "fullDescription":"The T1D-UOM was collected in the U.K. and released in 2025. It comprises between 30 to 178 days of continuous glucose data from participants with type 1 diabetes. This dataset also contains other contextual information from insulin delivery systems, wearable trackers, manual user logs of meals, questionnaire, and clinical measurements such as HbA1C.",
     "total": 17,
     "male": 7.0,
     "female": 10.0,
-    "age range": "23 – 70",
-    "Ethinicities": "--",
+    "age range": "23 \u2013 70",
+    "Ethinicities": "NR",
     "CGM Device": "Dexcom, Freestyle, Medtronic",
-    "Total days of glucose": "1,636",
-    "Glucose samples": "356,146",
-    "average days per participant": 96,
+    "Total days of glucose": 1636,
+    "Glucose samples": 356146,
+    "average days per participant": 96.2,
     "data_source": {
       "G": "Glucose",
-      "I": "Insulin data",
-      "W": "Heart rate, Steps",
-      "M": "Meals",
-      "Q": "Age, Sex",
+      "I": "Insulin data (e.g. basal rate, boluses, insulin type)",
+      "W": "Step count, active minutes, sleep metrics (Garmin Forerunner 45)",
+      "M": "Meals (type, tag, carbs, protein, fat, fibre)",
+      "Q": "Age, Sex/Gender",
       "C": "HbA1C"
     },
     "populationGroups": [
-      { "type": "T1D", "count": 17 }
+      {
+        "type": "T1D",
+        "count": 17
+      }
     ],
+    "Links to paper": "https://www.nature.com/articles/s41597-025-05695-1",
     "Link to dataset": "https://zenodo.org/records/15806142",
-    "GitHub glucose dataset":"https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/T1D-UOM"
+    "Link to Git": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/T1D-UOM"
   },
   {
     "name": "Bris-T1D Open",
+    "access": "Open",
     "year release": "2025",
-    "fullDescription":"The Bris-T1D dataset was collected in the U.K. and released in 2025. It comprises between 67 to 223 days of continuous glucose data from participants with type 1 diabetes. This dataset also contains other contextual data from insulin delivery systems, wearable trackers, questionnaires and qualitative interviews.",
     "total": 20,
     "male": 3.0,
     "female": 15.0,
-    "age range": "18 – 26",
+    "age range": "18 \u2013 26",
     "Ethinicities": "85% White",
     "CGM Device": "Dexcom G6 / Freestyle Libre 2 / Medtronic Guardian 4 / Dexcom One",
-    "Total days of glucose": "3,656",
-    "Glucose samples": "848,574",
-    "average days per participant": 183,
+    "Total days of glucose": 3656,
+    "Glucose samples": 848574,
+    "average days per participant": 182.8,
     "data_source": {
       "G": "Glucose",
       "I": "Insulin pump data (e.g. basal rate, carbohydrate input)",
       "W": "Heart rate, step count, calories burned",
       "Q": "Age, sex/gender, ethnicity, diabetes duration, qualititive interview and focus group transcripts"
     },
+    "Unknown": 2.0,
     "populationGroups": [
-      { "type": "T1D", "count": 20 }
+      {
+        "type": "T1D",
+        "count": 20
+      }
     ],
+    "Links to paper": "https://arxiv.org/pdf/2507.17757",
     "Link to dataset": "https://data.bris.ac.uk/data/dataset/33z5jc8fa6tob21ptrugzqog08",
-    "GitHub glucose dataset":"https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/Bris-T1D_Open"
+    "Link to Git": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/Bris-T1D_Open"
   },
   {
     "name": "AZT1D",
+    "access": "Open",
     "year release": "2025",
-    "fullDescription":"The AZT1D dataset was collected in the U.S. and released in 2025. It comprises an average of 43 days of continuous glucose data from participants with type 1 diabetes. This dataset also contains other contextual data from insulin delivery systems, questionnaires, and clinical measurements such as HbA1C.",
     "total": 25,
     "male": 12.0,
     "female": 13.0,
-    "age range": "27 – 80",
-    "Ethinicities": "--",
+    "age range": "27 \u2013 80",
+    "Ethinicities": "NR",
     "CGM Device": "Dexcom G6 Pro",
-    "Total days of glucose": "1,063",
-    "Glucose samples": "306,712",
-    "average days per participant": 43,
+    "Total days of glucose": 1063,
+    "Glucose samples": 306712,
+    "average days per participant": 42.5,
     "data_source": {
       "G": "Glucose",
-      "I": "Insulin Pump Data",
-      "Q": "Age, Sex",
+      "I": "Insulin Pump Data (e.g. basal rate, boluses, carbohydrate input)",
+      "Q": "Age, Sex/Gender",
       "C": "HbA1C"
     },
     "populationGroups": [
-      { "type": "T1D", "count": 25 }
+      {
+        "type": "T1D",
+        "count": 25
+      }
     ],
+    "Links to paper": "https://arxiv.org/abs/2506.14789",
     "Link to dataset": "https://data.mendeley.com/datasets/gk9m674wcx/1",
-    "GitHub glucose dataset": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/AZT1D"
+    "Link to Git": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/AZT1D"
   },
   {
     "name": "Park 2025",
+    "access": "Open",
     "year release": "2025",
-    "fullDescription":"The Park_2025 dataset was collected in the U.S. and released in 2025. It comprises continuous glucose data only around oral glucose tolerance tests (~3 hours) each day from participants with no diabetes, prediabetes, and type 2 diabetes, This dataset also contains other contextual data from questionnaires and clinical measurements such as fasting plasma glucose and HbA1C.",
     "total": 38,
     "male": 15.0,
     "female": 19.0,
-    "Unknown":4,
-    "age range": "25 – 79",
+    "age range": "25 \u2013 79",
     "Ethinicities": "73.7% White, 18.4% Asian, 7.9% Hispanic/Latino",
     "CGM Device": "Dexcom G4",
-    "Total days of glucose": "--",
-    "Glucose samples": "23,520",
-    "average days per participant": "--",
+    "Total days of glucose": "NR",
+    "Glucose samples": 23520,
+    "average days per participant": "NR",
     "data_source": {
       "G": "Glucose",
       "Q": "Age, Sex/Gender",
       "C": "BMI, Blood Pressure, Lab measurements (HbA1C, fasting plasma glucose, OGTT, triglyceride, cholesterol, fasting insulin, etc.)"
     },
+    "Unknown": 4.0,
     "populationGroups": [
-      { "type": "T2D", "count": 1},
-      { "type": "PreD", "count": 16 },
-      { "type": "ND", "count": 20 }
+      {
+        "type": "T2D",
+        "count": 1
+      },
+      {
+        "type": "PreD",
+        "count": 16
+      },
+      {
+        "type": "ND",
+        "count": 20
+      }
     ],
+    "Links to paper": "https://www.nature.com/articles/s41746-025-01728-6",
     "Link to dataset": "https://cgmdb.stanford.edu/data/",
-    "GitHub glucose dataset": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/Park_2025"
+    "Link to Git": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/Park_2025"
   },
   {
     "name": "PhysioCGM",
+    "access": "Open",
     "year release": "2025",
-    "fullDescription":"The PhysioCGM dataset was ollected in the U.S. and released in 2025. It comprises an average of 80 days of continuous glucose data from participants with type 1 diabetes. This dataset also contains other contextual data from questionnaires and clinical measurements such as blood pressure and body mass index.",
     "total": 10,
     "male": 6.0,
     "female": 4.0,
-    "age range": "24 – 41",
-    "Ethinicities": "--",
+    "age range": "24 \u2013 41",
+    "Ethinicities": "NR",
     "CGM Device": "Dexcom G6",
-    "Total days of glucose": "723",
-    "Glucose samples": "201,586",
-    "average days per participant": 80,
+    "Total days of glucose": 723,
+    "Glucose samples": 201586,
+    "average days per participant": 80.3,
     "data_source": {
       "G": "Glucose",
-      "Q": "Age, Sex",
-      "C": "BMI, Blood Pressure"
+      "W": "Accelerometry, Blood Volume Pulse, Electrodermal Activity, Heart Rate, Interbeat Interval, Respiration Rate, etc."
     },
     "populationGroups": [
-      { "type": "T2D", "count": 10 }
+      {
+        "type": "T1D",
+        "count": 10
+      }
     ],
+    "Links to paper": "https://www.nature.com/articles/s41597-025-06090-6",
     "Link to dataset": "https://doi.org/10.6084/m9.figshare.28136294",
-    "GitHub glucose dataset": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/PhysioCGM"
+    "Link to Git": "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/3_Glucose-ML-collection/PhysioCGM"
   }
 ]

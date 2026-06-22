@@ -1,0 +1,91 @@
+.dist-bar-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.dist-bar {
+  display: flex;
+  width: 100%;
+  height: 29px;
+  overflow: hidden;
+  border-radius: 6px;
+  opacity: 0.8;
+}
+
+.dist-bar-empty {
+  background: var(--secondary-light-grey);
+  opacity: 0.4;
+}
+
+.dist-seg {
+  flex-basis: 0;
+  min-width: 0;
+}
+
+.dist-seg:first-child {
+  border-radius: 6px 0 0 6px;
+}
+
+.dist-seg:last-child {
+  border-radius: 0 6px 6px 0;
+}
+
+.dist-seg-very-low {
+  background: var(--dist-very-low);
+}
+.dist-seg-low {
+  background: var(--dist-low);
+}
+.dist-seg-target {
+  background: var(--dist-target);
+}
+.dist-seg-high {
+  background: var(--dist-high);
+}
+.dist-seg-very-high {
+  background: var(--dist-very-high);
+}
+
+.dist-ticks {
+  position: relative;
+  width: 100%;
+  height: 15px;
+  margin-top: 2px;
+}
+
+.dist-tick-measurements {
+  position: absolute;
+  inset: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.dist-tick {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+}
+
+.dist-tick-mark {
+  width: 1px;
+  height: 4px;
+  background: var(--secondary-grey);
+  display: block;
+  margin: 0 auto;
+}
+
+.dist-tick-label,
+.dist-tick-measure {
+  color: var(--secondary-grey);
+  font-size: 8px;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.dist-tick-label {
+  position: absolute;
+  top: 6px;
+  transform: translateX(-50%);
+}

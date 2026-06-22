@@ -1,0 +1,12 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "npm ci --prefix frontend/glucose-ml-web",
+  "buildCommand": "npm run build --prefix frontend/glucose-ml-web",
+  "outputDirectory": "frontend/glucose-ml-web/dist",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

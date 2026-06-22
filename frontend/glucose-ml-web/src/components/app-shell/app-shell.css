@@ -1,0 +1,102 @@
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  background: var(--glm-color-page);
+}
+
+.app-shell > main {
+  flex: 1 0 auto;
+}
+
+.app-shell-nav {
+  position: relative;
+  width: 100%;
+  height: var(--glm-nav-height);
+  overflow: hidden;
+  background: var(--glm-color-grey-border);
+}
+
+.app-shell-logo {
+  position: absolute;
+  left: 57px;
+  top: 7px;
+  width: 219px;
+  height: 59px;
+  overflow: hidden;
+  display: block;
+  text-decoration: none;
+}
+
+.app-shell-logo img {
+  width: 219px;
+  height: 59px;
+  object-fit: contain;
+  display: block;
+}
+
+.app-shell-links {
+  position: absolute;
+  top: 28px;
+  right: 57px;
+  display: flex;
+  gap: 32px;
+}
+
+.app-shell-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: normal;
+  color: #484848;
+  text-align: right;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.app-shell-link img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+@media (max-width: 680px) {
+  .app-shell-nav {
+    display: flex;
+    min-height: var(--glm-nav-height);
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 4px 18px;
+    padding: 8px 16px 10px;
+  }
+
+  .app-shell-logo {
+    position: static;
+    width: 170px;
+    height: 46px;
+    flex: 0 0 auto;
+  }
+
+  .app-shell-logo img {
+    width: 170px;
+    height: 46px;
+  }
+
+  .app-shell-links {
+    position: static;
+    display: flex;
+    flex: 0 1 auto;
+    justify-content: center;
+    gap: 18px;
+    min-width: 0;
+  }
+
+  .app-shell-link {
+    font-size: 14px;
+  }
+}
