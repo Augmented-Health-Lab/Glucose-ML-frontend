@@ -57,12 +57,11 @@ export default function BackgroundCgmChart({
       aria-labelledby={`${titleId} ${descriptionId}`}
       preserveAspectRatio="xMidYMid meet"
     >
-      <title id={titleId}>Illustrative 24-Hour CGM Patterns</title>
+      <title id={titleId}>24-Hour CGM Readings Across Diabetes Groups</title>
       <desc id={descriptionId}>
-        Synthetic glucose patterns illustrating Type 1, Type 2, prediabetes,
-        and no-diabetes groups across 24 hours. These points do not represent
-        study participants. Gray reference lines mark the target range from 70
-        to 180 milligrams per deciliter.
+        Glucose readings for one Type 1, Type 2, prediabetes, and no diabetes
+        participant across a 24-hour day. Gray reference lines mark the target
+        range from 70 to 180 milligrams per deciliter.
       </desc>
 
       <rect width={CHART_WIDTH} height={CHART_HEIGHT} rx="20" fill="#ffffff" />
@@ -75,7 +74,7 @@ export default function BackgroundCgmChart({
         fontWeight="500"
         textAnchor="middle"
       >
-        Illustrative 24-Hour CGM Patterns
+        24-Hour CGM Readings Across Diabetes Groups
       </text>
 
       {(Object.keys(CHART_SERIES_STYLES) as BackgroundCgmGroupKey[]).map(

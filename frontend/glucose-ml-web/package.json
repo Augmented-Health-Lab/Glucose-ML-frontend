@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "generate:synthetic-chart": "node scripts/generate-synthetic-cgm-chart.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },

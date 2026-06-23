@@ -21,6 +21,18 @@ const allowedStaticData = [
   "time_in_ranges_by_type.json",
 ];
 
+const approvedParticipantChart = "background_cgm_chart.json";
+const aggregateStaticData = allowedStaticData.filter(
+  (filename) => filename !== approvedParticipantChart
+);
+
+const approvedParticipantSeries = [
+  { key: "t1d", dataset: "AZT1D", subject: "Subject 11", date: "2024-01-10" },
+  { key: "t2d", dataset: "CGMacros", subject: "012", date: "2023-03-02" },
+  { key: "pred", dataset: "CGMacros", subject: "044", date: "2022-10-19" },
+  { key: "nd", dataset: "CGMacros", subject: "034", date: "2022-03-03" },
+] as const;
+
 const prohibitedRecordKeys = new Set([
   "person_id",
   "subject",
@@ -70,7 +82,7 @@ test("public static data uses an explicit aggregate-data manifest", () => {
 });
 
 test("public static data excludes participant-record field names", () => {
-  const findings = allowedStaticData.flatMap((filename) => {
+  const findings = aggregateStaticData.flatMap((filename) => {
     const value = JSON.parse(
       readFileSync(path.join(staticDataRoot, filename), "utf8")
     );
@@ -80,18 +92,73 @@ test("public static data excludes participant-record field names", () => {
   assert.deepEqual(findings, []);
 });
 
-test("public source excludes copied subject labels and local paths", () => {
+test("background chart contains only the explicitly approved participant-day exception", () => {
+  const chart = JSON.parse(
+    readFileSync(path.join(staticDataRoot, approvedParticipantChart), "utf8")
+  ) as {
+    series: Array<{
+      key: string;
+      dataset: string;
+      subject: string;
+      date: string;
+      points: Array<{ hour: number; glucose: number }>;
+    }>;
+  };
+
+  assert.deepEqual(
+    chart.series.map(({ key, dataset, subject, date }) => ({
+      key,
+      dataset,
+      subject,
+      date,
+    })),
+    approvedParticipantSeries
+  );
+
+  for (const series of chart.series) {
+    assert.deepEqual(
+      Object.keys(series).sort(),
+      ["dataset", "date", "key", "points", "subject"]
+    );
+    for (const [index, point] of series.points.entries()) {
+      assert.deepEqual(Object.keys(point).sort(), ["glucose", "hour"]);
+      assert.equal(typeof point.hour, "number");
+      assert.equal(typeof point.glucose, "number");
+      assert.ok(Number.isFinite(point.hour));
+      assert.ok(Number.isFinite(point.glucose));
+      assert.ok(point.hour >= 0 && point.hour < 24);
+      if (index > 0) {
+        assert.ok(point.hour >= series.points[index - 1].hour);
+      }
+    }
+  }
+
+  const serialized = JSON.stringify(chart);
+  assert.doesNotMatch(
+    serialized,
+    /"(?:person_id|subject_id|timestamp|glucose_value_mg_dl)"\s*:/i
+  );
+});
+
+test("public source permits approved subject labels only in the chart module", () => {
   const sourceFiles = readdirSync(path.join(appRoot, "src"), {
     recursive: true,
     withFileTypes: true,
   }).filter((entry) => entry.isFile() && /\.(?:css|ts|tsx)$/.test(entry.name));
 
+  const chartModule = path.normalize(
+    path.join(appRoot, "src/features/background/background-cgm-chart.ts")
+  );
   const findings = sourceFiles.flatMap((entry) => {
     const filename = path.join(entry.parentPath, entry.name);
     const source = readFileSync(filename, "utf8");
-    return /Subject\s+\d+|CGMacros:\s*\d+|\/Users\/|\/home\/[^\s"'/]+\//.test(
+    const containsLocalPath = /\/Users\/|\/home\/[^\s"'/]+\//.test(source);
+    const containsSubjectLabel = /Subject\s+\d+|CGMacros:\s*\d+/.test(
       source
-    )
+    );
+    const hasUnexpectedSubjectLabel =
+      containsSubjectLabel && path.normalize(filename) !== chartModule;
+    return containsLocalPath || hasUnexpectedSubjectLabel
       ? [path.relative(appRoot, filename)]
       : [];
   });

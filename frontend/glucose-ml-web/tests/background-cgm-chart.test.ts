@@ -14,30 +14,60 @@ const chartData = JSON.parse(
     "utf8"
   )
 ) as {
-  synthetic: boolean;
-  description: string;
   series: Array<{
-    key: string;
+    key: "t1d" | "t2d" | "pred" | "nd";
+    dataset: string;
+    subject: string;
+    date: string;
     points: Array<{ hour: number; glucose: number }>;
   }>;
 };
 
-test("background CGM chart contains synthetic illustrative series only", () => {
-  assert.equal(chartData.synthetic, true);
-  assert.match(chartData.description, /synthetic/i);
-  assert.deepEqual(
-    chartData.series.map(({ key }) => key),
-    ["t1d", "t2d", "pred", "nd"]
-  );
+const approvedSeries = [
+  {
+    key: "t1d",
+    dataset: "AZT1D",
+    subject: "Subject 11",
+    date: "2024-01-10",
+    pointCount: 288,
+  },
+  {
+    key: "t2d",
+    dataset: "CGMacros",
+    subject: "012",
+    date: "2023-03-02",
+    pointCount: 1440,
+  },
+  {
+    key: "pred",
+    dataset: "CGMacros",
+    subject: "044",
+    date: "2022-10-19",
+    pointCount: 1440,
+  },
+  {
+    key: "nd",
+    dataset: "CGMacros",
+    subject: "034",
+    date: "2022-03-03",
+    pointCount: 1440,
+  },
+] as const;
 
-  const serialized = JSON.stringify(chartData);
-  assert.doesNotMatch(
-    serialized,
-    /"(?:subject|subject_id|person_id|date|dataset)"\s*:/i
+test("background CGM chart contains exactly the approved participant-day series", () => {
+  assert.deepEqual(
+    chartData.series.map(({ key, dataset, subject, date, points }) => ({
+      key,
+      dataset,
+      subject,
+      date,
+      pointCount: points.length,
+    })),
+    approvedSeries
   );
 });
 
-test("background CGM chart legend contains group labels only", () => {
+test("background CGM chart legend identifies the approved source subjects", () => {
   assert.deepEqual(
     Object.fromEntries(
       Object.entries(CHART_SERIES_STYLES).map(([key, style]) => [
@@ -46,26 +76,24 @@ test("background CGM chart legend contains group labels only", () => {
       ])
     ),
     {
-      t1d: "Type 1 diabetes",
-      t2d: "Type 2 diabetes",
-      pred: "Prediabetes",
-      nd: "No diabetes",
+      t1d: "T1D (AZT1D: Subject 11)",
+      t2d: "T2D (CGMacros: 012)",
+      pred: "PreD (CGMacros: 044)",
+      nd: "ND (CGMacros: 034)",
     }
   );
 });
 
-test("background CGM chart points are non-empty and chronological", () => {
+test("background CGM chart points use only numeric chronological chart fields", () => {
   for (const series of chartData.series) {
     assert.ok(series.points.length > 0);
-    assert.ok(
-      series.points.every(
-        (point, index, points) =>
-          point.hour >= 0 &&
-          point.hour < 24 &&
-          Number.isFinite(point.glucose) &&
-          (index === 0 || point.hour >= points[index - 1].hour)
-      )
-    );
+    for (const [index, point] of series.points.entries()) {
+      assert.deepEqual(Object.keys(point).sort(), ["glucose", "hour"]);
+      assert.ok(Number.isFinite(point.hour));
+      assert.ok(Number.isFinite(point.glucose));
+      assert.ok(point.hour >= 0 && point.hour < 24);
+      if (index > 0) assert.ok(point.hour >= series.points[index - 1].hour);
+    }
   }
 });
 

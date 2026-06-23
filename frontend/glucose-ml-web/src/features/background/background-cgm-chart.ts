@@ -7,12 +7,13 @@ export type BackgroundCgmPoint = {
 
 export type BackgroundCgmSeries = {
   key: BackgroundCgmGroupKey;
+  dataset: string;
+  subject: string;
+  date: string;
   points: BackgroundCgmPoint[];
 };
 
 export type BackgroundCgmChartData = {
-  synthetic: true;
-  description: string;
   series: BackgroundCgmSeries[];
 };
 
@@ -47,28 +48,28 @@ export const CHART_SERIES_STYLES: Record<
 > = {
   t1d: {
     label: "Type 1",
-    legendLabel: "Type 1 diabetes",
+    legendLabel: "T1D (AZT1D: Subject 11)",
     color: "#e61919",
     dashArray: "2 6",
     lineMark: ". . . .",
   },
   t2d: {
     label: "Type 2",
-    legendLabel: "Type 2 diabetes",
+    legendLabel: "T2D (CGMacros: 012)",
     color: "#f58516",
     dashArray: "14 6 2 6 2 6",
     lineMark: "- .",
   },
   pred: {
     label: "Prediabetes",
-    legendLabel: "Prediabetes",
+    legendLabel: "PreD (CGMacros: 044)",
     color: "#ebd91a",
     dashArray: "12 8",
     lineMark: "- .",
   },
   nd: {
     label: "No Diabetes",
-    legendLabel: "No diabetes",
+    legendLabel: "ND (CGMacros: 034)",
     color: "#1de04e",
     dashArray: "14 6 2 6",
     lineMark: "- .",

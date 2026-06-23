@@ -6,9 +6,9 @@ Production: [www.glucose-ml-project.com](https://www.glucose-ml-project.com/)
 
 ## Repository scope
 
-This repository contains only the deployable React frontend, its tests, required visual assets, and aggregate runtime data used by the site. It does not contain participant-level glucose records, subject-level metadata, controlled-access dataset files, or the private data-processing workspace.
+This repository contains only the deployable React frontend, its tests, required visual assets, and runtime data used by the site. Runtime data is aggregate except for one explicitly approved participant-day visualization on the Background page. It does not contain source datasets, controlled-access dataset files, or the private data-processing workspace.
 
-Dataset descriptions and aggregate statistics do not grant access to the underlying datasets. Access and reuse remain governed by each dataset provider's terms, linked from the application.
+The approved Background visualization contains four participant-day traces with dataset names, subject identifiers, and dates. Their inclusion does not grant access to or permission to reuse the underlying datasets. All dataset access and reuse remain governed by each dataset provider's terms, linked from the application.
 
 ## Development
 
@@ -21,7 +21,7 @@ npm run build
 npm run dev
 ```
 
-The application is built with Vite, React, and TypeScript. Static aggregate data is served from `frontend/glucose-ml-web/public/static_data/`.
+The application is built with Vite, React, and TypeScript. Runtime data is served from `frontend/glucose-ml-web/public/static_data/`.
 
 ## Deployment
 
