@@ -35,11 +35,15 @@ test("only the background tab filters remain sticky while scrolling", () => {
   assert.match(backgroundPageTsx, /className="background-anchor-nav-shell"/);
   assert.match(
     backgroundPageCss,
-    /\.background-anchor-nav-shell\s*\{[^}]*padding:\s*0\s+0\s+24px/s
+    /\.background-anchor-nav-shell\s*\{[^}]*padding:\s*24px\s+0/s
   );
   assert.match(
     backgroundPageCss,
     /\.background-anchor-nav\s*\{[^}]*justify-content:\s*center/s
+  );
+  assert.match(
+    backgroundPageCss,
+    /@media\s*\(max-width:\s*680px\)\s*\{[\s\S]*\.background-anchor-nav\s*\{[^}]*padding-bottom:\s*0/s
   );
   assert.match(
     backgroundPageCss,
