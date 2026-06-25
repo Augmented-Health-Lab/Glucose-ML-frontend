@@ -10,7 +10,7 @@ const populationOptionLabels: Record<string, string> = {
 };
 
 const accessOptionLabels: Record<string, string> = {
-  Open: "Public access",
+  Open: "Open access",
   Controlled: "Controlled access",
 };
 

@@ -35,11 +35,19 @@ test("only the background tab filters remain sticky while scrolling", () => {
   assert.match(backgroundPageTsx, /className="background-anchor-nav-shell"/);
   assert.match(
     backgroundPageCss,
-    /\.background-anchor-nav-shell\s*\{[^}]*padding:\s*22px\s+0/s
+    /\.background-anchor-nav-shell\s*\{[^}]*padding:\s*0\s+0\s+24px/s
+  );
+  assert.match(
+    backgroundPageCss,
+    /\.background-anchor-nav\s*\{[^}]*justify-content:\s*center/s
   );
   assert.match(
     backgroundPageCss,
     /\.background-anchor-nav__item\s*\{[^}]*border:\s*1px\s+solid\s+#e1e8e7[^}]*background:\s*#f5f8f8[^}]*color:\s*#3d403f/s
+  );
+  assert.match(
+    backgroundPageCss,
+    /\.background-anchor-nav__item\s*\{[^}]*\n\s+height:\s*41px/s
   );
   assert.match(
     backgroundPageCss,
@@ -86,11 +94,41 @@ test("background active section follows scrolling below the sticky header", () =
   assert.match(backgroundPageTsx, /scrollSettleTimeoutId/);
 });
 
-test("background diabetes learn more link routes to the NIDDK diabetes overview", () => {
+test("background hero header matches Figma centered spacing", () => {
+  assert.match(
+    backgroundPageCss,
+    /\.background-page\s*\{[^}]*--background-sticky-offset:\s*65px/s
+  );
+  assert.match(
+    backgroundPageCss,
+    /\.background-hero\s*\{[^}]*padding:\s*60px\s+0\s+24px[^}]*text-align:\s*center/s
+  );
+  assert.match(
+    backgroundPageCss,
+    /\.background-eyebrow\s*\{[^}]*margin:\s*0\s+0\s+8px[^}]*line-height:\s*24px/s
+  );
+  assert.match(
+    backgroundPageCss,
+    /\.background-hero h1\s*\{[^}]*font-size:\s*36px[^}]*line-height:\s*44px/s
+  );
+  assert.match(
+    backgroundPageCss,
+    /\.background-hero__subtitle\s*\{[^}]*margin:\s*8px\s+0\s+0[^}]*line-height:\s*24px/s
+  );
+});
+
+test("background learn more links route to the CDC diabetes overview", () => {
+  const cdcDiabetesOverviewHref = "https://www.cdc.gov/diabetes/about/index.html";
+
   assert.match(
     backgroundPageTsx,
-    /https:\/\/www\.niddk\.nih\.gov\/health-information\/diabetes\/overview\/what-is-diabetes/
+    /https:\/\/www\.cdc\.gov\/diabetes\/about\/index\.html/
   );
+  assert.equal(
+    backgroundPageTsx.split(cdcDiabetesOverviewHref).length - 1,
+    2
+  );
+  assert.doesNotMatch(backgroundPageTsx, /niddk\.nih\.gov/);
 });
 
 test("background glossary section appears above the model rationale section", () => {
@@ -128,6 +166,8 @@ test("background page wording follows Figma frame 36685", () => {
     backgroundPageTsx,
     /This page provides basic background and context needed to understand\s+the Glucose-ML project and mission - no prior knowledge is needed\./
   );
+  assert.match(backgroundPageTsx, /What is a Continuous Glucose Monitor \(CGM\)\?/);
+  assert.doesNotMatch(backgroundPageTsx, /What is a Continuous Glucose Monitoring \(CGM\)\?/);
   assert.match(backgroundPageTsx, /What CGM data look like/);
   assert.match(backgroundPageTsx, /Why real CGM data matters/);
   assert.match(backgroundPageTsx, /Why dataset diversity matters/);
@@ -199,5 +239,9 @@ test("background CGM group pills toggle the interactive chart", () => {
   assert.match(
     backgroundPageCss,
     /\.background-timeseries\s*\{[^}]*aspect-ratio:\s*1319\s*\/\s*794[^}]*border-radius:\s*20px/s
+  );
+  assert.match(
+    backgroundPageCss,
+    /@media\s*\(max-height:\s*820px\)\s*and\s*\(min-width:\s*900px\)\s*\{[\s\S]*\.background-timeseries\s*\{[^}]*width:\s*min\(100%,\s*calc\(\(100vh\s*-\s*230px\)\s*\*\s*1319\s*\/\s*794\)\)[^}]*margin-inline:\s*auto/s
   );
 });

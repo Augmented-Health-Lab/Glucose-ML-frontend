@@ -21,12 +21,20 @@ test("registers a dedicated About route in the shared shell", () => {
 test("renders the approved Figma About sections and placeholders", () => {
   assert.match(page, /ABOUT THE GLUCOSE ML PROJECT/);
   assert.match(page, /Accelerating data-driven research for diabetes/);
+  assert.match(page, /Glucose-ML is an evolving collection/);
+  assert.match(page, /Our mission/);
+  assert.match(page, /Bridge the data gap/);
   assert.match(page, /How it works/);
-  assert.match(page, /Augmented Health Lab/);
+  assert.match(page, /Explore & Discover/);
+  assert.match(page, /Visualize & Compare/);
+  assert.match(page, /Access & Build/);
+  assert.match(page, /Who we are/);
+  assert.doesNotMatch(page, /<h2 id="about-lab-title">Augmented Health Lab<\/h2>/);
   assert.match(page, /Current Contributors/);
   assert.match(page, /Past Contributors/);
   assert.match(page, /Publications/);
   assert.match(page, /name: "Firstname Lastname"/);
+  assert.match(page, /role: "ROLE"/);
   assert.match(page, /title: "Publication name details"/);
   assert.match(page, /Array\.from\(\{ length: 9 \}/);
   assert.match(page, /Array\.from\(\{ length: 3 \}/);
@@ -44,14 +52,19 @@ test("defines Figma desktop grids and responsive collapse", () => {
     css,
     /grid-template-columns:\s*repeat\(3,\s*minmax\(0,\s*1fr\)\)/
   );
-  assert.match(css, /grid-template-columns:\s*repeat\(6,\s*172px\)/);
+  assert.match(css, /grid-template-columns:\s*175px\s+minmax\(0,\s*882px\)/);
+  assert.match(css, /grid-template-columns:\s*repeat\(5,\s*172px\)/);
   assert.match(css, /@media\s*\(max-width:\s*760px\)/);
 });
 
 test("pins the measured Figma desktop geometry", () => {
   assert.match(page, /className="about-hero__message"/);
+  assert.match(css, /\.about-hero\s*\{[^}]*min-height:\s*285px/s);
+  assert.match(css, /\.about-mission\s*\{[^}]*min-height:\s*252px/s);
   assert.match(css, /\.about-hero__message\s*\{[^}]*gap:\s*8px/s);
-  assert.match(css, /\.about-info-card\s*\{[^}]*height:\s*128px/s);
+  assert.match(css, /\.about-how\s*\{[^}]*min-height:\s*382px/s);
+  assert.match(css, /\.about-info-card\s*\{[^}]*height:\s*162px/s);
+  assert.match(css, /\.about-contributor\s*\{[^}]*min-height:\s*216px/s);
   assert.match(css, /\.about-contact__grid\s*\{[^}]*height:\s*209px/s);
   assert.match(css, /\.about-contact-card\s*\{[^}]*height:\s*207px/s);
   assert.match(css, /\.about-page\s*\{[^}]*padding-bottom:\s*34px/s);

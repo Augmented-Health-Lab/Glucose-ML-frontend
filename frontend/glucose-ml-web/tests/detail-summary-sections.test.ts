@@ -37,8 +37,20 @@ test("participant groups render as ordered detail rows without population badges
   assert.match(populationTsx, /ND: "No diabetes"/);
   assert.doesNotMatch(populationTsx, /RoundIcon/);
   assert.match(populationTsx, />Population</);
-  assert.match(populationTsx, /className="detail-card__info"/);
   assert.match(populationTsx, /\$\{count\.toLocaleString\("en-US"\)\} participants/);
+});
+
+test("population information opens from an accessible button", () => {
+  assert.match(populationTsx, /useState/);
+  assert.match(populationTsx, /<button[\s\S]*className="detail-card__info"/);
+  assert.match(populationTsx, /type="button"/);
+  assert.match(populationTsx, /aria-expanded=\{isInfoOpen\}/);
+  assert.match(populationTsx, /aria-controls="population-info-popup"/);
+  assert.match(populationTsx, /id="population-info-popup"/);
+  assert.match(
+    populationTsx,
+    /Number of participants with CGM data in this dataset\. Participants without CGM data are not included in this count\./
+  );
 });
 
 test("demographics follow the Figma order and report missing values explicitly", () => {

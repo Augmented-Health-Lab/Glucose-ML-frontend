@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import "./legend-modal.css";
 import {
+  legendAccessTiers,
   legendDataSources,
   legendGlucoseRanges,
   legendPopulation,
@@ -59,18 +60,20 @@ export default function LegendModal({ open, onClose }: Props) {
 
         <div className="legend-modal-content">
           <h2 id="legend-title" className="legend-title">
-            Dataset Guide
+            Guide to Exploring CGM Datasets
           </h2>
-          <a className="legend-learn-link" href="#background">
-            New to CGM data? Learn how to interpret it →
+          <a className="legend-learn-link" href="/background">
+            New to CGM data? See background →
           </a>
 
           <div className="legend-columns">
             <div className="legend-col">
               <section className="legend-block">
-                <div className="legend-block-title">Glucose value ranges</div>
+                <div className="legend-block-title">Glucose Distribution</div>
                 <div className="legend-block-subtitle">
-                  The total range of values in which...
+                  An overview of glucose data distribution across all
+                  participants in a given dataset in accordance with clinical
+                  targets for continuous glucose monitoring data interpretation.
                 </div>
 
                 <ul className="legend-swatch-list">
@@ -89,22 +92,19 @@ export default function LegendModal({ open, onClose }: Props) {
               <div className="legend-divider" />
 
               <section className="legend-block">
-                <div className="legend-block-title">Population</div>
+                <div className="legend-block-title">Data Sources</div>
                 <div className="legend-block-subtitle">
-                  Diabetes groups determined by HbA1c lab measurement.
+                  All datasets in the Glucose-ML collection include continuous
+                  glucose monitoring data. Many datasets also include
+                  complementary data from other sources.
                 </div>
 
-                <div className="population-list">
-                  {legendPopulation.map((population) => (
-                    <div className="population-item" key={population.code}>
-                      <span
-                        className={`legend-pop-badge ${population.className}`}
-                      >
-                        {population.code}
-                      </span>
-                      <div className="pop-text">
-                        <div className="pop-name">{population.label}</div>
-                        <div className="pop-desc">{population.description}</div>
+                <div className="source-list">
+                  {legendDataSources.map((source) => (
+                    <div className="source-item" key={source.code}>
+                      <div className="source-text">
+                        <div className="source-title">{source.label}</div>
+                        <div className="source-desc">{source.description}</div>
                       </div>
                     </div>
                   ))}
@@ -114,15 +114,53 @@ export default function LegendModal({ open, onClose }: Props) {
 
             <div className="legend-col">
               <section className="legend-block">
-                <div className="legend-block-title">Data collection sources</div>
+                <div className="legend-block-title">Population</div>
+                <div className="legend-block-subtitle">
+                  An overview of the number of participants represented in a
+                  given dataset in accordance with the diabetes groups reported
+                  in the original dataset reference.
+                </div>
 
-                <div className="source-list">
-                  {legendDataSources.map((source) => (
-                    <div className="source-item" key={source.code}>
-                      <div className="source-text">
-                        <div className="source-title">{source.label}</div>
-                        <div className="source-desc">{source.description}</div>
+                <div className="population-list">
+                  {legendPopulation.map((population) => (
+                    <div className="population-item" key={population.code}>
+                      <span
+                        className={`legend-pop-badge ${population.className}`}
+                      >
+                        {population.label}
+                      </span>
+                      <div className="pop-desc">{population.description}</div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              <div className="legend-divider legend-divider--right" />
+
+              <section className="legend-block">
+                <div className="legend-block-title">Accessibility</div>
+                <div className="legend-block-subtitle">
+                  All datasets in the Glucose-ML collection are public. However,
+                  datasets are released via one of the following options:
+                </div>
+
+                <div className="access-list">
+                  {legendAccessTiers.map((tier) => (
+                    <div className="access-item" key={tier.type}>
+                      <div className="access-title">
+                        <img
+                          className={
+                            tier.type === "Controlled"
+                              ? "access-icon access-icon--controlled"
+                              : "access-icon"
+                          }
+                          src={tier.icon}
+                          alt=""
+                          aria-hidden="true"
+                        />
+                        <span>{tier.label}</span>
                       </div>
+                      <div className="access-desc">{tier.description}</div>
                     </div>
                   ))}
                 </div>

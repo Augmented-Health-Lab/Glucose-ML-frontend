@@ -27,6 +27,7 @@
 }
 
 .detail-card__heading {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -41,12 +42,37 @@
   width: 20px;
   height: 20px;
   flex: 0 0 auto;
+  padding: 0;
   border: 0.769px solid #bac5c4;
   border-radius: 50%;
+  background: var(--glm-color-white);
   color: #59636e;
+  cursor: pointer;
   font-size: 10px;
   font-weight: 700;
   line-height: 1;
+}
+
+.detail-card__info:focus-visible {
+  outline: 2px solid #2f8c88;
+  outline-offset: 2px;
+}
+
+.detail-card__info-popup {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 3;
+  width: min(280px, calc(100vw - 48px));
+  padding: 12px 14px;
+  border: 1px solid #d6e1e0;
+  border-radius: 8px;
+  background: var(--glm-color-white);
+  box-shadow: 0 12px 28px rgba(39, 41, 45, 0.16);
+  color: var(--glm-color-text);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.45;
 }
 
 .detail-card__rows {

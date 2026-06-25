@@ -347,7 +347,7 @@ const BackgroundPage = () => {
               </ul>
               <a
                 className="background-learn-more"
-                href="https://www.niddk.nih.gov/health-information/diabetes/overview/what-is-diabetes"
+                href="https://www.cdc.gov/diabetes/about/index.html"
                 rel="noreferrer"
                 target="_blank"
               >
@@ -361,7 +361,7 @@ const BackgroundPage = () => {
         <section id="cgm" className="background-section background-section--white">
           <div className="background-page__inner background-split">
             <div className="background-copy">
-              <h2>What is Continuous Glucose Monitoring (CGM)?</h2>
+              <h2>What is a Continuous Glucose Monitor (CGM)?</h2>
               <p>
                 A CGM is a wearable technology that continuously tracks glucose
                 levels throughout the day and night. It measures the glucose level
@@ -388,7 +388,7 @@ const BackgroundPage = () => {
               </p>
               <a
                 className="background-learn-more background-learn-more--split"
-                href="https://www.niddk.nih.gov/health-information/diabetes/overview/managing-diabetes/continuous-glucose-monitoring"
+                href="https://www.cdc.gov/diabetes/about/index.html"
                 rel="noreferrer"
                 target="_blank"
               >

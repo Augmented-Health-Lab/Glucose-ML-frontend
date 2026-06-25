@@ -7,6 +7,8 @@ const read = (path: string) =>
 
 const appShellTsx = read("../src/components/app-shell/AppShell.tsx");
 const appShellCss = read("../src/components/app-shell/app-shell.css");
+const navHomeSvg = read("../public/figma-assets/nav-home.svg");
+const navBackgroundSvg = read("../public/figma-assets/nav-background.svg");
 const datasetDetailTsx = read(
   "../src/features/dataset-detail/DatasetDetail.tsx"
 );
@@ -44,6 +46,16 @@ test("app shell navigation follows the Figma icon and link order", () => {
     appShellCss,
     /\.app-shell-link\s*\{[^}]*display:\s*inline-flex[^}]*gap:\s*8px/s
   );
+  assert.match(
+    appShellCss,
+    /\.app-shell-link:nth-child\(-n \+ 2\)\s*\{[^}]*color:\s*#2f8c88/s
+  );
+  assert.match(
+    appShellCss,
+    /\.app-shell-link:nth-child\(3\)\s*\{[^}]*color:\s*#484848/s
+  );
+  assert.match(navHomeSvg, /fill="#2f8c88"/i);
+  assert.match(navBackgroundSvg, /fill="#2f8c88"/i);
   assert.equal(
     existsSync(new URL("../public/figma-assets/nav-home.svg", import.meta.url)),
     true

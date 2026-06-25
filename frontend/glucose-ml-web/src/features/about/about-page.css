@@ -14,7 +14,7 @@
 }
 
 .about-hero {
-  min-height: 329px;
+  min-height: 285px;
   background: #f6f7f7;
 }
 
@@ -22,8 +22,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 32px;
-  padding-block: 60px;
+  gap: 24px;
+  padding-block: 60px 24px;
   text-align: center;
 }
 
@@ -54,10 +54,11 @@
   color: #1e1f22;
   font-size: 36px;
   font-weight: 700;
-  line-height: normal;
+  line-height: 44px;
 }
 
 .about-hero__description {
+  max-width: 1320px;
   margin: 0;
   color: #848e99;
   font-size: 18px;
@@ -87,19 +88,48 @@
   background: #2f8c88;
 }
 
+.about-mission,
 .about-how {
-  min-height: 384px;
-  padding-block: 60px;
   background: #e7eeed;
 }
 
+.about-mission {
+  min-height: 252px;
+  padding-block: 60px 24px;
+}
+
+.about-mission__content {
+  display: grid;
+  grid-template-columns: 175px minmax(0, 882px);
+  column-gap: 263px;
+  align-items: start;
+}
+
+.about-mission h2,
 .about-how h2,
 .about-lab h2 {
   margin: 0;
   color: #1e1f22;
   font-size: 28px;
   font-weight: 600;
-  line-height: normal;
+  line-height: 34px;
+}
+
+.about-mission ul {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding-left: 18px;
+  color: #59636e;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.about-how {
+  min-height: 382px;
+  padding-block: 24px 60px;
 }
 
 .about-how__grid,
@@ -115,7 +145,7 @@
 
 .about-info-card {
   display: flex;
-  height: 128px;
+  height: 162px;
   align-items: flex-start;
   gap: 12px;
   padding: 32px 36px;
@@ -137,7 +167,7 @@
   color: #1e1f22;
   font-size: 18px;
   font-weight: 700;
-  line-height: normal;
+  line-height: 22px;
 }
 
 .about-info-card p,
@@ -146,7 +176,7 @@
   color: #59636e;
   font-size: 14px;
   font-weight: 400;
-  line-height: normal;
+  line-height: 17px;
 }
 
 .about-how__summary {
@@ -158,13 +188,21 @@
 }
 
 .about-lab {
-  min-height: 1047px;
+  min-height: 1103px;
   padding-block: 60px;
-  background: #e7eeed;
+  background: #fff;
+}
+
+.about-lab__heading {
+  display: flex;
+  min-height: 34px;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
 }
 
 .about-lab__intro > p {
-  margin: 22px 0 0;
+  margin: 27px 0 0;
   color: #59636e;
   font-size: 16px;
   font-weight: 400;
@@ -177,7 +215,7 @@
   gap: 8px;
   color: #2f8c88;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 24px;
   text-decoration: none;
 }
@@ -197,9 +235,7 @@
 }
 
 .about-lab__link {
-  display: flex;
-  width: fit-content;
-  margin: 8px 0 0 auto;
+  flex: 0 0 auto;
 }
 
 .about-contributors {
@@ -216,36 +252,52 @@
 
 .about-contributors__grid {
   display: grid;
-  grid-template-columns: repeat(6, 172px);
-  gap: 28px;
-  margin-top: 16px;
+  grid-template-columns: repeat(5, 172px);
+  gap: 60px;
+  margin-top: 24px;
 }
 
 .about-contributor {
   display: flex;
   width: 172px;
-  min-height: 192px;
+  min-height: 216px;
   flex-direction: column;
   align-items: center;
   gap: 12px;
 }
 
 .about-contributor__portrait {
-  width: 132px;
-  height: 132px;
+  width: 156px;
+  height: 156px;
   flex: 0 0 auto;
-  border: 2px solid #3ba7a1;
+  border: 3px solid #3ba7a1;
   border-radius: 50%;
   background: #d9d9d9;
 }
 
+.about-contributor__details {
+  display: flex;
+  width: 172px;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
 .about-contributor p {
-  width: 132px;
+  width: 172px;
   margin: 0;
   color: #59636e;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 24px;
+  text-align: center;
+}
+
+.about-contributor span {
+  color: #848e99;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
   text-align: center;
 }
 
@@ -359,6 +411,16 @@
   line-height: 17px;
 }
 
+.about-card-link {
+  min-height: 49px;
+  padding: 16px 20px;
+  border: 1px solid #2f8c88;
+  border-radius: 12px;
+  background: #f5f8f8;
+  box-shadow: var(--glm-shadow-button);
+  text-decoration: none;
+}
+
 .about-card-link img {
   width: 16px;
   height: 16px;
@@ -367,7 +429,7 @@
 .about-email-link {
   min-height: 44px;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 19px;
   text-decoration: none;
 }
@@ -378,8 +440,13 @@
 }
 
 @media (max-width: 1200px) {
+  .about-mission__content {
+    grid-template-columns: 175px minmax(0, 1fr);
+    column-gap: 96px;
+  }
+
   .about-contributors__grid {
-    grid-template-columns: repeat(5, 172px);
+    grid-template-columns: repeat(4, 172px);
   }
 }
 
@@ -388,13 +455,19 @@
     padding-inline: 32px;
   }
 
+  .about-mission__content {
+    grid-template-columns: 1fr;
+    row-gap: 20px;
+  }
+
   .about-how__grid,
   .about-contact__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .about-contributors__grid {
-    grid-template-columns: repeat(4, 172px);
+    grid-template-columns: repeat(3, 172px);
+    gap: 48px;
   }
 }
 
@@ -404,6 +477,7 @@
   }
 
   .about-hero__content,
+  .about-mission,
   .about-how,
   .about-lab,
   .about-contact {
@@ -412,11 +486,17 @@
 
   .about-hero h1 {
     font-size: 30px;
+    line-height: 36px;
   }
 
   .about-hero__description {
     font-size: 16px;
     line-height: 22px;
+  }
+
+  .about-lab__heading {
+    flex-direction: column;
+    gap: 12px;
   }
 
   .about-how__grid,
@@ -433,16 +513,12 @@
   .about-contact__grid {
     height: auto;
   }
-
-  .about-contributors__grid {
-    grid-template-columns: repeat(3, 172px);
-  }
 }
 
-@media (max-width: 590px) {
+@media (max-width: 640px) {
   .about-contributors__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 28px 12px;
+    gap: 36px 12px;
   }
 
   .about-contributor {
@@ -461,6 +537,7 @@
 
   .about-hero h1 {
     font-size: 27px;
+    line-height: 34px;
   }
 
   .about-info-card,
@@ -469,13 +546,12 @@
   }
 
   .about-contributor__portrait {
-    width: 120px;
-    height: 120px;
+    width: 132px;
+    height: 132px;
   }
 
-  .about-contributor p {
-    width: 120px;
-    font-size: 14px;
-    line-height: 21px;
+  .about-contributor p,
+  .about-contributor__details {
+    width: 132px;
   }
 }

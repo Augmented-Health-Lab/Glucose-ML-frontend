@@ -6,14 +6,16 @@
   align-items: center;
   justify-content: center;
   padding: 28px;
+  overscroll-behavior: none;
   background: rgba(0, 0, 0, 0.88);
 }
 
 .legend-modal {
   position: relative;
   width: min(940px, 100%);
-  height: min(750px, calc(100vh - 56px));
-  overflow: hidden;
+  height: min(1217px, calc(100vh - 56px));
+  overflow: auto;
+  overscroll-behavior: none;
   background: var(--glm-color-white);
   border: 1px solid var(--glm-color-card-border);
   border-radius: 20.202px;
@@ -60,7 +62,7 @@
 
 .legend-modal-content {
   position: relative;
-  height: 100%;
+  min-height: 1215px;
   padding: 40px;
 }
 
@@ -75,7 +77,7 @@
 .legend-learn-link {
   display: block;
   width: 860px;
-  margin-top: 6px;
+  margin-top: 8px;
   color: var(--glm-color-brand-dark);
   font-size: 14px;
   font-weight: 400;
@@ -87,7 +89,7 @@
   display: grid;
   grid-template-columns: 410px minmax(0, 414px);
   column-gap: 36px;
-  margin-top: 32px;
+  margin-top: 28px;
 }
 
 .legend-col {
@@ -121,6 +123,11 @@
   background: var(--glm-color-grey-border);
 }
 
+.legend-divider--right {
+  width: 414px;
+  margin: 24px 0 24px;
+}
+
 .legend-swatch-list {
   display: flex;
   flex-direction: column;
@@ -133,7 +140,7 @@
 .legend-swatch-list li {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
   color: var(--glm-color-text);
   font-size: 16px;
   font-weight: 500;
@@ -175,42 +182,29 @@
 }
 
 .population-item {
-  display: grid;
-  grid-template-columns: 18px 1fr;
-  grid-template-rows: 18px auto;
-  column-gap: 8px;
-  row-gap: 8px;
-  align-items: center;
-}
-
-.pop-text {
-  display: contents;
-}
-
-.pop-name {
-  align-items: center;
-  color: var(--glm-color-text);
-  font-size: 16px;
-  font-weight: 500;
-  line-height: normal;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
 }
 
 .legend-pop-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 18px;
-  height: 18px;
-  border-radius: 9.686px;
+  min-height: 29px;
+  padding: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 99px;
   color: var(--glm-color-black);
-  font-size: 8.182px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 500;
   line-height: normal;
 }
 
 .pop-desc {
-  grid-column: 1 / -1;
-  width: 410px;
+  width: 100%;
+  padding: 0 6px;
   color: #717b87;
   font-size: 14px;
   font-weight: 400;
@@ -237,7 +231,7 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  margin-top: 24px;
+  margin-top: 0;
 }
 
 .source-item {
@@ -255,7 +249,49 @@
 }
 
 .source-desc {
-  width: 414px;
+  width: 410px;
+  color: #717b87;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.access-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.access-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.access-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--glm-color-text);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.access-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  opacity: 0.6;
+}
+
+.access-icon--controlled {
+  transform: rotate(180deg);
+}
+
+.access-desc {
+  width: 100%;
   color: #717b87;
   font-size: 14px;
   font-weight: 400;
@@ -264,13 +300,12 @@
 
 @media (max-width: 960px) {
   .legend-modal {
-    height: min(750px, calc(100vh - 32px));
+    height: min(1217px, calc(100vh - 32px));
     overflow: auto;
   }
 
   .legend-modal-content {
-    height: auto;
-    min-height: 100%;
+    min-height: 0;
   }
 
   .legend-columns {
@@ -280,8 +315,32 @@
 
   .legend-learn-link,
   .legend-divider,
+  .legend-divider--right,
   .pop-desc,
   .source-desc {
     width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .legend-modal-overlay {
+    padding: 16px 28px;
+  }
+
+  .legend-ribbon {
+    right: 58px;
+  }
+
+  .legend-modal-close {
+    top: 38px;
+    right: 28px;
+  }
+
+  .legend-modal-content {
+    padding: 40px;
+  }
+
+  .legend-title {
+    max-width: calc(100% - 76px);
   }
 }

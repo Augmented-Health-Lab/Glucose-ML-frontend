@@ -7,27 +7,35 @@ const DATASET_FORM_URL = "https://forms.gle/ni7nZpD8NnLVAh5R6";
 
 const howItWorksItems = [
   {
-    title: "Discover Datasets",
+    title: "Explore & Discover",
     description:
-      "Explore our curated collection of diabetes glucose ML datasets.",
+      "Explore a curated collection of high-quality continuous glucose monitoring dataset to support AI/ML research.",
     icon: "/figma-assets/about-discover.svg",
   },
   {
-    title: "Compare Data & Fit",
-    description: "Evaluate datasets side by side across key metadata.",
+    title: "Visualize & Compare",
+    description:
+      "Visualize CGM datasets across standardized metrics and compare datasets side by side to assess fit for your task.",
     icon: "/figma-assets/about-compare.svg",
   },
   {
-    title: "Access & Start Building",
+    title: "Access & Build",
     description:
-      "Download datasets directly or request access to begin using the data.",
+      "Download public CGM datasets directly or request access and use our helper scripts to build and evaluate your solution faster.",
     icon: "/figma-assets/about-access.svg",
   },
+];
+
+const missionItems = [
+  "Bridge the data gap that imposes barriers for novice and established data science, machine learning, and AI practitioners seeking to contribute to health-relevant research.",
+  "Provide a central hub for exploring, visualizing, and comparing real-world CGM datasets to support AI/ML research for diabetes prevention and care.",
+  "Facilitate dataset transparency and enable joint use of disparate high-quality datasets to develop robust, reproducible, and generalizable algorithms that support health equitably.",
 ];
 
 const contributors = Array.from({ length: 9 }, (_, index) => ({
   id: `placeholder-contributor-${index + 1}`,
   name: "Firstname Lastname",
+  role: "ROLE",
 }));
 
 const publications = Array.from({ length: 3 }, (_, index) => ({
@@ -48,17 +56,27 @@ const AboutPage = () => {
                   Accelerating data-driven research for diabetes
                 </h1>
                 <p className="about-hero__description">
-                  A comprehensive platform for visualizing, analyzing, and
-                  comparing diabetes glucose machine learning datasets from
-                  leading research institutions worldwide. A comprehensive
-                  platform for visualizing, analyzing, and comparing diabetes
-                  glucose machine learning datasets from research institutions.
+                  Glucose-ML is an evolving collection of publicly available
+                  continuous glucose datasets curated, standardized, and
+                  maintained to accelerate data-centric research and
+                  development.
                 </p>
               </div>
             </div>
             <Link className="about-primary-action" to="/">
               Explore datasets
             </Link>
+          </div>
+        </section>
+
+        <section className="about-mission" aria-labelledby="about-mission-title">
+          <div className="about-container about-mission__content">
+            <h2 id="about-mission-title">Our mission</h2>
+            <ul>
+              {missionItems.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
           </div>
         </section>
 
@@ -88,26 +106,26 @@ const AboutPage = () => {
         <section className="about-lab" aria-labelledby="about-lab-title">
           <div className="about-container">
             <div className="about-lab__intro">
-              <h2 id="about-lab-title">Augmented Health Lab</h2>
+              <div className="about-lab__heading">
+                <h2 id="about-lab-title">Who we are</h2>
+                <a
+                  className="about-inline-link about-lab__link"
+                  href="https://ah-lab.t-prioleau.com/"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Learn more
+                  <img src="/figma-assets/about-arrow-up-right.svg" alt="" />
+                </a>
+              </div>
               <p>
-                The lab was founded at Dartmouth by Professor Prioleau. We
-                democratize access to high-quality diabetes glucose datasets
-                and provide researchers, data scientists, and healthcare
-                professionals with powerful tools to compare and evaluate
-                machine learning model performance.
+                The Glucose-ML project is developed and maintained by the
+                Augmented Health Lab under the leadership of Professor
+                Prioleau. The project is made possible by the internal and
+                external contributors across the interdisciplinary fields of
+                computer science, health data science, psychology, and
+                medicine.
               </p>
-              <a
-                className="about-inline-link about-lab__link"
-                href="https://ah-lab.t-prioleau.com/"
-                rel="noreferrer"
-                target="_blank"
-              >
-                Learn more
-                <img
-                  src="/figma-assets/about-arrow-up-right.svg"
-                  alt=""
-                />
-              </a>
             </div>
 
             <div className="about-contributors">
@@ -123,7 +141,10 @@ const AboutPage = () => {
                       role="img"
                       aria-label="Placeholder contributor portrait"
                     />
-                    <p>{contributor.name}</p>
+                    <div className="about-contributor__details">
+                      <p>{contributor.name}</p>
+                      <span>{contributor.role}</span>
+                    </div>
                   </article>
                 ))}
               </div>
@@ -132,7 +153,8 @@ const AboutPage = () => {
             <div className="about-past-contributors">
               <h3>Past Contributors</h3>
               <p>
-                Firstname Lastname, Firstname Lastname, Firstname Lastname...
+                Firstname Lastname (ROLE), Firstname Lastname (ROLE),
+                Firstname Lastname (ROLE)...
               </p>
             </div>
 

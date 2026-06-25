@@ -1,5 +1,5 @@
 .background-page {
-  --background-sticky-offset: 87px;
+  --background-sticky-offset: 65px;
   min-height: calc(100vh - var(--glm-nav-height));
   background: #f6f7f7;
   color: var(--glm-color-black);
@@ -13,6 +13,7 @@
 .background-hero {
   padding: 60px 0 24px;
   background: #f6f7f7;
+  text-align: center;
 }
 
 .background-eyebrow {
@@ -34,7 +35,7 @@
 .background-hero h1 {
   font-size: 36px;
   font-weight: 700;
-  line-height: normal;
+  line-height: 44px;
 }
 
 .background-hero__subtitle {
@@ -49,7 +50,7 @@
   position: sticky;
   top: 0;
   z-index: 20;
-  padding: 22px 0;
+  padding: 0 0 24px;
   background: #f6f7f7;
 }
 
@@ -57,13 +58,14 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  justify-content: center;
 }
 
 .background-anchor-nav__item {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 41px;
+  height: 41px;
   padding: 12px 16px;
   border: 1px solid #e1e8e7;
   border-radius: 999px;
@@ -498,6 +500,13 @@
   }
 }
 
+@media (max-height: 820px) and (min-width: 900px) {
+  .background-timeseries {
+    width: min(100%, calc((100vh - 230px) * 1319 / 794));
+    margin-inline: auto;
+  }
+}
+
 @media (max-width: 680px) {
   .background-page {
     --background-sticky-offset: 79px;
@@ -532,6 +541,7 @@
 
   .background-anchor-nav {
     flex-wrap: nowrap;
+    justify-content: flex-start;
     overflow-x: auto;
     padding-bottom: 4px;
   }

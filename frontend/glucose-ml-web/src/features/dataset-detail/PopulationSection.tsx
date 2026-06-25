@@ -1,4 +1,5 @@
 
+import { useState } from "react";
 import "./population-section.css";
 import type { DatasetPopulationGroup } from "../../types/dataset";
 
@@ -15,6 +16,8 @@ const populationGroupLabels = {
   PreD: "Prediabetes",
   ND: "No diabetes",
 } satisfies Record<DatasetPopulationGroup["type"], string>;
+const populationInfoText =
+  "Number of participants with CGM data in this dataset. Participants without CGM data are not included in this count.";
 
 function formatParticipantCount(count: number) {
   return Number.isFinite(count) && count > 0
@@ -23,6 +26,7 @@ function formatParticipantCount(count: number) {
 }
 
 export default function PopulationSection({ total, groups }: Props) {
+  const [isInfoOpen, setIsInfoOpen] = useState(false);
   const orderedGroups = [...groups].sort(
     (a, b) =>
       populationGroupOrder.indexOf(a.type) -
@@ -33,9 +37,25 @@ export default function PopulationSection({ total, groups }: Props) {
     <section className="detail-card">
       <div className="detail-card__heading">
         <h2 className="detail-card__title">Population</h2>
-        <span className="detail-card__info" aria-label="Population information">
+        <button
+          className="detail-card__info"
+          type="button"
+          aria-label="Population information"
+          aria-expanded={isInfoOpen}
+          aria-controls="population-info-popup"
+          onClick={() => setIsInfoOpen((open) => !open)}
+        >
           i
-        </span>
+        </button>
+        {isInfoOpen && (
+          <div
+            className="detail-card__info-popup"
+            id="population-info-popup"
+            role="tooltip"
+          >
+            {populationInfoText}
+          </div>
+        )}
       </div>
 
       <div className="detail-card__rows">

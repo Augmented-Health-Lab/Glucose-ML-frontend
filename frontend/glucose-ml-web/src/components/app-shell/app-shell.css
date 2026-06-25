@@ -57,6 +57,14 @@
   white-space: nowrap;
 }
 
+.app-shell-link:nth-child(-n + 2) {
+  color: #2f8c88;
+}
+
+.app-shell-link:nth-child(3) {
+  color: #484848;
+}
+
 .app-shell-link img {
   width: 20px;
   height: 20px;

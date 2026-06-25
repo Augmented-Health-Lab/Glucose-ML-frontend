@@ -22,7 +22,7 @@ test("access filter options match homepage access values", () => {
 });
 
 test("access filter displays the requested access labels", () => {
-  assert.match(multiSelectTsx, /Open:\s*"Public access"/);
+  assert.match(multiSelectTsx, /Open:\s*"Open access"/);
   assert.match(multiSelectTsx, /Controlled:\s*"Controlled access"/);
   assert.match(
     multiSelectTsx,
