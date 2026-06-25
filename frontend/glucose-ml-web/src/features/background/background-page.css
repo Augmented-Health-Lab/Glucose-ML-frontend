@@ -50,7 +50,7 @@
   position: sticky;
   top: 0;
   z-index: 20;
-  padding: 0 0 24px;
+  padding: 24px 0;
   background: #f6f7f7;
 }
 
@@ -543,7 +543,7 @@
     flex-wrap: nowrap;
     justify-content: flex-start;
     overflow-x: auto;
-    padding-bottom: 4px;
+    padding-bottom: 0;
   }
 
   .background-anchor-nav__item {
