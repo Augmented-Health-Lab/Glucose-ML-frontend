@@ -7,8 +7,6 @@ const read = (path: string) =>
 
 const appShellTsx = read("../src/components/app-shell/AppShell.tsx");
 const appShellCss = read("../src/components/app-shell/app-shell.css");
-const navHomeSvg = read("../public/figma-assets/nav-home.svg");
-const navBackgroundSvg = read("../public/figma-assets/nav-background.svg");
 const datasetDetailTsx = read(
   "../src/features/dataset-detail/DatasetDetail.tsx"
 );
@@ -39,23 +37,33 @@ test("app shell navigation follows the Figma icon and link order", () => {
   assert.ok(explore >= 0);
   assert.ok(background > explore);
   assert.ok(about > background);
-  assert.match(appShellTsx, /nav-home\.svg/);
-  assert.match(appShellTsx, /nav-background\.svg/);
-  assert.match(appShellTsx, /nav-about\.svg/);
+  assert.match(appShellCss, /nav-home\.svg/);
+  assert.match(appShellCss, /nav-background\.svg/);
+  assert.match(appShellCss, /nav-about\.svg/);
+  assert.match(appShellTsx, /import \{ Link, NavLink \} from "react-router-dom"/);
+  assert.match(appShellTsx, /className=\{\(\{ isActive \}\)/);
+  assert.match(appShellTsx, /app-shell-link--active/);
   assert.match(
     appShellCss,
     /\.app-shell-link\s*\{[^}]*display:\s*inline-flex[^}]*gap:\s*8px/s
   );
   assert.match(
     appShellCss,
-    /\.app-shell-link:nth-child\(-n \+ 2\)\s*\{[^}]*color:\s*#2f8c88/s
+    /\.app-shell-link\s*\{[^}]*font-weight:\s*400[^}]*color:\s*#484848/s
   );
   assert.match(
     appShellCss,
-    /\.app-shell-link:nth-child\(3\)\s*\{[^}]*color:\s*#484848/s
+    /\.app-shell-link:hover\s*\{[^}]*font-weight:\s*400[^}]*color:\s*#2f8c88/s
   );
-  assert.match(navHomeSvg, /fill="#2f8c88"/i);
-  assert.match(navBackgroundSvg, /fill="#2f8c88"/i);
+  assert.match(
+    appShellCss,
+    /\.app-shell-link--active\s*\{[^}]*font-weight:\s*700[^}]*color:\s*#2f8c88/s
+  );
+  assert.doesNotMatch(appShellCss, /\.app-shell-link:nth-child/);
+  assert.match(
+    appShellCss,
+    /\.app-shell-link__icon\s*\{[^}]*background-color:\s*currentColor/s
+  );
   assert.equal(
     existsSync(new URL("../public/figma-assets/nav-home.svg", import.meta.url)),
     true

@@ -15,11 +15,12 @@ const css = read("../src/features/about/about-page.css");
 test("registers a dedicated About route in the shared shell", () => {
   assert.match(app, /import AboutPage/);
   assert.match(app, /path="\/about" element=\{<AboutPage \/>\}/);
-  assert.match(shell, /<Link to="\/about" className="app-shell-link">/);
+  assert.match(shell, /<NavLink[\s\S]*to="\/about"[\s\S]*className=\{\(\{ isActive \}\)/);
 });
 
 test("renders the approved Figma About sections and placeholders", () => {
-  assert.match(page, /<AppShell showFooter=\{false\}>/);
+  assert.match(page, /<AppShell>/);
+  assert.doesNotMatch(page, /showFooter=\{false\}/);
   assert.match(page, /ABOUT THE GLUCOSE ML PROJECT/);
   assert.match(page, /Accelerating data-driven research for diabetes/);
   assert.match(page, /Glucose-ML is an evolving collection/);

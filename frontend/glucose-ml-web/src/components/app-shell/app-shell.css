@@ -48,7 +48,7 @@
   align-items: center;
   gap: 8px;
   font-family: "Inter", sans-serif;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 16px;
   line-height: normal;
   color: #484848;
@@ -57,18 +57,46 @@
   white-space: nowrap;
 }
 
-.app-shell-link:nth-child(-n + 2) {
+.app-shell-link:hover {
+  font-weight: 400;
   color: #2f8c88;
 }
 
-.app-shell-link:nth-child(3) {
-  color: #484848;
+.app-shell-link--active {
+  font-weight: 700;
+  color: #2f8c88;
 }
 
-.app-shell-link img {
+.app-shell-link--active:hover {
+  font-weight: 700;
+}
+
+.app-shell-link__icon {
   width: 20px;
   height: 20px;
-  object-fit: contain;
+  flex: 0 0 auto;
+  background-color: currentColor;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+}
+
+.app-shell-link__icon--home {
+  mask-image: url("/figma-assets/nav-home.svg");
+  -webkit-mask-image: url("/figma-assets/nav-home.svg");
+}
+
+.app-shell-link__icon--background {
+  mask-image: url("/figma-assets/nav-background.svg");
+  -webkit-mask-image: url("/figma-assets/nav-background.svg");
+}
+
+.app-shell-link__icon--about {
+  mask-image: url("/figma-assets/nav-about.svg");
+  -webkit-mask-image: url("/figma-assets/nav-about.svg");
 }
 
 @media (max-width: 680px) {

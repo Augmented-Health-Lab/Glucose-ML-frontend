@@ -19,6 +19,12 @@ type Props = {
   yLabel?: string;
 };
 
+type HoveredBar = {
+  rangeStart: number;
+  rangeEnd: number;
+  count: number;
+};
+
 // Color mapping based on label
 function getColorForLabel(label: string): string {
   if (label.includes("Very low glucose")) {
@@ -50,8 +56,16 @@ function formatLegendText(label: string): { title: string; range: string } {
   return { title: label, range: "" }; // Fallback to original label
 }
 
+function formatGlucoseBinValue(value: number): string {
+  return Number.isInteger(value) ? value.toString() : value.toLocaleString("en-US");
+}
+
+function formatTooltipText({ rangeStart, rangeEnd, count }: HoveredBar): string {
+  return `${formatGlucoseBinValue(rangeStart)} - ${formatGlucoseBinValue(rangeEnd)} mg/dL, count: ${count}`;
+}
+
 export default function HistogramChart({ data, yLabel = "Count" }: Props) {
-  const [hoveredBar, setHoveredBar] = useState<{ x: number; y: number; value: number; count: number } | null>(null);
+  const [hoveredBar, setHoveredBar] = useState<HoveredBar | null>(null);
   const [tooltipPosition, setTooltipPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const plotAreaRef = useRef<HTMLDivElement>(null);
 
@@ -89,9 +103,8 @@ export default function HistogramChart({ data, yLabel = "Count" }: Props) {
       });
     }
     setHoveredBar({
-      x: point.x,
-      y: point.y,
-      value: point.x,
+      rangeStart: point.bin_start,
+      rangeEnd: point.bin_end,
       count: point.y,
     });
   };
@@ -170,8 +183,9 @@ export default function HistogramChart({ data, yLabel = "Count" }: Props) {
               top: `${tooltipPosition.y}px`,
             }}
           >
-            <div className="histogram-tooltip-value">{hoveredBar.value}</div>
-            <div className="histogram-tooltip-count">count : {hoveredBar.count}</div>
+            <div className="histogram-tooltip-value">
+              {formatTooltipText(hoveredBar)}
+            </div>
           </div>
         )}
       </div>

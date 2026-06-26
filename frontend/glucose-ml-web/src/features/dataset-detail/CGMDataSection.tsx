@@ -16,7 +16,7 @@ type Props = {
 type TabKey = "hist" | "tir";
 
 export default function CGMDataSection({ dataset }: Props) {
-  const [tab, setTab] = useState<TabKey>("tir");
+  const [tab, setTab] = useState<TabKey>("hist");
 
   const totalDaysRange = dataset.cgmSummary.totalDaysRange;
   const totalDaysDisplay =
