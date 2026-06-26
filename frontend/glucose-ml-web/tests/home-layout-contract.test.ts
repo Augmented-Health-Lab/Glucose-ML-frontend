@@ -14,6 +14,10 @@ const filterCss = readFileSync(
   new URL("../src/features/home/filter-bar.css", import.meta.url),
   "utf8"
 );
+const pageTitleCss = readFileSync(
+  new URL("../src/features/home/page-title.css", import.meta.url),
+  "utf8"
+);
 const homePageCss = readFileSync(
   new URL("../src/features/home/home-page.css", import.meta.url),
   "utf8"
@@ -175,6 +179,77 @@ test("dataset card checkbox uses the centered Figma check asset", () => {
 test("filter row can wrap instead of widening the viewport", () => {
   assert.match(filterCss, /\.home-filter-row\s*\{[^}]*flex-wrap:\s*wrap/s);
   assert.match(filterCss, /\.home-filter-row__left\s*\{[^}]*min-width:\s*0/s);
+});
+
+test("home filter controls stay sticky with guidance and result actions", () => {
+  assert.match(
+    homePageTsx,
+    /<section[\s\S]*ref=\{stickyControlsRef\}[\s\S]*className=\{stickyControlsClassName\}[\s\S]*aria-label="Dataset search controls"[\s\S]*<FilterBar[\s\S]*<section className="home-page__guide-row">[\s\S]*Use checkboxes to compare datasets\.\s*Click a card for details\.[\s\S]*<GuideButton/s
+  );
+  assert.match(homePageTsx, /useRef<HTMLElement \| null>\(null\)/);
+  assert.match(homePageTsx, /stickyControlsStuck/);
+  assert.match(homePageTsx, /home-page__sticky-controls--stuck/);
+  assert.match(homePageTsx, /getBoundingClientRect\(\)\.top\s*<=\s*0/);
+  assert.match(
+    homePageCss,
+    /\.home-page__sticky-controls\s*\{[^}]*position:\s*sticky[^}]*top:\s*0[^}]*z-index:\s*10/s
+  );
+  assert.match(
+    homePageCss,
+    /\.home-page\s*\{[^}]*background:\s*var\(--glm-color-teal-page\)/s
+  );
+  assert.match(
+    homePageCss,
+    /\.home-page__hero-bg\s*\{[^}]*background:\s*var\(--glm-color-teal-page\)/s
+  );
+  assert.match(
+    homePageCss,
+    /\.home-page__sticky-controls\s*\{[^}]*padding-top:\s*20px[^}]*background:\s*var\(--glm-color-teal-page\)/s
+  );
+  assert.match(
+    homePageCss,
+    /\.home-page__sticky-controls\s*\{[^}]*isolation:\s*isolate/s
+  );
+  assert.doesNotMatch(
+    homePageCss,
+    /\.home-page__sticky-controls\s*\{[^}]*box-shadow:/s
+  );
+  assert.match(
+    homePageCss,
+    /\.home-page__sticky-controls::before,[\s\S]*\.home-page__sticky-controls::after\s*\{[^}]*position:\s*absolute[^}]*width:\s*100vw[^}]*pointer-events:\s*none/s
+  );
+  assert.match(
+    homePageCss,
+    /\.home-page__sticky-controls::before\s*\{[^}]*background:\s*var\(--glm-color-teal-page\)/s
+  );
+  assert.match(
+    homePageCss,
+    /\.home-page__sticky-controls--stuck::after\s*\{[^}]*bottom:\s*-12px[^}]*height:\s*12px[^}]*linear-gradient/s
+  );
+  assert.doesNotMatch(
+    homePageCss,
+    /\.home-page__sticky-controls::after\s*\{[^}]*linear-gradient/s
+  );
+  assert.match(
+    pageTitleCss,
+    /\.page-title\s*\{[^}]*margin-bottom:\s*20px/s
+  );
+  assert.match(
+    homePageCss,
+    /\.home-page__guide-row\s*\{[^}]*min-height:\s*20px[^}]*flex-wrap:\s*wrap/s
+  );
+  assert.doesNotMatch(
+    homePageCss,
+    /\.home-page__guide-row\s*\{[^}]*\n\s*height:\s*20px/s
+  );
+  assert.match(
+    filterCss,
+    /\.home-filter-row__count\s*\{[^}]*flex:\s*0\s+0\s+auto/s
+  );
+  assert.match(
+    filterCss,
+    /\.home-filter-row__clear\s*\{[^}]*flex:\s*0\s+0\s+auto/s
+  );
 });
 
 test("data source filter uses consistent wording and fits the full CGM label", () => {

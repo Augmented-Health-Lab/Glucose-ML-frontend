@@ -45,7 +45,7 @@ const publications = Array.from({ length: 3 }, (_, index) => ({
 
 const AboutPage = () => {
   return (
-    <AppShell>
+    <AppShell showFooter={false}>
       <main className="about-page">
         <section className="about-hero" aria-labelledby="about-title">
           <div className="about-container about-hero__content">
@@ -72,11 +72,11 @@ const AboutPage = () => {
         <section className="about-mission" aria-labelledby="about-mission-title">
           <div className="about-container about-mission__content">
             <h2 id="about-mission-title">Our mission</h2>
-            <ul>
+            <div className="about-mission__copy">
               {missionItems.map((item) => (
-                <li key={item}>{item}</li>
+                <p key={item}>{item}</p>
               ))}
-            </ul>
+            </div>
           </div>
         </section>
 

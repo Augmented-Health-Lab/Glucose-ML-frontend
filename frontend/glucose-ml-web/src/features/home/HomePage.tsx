@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import AppShell from "../../components/app-shell/AppShell";
 import PageTitle from "./PageTitle";
@@ -25,6 +25,7 @@ import "./home-page.css";
 const HomePage = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const stickyControlsRef = useRef<HTMLElement | null>(null);
   const [filterSelections, setFilterSelections] = useState<{
     [key: string]: string[];
   }>({});
@@ -38,6 +39,39 @@ const HomePage = () => {
     useState<GlucoseDistributionByDataset>({});
   const [loadError, setLoadError] = useState<string | null>(null);
   const [legendOpen, setLegendOpen] = useState(false);
+  const [stickyControlsStuck, setStickyControlsStuck] = useState(false);
+
+  useEffect(() => {
+    let animationFrame = 0;
+
+    const updateStickyControlsState = () => {
+      if (animationFrame) return;
+
+      animationFrame = window.requestAnimationFrame(() => {
+        animationFrame = 0;
+        const stickyControls = stickyControlsRef.current;
+        if (!stickyControls) return;
+
+        setStickyControlsStuck(
+          stickyControls.getBoundingClientRect().top <= 0 && window.scrollY > 0
+        );
+      });
+    };
+
+    updateStickyControlsState();
+    window.addEventListener("scroll", updateStickyControlsState, {
+      passive: true,
+    });
+    window.addEventListener("resize", updateStickyControlsState);
+
+    return () => {
+      window.removeEventListener("scroll", updateStickyControlsState);
+      window.removeEventListener("resize", updateStickyControlsState);
+      if (animationFrame) {
+        window.cancelAnimationFrame(animationFrame);
+      }
+    };
+  }, []);
 
   // load static datasets info
   useEffect(() => {
@@ -216,6 +250,12 @@ const HomePage = () => {
       }),
     [filteredDatasets, glucoseDistributionMap, tableRows]
   );
+  const stickyControlsClassName = [
+    "home-page__sticky-controls",
+    stickyControlsStuck ? "home-page__sticky-controls--stuck" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <AppShell>
@@ -223,16 +263,24 @@ const HomePage = () => {
         <div className="home-page__hero-bg" aria-hidden="true" />
         <main className="home-page__content">
           <PageTitle datasets={datasets} />
-          <FilterBar
-            filterSelections={filterSelections}
-            onFilterChange={handleFilterChange}
-            filterButtonEnabled={hasFilter}
-            resultCount={filteredDatasets.length}
-            totalCount={datasets.length}
-          />
-          <section className="home-page__guide-row">
-            <p>Use checkboxes to compare datasets. Click a card for details.</p>
-            <GuideButton onClick={() => setLegendOpen(true)} />
+          <section
+            ref={stickyControlsRef}
+            className={stickyControlsClassName}
+            aria-label="Dataset search controls"
+          >
+            <FilterBar
+              filterSelections={filterSelections}
+              onFilterChange={handleFilterChange}
+              filterButtonEnabled={hasFilter}
+              resultCount={filteredDatasets.length}
+              totalCount={datasets.length}
+            />
+            <section className="home-page__guide-row">
+              <p>
+                Use checkboxes to compare datasets. Click a card for details.
+              </p>
+              <GuideButton onClick={() => setLegendOpen(true)} />
+            </section>
           </section>
           {loadError && (
             <p className="home-page__error" role="alert">

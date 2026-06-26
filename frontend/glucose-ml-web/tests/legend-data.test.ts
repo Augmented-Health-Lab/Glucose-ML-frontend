@@ -107,7 +107,11 @@ test("guide modal uses frame 36789 title, sections, and two-column order", () =>
 
   assert.match(
     legendModalCss,
-    /\.legend-modal\s*\{[^}]*height:\s*min\(1217px,\s*calc\(100vh - 56px\)\)/s
+    /\.legend-modal\s*\{[^}]*height:\s*min\(1200px,\s*calc\(100vh - 56px\)\)/s
+  );
+  assert.match(
+    legendModalCss,
+    /\.legend-modal\s*\{[^}]*border:\s*1px\s+solid\s+var\(--glm-color-card-border\)[^}]*border-radius:\s*20\.202px[^}]*box-shadow:\s*var\(--glm-shadow-card\)/s
   );
   assert.match(
     legendModalCss,
@@ -115,7 +119,7 @@ test("guide modal uses frame 36789 title, sections, and two-column order", () =>
   );
   assert.match(
     legendModalCss,
-    /\.legend-modal-content\s*\{[^}]*padding:\s*40px/s
+    /\.legend-modal-content\s*\{[^}]*min-height:\s*1200px[^}]*padding:\s*40px\s+40px\s+23px/s
   );
 });
 
@@ -137,6 +141,15 @@ test("dataset guide modal exposes the Figma x close button", () => {
     legendModalCss,
     /\.legend-ribbon\s*\{[^}]*right:\s*87px/s
   );
+  assert.match(
+    legendModalCss,
+    /\.legend-ribbon\s*\{[^}]*width:\s*57px[^}]*height:\s*89px/s
+  );
+  assert.match(
+    legendModalCss,
+    /\.legend-ribbon::before\s*\{[^}]*inset:\s*0\s+-4px\s+-7px\s+-4px[^}]*background:\s*url\("\/figma-assets\/guide-ribbon\.svg"\)\s+center\s*\/\s*100%\s+100%\s+no-repeat/s
+  );
+  assert.doesNotMatch(legendModalCss, /clip-path:\s*polygon/);
   assert.match(
     legendModalCss,
     /\.legend-modal-close\s*\{[^}]*width:\s*24px[^}]*height:\s*24px/s

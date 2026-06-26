@@ -1,0 +1,17 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" viewBox="0 0 65 95.7503" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g filter="url(#guide-ribbon-shadow)">
+    <path d="M4 85.7477V2C4 0.895431 4.89543 0 6 0H59C60.1046 0 61 0.89543 61 2V85.3928C61 86.9634 59.2727 87.9212 57.9405 87.0892L36.456 73.6708C35.8625 73.3001 35.1185 73.2665 34.4941 73.5823L6.90241 87.5325C5.57211 88.2051 4 87.2384 4 85.7477Z" fill="#3BA7A1" />
+  </g>
+  <defs>
+    <filter id="guide-ribbon-shadow" x="0" y="0" width="65" height="95.7503" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix" />
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+      <feOffset dy="4" />
+      <feGaussianBlur stdDeviation="2" />
+      <feComposite in2="hardAlpha" operator="out" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+    </filter>
+  </defs>
+</svg>

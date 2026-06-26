@@ -136,6 +136,14 @@
   margin-bottom: 0;
 }
 
+.background-heading-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
 .background-copy ul {
   margin: 0 0 16px;
   padding-left: 18px;
@@ -162,6 +170,11 @@
 .background-learn-more img {
   width: 24px;
   height: 24px;
+}
+
+.background-learn-more--inline {
+  position: static;
+  flex: 0 0 auto;
 }
 
 .background-learn-more--split {
@@ -315,7 +328,7 @@
 
 .background-glossary-heading {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 24px;
 }
@@ -325,6 +338,7 @@
   min-height: 24px;
   align-items: center;
   gap: 8px;
+  margin-top: 10px;
   padding: 0;
   border: 0;
   background: transparent;
@@ -559,13 +573,20 @@
     margin-top: 20px;
   }
 
+  .background-learn-more--inline {
+    margin-top: 0;
+  }
+
   .background-glossary-grid {
     grid-template-columns: 1fr;
     gap: 16px;
   }
 
+  .background-heading-row,
   .background-glossary-heading {
     align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
   }
 
   .background-stat-row {
