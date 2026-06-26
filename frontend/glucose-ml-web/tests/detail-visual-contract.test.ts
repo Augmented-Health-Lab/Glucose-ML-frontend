@@ -202,9 +202,14 @@ test("histogram tooltip shows bin range, units, and count", () => {
   assert.match(histogramChartTsx, /rangeEnd:\s*point\.bin_end/);
   assert.match(
     histogramChartTsx,
-    /\$\{formatGlucoseBinValue\(rangeStart\)\} - \$\{formatGlucoseBinValue\(rangeEnd\)\} mg\/dL, count: \$\{count\}/
+    /\$\{formatGlucoseBinValue\(rangeStart\)\} - \$\{formatGlucoseBinValue\(rangeEnd\)\} mg\/dL/
   );
+  assert.match(histogramChartTsx, /className="histogram-tooltip-count"/);
+  assert.match(histogramChartTsx, /count:\s*\{hoveredBar\.count\}/);
   assert.doesNotMatch(histogramChartTsx, /count\s+:\s+\{/);
+  assert.doesNotMatch(histogramChartTsx, /mg\/dL,\s*count:/);
+  assert.match(histogramCss, /\.histogram-tooltip-count\s*\{[^}]*font-size:\s*15\.14px/s);
+  assert.match(histogramCss, /\.histogram-tooltip-count\s*\{[^}]*font-weight:\s*400/s);
 });
 
 test("time-in-range chart body hugs graph content instead of forcing empty bottom space", () => {

@@ -62,9 +62,7 @@ export default function LegendModal({ open, onClose }: Props) {
           <h2 id="legend-title" className="legend-title">
             Guide to Exploring CGM Datasets
           </h2>
-          <a className="legend-learn-link" href="/background">
-            New to CGM data? See background →
-          </a>
+          <p className="legend-learn-text">New to CGM data? See background</p>
 
           <div className="legend-columns">
             <div className="legend-col">

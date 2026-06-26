@@ -6,6 +6,10 @@ const populationTsx = readFileSync(
   new URL("../src/features/dataset-detail/PopulationSection.tsx", import.meta.url),
   "utf8"
 );
+const populationCss = readFileSync(
+  new URL("../src/features/dataset-detail/population-section.css", import.meta.url),
+  "utf8"
+);
 const demographicsTsx = readFileSync(
   new URL("../src/features/dataset-detail/DemographicsSection.tsx", import.meta.url),
   "utf8"
@@ -67,6 +71,13 @@ test("demographics follow the Figma order and report missing values explicitly",
   assert.match(ethnicityFormatTs, /\.replace\(/);
   assert.match(demographicsTsx, /className="detail-card__value-line"/);
   assert.doesNotMatch(demographicsTsx, /<span className="empty-value">-<\/span>/);
+});
+
+test("detail summary rows top align labels with multi-line values", () => {
+  assert.match(
+    populationCss,
+    /\.detail-card__row\s*\{[^}]*align-items:\s*flex-start/s
+  );
 });
 
 test("data sources use Figma label casing and show Not reported for missing details", () => {

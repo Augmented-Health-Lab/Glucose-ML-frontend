@@ -144,9 +144,9 @@
 }
 
 .histogram-tooltip-count {
-  font-size: 14px;
+  font-size: 15.14px;
   font-weight: 400;
-  color: var(--secondary-grey);
+  color: var(--glm-color-text);
 }
 
 .histogram-x-axis {

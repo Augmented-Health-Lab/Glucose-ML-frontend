@@ -78,15 +78,14 @@
   line-height: normal;
 }
 
-.legend-learn-link {
+.legend-learn-text {
   display: block;
   width: 860px;
-  margin-top: 8px;
+  margin: 8px 0 0;
   color: var(--glm-color-brand-dark);
   font-size: 14px;
   font-weight: 400;
   line-height: normal;
-  text-decoration: underline;
 }
 
 .legend-columns {
@@ -317,7 +316,7 @@
     row-gap: 32px;
   }
 
-  .legend-learn-link,
+  .legend-learn-text,
   .legend-divider,
   .legend-divider--right,
   .pop-desc,

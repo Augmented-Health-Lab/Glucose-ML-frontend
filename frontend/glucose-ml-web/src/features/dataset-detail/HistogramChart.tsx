@@ -60,8 +60,8 @@ function formatGlucoseBinValue(value: number): string {
   return Number.isInteger(value) ? value.toString() : value.toLocaleString("en-US");
 }
 
-function formatTooltipText({ rangeStart, rangeEnd, count }: HoveredBar): string {
-  return `${formatGlucoseBinValue(rangeStart)} - ${formatGlucoseBinValue(rangeEnd)} mg/dL, count: ${count}`;
+function formatTooltipRange({ rangeStart, rangeEnd }: HoveredBar): string {
+  return `${formatGlucoseBinValue(rangeStart)} - ${formatGlucoseBinValue(rangeEnd)} mg/dL`;
 }
 
 export default function HistogramChart({ data, yLabel = "Count" }: Props) {
@@ -184,7 +184,10 @@ export default function HistogramChart({ data, yLabel = "Count" }: Props) {
             }}
           >
             <div className="histogram-tooltip-value">
-              {formatTooltipText(hoveredBar)}
+              {formatTooltipRange(hoveredBar)}
+            </div>
+            <div className="histogram-tooltip-count">
+              count: {hoveredBar.count}
             </div>
           </div>
         )}
