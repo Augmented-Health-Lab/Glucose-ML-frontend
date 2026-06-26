@@ -19,6 +19,7 @@ test("registers a dedicated About route in the shared shell", () => {
 });
 
 test("renders the approved Figma About sections and placeholders", () => {
+  assert.match(page, /<AppShell showFooter=\{false\}>/);
   assert.match(page, /ABOUT THE GLUCOSE ML PROJECT/);
   assert.match(page, /Accelerating data-driven research for diabetes/);
   assert.match(page, /Glucose-ML is an evolving collection/);
@@ -59,12 +60,19 @@ test("defines Figma desktop grids and responsive collapse", () => {
 
 test("pins the measured Figma desktop geometry", () => {
   assert.match(page, /className="about-hero__message"/);
-  assert.match(css, /\.about-hero\s*\{[^}]*min-height:\s*285px/s);
-  assert.match(css, /\.about-mission\s*\{[^}]*min-height:\s*252px/s);
+  assert.match(css, /\.about-hero\s*\{[^}]*min-height:\s*325px/s);
+  assert.match(css, /\.about-hero\s*\{[^}]*background:\s*#3ba7a1/s);
+  assert.match(css, /\.about-hero h1\s*\{[^}]*color:\s*#fff/s);
+  assert.match(css, /\.about-primary-action\s*\{[^}]*background:\s*#fff/s);
+  assert.match(css, /\.about-primary-action\s*\{[^}]*color:\s*#2f8c88/s);
+  assert.match(css, /\.about-mission\s*\{[^}]*min-height:\s*288px/s);
+  assert.match(css, /\.about-mission\s*\{[^}]*background:\s*#fff/s);
   assert.match(css, /\.about-hero__message\s*\{[^}]*gap:\s*8px/s);
-  assert.match(css, /\.about-how\s*\{[^}]*min-height:\s*382px/s);
+  assert.match(css, /\.about-how\s*\{[^}]*min-height:\s*418px/s);
   assert.match(css, /\.about-info-card\s*\{[^}]*height:\s*162px/s);
+  assert.match(css, /\.about-lab\s*\{[^}]*min-height:\s*1103px/s);
   assert.match(css, /\.about-contributor\s*\{[^}]*min-height:\s*216px/s);
+  assert.match(css, /\.about-contact\s*\{[^}]*min-height:\s*377px/s);
   assert.match(css, /\.about-contact__grid\s*\{[^}]*height:\s*209px/s);
   assert.match(css, /\.about-contact-card\s*\{[^}]*height:\s*207px/s);
   assert.match(css, /\.about-page\s*\{[^}]*padding-bottom:\s*34px/s);

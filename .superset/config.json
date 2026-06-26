@@ -1,0 +1,11 @@
+{
+  "setup": [
+    "# setup\ncd /Users/leoding/.superset/worktrees/Glucose-ML/frontend-bug-fixes-and-improvements/frontend/glucose-ml-web\nnpm ci\nnode --test tests/*.test.ts\nnpm run lint\nnpm run build"
+  ],
+  "teardown": [
+    "pkill -f \"vite --host 127.0.0.1 --port 5174\" || true\npkill -f \"npm run dev -- --host 127.0.0.1 --port 5174\" || true"
+  ],
+  "run": [
+    "cd /Users/leoding/.superset/worktrees/Glucose-ML/frontend-bug-fixes-and-improvements/frontend/glucose-ml-web\nnpm run dev -- --host 127.0.0.1 --port 5174"
+  ]
+}

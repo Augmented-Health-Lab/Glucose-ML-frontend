@@ -14,16 +14,16 @@
 }
 
 .about-hero {
-  min-height: 285px;
-  background: #f6f7f7;
+  min-height: 325px;
+  background: #3ba7a1;
 }
 
 .about-hero__content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
-  padding-block: 60px 24px;
+  gap: 32px;
+  padding-block: 60px;
   text-align: center;
 }
 
@@ -31,7 +31,6 @@
   display: flex;
   width: 100%;
   flex-direction: column;
-  gap: 12px;
 }
 
 .about-hero__message {
@@ -43,15 +42,15 @@
 
 .about-eyebrow {
   margin: 0;
-  color: #82888f;
-  font-size: 16px;
-  font-weight: 700;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
   line-height: 24px;
 }
 
 .about-hero h1 {
   margin: 0;
-  color: #1e1f22;
+  color: #fff;
   font-size: 36px;
   font-weight: 700;
   line-height: 44px;
@@ -60,7 +59,7 @@
 .about-hero__description {
   max-width: 1320px;
   margin: 0;
-  color: #848e99;
+  color: #fff;
   font-size: 18px;
   font-weight: 500;
   line-height: 20px;
@@ -74,9 +73,9 @@
   padding: 16px 20px;
   border: 1px solid #2f8c88;
   border-radius: 12px;
-  background: #3ba7a1;
+  background: #fff;
   box-shadow: var(--glm-shadow-button);
-  color: #fff;
+  color: #2f8c88;
   font-size: 14px;
   font-weight: 600;
   line-height: normal;
@@ -85,17 +84,17 @@
 
 .about-primary-action:hover,
 .about-primary-action:focus-visible {
-  background: #2f8c88;
+  background: #f5f8f8;
 }
 
-.about-mission,
 .about-how {
   background: #e7eeed;
 }
 
 .about-mission {
-  min-height: 252px;
-  padding-block: 60px 24px;
+  min-height: 288px;
+  padding-block: 60px;
+  background: #fff;
 }
 
 .about-mission__content {
@@ -115,21 +114,24 @@
   line-height: 34px;
 }
 
-.about-mission ul {
+.about-mission__copy {
   display: flex;
   flex-direction: column;
   gap: 12px;
   margin: 0;
-  padding-left: 18px;
   color: #59636e;
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
 }
 
+.about-mission__copy p {
+  margin: 0;
+}
+
 .about-how {
-  min-height: 382px;
-  padding-block: 24px 60px;
+  min-height: 418px;
+  padding-block: 60px;
 }
 
 .about-how__grid,

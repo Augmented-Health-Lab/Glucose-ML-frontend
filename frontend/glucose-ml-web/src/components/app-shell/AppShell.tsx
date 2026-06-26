@@ -3,7 +3,13 @@ import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import AppFooter from "./AppFooter";
 
-const AppShell = ({ children }: { children: ReactNode }) => {
+const AppShell = ({
+  children,
+  showFooter = true,
+}: {
+  children: ReactNode;
+  showFooter?: boolean;
+}) => {
   return (
     <div className="app-shell">
       <header className="app-shell-nav">
@@ -26,7 +32,7 @@ const AppShell = ({ children }: { children: ReactNode }) => {
         </nav>
       </header>
       {children}
-      <AppFooter />
+      {showFooter ? <AppFooter /> : null}
     </div>
   );
 };

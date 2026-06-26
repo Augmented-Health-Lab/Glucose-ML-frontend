@@ -135,6 +135,25 @@ test("background learn more links route to the CDC diabetes overview", () => {
   assert.doesNotMatch(backgroundPageTsx, /niddk\.nih\.gov/);
 });
 
+test("background data and metrics learn more links use the requested sources", () => {
+  const glucoseSpikeHref = "https://www.hellolingo.com/blog/what-is-a-glucose-spike";
+  const cgmMetricsHref =
+    "https://diabetesjournals.org/care/article/42/8/1593/36184/Clinical-Targets-for-Continuous-Glucose-Monitoring";
+
+  assert.match(backgroundPageTsx, /What does CGM data look like\?/);
+  assert.match(backgroundPageTsx, /What are common CGM Metrics\?/);
+  assert.match(
+    backgroundPageTsx,
+    /href="https:\/\/www\.hellolingo\.com\/blog\/what-is-a-glucose-spike"/
+  );
+  assert.match(
+    backgroundPageTsx,
+    /href="https:\/\/diabetesjournals\.org\/care\/article\/42\/8\/1593\/36184\/Clinical-Targets-for-Continuous-Glucose-Monitoring"/
+  );
+  assert.equal(backgroundPageTsx.split(glucoseSpikeHref).length - 1, 1);
+  assert.equal(backgroundPageTsx.split(cgmMetricsHref).length - 1, 1);
+});
+
 test("background glossary section appears above the model rationale section", () => {
   const dataIndex = backgroundPageTsx.indexOf('id="data"');
   const modelsIndex = backgroundPageTsx.indexOf('id="models"');
@@ -162,7 +181,16 @@ test("background metrics use the Figma primary terms and disclose the remaining 
   assert.match(backgroundPageTsx, /Sampling frequency/);
   assert.match(backgroundPageTsx, /aria-expanded=\{showAllMetrics\}/);
   assert.match(backgroundPageTsx, /showAllMetrics \? "See less" : "See more"/);
+  assert.match(backgroundPageTsx, /background-glossary-toggle__icon--expanded/);
   assert.match(backgroundPageCss, /\.background-glossary-toggle/);
+  assert.match(
+    backgroundPageCss,
+    /\.background-glossary-toggle__icon--expanded\s*\{[^}]*transform:\s*rotate\(180deg\)/s
+  );
+  assert.match(
+    backgroundPageTsx,
+    /<div id="background-metric-cards"[\s\S]*<\/div>\s*<button[\s\S]*className="background-glossary-toggle"/
+  );
 });
 
 test("background page wording follows Figma frame 36685", () => {
