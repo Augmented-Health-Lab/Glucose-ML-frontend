@@ -45,7 +45,7 @@ const publications = Array.from({ length: 3 }, (_, index) => ({
 
 const AboutPage = () => {
   return (
-    <AppShell showFooter={false}>
+    <AppShell>
       <main className="about-page">
         <section className="about-hero" aria-labelledby="about-title">
           <div className="about-container about-hero__content">

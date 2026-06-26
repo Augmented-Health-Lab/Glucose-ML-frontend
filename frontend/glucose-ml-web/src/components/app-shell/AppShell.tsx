@@ -1,6 +1,6 @@
 import "./app-shell.css";
 import type { ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import AppFooter from "./AppFooter";
 
 const AppShell = ({
@@ -17,18 +17,43 @@ const AppShell = ({
           <img src="/glucose-ml-logo.svg" alt="Glucose-ML" />
         </Link>
         <nav className="app-shell-links" aria-label="Primary">
-          <Link to="/" className="app-shell-link">
-            <img src="/figma-assets/nav-home.svg" alt="" />
+          <NavLink
+            to="/"
+            end
+            className={({ isActive }) =>
+              `app-shell-link${isActive ? " app-shell-link--active" : ""}`
+            }
+          >
+            <span
+              className="app-shell-link__icon app-shell-link__icon--home"
+              aria-hidden="true"
+            />
             Explore
-          </Link>
-          <Link to="/background" className="app-shell-link">
-            <img src="/figma-assets/nav-background.svg" alt="" />
+          </NavLink>
+          <NavLink
+            to="/background"
+            className={({ isActive }) =>
+              `app-shell-link${isActive ? " app-shell-link--active" : ""}`
+            }
+          >
+            <span
+              className="app-shell-link__icon app-shell-link__icon--background"
+              aria-hidden="true"
+            />
             Background
-          </Link>
-          <Link to="/about" className="app-shell-link">
-            <img src="/figma-assets/nav-about.svg" alt="" />
+          </NavLink>
+          <NavLink
+            to="/about"
+            className={({ isActive }) =>
+              `app-shell-link${isActive ? " app-shell-link--active" : ""}`
+            }
+          >
+            <span
+              className="app-shell-link__icon app-shell-link__icon--about"
+              aria-hidden="true"
+            />
             About
-          </Link>
+          </NavLink>
         </nav>
       </header>
       {children}

@@ -197,6 +197,16 @@ test("detail charts use the approved mg/dL ranges", () => {
   assert.doesNotMatch(histogramChartTsx, /<54mg\/dL/);
 });
 
+test("histogram tooltip shows bin range, units, and count", () => {
+  assert.match(histogramChartTsx, /rangeStart:\s*point\.bin_start/);
+  assert.match(histogramChartTsx, /rangeEnd:\s*point\.bin_end/);
+  assert.match(
+    histogramChartTsx,
+    /\$\{formatGlucoseBinValue\(rangeStart\)\} - \$\{formatGlucoseBinValue\(rangeEnd\)\} mg\/dL, count: \$\{count\}/
+  );
+  assert.doesNotMatch(histogramChartTsx, /count\s+:\s+\{/);
+});
+
 test("time-in-range chart body hugs graph content instead of forcing empty bottom space", () => {
   assert.doesNotMatch(cgmSectionCss, /\.graph-body\s*\{[^}]*min-height:\s*380px/s);
   assert.match(cgmSectionCss, /\.graph-body\s*\{[^}]*height:\s*auto/s);
@@ -213,6 +223,11 @@ test("dataset detail CGM tabs do not expose ambulatory glucose profile", () => {
   assert.doesNotMatch(cgmTabGroupTsx, /"agp"/);
   assert.doesNotMatch(cgmSectionTsx, /Ambulatory glucose profile/);
   assert.doesNotMatch(cgmSectionTsx, /tab === "agp"/);
+});
+
+test("dataset detail CGM tabs default to the histogram", () => {
+  assert.match(cgmSectionTsx, /useState<TabKey>\("hist"\)/);
+  assert.match(cgmTabGroupTsx, /onClick=\{\(\) => onChange\("tir"\)\}/);
 });
 
 test("dataset detail CGM tabs keep rounded buttons on a grey strip inside a white shell", () => {

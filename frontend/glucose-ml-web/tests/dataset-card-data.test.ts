@@ -7,11 +7,11 @@ import { getDatasetSourceLabels } from "../src/utils/source-labels.ts";
 test("dataset card source labels match Figma card chips", () => {
   assert.deepEqual(getDatasetSourceLabels(["G", "I", "W", "M", "Q", "C"]), [
     "CGM",
-    "Insulin",
+    "Insulin System",
     "Wearable Tracker",
     "Manual Logs",
     "Questionnaire",
-    "Clinical",
+    "Clinical Measurements",
   ]);
 });
 

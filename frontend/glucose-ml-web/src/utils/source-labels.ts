@@ -1,11 +1,11 @@
 const SOURCE_LABELS: Record<string, string> = {
   G: "CGM",
-  I: "Insulin",
+  I: "Insulin System",
   W: "Wearable Tracker",
   A: "Wearable Tracker",
   M: "Manual Logs",
   Q: "Questionnaire",
-  C: "Clinical",
+  C: "Clinical Measurements",
 };
 
 export function getDatasetSourceLabels(sources: string[]) {

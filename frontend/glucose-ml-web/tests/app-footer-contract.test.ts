@@ -9,6 +9,18 @@ const appShellTsx = readFileSync(
   new URL("../src/components/app-shell/AppShell.tsx", import.meta.url),
   "utf8"
 );
+const homePageTsx = readFileSync(
+  new URL("../src/features/home/HomePage.tsx", import.meta.url),
+  "utf8"
+);
+const backgroundPageTsx = readFileSync(
+  new URL("../src/features/background/BackgroundPage.tsx", import.meta.url),
+  "utf8"
+);
+const aboutPageTsx = readFileSync(
+  new URL("../src/features/about/AboutPage.tsx", import.meta.url),
+  "utf8"
+);
 const appFooterTsx = readOptionalFile(
   new URL("../src/components/app-shell/AppFooter.tsx", import.meta.url)
 );
@@ -19,6 +31,15 @@ const appFooterCss = readOptionalFile(
 test("app shell renders the Figma footer on every page", () => {
   assert.match(appShellTsx, /import AppFooter/);
   assert.match(appShellTsx, /<AppFooter \/>/);
+});
+
+test("home, background, and about pages all use the shared footer", () => {
+  assert.match(homePageTsx, /<AppShell>/);
+  assert.match(backgroundPageTsx, /<AppShell>/);
+  assert.match(aboutPageTsx, /<AppShell>/);
+  assert.doesNotMatch(homePageTsx, /showFooter=\{false\}/);
+  assert.doesNotMatch(backgroundPageTsx, /showFooter=\{false\}/);
+  assert.doesNotMatch(aboutPageTsx, /showFooter=\{false\}/);
 });
 
 test("footer includes the approved Figma copy and functional destinations", () => {
@@ -62,6 +83,10 @@ test("footer matches the desktop Figma geometry and stacks responsively", () => 
   assert.match(
     appFooterCss,
     /\.app-footer\s*\{[^}]*min-height:\s*280px[^}]*background:\s*#e1e8e7/s
+  );
+  assert.doesNotMatch(
+    appFooterCss,
+    /\.app-footer\s*\{[^}]*box-shadow:/s
   );
   assert.match(
     appFooterCss,

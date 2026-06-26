@@ -176,6 +176,29 @@ test("dataset card checkbox uses the centered Figma check asset", () => {
   );
 });
 
+test("dataset cards and compare checkboxes use teal hover outlines", () => {
+  assert.match(
+    cardCss,
+    /\.dataset-card:hover\s*\{[^}]*border-color:\s*var\(--glm-color-brand-dark\)[^}]*box-shadow:\s*inset\s+0\s+0\s+0\s+1px\s+var\(--glm-color-brand-dark\),\s*0\s+2px\s+8px\s+rgba\(58,\s*58,\s*59,\s*0\.18\)/s
+  );
+  assert.doesNotMatch(
+    cardCss,
+    /\.dataset-card:hover\s*\{[^}]*z-index:/s
+  );
+  assert.doesNotMatch(
+    cardCss,
+    /\.dataset-card:hover\s*\{[^}]*border-width:/s
+  );
+  assert.match(
+    cardCss,
+    /\.dataset-card__checkbox:hover:not\(:disabled\)\s*\{[^}]*border-color:\s*var\(--glm-color-brand-dark\)[^}]*box-shadow:\s*inset\s+0\s+0\s+0\s+1px\s+var\(--glm-color-brand-dark\)/s
+  );
+  assert.doesNotMatch(
+    cardCss,
+    /\.dataset-card__checkbox:hover:not\(:disabled\)\s*\{[^}]*border-width:/s
+  );
+});
+
 test("filter row can wrap instead of widening the viewport", () => {
   assert.match(filterCss, /\.home-filter-row\s*\{[^}]*flex-wrap:\s*wrap/s);
   assert.match(filterCss, /\.home-filter-row__left\s*\{[^}]*min-width:\s*0/s);
