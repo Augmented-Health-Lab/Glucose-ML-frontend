@@ -128,8 +128,10 @@ test("detail headers render the Figma action set for controlled and open dataset
   assert.match(headerTsx, /Year \{year\}/);
   assert.match(
     headerTsx,
-    /const HELPER_SCRIPTS_URL =\s*"https:\/\/github\.com\/Augmented-Health-Lab\/Glucose-ML-Project\/tree\/main\/2_Harmonize-cgm-datasets"/
+    /import \{ getHelperScriptsUrl \} from "\.\.\/\.\.\/utils\/helper-scripts";/
   );
+  assert.match(headerTsx, /const helperScriptsUrl = getHelperScriptsUrl\(dataset\.title\)/);
+  assert.match(headerTsx, /href=\{helperScriptsUrl\}/);
   assert.match(headerTsx, /isControlledAccess \? \(/);
   assert.match(headerTsx, />\s*Request access\s*</);
   assert.match(headerTsx, />\s*Download dataset\s*</);

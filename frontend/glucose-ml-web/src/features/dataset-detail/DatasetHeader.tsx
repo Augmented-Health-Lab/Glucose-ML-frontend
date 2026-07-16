@@ -4,6 +4,7 @@ import {
   getAccessIcon,
   normalizeDatasetAccess,
 } from "../../utils/access";
+import { getHelperScriptsUrl } from "../../utils/helper-scripts";
 
 type Props = {
   dataset: {
@@ -23,15 +24,13 @@ type Props = {
   onLegendInfo?: () => void;
 };
 
-const HELPER_SCRIPTS_URL =
-  "https://github.com/Augmented-Health-Lab/Glucose-ML-Project/tree/main/2_Harmonize-cgm-datasets";
-
 export default function DatasetHeader({ dataset, onBack }: Props) {
   const year = dataset.duration.replace("Year released:", "").trim() || "-";
   const accessLabel = formatAccessLabel(dataset.access, "detail");
   const accessIcon = getAccessIcon(dataset.access);
   const accessType = normalizeDatasetAccess(dataset.access) ?? "Controlled";
   const isControlledAccess = accessType === "Controlled";
+  const helperScriptsUrl = getHelperScriptsUrl(dataset.title);
 
   return (
     <header className="detail-header">
@@ -138,7 +137,7 @@ export default function DatasetHeader({ dataset, onBack }: Props) {
           )}
           <a
             className="detail-header__helper-link"
-            href={HELPER_SCRIPTS_URL}
+            href={helperScriptsUrl}
             target="_blank"
             rel="noopener noreferrer"
           >
