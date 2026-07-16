@@ -100,9 +100,9 @@ test("guide legend data follows Figma frame 36789", () => {
 test("guide modal uses frame 36789 title, sections, and two-column order", () => {
   assert.match(legendModalTsx, /Guide to Exploring CGM Datasets/);
   assert.match(legendModalTsx, /New to CGM data\? See background/);
-  assert.doesNotMatch(
+  assert.match(
     legendModalTsx,
-    /<a\s+className="legend-learn-link"\s+href="\/background"/
+    /<Link\s+className="legend-learn-link"\s+to="\/background">\s*New to CGM data\? See background\s*<\/Link>/s
   );
   assert.match(legendModalTsx, /Glucose Distribution/);
   assert.match(legendModalTsx, /Data Sources/);
