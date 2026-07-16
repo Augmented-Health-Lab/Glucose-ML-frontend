@@ -154,6 +154,38 @@ test("background data and metrics learn more links use the requested sources", (
   assert.equal(backgroundPageTsx.split(cgmMetricsHref).length - 1, 1);
 });
 
+test("background metrics learn more is available only in the expanded action row", () => {
+  const glossaryStart = backgroundPageTsx.indexOf('id="glossary"');
+  const glossaryEnd = backgroundPageTsx.indexOf('id="models"');
+  const glossarySection = backgroundPageTsx.slice(glossaryStart, glossaryEnd);
+  const actionsIndex = glossarySection.indexOf(
+    'className="background-glossary-actions"'
+  );
+  const toggleIndex = glossarySection.indexOf(
+    'className="background-glossary-toggle"',
+    actionsIndex
+  );
+  const conditionalIndex = glossarySection.indexOf(
+    "{showAllMetrics ? (",
+    toggleIndex
+  );
+  const learnMoreIndex = glossarySection.indexOf(
+    'href="https://diabetesjournals.org/care/article/42/8/1593/36184/Clinical-Targets-for-Continuous-Glucose-Monitoring"',
+    conditionalIndex
+  );
+
+  assert.ok(glossaryStart !== -1);
+  assert.ok(glossaryEnd !== -1);
+  assert.ok(actionsIndex !== -1);
+  assert.ok(toggleIndex > actionsIndex);
+  assert.ok(conditionalIndex > toggleIndex);
+  assert.ok(learnMoreIndex > conditionalIndex);
+  assert.match(
+    backgroundPageCss,
+    /\.background-glossary-actions\s*\{[^}]*display:\s*flex[^}]*justify-content:\s*space-between[^}]*flex-wrap:\s*nowrap/s
+  );
+});
+
 test("background glossary section appears above the model rationale section", () => {
   const dataIndex = backgroundPageTsx.indexOf('id="data"');
   const modelsIndex = backgroundPageTsx.indexOf('id="models"');
@@ -189,7 +221,7 @@ test("background metrics use the Figma primary terms and disclose the remaining 
   );
   assert.match(
     backgroundPageTsx,
-    /<div id="background-metric-cards"[\s\S]*<\/div>\s*<button[\s\S]*className="background-glossary-toggle"/
+    /<div id="background-metric-cards"[\s\S]*<\/div>\s*<div className="background-glossary-actions">\s*<button[\s\S]*className="background-glossary-toggle"/
   );
 });
 
