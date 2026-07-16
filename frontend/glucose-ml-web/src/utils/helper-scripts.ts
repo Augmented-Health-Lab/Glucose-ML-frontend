@@ -21,7 +21,7 @@ const DATASET_HELPER_FOLDERS: Record<string, string> = {
   "T1D-UOM": "T1D-UOM",
   "Bris-T1D Open": "Bris-T1D_Open",
   AZT1D: "AZT1D",
-  "Park 2025": "Park_2025",
+  Park2025: "Park_2025",
   PhysioCGM: "PhysioCGM",
 };
 

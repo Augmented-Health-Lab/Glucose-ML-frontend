@@ -3,7 +3,7 @@ import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
-type TableDetailRow = { name: string };
+type DatasetCard = { title: string };
 
 const moduleUrl = new URL("../src/utils/helper-scripts.ts", import.meta.url);
 const expectedFolders: Record<string, string> = {
@@ -26,22 +26,22 @@ const expectedFolders: Record<string, string> = {
   "T1D-UOM": "T1D-UOM",
   "Bris-T1D Open": "Bris-T1D_Open",
   AZT1D: "AZT1D",
-  "Park 2025": "Park_2025",
+  Park2025: "Park_2025",
   PhysioCGM: "PhysioCGM",
 };
 
-test("every current dataset resolves to its helper scripts folder", async () => {
+test("every current dataset card resolves to its helper scripts folder", async () => {
   assert.ok(existsSync(fileURLToPath(moduleUrl)), "Expected helper scripts utility");
   const { getHelperScriptsUrl } = await import(moduleUrl.href);
-  const rows = JSON.parse(
+  const cards = JSON.parse(
     readFileSync(
-      new URL("../public/static_data/table1_detail_data.json", import.meta.url),
+      new URL("../public/static_data/dataset_card_info.json", import.meta.url),
       "utf8"
     )
-  ) as TableDetailRow[];
+  ) as DatasetCard[];
 
   assert.deepEqual(
-    rows.map(({ name }) => name).toSorted(),
+    cards.map(({ title }) => title).toSorted(),
     Object.keys(expectedFolders).toSorted()
   );
 
