@@ -18,7 +18,7 @@ test("registers a dedicated About route in the shared shell", () => {
   assert.match(shell, /<NavLink[\s\S]*to="\/about"[\s\S]*className=\{\(\{ isActive \}\)/);
 });
 
-test("renders the approved Figma About sections and placeholders", () => {
+test("renders the approved About sections with real contributor and publication content", () => {
   assert.match(page, /<AppShell>/);
   assert.doesNotMatch(page, /showFooter=\{false\}/);
   assert.match(page, /ABOUT THE GLUCOSE ML PROJECT/);
@@ -32,14 +32,20 @@ test("renders the approved Figma About sections and placeholders", () => {
   assert.match(page, /Access & Build/);
   assert.match(page, /Who we are/);
   assert.doesNotMatch(page, /<h2 id="about-lab-title">Augmented Health Lab<\/h2>/);
-  assert.match(page, /Current Contributors/);
   assert.match(page, /Past Contributors/);
+  assert.match(page, /Kultum Lhabaik \(Frontend Developer\)/);
   assert.match(page, /Publications/);
-  assert.match(page, /name: "Firstname Lastname"/);
-  assert.match(page, /role: "ROLE"/);
-  assert.match(page, /title: "Publication name details"/);
-  assert.match(page, /Array\.from\(\{ length: 9 \}/);
-  assert.match(page, /Array\.from\(\{ length: 3 \}/);
+  assert.match(
+    page,
+    /Glucose-ML: A collection of longitudinal diabetes datasets for development of robust AI solutions/
+  );
+  assert.match(page, /https:\/\/arxiv\.org\/abs\/2507\.14077/);
+  assert.doesNotMatch(page, /title: "Publication name details"/);
+  assert.doesNotMatch(page, /placeholder-publication/);
+  assert.doesNotMatch(page, /Firstname Lastname/);
+  assert.doesNotMatch(page, /placeholder-contributor/);
+  assert.doesNotMatch(page, /Placeholder contributor portrait/);
+  assert.doesNotMatch(css, /\.about-lab\s*\{[^}]*min-height:\s*1103px/s);
 });
 
 test("uses the supplied forms and direct contact destinations", () => {
@@ -71,7 +77,6 @@ test("pins the measured Figma desktop geometry", () => {
   assert.match(css, /\.about-hero__message\s*\{[^}]*gap:\s*8px/s);
   assert.match(css, /\.about-how\s*\{[^}]*min-height:\s*418px/s);
   assert.match(css, /\.about-info-card\s*\{[^}]*height:\s*162px/s);
-  assert.match(css, /\.about-lab\s*\{[^}]*min-height:\s*1103px/s);
   assert.match(css, /\.about-contributor\s*\{[^}]*min-height:\s*216px/s);
   assert.match(css, /\.about-contact\s*\{[^}]*min-height:\s*377px/s);
   assert.match(css, /\.about-contact__grid\s*\{[^}]*height:\s*209px/s);

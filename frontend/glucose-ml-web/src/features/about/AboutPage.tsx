@@ -32,16 +32,14 @@ const missionItems = [
   "Facilitate dataset transparency and enable joint use of disparate high-quality datasets to develop robust, reproducible, and generalizable algorithms that support health equitably.",
 ];
 
-const contributors = Array.from({ length: 9 }, (_, index) => ({
-  id: `placeholder-contributor-${index + 1}`,
-  name: "Firstname Lastname",
-  role: "ROLE",
-}));
-
-const publications = Array.from({ length: 3 }, (_, index) => ({
-  id: `placeholder-publication-${index + 1}`,
-  title: "Publication name details",
-}));
+const publications = [
+  {
+    id: "arxiv-2507-14077",
+    title:
+      "Glucose-ML: A collection of longitudinal diabetes datasets for development of robust AI solutions",
+    url: "https://arxiv.org/abs/2507.14077",
+  },
+];
 
 const AboutPage = () => {
   return (
@@ -128,34 +126,9 @@ const AboutPage = () => {
               </p>
             </div>
 
-            <div className="about-contributors">
-              <h3>Current Contributors</h3>
-              <div className="about-contributors__grid">
-                {contributors.map((contributor) => (
-                  <article
-                    className="about-contributor"
-                    key={contributor.id}
-                  >
-                    <div
-                      className="about-contributor__portrait"
-                      role="img"
-                      aria-label="Placeholder contributor portrait"
-                    />
-                    <div className="about-contributor__details">
-                      <p>{contributor.name}</p>
-                      <span>{contributor.role}</span>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-
             <div className="about-past-contributors">
               <h3>Past Contributors</h3>
-              <p>
-                Firstname Lastname (ROLE), Firstname Lastname (ROLE),
-                Firstname Lastname (ROLE)...
-              </p>
+              <p>Kultum Lhabaik (Frontend Developer)</p>
             </div>
 
             <div className="about-publications">
@@ -164,13 +137,17 @@ const AboutPage = () => {
                 {publications.map((publication) => (
                   <div className="about-publication" key={publication.id}>
                     <span>{publication.title}</span>
-                    <button type="button" aria-disabled="true">
+                    <a
+                      href={publication.url}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
                       View
                       <img
                         src="/figma-assets/about-arrow-up-right.svg"
                         alt=""
                       />
-                    </button>
+                    </a>
                   </div>
                 ))}
               </div>
