@@ -506,18 +506,7 @@ const BackgroundPage = () => {
 
         <section id="glossary" className="background-section background-section--white">
           <div className="background-page__inner">
-            <div className="background-glossary-heading">
-              <h2>What are common CGM Metrics?</h2>
-              <a
-                className="background-learn-more background-learn-more--inline"
-                href="https://diabetesjournals.org/care/article/42/8/1593/36184/Clinical-Targets-for-Continuous-Glucose-Monitoring"
-                rel="noreferrer"
-                target="_blank"
-              >
-                Learn more
-                <img src="/figma-assets/icon-arrow-up-right.png" alt="" />
-              </a>
-            </div>
+            <h2>What are common CGM Metrics?</h2>
             <div id="background-metric-cards" className="background-glossary-grid">
               {primaryMetricTerms.map((term) => (
                 <article className="background-glossary-card" key={term.term}>
@@ -534,23 +523,36 @@ const BackgroundPage = () => {
                   ))
                 : null}
             </div>
-            <button
-              type="button"
-              className="background-glossary-toggle"
-              aria-expanded={showAllMetrics}
-              aria-controls="background-metric-cards"
-              onClick={() => setShowAllMetrics((current) => !current)}
-            >
-              {showAllMetrics ? "See less" : "See more"}
-              <span
-                className={`background-glossary-toggle__icon${
-                  showAllMetrics
-                    ? " background-glossary-toggle__icon--expanded"
-                    : ""
-                }`}
-                aria-hidden="true"
-              />
-            </button>
+            <div className="background-glossary-actions">
+              <button
+                type="button"
+                className="background-glossary-toggle"
+                aria-expanded={showAllMetrics}
+                aria-controls="background-metric-cards"
+                onClick={() => setShowAllMetrics((current) => !current)}
+              >
+                {showAllMetrics ? "See less" : "See more"}
+                <span
+                  className={`background-glossary-toggle__icon${
+                    showAllMetrics
+                      ? " background-glossary-toggle__icon--expanded"
+                      : ""
+                  }`}
+                  aria-hidden="true"
+                />
+              </button>
+              {showAllMetrics ? (
+                <a
+                  className="background-learn-more background-learn-more--inline"
+                  href="https://diabetesjournals.org/care/article/42/8/1593/36184/Clinical-Targets-for-Continuous-Glucose-Monitoring"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Learn more
+                  <img src="/figma-assets/icon-arrow-up-right.png" alt="" />
+                </a>
+              ) : null}
+            </div>
           </div>
         </section>
 
