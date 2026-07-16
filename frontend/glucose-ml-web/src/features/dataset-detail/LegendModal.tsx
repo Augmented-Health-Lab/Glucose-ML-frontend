@@ -1,5 +1,6 @@
 // src/features/dataset-detail/LegendModal.tsx
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./legend-modal.css";
 import {
   legendAccessTiers,
@@ -62,7 +63,9 @@ export default function LegendModal({ open, onClose }: Props) {
           <h2 id="legend-title" className="legend-title">
             Guide to Exploring CGM Datasets
           </h2>
-          <p className="legend-learn-text">New to CGM data? See background</p>
+          <Link className="legend-learn-link" to="/background">
+            New to CGM data? See background
+          </Link>
 
           <div className="legend-columns">
             <div className="legend-col">

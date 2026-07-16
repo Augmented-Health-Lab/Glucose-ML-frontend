@@ -78,7 +78,7 @@
   line-height: normal;
 }
 
-.legend-learn-text {
+.legend-learn-link {
   display: block;
   width: 860px;
   margin: 8px 0 0;
@@ -86,6 +86,7 @@
   font-size: 14px;
   font-weight: 400;
   line-height: normal;
+  text-decoration: underline;
 }
 
 .legend-columns {
@@ -316,7 +317,7 @@
     row-gap: 32px;
   }
 
-  .legend-learn-text,
+  .legend-learn-link,
   .legend-divider,
   .legend-divider--right,
   .pop-desc,
