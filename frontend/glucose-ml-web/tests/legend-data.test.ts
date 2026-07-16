@@ -168,3 +168,11 @@ test("dataset guide modal exposes the Figma x close button", () => {
   );
   assert.doesNotMatch(legendModalCss, /clip:\s*rect\(0,\s*0,\s*0,\s*0\)/);
 });
+
+test("guide modal uses Figma spacing for the Data Sources section", () => {
+  assert.match(
+    legendModalCss,
+    /\.legend-block-subtitle\s*\{[^}]*margin-bottom:\s*24px/s
+  );
+  assert.match(legendModalCss, /\.source-list\s*\{[^}]*gap:\s*16px/s);
+});
