@@ -69,6 +69,12 @@ test("BIGIDEAs release year is sourced as 2022", () => {
   assert.equal(bigIdeas["year release"], "2022");
 });
 
+test("AI-READI request access links to Fairhub dataset 3", () => {
+  const aiReadi = rowFor("AI-READI");
+
+  assert.equal(aiReadi["Link to dataset"], "https://fairhub.io/datasets/3");
+});
+
 test("detail header uses Git links for downloads and dataset links for source or access", () => {
   assert.match(datasetHeaderTsx, /href=\{dataset\.downloadLink\}/);
   assert.match(datasetHeaderTsx, /href=\{dataset\.datasetLink\}/);
