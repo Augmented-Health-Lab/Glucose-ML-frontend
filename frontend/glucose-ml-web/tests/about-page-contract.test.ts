@@ -31,9 +31,10 @@ test("registers a dedicated About route in the shared shell", () => {
 test("renders the approved About sections with real contributor and publication content", () => {
   assert.match(page, /<AppShell>/);
   assert.doesNotMatch(page, /showFooter=\{false\}/);
-  assert.match(page, /ABOUT THE GLUCOSE ML PROJECT/);
+  assert.match(page, />ABOUT</);
+  assert.doesNotMatch(page, /ABOUT THE GLUCOSE ML PROJECT/);
   assert.match(page, /Accelerating data-driven research for diabetes/);
-  assert.match(page, /Glucose-ML is an evolving collection/);
+  assert.match(page, /The Glucose-ML project is an evolving collection/);
   assert.match(page, /Our mission/);
   assert.match(page, /Bridge the data gap/);
   assert.match(page, /How it works/);
@@ -109,20 +110,29 @@ test("defines Figma desktop grids and responsive collapse", () => {
     css,
     /grid-template-columns:\s*repeat\(3,\s*minmax\(0,\s*1fr\)\)/
   );
-  assert.match(css, /grid-template-columns:\s*175px\s+minmax\(0,\s*882px\)/);
+  assert.match(css, /grid-template-columns:\s*175px\s+minmax\(0,\s*954px\)/);
   assert.match(css, /grid-template-columns:\s*repeat\(5,\s*172px\)/);
   assert.match(css, /@media\s*\(max-width:\s*760px\)/);
 });
 
 test("pins the measured Figma desktop geometry", () => {
   assert.match(page, /className="about-hero__message"/);
-  assert.match(css, /\.about-hero\s*\{[^}]*min-height:\s*325px/s);
+  assert.match(css, /\.about-hero\s*\{[^}]*height:\s*305px/s);
+  assert.match(css, /\.about-hero__content\s*\{[^}]*gap:\s*9px/s);
+  assert.match(css, /\.about-hero__content\s*\{[^}]*padding-block:\s*60px 24px/s);
+  assert.match(css, /\.about-hero__copy\s*\{[^}]*gap:\s*8px/s);
   assert.match(css, /\.about-hero\s*\{[^}]*background:\s*#3ba7a1/s);
   assert.match(css, /\.about-hero h1\s*\{[^}]*color:\s*#fff/s);
   assert.match(css, /\.about-primary-action\s*\{[^}]*background:\s*#fff/s);
   assert.match(css, /\.about-primary-action\s*\{[^}]*color:\s*#2f8c88/s);
-  assert.match(css, /\.about-mission\s*\{[^}]*min-height:\s*288px/s);
+  assert.match(css, /\.about-mission\s*\{[^}]*min-height:\s*336px/s);
   assert.match(css, /\.about-mission\s*\{[^}]*background:\s*#fff/s);
+  assert.match(page, /className="about-mission__item"/);
+  assert.match(page, /className="about-mission__marker"/);
+  assert.match(page, /<strong>\{item\.lead\}<\/strong>/);
+  assert.match(css, /\.about-mission__copy\s*\{[^}]*gap:\s*24px/s);
+  assert.match(css, /\.about-mission__marker::before\s*\{[^}]*border:\s*2px solid #3ba7a1/s);
+  assert.match(css, /\.about-mission__item:not\(:last-child\)::after\s*\{[^}]*width:\s*min\(100%,\s*850px\)/s);
   assert.match(css, /\.about-hero__message\s*\{[^}]*gap:\s*8px/s);
   assert.match(css, /\.about-how\s*\{[^}]*min-height:\s*418px/s);
   assert.match(css, /\.about-info-card\s*\{[^}]*height:\s*162px/s);

@@ -27,9 +27,18 @@ const howItWorksItems = [
 ];
 
 const missionItems = [
-  "Bridge the data gap that imposes barriers for novice and established data science, machine learning, and AI practitioners seeking to contribute to health-relevant research.",
-  "Provide a central hub for exploring, visualizing, and comparing real-world CGM datasets to support AI/ML research for diabetes prevention and care.",
-  "Facilitate dataset transparency and enable joint use of disparate high-quality datasets to develop robust, reproducible, and generalizable algorithms that support health equitably.",
+  {
+    lead: "Bridge the data gap",
+    body: "that imposes barriers for novice and established data science, machine learning, and AI practitioners seeking to contribute to health-relevant research.",
+  },
+  {
+    lead: "Provide a central hub",
+    body: "for exploring, visualizing, and comparing real-world CGM datasets to support AI/ML research for diabetes prevention and care.",
+  },
+  {
+    lead: "Facilitate dataset transparency",
+    body: "and enable joint use of disparate high-quality datasets to develop robust, reproducible, and generalizable algorithms that support health equitably.",
+  },
 ];
 
 const publications = [
@@ -86,15 +95,15 @@ const AboutPage = () => {
         <section className="about-hero" aria-labelledby="about-title">
           <div className="about-container about-hero__content">
             <div className="about-hero__copy">
-              <p className="about-eyebrow">ABOUT THE GLUCOSE ML PROJECT</p>
+              <p className="about-eyebrow">ABOUT</p>
               <div className="about-hero__message">
                 <h1 id="about-title">
                   Accelerating data-driven research for diabetes
                 </h1>
                 <p className="about-hero__description">
-                  Glucose-ML is an evolving collection of publicly available
-                  continuous glucose datasets curated, standardized, and
-                  maintained to accelerate data-centric research and
+                  The Glucose-ML project is an evolving collection of publicly
+                  available continuous glucose datasets curated, standardized,
+                  and maintained to accelerate data-centric research and
                   development.
                 </p>
               </div>
@@ -110,7 +119,12 @@ const AboutPage = () => {
             <h2 id="about-mission-title">Our mission</h2>
             <div className="about-mission__copy">
               {missionItems.map((item) => (
-                <p key={item}>{item}</p>
+                <div className="about-mission__item" key={item.lead}>
+                  <span className="about-mission__marker" aria-hidden="true" />
+                  <p>
+                    <strong>{item.lead}</strong> {item.body}
+                  </p>
+                </div>
               ))}
             </div>
           </div>
