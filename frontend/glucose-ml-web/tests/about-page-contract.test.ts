@@ -67,9 +67,9 @@ test("renders the approved About sections with real contributor and publication 
   assert.match(page, /Publications/);
   assert.match(
     page,
-    /Glucose-ML: A collection of longitudinal diabetes datasets for development of robust AI solutions/
+    /Prioleau, T\., Lu, B\. Cui, Y\. \(2025\)\. Glucose-ML: A collection of longitudinal diabetes datasets for development of robust AI solutions\. arXiv\. https:\/\/doi\.org\/10\.48550\/arXiv\.2507\.14077\./
   );
-  assert.match(page, /https:\/\/arxiv\.org\/abs\/2507\.14077/);
+  assert.match(page, /url: "https:\/\/doi\.org\/10\.48550\/arXiv\.2507\.14077"/);
   assert.doesNotMatch(page, /title: "Publication name details"/);
   assert.doesNotMatch(page, /placeholder-publication/);
   assert.doesNotMatch(page, /Firstname Lastname/);

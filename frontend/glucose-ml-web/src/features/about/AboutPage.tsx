@@ -36,8 +36,8 @@ const publications = [
   {
     id: "arxiv-2507-14077",
     title:
-      "Glucose-ML: A collection of longitudinal diabetes datasets for development of robust AI solutions",
-    url: "https://arxiv.org/abs/2507.14077",
+      "Prioleau, T., Lu, B. Cui, Y. (2025). Glucose-ML: A collection of longitudinal diabetes datasets for development of robust AI solutions. arXiv. https://doi.org/10.48550/arXiv.2507.14077.",
+    url: "https://doi.org/10.48550/arXiv.2507.14077",
   },
 ];
 
