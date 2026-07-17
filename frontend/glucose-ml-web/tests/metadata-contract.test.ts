@@ -48,3 +48,31 @@ test("WebSite JSON-LD identifies the canonical site name and URL", () => {
     url: "https://www.glucose-ml-project.com/",
   });
 });
+
+const readPngSize = (url: URL) => {
+  const bytes = readFileSync(url);
+  assert.equal(bytes.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
+  return {
+    width: bytes.readUInt32BE(16),
+    height: bytes.readUInt32BE(20),
+  };
+};
+
+test("raster favicon and Apple touch icon use exact square dimensions", () => {
+  assert.match(
+    indexHtml,
+    /<link rel="icon" type="image\/png" sizes="48x48" href="\/favicon-48x48\.png" \/>/
+  );
+  assert.match(
+    indexHtml,
+    /<link rel="apple-touch-icon" sizes="180x180" href="\/apple-touch-icon\.png" \/>/
+  );
+  assert.deepEqual(
+    readPngSize(new URL("public/favicon-48x48.png", appRoot)),
+    { width: 48, height: 48 }
+  );
+  assert.deepEqual(
+    readPngSize(new URL("public/apple-touch-icon.png", appRoot)),
+    { width: 180, height: 180 }
+  );
+});
