@@ -223,6 +223,8 @@
 
 .about-inline-link:hover,
 .about-inline-link:focus-visible,
+.about-text-link:hover,
+.about-text-link:focus-visible,
 .about-card-link:hover,
 .about-card-link:focus-visible,
 .about-email-link:hover,
@@ -237,6 +239,12 @@
 
 .about-lab__link {
   flex: 0 0 auto;
+}
+
+.about-text-link {
+  color: #2f8c88;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .about-contributors {
@@ -274,6 +282,7 @@
   border: 3px solid #3ba7a1;
   border-radius: 50%;
   background: #d9d9d9;
+  object-fit: cover;
 }
 
 .about-contributor__details {

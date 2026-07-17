@@ -41,6 +41,44 @@ const publications = [
   },
 ];
 
+const contributors = [
+  {
+    name: "Temi Prioleau",
+    role: "Project Lead",
+    image: "/contributors/temi-prioleau.jpg",
+  },
+  {
+    name: "Ryan Pontius",
+    role: "Research Data Engineer",
+    image: "/contributors/ryan-pontius.jpg",
+  },
+  {
+    name: "Pam Pitakanonda",
+    role: "UI/UX Designer",
+    image: "/contributors/pam-pitakanonda.jpg",
+  },
+  {
+    name: "Leo Ding",
+    role: "Frontend Developer",
+    image: "/contributors/leo-ding.jpg",
+  },
+  {
+    name: "Diego Guzman Gonzalez",
+    role: "Qualitative Researcher",
+    image: "/contributors/diego-guzman-gonzalez.png",
+  },
+  {
+    name: "Wai Yan Chan",
+    role: "Research Intern",
+    image: "/contributors/wai-yan-chan.jpg",
+  },
+  {
+    name: "Zimo Li",
+    role: "Research Intern",
+    image: "/contributors/zimo-li.jpg",
+  },
+];
+
 const AboutPage = () => {
   return (
     <AppShell>
@@ -119,11 +157,42 @@ const AboutPage = () => {
               <p>
                 The Glucose-ML project is developed and maintained by the
                 Augmented Health Lab under the leadership of Professor
-                Prioleau. The project is made possible by the internal and
-                external contributors across the interdisciplinary fields of
-                computer science, health data science, psychology, and
-                medicine.
+                {" "}
+                <a
+                  className="about-text-link"
+                  href="https://www.t-prioleau.com/"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Temi Prioleau
+                </a>
+                . The project is made possible by the internal and external
+                contributors across the interdisciplinary fields of computer
+                science, health data science, psychology, and medicine.
               </p>
+            </div>
+
+            <div className="about-contributors">
+              <h3>Current Contributors</h3>
+              <div className="about-contributors__grid">
+                {contributors.map((contributor) => (
+                  <article className="about-contributor" key={contributor.name}>
+                    <img
+                      className="about-contributor__portrait"
+                      src={contributor.image}
+                      alt={`${contributor.name} portrait`}
+                      loading="lazy"
+                      decoding="async"
+                      width={156}
+                      height={156}
+                    />
+                    <div className="about-contributor__details">
+                      <p>{contributor.name}</p>
+                      <span>{contributor.role}</span>
+                    </div>
+                  </article>
+                ))}
+              </div>
             </div>
 
             <div className="about-past-contributors">

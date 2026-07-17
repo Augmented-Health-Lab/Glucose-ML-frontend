@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, statSync } from "node:fs";
 import test from "node:test";
 
 const read = (path: string) => {
@@ -11,6 +11,16 @@ const app = read("../src/app/App.tsx");
 const shell = read("../src/components/app-shell/AppShell.tsx");
 const page = read("../src/features/about/AboutPage.tsx");
 const css = read("../src/features/about/about-page.css");
+
+const contributorImagePaths = [
+  "/contributors/temi-prioleau.jpg",
+  "/contributors/ryan-pontius.jpg",
+  "/contributors/pam-pitakanonda.jpg",
+  "/contributors/leo-ding.jpg",
+  "/contributors/diego-guzman-gonzalez.png",
+  "/contributors/wai-yan-chan.jpg",
+  "/contributors/zimo-li.jpg",
+];
 
 test("registers a dedicated About route in the shared shell", () => {
   assert.match(app, /import AboutPage/);
@@ -32,6 +42,26 @@ test("renders the approved About sections with real contributor and publication 
   assert.match(page, /Access & Build/);
   assert.match(page, /Who we are/);
   assert.doesNotMatch(page, /<h2 id="about-lab-title">Augmented Health Lab<\/h2>/);
+  assert.match(page, /Professor/);
+  assert.match(page, /Temi Prioleau/);
+  assert.match(page, /https:\/\/www\.t-prioleau\.com\//);
+  assert.match(page, /Current Contributors/);
+  assert.match(page, /Temi Prioleau/);
+  assert.match(page, /Project Lead/);
+  assert.match(page, /Ryan Pontius/);
+  assert.match(page, /Research Data Engineer/);
+  assert.match(page, /Pam Pitakanonda/);
+  assert.match(page, /UI\/UX Designer/);
+  assert.match(page, /Leo Ding/);
+  assert.match(page, /Frontend Developer/);
+  assert.match(page, /Diego Guzman Gonzalez/);
+  assert.match(page, /Qualitative Researcher/);
+  assert.match(page, /Wai Yan Chan/);
+  assert.match(page, /Research Intern/);
+  assert.match(page, /Zimo Li/);
+  for (const imagePath of contributorImagePaths) {
+    assert.match(page, new RegExp(imagePath.replaceAll("/", "\\/").replace(".", "\\.")));
+  }
   assert.match(page, /Past Contributors/);
   assert.match(page, /Kultum Lhabaik \(Frontend Developer\)/);
   assert.match(page, /Publications/);
@@ -53,6 +83,25 @@ test("uses the supplied forms and direct contact destinations", () => {
   assert.match(page, /https:\/\/forms\.gle\/ni7nZpD8NnLVAh5R6/);
   assert.match(page, /mailto:ah-lab@emory\.edu/);
   assert.match(page, /https:\/\/ah-lab\.t-prioleau\.com\//);
+  assert.match(page, /https:\/\/www\.t-prioleau\.com\//);
+});
+
+test("loads contributor portraits efficiently with stable dimensions", () => {
+  assert.match(page, /loading="lazy"/);
+  assert.match(page, /decoding="async"/);
+  assert.match(page, /width=\{156\}/);
+  assert.match(page, /height=\{156\}/);
+});
+
+test("ships optimized contributor portrait assets", () => {
+  for (const imagePath of contributorImagePaths) {
+    const asset = new URL(`../public${imagePath}`, import.meta.url);
+    assert.equal(existsSync(asset), true, `${imagePath} should exist`);
+    assert.ok(
+      statSync(asset).size <= 250 * 1024,
+      `${imagePath} should stay under 250 KB`
+    );
+  }
 });
 
 test("defines Figma desktop grids and responsive collapse", () => {
