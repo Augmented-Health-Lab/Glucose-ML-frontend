@@ -71,10 +71,27 @@ test("public repository excludes private and research-source directories", () =>
     "CLAUDE.md",
     "PLAN.md",
     ".claude",
-    "docs",
   ]) {
     assert.equal(existsSync(path.join(repositoryRoot, name)), false, name);
   }
+});
+
+test("root docs contain only Superpowers plans and specs", () => {
+  const docsRoot = path.join(repositoryRoot, "docs");
+  const unexpected = readdirSync(docsRoot, {
+    recursive: true,
+    withFileTypes: true,
+  })
+    .filter((entry) => entry.isFile())
+    .map((entry) =>
+      path.relative(docsRoot, path.join(entry.parentPath, entry.name))
+    )
+    .filter(
+      (filename) =>
+        !/^superpowers\/(?:plans|specs)\/[a-z0-9-]+\.md$/.test(filename)
+    );
+
+  assert.deepEqual(unexpected, []);
 });
 
 test("public static data uses an explicit aggregate-data manifest", () => {
