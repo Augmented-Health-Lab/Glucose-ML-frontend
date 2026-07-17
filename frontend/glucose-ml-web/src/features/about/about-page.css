@@ -14,7 +14,7 @@
 }
 
 .about-hero {
-  min-height: 325px;
+  height: 305px;
   background: #3ba7a1;
 }
 
@@ -22,8 +22,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 32px;
-  padding-block: 60px;
+  gap: 9px;
+  padding-block: 60px 24px;
   text-align: center;
 }
 
@@ -31,6 +31,7 @@
   display: flex;
   width: 100%;
   flex-direction: column;
+  gap: 8px;
 }
 
 .about-hero__message {
@@ -92,15 +93,15 @@
 }
 
 .about-mission {
-  min-height: 288px;
+  min-height: 336px;
   padding-block: 60px;
   background: #fff;
 }
 
 .about-mission__content {
   display: grid;
-  grid-template-columns: 175px minmax(0, 882px);
-  column-gap: 263px;
+  grid-template-columns: 175px minmax(0, 954px);
+  column-gap: 191px;
   align-items: start;
 }
 
@@ -117,7 +118,7 @@
 .about-mission__copy {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 24px;
   margin: 0;
   color: #59636e;
   font-size: 16px;
@@ -125,8 +126,51 @@
   line-height: 24px;
 }
 
+.about-mission__item {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.about-mission__item:not(:last-child) {
+  padding-bottom: 12px;
+}
+
+.about-mission__item:not(:last-child)::after {
+  position: absolute;
+  bottom: 0;
+  left: 36px;
+  width: min(100%, 850px);
+  max-width: calc(100% - 36px);
+  border-bottom: 1px solid #dbe0e3;
+  content: "";
+}
+
+.about-mission__marker {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+}
+
+.about-mission__marker::before {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #3ba7a1;
+  border-radius: 50%;
+  content: "";
+}
+
 .about-mission__copy p {
   margin: 0;
+}
+
+.about-mission__copy strong {
+  font-weight: 700;
 }
 
 .about-how {
@@ -495,6 +539,10 @@
   .about-lab,
   .about-contact {
     padding-block: 40px;
+  }
+
+  .about-hero {
+    height: auto;
   }
 
   .about-hero h1 {
