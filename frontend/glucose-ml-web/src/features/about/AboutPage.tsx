@@ -144,12 +144,6 @@ const AboutPage = () => {
                 </article>
               ))}
             </div>
-            <p className="about-how__summary">
-              We bring CGM datasets from research labs into one standardized,
-              searchable database. Download directly, request access, and use
-              built-in helper scripts to start working with data right away.
-              (More info on standardization we do?)
-            </p>
           </div>
         </section>
 
