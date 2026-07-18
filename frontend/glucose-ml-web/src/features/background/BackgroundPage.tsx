@@ -81,15 +81,14 @@ const diversityTags = [
 ];
 
 const groupFilters = [
-  { key: "t1d", label: "Type 1", tone: "t1d", lineMark: ". . . ." },
-  { key: "t2d", label: "Type 2", tone: "t2d", lineMark: "- ." },
-  { key: "pred", label: "Prediabetes", tone: "pred", lineMark: "- ." },
-  { key: "nd", label: "No Diabetes", tone: "nd", lineMark: "- ." },
+  { key: "t1d", label: "Type 1", tone: "t1d" },
+  { key: "t2d", label: "Type 2", tone: "t2d" },
+  { key: "pred", label: "Prediabetes", tone: "pred" },
+  { key: "nd", label: "No Diabetes", tone: "nd" },
 ] satisfies Array<{
   key: BackgroundCgmGroupKey;
   label: string;
   tone: BackgroundCgmGroupKey;
-  lineMark: string;
 }>;
 
 const getStickyHeaderHeight = () => {
@@ -475,9 +474,6 @@ const BackgroundPage = () => {
                           )
                         }
                       >
-                        <span className="background-filter-pill__line" aria-hidden="true">
-                          {filter.lineMark}
-                        </span>
                         <span className="background-filter-pill__label">
                           {filter.label}
                         </span>
