@@ -22,13 +22,35 @@ import type {
 import type { DatasetCardProps } from "./DatasetCard";
 import "./home-page.css";
 
+const FILTER_STORAGE_KEY = "home-filter-selections";
+
+function readStoredFilterSelections(): { [key: string]: string[] } {
+  try {
+    const raw = sessionStorage.getItem(FILTER_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
+
 const HomePage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const stickyControlsRef = useRef<HTMLElement | null>(null);
   const [filterSelections, setFilterSelections] = useState<{
     [key: string]: string[];
-  }>({});
+  }>(readStoredFilterSelections);
+
+  useEffect(() => {
+    try {
+      sessionStorage.setItem(
+        FILTER_STORAGE_KEY,
+        JSON.stringify(filterSelections)
+      );
+    } catch {
+      // storage unavailable; filters just won't persist
+    }
+  }, [filterSelections]);
   const selectedCards = useMemo(
     () => parseSelectedDatasets(location.search),
     [location.search]
