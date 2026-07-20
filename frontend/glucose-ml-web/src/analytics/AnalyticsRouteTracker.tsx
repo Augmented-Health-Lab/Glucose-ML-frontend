@@ -12,16 +12,21 @@
  *   reporting purposes is its path, not any parameters appended to it.
  *
  * - scroll effect: (re)creates a fresh "already sent" milestone set and
- *   (re)attaches a passive `scroll` listener. Because this reset and the
- *   listener attach/detach live in the *same* effect, React's normal
- *   cleanup-before-setup ordering on a dependency change guarantees the
- *   previous route's listener is gone and the new route's milestone set is
- *   empty before either can observe a scroll event — see
- *   `../app/RouteScrollManager.tsx`, which scrolls programmatically on every
- *   navigation (restoring a saved offset on `/`, resetting to top
- *   elsewhere). Without this, that synthetic scroll could otherwise cross a
- *   milestone attributed to the route being left, not the route being
- *   entered.
+ *   (re)attaches a passive `scroll` listener on every navigation.
+ *
+ * `../app/RouteScrollManager.tsx` scrolls the page programmatically on every
+ * navigation — synchronously via `useLayoutEffect`, and asynchronously via a
+ * `ResizeObserver` that retries the restore until it lands — which generates
+ * real `scroll` events that are not user activity on the newly-entered
+ * route. Left unguarded, one of those synthetic events could be attributed
+ * to the wrong route (e.g. crossing a milestone that gets tagged with the
+ * route being left, not the route being entered, if it fires before the
+ * scroll effect's cleanup/setup for the new route has run). The scroll
+ * handler below guards against this itself — by comparing the pathname it
+ * was set up for against the live pathname — rather than relying on React
+ * flushing this effect's cleanup and setup before the browser dispatches the
+ * async `scroll` event; see the comment on `currentPathnameRef` and inside
+ * `handleScroll`.
  *
  * StrictMode note: `src/app/main.tsx` renders the app inside
  * `<StrictMode>`, which double-invokes effects (setup → cleanup → setup) on
@@ -38,7 +43,7 @@
  * double-mount bugs) for a cosmetic dev-only artifact.
  */
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { initAnalytics, trackPageView, trackScrollDepth } from "./index.ts";
 import { normalizePagePath, getRouteType, getDatasetNameFromPath } from "./params.ts";
@@ -46,6 +51,19 @@ import { getScrollPercent, nextMilestones, type ScrollMilestone } from "./scroll
 
 const AnalyticsRouteTracker = () => {
   const { pathname } = useLocation();
+  const routeType = getRouteType(pathname);
+  const datasetName = getDatasetNameFromPath(pathname);
+
+  // The most recently rendered pathname. Assigned during render, so it is
+  // always up to date before any effect — cleanup or setup, for any
+  // navigation — runs for the corresponding commit: React always finishes
+  // rendering (running this component's function body) before it runs any
+  // effects for that update. The scroll handler below reads this ref to
+  // learn the *current* route independent of whether the scroll effect's
+  // own cleanup/setup has run yet, which is what makes the guard correct
+  // regardless of listener attach/detach timing.
+  const currentPathnameRef = useRef(pathname);
+  currentPathnameRef.current = pathname;
 
   useEffect(() => {
     initAnalytics();
@@ -55,17 +73,32 @@ const AnalyticsRouteTracker = () => {
     trackPageView({
       pagePath: normalizePagePath(pathname),
       pageTitle: document.title,
-      routeType: getRouteType(pathname),
-      datasetName: getDatasetNameFromPath(pathname),
+      routeType,
+      datasetName,
     });
+    // Must depend on [pathname] only: routeType/datasetName are pure,
+    // synchronous derivations of pathname (see params.ts) computed once per
+    // render above, and the router's query string must never be added here
+    // or read by this effect — a route's identity for analytics is its path.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   useEffect(() => {
-    const routeType = getRouteType(pathname);
-    const datasetName = getDatasetNameFromPath(pathname);
     const sentMilestones = new Set<ScrollMilestone>();
+    // The pathname this listener instance was set up for. Captured once,
+    // when this effect runs, and never reassigned.
+    const trackedPathname = pathname;
 
     const handleScroll = () => {
+      // Guard against RouteScrollManager's synthetic scroll activity (see
+      // the file header) being misattributed to the wrong route: only
+      // record/emit a milestone if the route this listener was created for
+      // is still the live route. Without this, a scroll event that fires
+      // between a navigation's render and this effect's cleanup/setup
+      // running could otherwise cross a milestone for the route being left,
+      // or the route being entered, using the wrong route's identity.
+      if (currentPathnameRef.current !== trackedPathname) return;
+
       const percent = getScrollPercent({
         scrollY: window.scrollY,
         viewportHeight: window.innerHeight,
@@ -82,7 +115,7 @@ const AnalyticsRouteTracker = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [pathname]);
+  }, [pathname, routeType, datasetName]);
 
   return null;
 };

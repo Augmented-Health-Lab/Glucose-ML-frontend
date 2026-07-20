@@ -86,9 +86,82 @@ test("AnalyticsRouteTracker calls trackPageView", () => {
 });
 
 test("AnalyticsRouteTracker's page-view effect depends only on [pathname], never on the query string", () => {
-  assert.match(trackerSource, /\},\s*\[pathname\]\s*\)/);
+  // Anchored to the trackPageView call itself, not just any effect in the
+  // file: the effect that calls trackPageView must be the one whose
+  // dependency array closes with exactly `[pathname]`. A loose
+  // `/\},\s*\[pathname\]\s*\)/` match would also be satisfied by the
+  // *scroll* effect's `[pathname]` (or, after sharing routeType/datasetName,
+  // its `[pathname, routeType, datasetName]`), so it wouldn't actually pin
+  // the page-view effect's contract.
+  assert.match(
+    trackerSource,
+    /trackPageView\(\s*\{[\s\S]*?\}\s*\)\s*;[\s\S]*?\},\s*\[pathname\]\s*\)/
+  );
   assert.equal(trackerSource.includes("location.search"), false);
   assert.equal(trackerSource.includes(".search"), false);
+});
+
+test("AnalyticsRouteTracker derives routeType and datasetName once and shares them between effects", () => {
+  const routeTypeCalls = trackerSource.match(/getRouteType\(pathname\)/g) ?? [];
+  const datasetNameCalls = trackerSource.match(/getDatasetNameFromPath\(pathname\)/g) ?? [];
+  assert.equal(routeTypeCalls.length, 1, "getRouteType(pathname) must be called exactly once");
+  assert.equal(
+    datasetNameCalls.length,
+    1,
+    "getDatasetNameFromPath(pathname) must be called exactly once"
+  );
+});
+
+test("AnalyticsRouteTracker updates a live-pathname ref during render, not inside an effect", () => {
+  // The scroll-handler guard (see next test) is only correct if the value it
+  // compares against is kept current independent of effect flush ordering.
+  // Assigning `.current` during render — before any `useEffect(` call in
+  // source order — is what gives that: React always finishes running this
+  // component's function body before it runs any effect (cleanup or setup)
+  // for the resulting commit.
+  const refAssignIndex = trackerSource.indexOf(".current = pathname;");
+  const firstEffectIndex = trackerSource.indexOf("useEffect(");
+  assert.ok(refAssignIndex !== -1, "ref assignment `.current = pathname;` not found");
+  assert.ok(firstEffectIndex !== -1, "no useEffect(...) call found");
+  assert.ok(
+    refAssignIndex < firstEffectIndex,
+    "ref must be assigned during render, before the first useEffect call"
+  );
+});
+
+test("AnalyticsRouteTracker's scroll handler bails out unless its captured pathname still matches the live pathname", () => {
+  // RouteScrollManager (../src/app/RouteScrollManager.tsx) generates
+  // synthetic scroll activity during navigation (a useLayoutEffect scroll,
+  // plus a ResizeObserver that retries it). The handler must guard against
+  // misattributing that activity to the wrong route from its own logic —
+  // not merely by relying on React flushing this effect's cleanup/setup
+  // before the browser dispatches the async `scroll` event.
+  const handleScrollMatch = trackerSource.match(
+    /handleScroll\s*=\s*\(\)\s*=>\s*\{([\s\S]*?)\n\s*\};/
+  );
+  assert.ok(handleScrollMatch, "handleScroll function not found");
+  const handleScrollBody = handleScrollMatch[1] ?? "";
+
+  const guardMatch = handleScrollBody.match(
+    /if\s*\(\s*([\w.]+)\s*!==\s*([\w.]+)\s*\)\s*return;/
+  );
+  assert.ok(guardMatch, "pathname-mismatch guard not found in handleScroll");
+
+  const guardIndex = handleScrollBody.indexOf(guardMatch[0]);
+  const trackCallIndex = handleScrollBody.indexOf("trackScrollDepth(");
+  assert.ok(trackCallIndex !== -1, "trackScrollDepth call not found in handleScroll");
+  assert.ok(
+    guardIndex !== -1 && guardIndex < trackCallIndex,
+    "the guard must run before trackScrollDepth can be called"
+  );
+
+  // One side of the comparison must read a ref's live value, proving the
+  // guard checks the captured-at-setup pathname against something that can
+  // change independent of this listener's own lifecycle.
+  assert.ok(
+    guardMatch[1].includes(".current") || guardMatch[2].includes(".current"),
+    "guard must compare against a ref's live .current value"
+  );
 });
 
 test("AnalyticsRouteTracker registers the scroll listener as passive and removes it on unmount", () => {
