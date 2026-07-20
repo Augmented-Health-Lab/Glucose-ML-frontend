@@ -1,8 +1,24 @@
 import { trackEvent } from "./google-analytics.ts";
 import {
+  FILTERS,
+  type FilterName,
+  type FilterOption,
+} from "../data/filters.ts";
+import {
   filterPublicDatasetNames,
   getPublicDatasetName,
 } from "./public-datasets.ts";
+
+const FILTER_OPTIONS_BY_NAME = new Map<string, ReadonlySet<string>>(
+  FILTERS.map((filter) => [filter.label, new Set<string>(filter.options)])
+);
+
+export function isApprovedFilterSelection(
+  filterName: string,
+  filterValue: string
+) {
+  return FILTER_OPTIONS_BY_NAME.get(filterName)?.has(filterValue) === true;
+}
 
 export function serializeDatasetNames(datasetNames: string[]) {
   return filterPublicDatasetNames(datasetNames)
@@ -22,18 +38,23 @@ export function getDestinationHostname(url: string) {
 }
 
 export const trackFilterChange = (parameters: {
-  filterName: string;
-  filterValue: string;
+  filterName: FilterName;
+  filterValue: FilterOption;
   action: "add" | "remove";
   activeFilterCount: number;
   resultCount: number;
-}) => trackEvent("filter_change", {
-  filter_name: parameters.filterName,
-  filter_value: parameters.filterValue,
-  action: parameters.action,
-  active_filter_count: parameters.activeFilterCount,
-  result_count: parameters.resultCount,
-});
+}) => {
+  if (!isApprovedFilterSelection(parameters.filterName, parameters.filterValue)) {
+    return;
+  }
+  trackEvent("filter_change", {
+    filter_name: parameters.filterName,
+    filter_value: parameters.filterValue,
+    action: parameters.action,
+    active_filter_count: parameters.activeFilterCount,
+    result_count: parameters.resultCount,
+  });
+};
 
 export const trackFilterClear = (clearedFilterCount: number, resultCount: number) =>
   trackEvent("filter_clear", {

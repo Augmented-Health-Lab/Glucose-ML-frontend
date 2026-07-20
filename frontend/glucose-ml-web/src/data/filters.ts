@@ -37,3 +37,6 @@ export const FILTERS = [
     options: ["Open", "Controlled"],
   },
 ] as const;
+
+export type FilterName = (typeof FILTERS)[number]["label"];
+export type FilterOption = (typeof FILTERS)[number]["options"][number];

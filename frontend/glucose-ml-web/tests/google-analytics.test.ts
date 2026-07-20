@@ -1,7 +1,11 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
-import { sanitizeAnalyticsParameters } from "../src/analytics/google-analytics.ts";
+import {
+  initializeGoogleAnalytics,
+  sanitizeAnalyticsParameters,
+  shouldEnableAnalytics,
+} from "../src/analytics/google-analytics.ts";
 import {
   getDestinationHostname,
   serializeDatasetNames,
@@ -10,12 +14,14 @@ import {
   trackDatasetAction,
   trackDatasetOpen,
   trackDetailViewChange,
+  trackFilterChange,
 } from "../src/analytics/events.ts";
 import {
   getNewScrollMilestones,
   getRouteAnalyticsContext,
   getSafeReferrerOrigin,
 } from "../src/analytics/route-analytics.ts";
+import { FILTERS } from "../src/data/filters.ts";
 
 const analyticsSource = readFileSync(
   new URL("../src/analytics/google-analytics.ts", import.meta.url),
@@ -66,6 +72,145 @@ function captureAnalyticsEvents(run: () => void) {
     }
   }
 }
+
+test("the gtag bootstrap queues Arguments objects in call order", () => {
+  const previousWindow = Object.getOwnPropertyDescriptor(globalThis, "window");
+  const previousDocument = Object.getOwnPropertyDescriptor(globalThis, "document");
+  const dataLayer: unknown[] = [];
+
+  Object.defineProperty(globalThis, "window", {
+    configurable: true,
+    value: {
+      dataLayer,
+      location: { hostname: "glucose-ml-project.com" },
+    },
+  });
+  Object.defineProperty(globalThis, "document", {
+    configurable: true,
+    value: {
+      head: { append: () => undefined },
+      querySelector: () => ({}),
+    },
+  });
+
+  try {
+    assert.equal(initializeGoogleAnalytics(), true);
+    assert.equal(typeof window.gtag, "function");
+    window.gtag?.("get", "G-7VEBP7G8TE", "client_id", "callback");
+
+    const getCall = dataLayer.at(-1);
+    assert.equal(Object.prototype.toString.call(getCall), "[object Arguments]");
+    assert.deepEqual(Array.from(getCall as ArrayLike<unknown>), [
+      "get",
+      "G-7VEBP7G8TE",
+      "client_id",
+      "callback",
+    ]);
+  } finally {
+    if (previousWindow) {
+      Object.defineProperty(globalThis, "window", previousWindow);
+    } else {
+      Reflect.deleteProperty(globalThis, "window");
+    }
+    if (previousDocument) {
+      Object.defineProperty(globalThis, "document", previousDocument);
+    } else {
+      Reflect.deleteProperty(globalThis, "document");
+    }
+  }
+});
+
+test("analytics enablement covers dev, local preview, deployments, and debug", () => {
+  assert.equal(
+    shouldEnableAnalytics({
+      isDev: true,
+      environment: "local",
+      isDebug: false,
+    }),
+    false
+  );
+  assert.equal(
+    shouldEnableAnalytics({
+      isDev: false,
+      environment: "local",
+      isDebug: false,
+    }),
+    false
+  );
+  assert.equal(
+    shouldEnableAnalytics({
+      isDev: false,
+      environment: "preview",
+      isDebug: false,
+    }),
+    true
+  );
+  assert.equal(
+    shouldEnableAnalytics({
+      isDev: false,
+      environment: "production",
+      isDebug: false,
+    }),
+    true
+  );
+  assert.equal(
+    shouldEnableAnalytics({
+      isDev: true,
+      environment: "local",
+      isDebug: true,
+    }),
+    true
+  );
+});
+
+test("filter analytics accepts every fixed filter option", () => {
+  const events = captureAnalyticsEvents(() => {
+    for (const filter of FILTERS) {
+      for (const option of filter.options) {
+        trackFilterChange({
+          filterName: filter.label,
+          filterValue: option,
+          action: "add",
+          activeFilterCount: 1,
+          resultCount: 1,
+        });
+      }
+    }
+  });
+
+  assert.equal(
+    events.length,
+    FILTERS.reduce((count, filter) => count + filter.options.length, 0)
+  );
+});
+
+test("filter analytics rejects free-form and mismatched filter values", () => {
+  const events = captureAnalyticsEvents(() => {
+    trackFilterChange({
+      filterName: "Blood glucose",
+      filterValue: "patient@example.com HbA1c 9.2",
+      action: "add",
+      activeFilterCount: 1,
+      resultCount: 1,
+    });
+    trackFilterChange({
+      filterName: "Population",
+      filterValue: "insulin dosage 42 units",
+      action: "add",
+      activeFilterCount: 1,
+      resultCount: 1,
+    });
+    trackFilterChange({
+      filterName: "Population",
+      filterValue: "Open",
+      action: "add",
+      activeFilterCount: 1,
+      resultCount: 1,
+    });
+  });
+
+  assert.deepEqual(events, []);
+});
 
 test("analytics parameters retain only bounded GA-safe primitives", () => {
   const raw = {

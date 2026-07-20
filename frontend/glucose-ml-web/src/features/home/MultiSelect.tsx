@@ -26,23 +26,23 @@ function getOptionLabel(filterLabel: string, option: string) {
   return option;
 }
 
-interface MultiSelectProps {
+interface MultiSelectProps<Option extends string> {
   label: string;
   prompt: string;
   multi: boolean;
-  options: readonly string[];
-  selected: string[];
-  onChange: (selected: string[]) => void;
+  options: readonly Option[];
+  selected: Option[];
+  onChange: (selected: Option[]) => void;
 }
 
-const MultiSelect = ({
+const MultiSelect = <Option extends string,>({
   label,
   prompt,
   multi,
   options,
   selected,
   onChange,
-}: MultiSelectProps) => {
+}: MultiSelectProps<Option>) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -65,8 +65,8 @@ const MultiSelect = ({
     setIsOpen(!isOpen);
   };
 
-  const handleOptionClick = (option: string) => {
-    let newSelected: string[];
+  const handleOptionClick = (option: Option) => {
+    let newSelected: Option[];
 
     if (multi) {
       if (selected.includes(option)) {

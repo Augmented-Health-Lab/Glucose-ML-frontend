@@ -15,6 +15,7 @@ import {
   trackGuide,
 } from "../../analytics/events";
 import { fetchJson } from "../../utils/fetch-json";
+import type { FilterName, FilterOption } from "../../data/filters";
 import { findTableDataset, normalizeDatasetName } from "../../utils/dataset-names";
 import {
   makeHomeUrl,
@@ -27,16 +28,17 @@ import type {
   TableDataset,
 } from "../../types/dataset";
 import type { DatasetCardProps } from "./DatasetCard";
-import { filterHomeDatasets } from "./filter-datasets";
+import {
+  filterHomeDatasets,
+  type FilterSelections,
+} from "./filter-datasets";
 import "./home-page.css";
 
 const HomePage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const stickyControlsRef = useRef<HTMLElement | null>(null);
-  const [filterSelections, setFilterSelections] = useState<{
-    [key: string]: string[];
-  }>({});
+  const [filterSelections, setFilterSelections] = useState<FilterSelections>({});
   const selectedCards = useMemo(
     () => parseSelectedDatasets(location.search),
     [location.search]
@@ -120,7 +122,7 @@ const HomePage = () => {
   );
 
   // callback for filter
-  const handleFilterChange = (label: string, selected: string[]) => {
+  const handleFilterChange = (label: FilterName, selected: FilterOption[]) => {
     const previous = filterSelections[label] ?? [];
     const addedValue = selected.find((value) => !previous.includes(value));
     const removedValue = previous.find((value) => !selected.includes(value));

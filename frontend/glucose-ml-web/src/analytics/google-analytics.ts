@@ -60,7 +60,7 @@ export type AnalyticsEventName = keyof AnalyticsEventMap;
 
 declare global {
   interface Window {
-    dataLayer?: unknown[][];
+    dataLayer?: unknown[];
     gtag?: (...args: unknown[]) => void;
   }
 }
@@ -86,11 +86,27 @@ function isDebugEnabled() {
   return viteEnv?.VITE_GA_DEBUG === "true";
 }
 
+export function shouldEnableAnalytics({
+  isDev,
+  environment,
+  isDebug,
+}: {
+  isDev: boolean;
+  environment: "production" | "preview" | "local";
+  isDebug: boolean;
+}) {
+  return isDebug || (!isDev && environment !== "local");
+}
+
 function isAnalyticsEnabled() {
   if (typeof window === "undefined" || typeof document === "undefined") {
     return false;
   }
-  return viteEnv?.DEV !== true || isDebugEnabled();
+  return shouldEnableAnalytics({
+    isDev: viteEnv?.DEV === true,
+    environment: getAnalyticsEnvironment(),
+    isDebug: isDebugEnabled(),
+  });
 }
 
 export function getAnalyticsEnvironment(): "production" | "preview" | "local" {
@@ -124,6 +140,14 @@ export function sanitizeAnalyticsParameters(
   );
 }
 
+export function createGtagQueue(dataLayer: unknown[]) {
+  return function gtag() {
+    // Google gtag.js requires the function's Arguments object, not a rest array.
+    // eslint-disable-next-line prefer-rest-params
+    dataLayer.push(arguments);
+  };
+}
+
 export function initializeGoogleAnalytics(): boolean {
   if (!isAnalyticsEnabled()) return false;
 
@@ -132,7 +156,7 @@ export function initializeGoogleAnalytics(): boolean {
     if (initializedMeasurementId === measurementId) return true;
 
     window.dataLayer ??= [];
-    window.gtag ??= (...args: unknown[]) => window.dataLayer?.push(args);
+    window.gtag ??= createGtagQueue(window.dataLayer);
 
     if (!document.querySelector(`script[data-ga-measurement-id="${measurementId}"]`)) {
       const script = document.createElement("script");

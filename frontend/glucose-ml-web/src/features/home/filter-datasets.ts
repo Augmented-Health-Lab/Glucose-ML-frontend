@@ -1,6 +1,7 @@
 import type { HomeDataset } from "../../types/dataset";
+import type { FilterName, FilterOption } from "../../data/filters";
 
-export type FilterSelections = Record<string, string[]>;
+export type FilterSelections = Partial<Record<FilterName, FilterOption[]>>;
 
 export function filterHomeDatasets(
   datasets: HomeDataset[],

@@ -1,10 +1,15 @@
 import "./filter-bar.css";
-import { FILTERS } from "../../data/filters";
+import {
+  FILTERS,
+  type FilterName,
+  type FilterOption,
+} from "../../data/filters";
+import type { FilterSelections } from "./filter-datasets";
 import MultiSelect from "./MultiSelect";
 
 interface FilterBarProps {
-  filterSelections: { [key: string]: string[] };
-  onFilterChange: (label: string, selected: string[]) => void;
+  filterSelections: FilterSelections;
+  onFilterChange: (label: FilterName, selected: FilterOption[]) => void;
   onClearFilters: () => void;
   filterButtonEnabled: boolean;
   resultCount: number;
@@ -34,9 +39,7 @@ const FilterBar = ({
               multi={f.multi}
               options={f.options}
               selected={filterSelections[f.label] || []}
-              onChange={(selected: string[]) =>
-                onFilterChange(f.label, selected)
-              }
+              onChange={(selected) => onFilterChange(f.label, selected)}
             />
           ))}
         </div>
