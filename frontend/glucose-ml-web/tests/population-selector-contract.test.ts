@@ -14,8 +14,8 @@ const filtersTs = readFileSync(
   new URL("../src/data/filters.ts", import.meta.url),
   "utf8"
 );
-const homePageTsx = readFileSync(
-  new URL("../src/features/home/HomePage.tsx", import.meta.url),
+const filterDatasetsTs = readFileSync(
+  new URL("../src/features/home/filter-datasets.ts", import.meta.url),
   "utf8"
 );
 
@@ -89,10 +89,10 @@ test("single-select filters use the latest Figma labels and data thresholds", ()
   assert.match(filtersTs, /prompt:\s*"Select access type"/);
   assert.match(filtersTs, /options:\s*\["Open",\s*"Controlled"\]/);
 
-  assert.match(homePageTsx, /case "1 month":\s*return numDays >= 30/);
-  assert.match(homePageTsx, /case "2\+ months":\s*return numDays >= 60/);
-  assert.match(homePageTsx, /case "1000\+":\s*return dataset\.participants >= 1000/);
-  assert.match(homePageTsx, /return dataset\.access === filterValue/);
+  assert.match(filterDatasetsTs, /case "1 month":\s*return numDays >= 30/);
+  assert.match(filterDatasetsTs, /case "2\+ months":\s*return numDays >= 60/);
+  assert.match(filterDatasetsTs, /case "1000\+":\s*return dataset\.participants >= 1000/);
+  assert.match(filterDatasetsTs, /return dataset\.access === selectedValues\[0\]/);
 });
 
 test("single-select menus match the latest Figma geometry and typography", () => {

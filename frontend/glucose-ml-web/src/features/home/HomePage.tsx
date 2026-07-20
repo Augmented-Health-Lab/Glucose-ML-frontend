@@ -7,6 +7,13 @@ import CompareBar from "./CompareBar";
 import DatasetGrid from "./DatasetGrid";
 import LegendModal from "../dataset-detail/LegendModal";
 import GuideButton from "../../components/guide-button/GuideButton";
+import {
+  trackCompareSelectionChange,
+  trackContentLoadError,
+  trackFilterChange,
+  trackFilterClear,
+  trackGuide,
+} from "../../analytics/events";
 import { fetchJson } from "../../utils/fetch-json";
 import { findTableDataset, normalizeDatasetName } from "../../utils/dataset-names";
 import {
@@ -20,6 +27,7 @@ import type {
   TableDataset,
 } from "../../types/dataset";
 import type { DatasetCardProps } from "./DatasetCard";
+import { filterHomeDatasets } from "./filter-datasets";
 import "./home-page.css";
 
 const HomePage = () => {
@@ -99,104 +107,48 @@ const HomePage = () => {
           return;
         }
 
+        trackContentLoadError("home", "static_data");
         setLoadError(error instanceof Error ? error.message : String(error));
       });
 
     return () => controller.abort();
   }, []);
 
-  // filter!!
-  const filteredDatasets = useMemo(() => {
-    if (Object.values(filterSelections).every((arr) => arr.length === 0)) {
-      return datasets;
-    }
-
-    return datasets.filter((dataset) => {
-      return Object.entries(filterSelections).every(
-        ([filterLabel, selectedValues]) => {
-          if (selectedValues.length === 0) return true;
-
-          switch (filterLabel) {
-            case "Data Sources": {
-              const sourceMap: Record<string, string> = {
-                "Continuous Glucose Monitor (CGM)": "G",
-                "Insulin Delivery System": "I",
-                "Wearable Tracker": "W",
-                "Mobile / Manual logs": "M",
-                Questionnaire: "Q",
-                "Clinical measurements": "C",
-              };
-              return selectedValues.every((filterValue) =>
-                dataset.sources.includes(sourceMap[filterValue])
-              );
-            }
-
-            case "Population": {
-              const typeMap: Record<string, string> = {
-                T1D: "T1D",
-                T2D: "T2D",
-                Prediabetic: "PreD",
-                "Non diabetic": "ND",
-              };
-
-              return selectedValues.every((filterValue) =>
-                dataset.types.includes(typeMap[filterValue])
-              );
-            }
-
-            case "Study duration": {
-              if (dataset.days === "TBD") return false;
-              const numDays = Number(dataset.days);
-              const filterValue = selectedValues[0];
-
-              switch (filterValue) {
-                case "7+ days":
-                  return numDays >= 7;
-                case "14+ days":
-                  return numDays >= 14;
-                case "1 month":
-                  return numDays >= 30;
-                case "2+ months":
-                  return numDays >= 60;
-                default:
-                  return false;
-              }
-            }
-
-            case "Sample size": {
-              const filterValue = selectedValues[0];
-              switch (filterValue) {
-                case "20+":
-                  return dataset.participants >= 20;
-                case "50+":
-                  return dataset.participants >= 50;
-                case "100+":
-                  return dataset.participants >= 100;
-                case "500+":
-                  return dataset.participants >= 500;
-                case "1000+":
-                  return dataset.participants >= 1000;
-                default:
-                  return false;
-              }
-            }
-
-            case "Access": {
-              const filterValue = selectedValues[0];
-              return dataset.access === filterValue;
-            }
-
-            default:
-              return true;
-          }
-        }
-      );
-    });
-  }, [filterSelections, datasets]);
+  const filteredDatasets = useMemo(
+    () => filterHomeDatasets(datasets, filterSelections),
+    [datasets, filterSelections]
+  );
 
   // callback for filter
   const handleFilterChange = (label: string, selected: string[]) => {
-    setFilterSelections((prev) => ({ ...prev, [label]: selected }));
+    const previous = filterSelections[label] ?? [];
+    const addedValue = selected.find((value) => !previous.includes(value));
+    const removedValue = previous.find((value) => !selected.includes(value));
+    const changedValue = addedValue ?? removedValue;
+    const nextSelections = { ...filterSelections, [label]: selected };
+
+    setFilterSelections(nextSelections);
+    if (changedValue) {
+      trackFilterChange({
+        filterName: label,
+        filterValue: changedValue,
+        action: addedValue ? "add" : "remove",
+        activeFilterCount: Object.values(nextSelections).reduce(
+          (count, values) => count + values.length,
+          0
+        ),
+        resultCount: filterHomeDatasets(datasets, nextSelections).length,
+      });
+    }
+  };
+
+  const handleClearFilters = () => {
+    const clearedFilterCount = Object.values(filterSelections).reduce(
+      (count, values) => count + values.length,
+      0
+    );
+    setFilterSelections({});
+    trackFilterClear(clearedFilterCount, datasets.length);
   };
 
   // callback for card
@@ -216,6 +168,11 @@ const HomePage = () => {
       nextSelectedCards = selectedCards.filter((t) => t !== title);
     }
 
+    trackCompareSelectionChange(
+      checked ? "add" : "remove",
+      nextSelectedCards.length,
+      title
+    );
     navigate(makeHomeUrl(nextSelectedCards), { replace: true });
   };
 
@@ -224,7 +181,18 @@ const HomePage = () => {
   };
 
   const handleClearCompareSelection = () => {
+    trackCompareSelectionChange("clear", 0);
     navigate(makeHomeUrl([]), { replace: true });
+  };
+
+  const handleGuideOpen = () => {
+    trackGuide("open", "home");
+    setLegendOpen(true);
+  };
+
+  const handleGuideClose = () => {
+    trackGuide("close", "home");
+    setLegendOpen(false);
   };
 
   const hasFilter = Object.values(filterSelections).some(
@@ -271,6 +239,7 @@ const HomePage = () => {
             <FilterBar
               filterSelections={filterSelections}
               onFilterChange={handleFilterChange}
+              onClearFilters={handleClearFilters}
               filterButtonEnabled={hasFilter}
               resultCount={filteredDatasets.length}
               totalCount={datasets.length}
@@ -279,7 +248,7 @@ const HomePage = () => {
               <p>
                 Use checkboxes to compare datasets. Click a card for details.
               </p>
-              <GuideButton onClick={() => setLegendOpen(true)} />
+              <GuideButton onClick={handleGuideOpen} />
             </section>
           </section>
           {loadError && (
@@ -296,7 +265,7 @@ const HomePage = () => {
             onCardSelect={handleCardSelect}
           />
         </main>
-        <LegendModal open={legendOpen} onClose={() => setLegendOpen(false)} />
+        <LegendModal open={legendOpen} onClose={handleGuideClose} />
         <CompareBar
           selectedCards={selectedCards}
           onRemoveSelection={handleRemoveCompareSelection}

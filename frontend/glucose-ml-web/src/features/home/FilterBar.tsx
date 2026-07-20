@@ -5,6 +5,7 @@ import MultiSelect from "./MultiSelect";
 interface FilterBarProps {
   filterSelections: { [key: string]: string[] };
   onFilterChange: (label: string, selected: string[]) => void;
+  onClearFilters: () => void;
   filterButtonEnabled: boolean;
   resultCount: number;
   totalCount: number;
@@ -13,14 +14,13 @@ interface FilterBarProps {
 const FilterBar = ({
   filterSelections,
   onFilterChange,
+  onClearFilters,
   filterButtonEnabled,
   resultCount,
   totalCount,
 }: FilterBarProps) => {
   // clear all filters
-  const handleClear = () => {
-    Object.keys(filterSelections).forEach((label) => onFilterChange(label, []));
-  };
+  const handleClear = () => onClearFilters();
 
   return (
     <section className="home-filter-row" aria-label="Dataset filters">
