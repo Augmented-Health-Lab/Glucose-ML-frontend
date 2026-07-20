@@ -41,12 +41,15 @@ export type {
   TrackContentLoadErrorParams,
   ScrollPercent,
   FilterAction,
+  FilterCategory,
+  FilterOption,
   DatasetOpenOrigin,
   CompareSelectionAction,
   CompareSection,
   SectionState,
   DetailView,
   DatasetActionType,
+  GuideScreenName,
 } from "./events.ts";
 
 export { initAnalytics } from "./gtag.ts";

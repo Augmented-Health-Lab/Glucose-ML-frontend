@@ -58,16 +58,65 @@ const files = listAnalyticsFiles();
  * All three are pre-existing, already-reviewed code/prose from Task 1, not
  * something this task's helpers or barrel are allowed to do — `events.ts`
  * and `index.ts` get the full, unexempted list below.
+ *
+ * These exemptions are bounded, not open-ended: instead of unconditionally
+ * stripping every occurrence of a literal before scanning, each exemption
+ * carries the exact occurrence count present in `params.ts` as of the last
+ * review (`countOccurrences`, verified against the file below). If a future
+ * change adds even one more occurrence of any of these literals to
+ * `params.ts` — including inside a genuinely new, unreviewed function —
+ * the count assertion fails the test loudly instead of the literal being
+ * silently erased before the scan runs. These counts are deliberate
+ * tripwires, not cosmetic bookkeeping: bump them only after re-reviewing
+ * every new occurrence for a privacy leak.
  */
 const PER_FILE_EXEMPTIONS: Record<string, readonly string[]> = {
   "params.ts": ["glucose-ml-project.com", "error.message", "stack traces"],
 };
+
+/**
+ * Exact occurrence counts for each `params.ts` exemption literal, as of the
+ * last review:
+ * - "glucose-ml-project.com": 2 — `PRODUCTION_HOSTS = ["www.glucose-ml-project.com", "glucose-ml-project.com"]`
+ *   (the literal also matches as a substring of the "www." variant).
+ * - "error.message": 1 — the single `message = error.message` read inside
+ *   `categorizeLoadError`'s try/catch.
+ * - "stack traces": 1 — the file-header prose only.
+ */
+const PARAMS_EXEMPTION_COUNTS: Record<string, number> = {
+  "glucose-ml-project.com": 2,
+  "error.message": 1,
+  "stack traces": 1,
+};
+
+function countOccurrences(text: string, literal: string): number {
+  let count = 0;
+  let index = text.indexOf(literal);
+  while (index !== -1) {
+    count++;
+    index = text.indexOf(literal, index + literal.length);
+  }
+  return count;
+}
 
 function textForScanning(file: string): string {
   const raw = readFileSync(`${ANALYTICS_DIR}${file}`, "utf8");
   const exemptLiterals = PER_FILE_EXEMPTIONS[file] ?? [];
   return exemptLiterals.reduce((text, literal) => text.split(literal).join(""), raw);
 }
+
+test("params.ts exemption literals appear exactly the reviewed number of times", () => {
+  const raw = readFileSync(`${ANALYTICS_DIR}params.ts`, "utf8");
+  for (const [literal, expectedCount] of Object.entries(PARAMS_EXEMPTION_COUNTS)) {
+    assert.equal(
+      countOccurrences(raw, literal),
+      expectedCount,
+      `params.ts exemption literal "${literal}" occurs a different number of times than ` +
+        `reviewed (expected ${expectedCount}) — a new occurrence needs privacy re-review ` +
+        `and the count above updated deliberately, it must not be silently stripped`
+    );
+  }
+});
 
 test("src/analytics/ contains at least the expected core files", () => {
   assert.ok(files.includes("params.ts"));

@@ -1,5 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { FILTERS } from "../src/data/filters.ts";
 
 // ---------------------------------------------------------------------------
 // Fake globals — same technique as tests/analytics-gtag-contract.test.ts.
@@ -164,7 +167,7 @@ test("trackFilterChange sends filter_change with the exact reference keys", () =
   const { name, params } = captureEvent(() =>
     trackFilterChange({
       filterCategory: "Population",
-      filterOption: "Type 1 diabetes",
+      filterOption: "T1D",
       filterAction: "add",
       activeFilterCount: 3,
       resultCount: 5,
@@ -185,7 +188,7 @@ test("trackFilterChange clamps counts above the bound", () => {
   const { params } = captureEvent(() =>
     trackFilterChange({
       filterCategory: "Population",
-      filterOption: "Type 1 diabetes",
+      filterOption: "T1D",
       filterAction: "remove",
       activeFilterCount: 5000,
       resultCount: -1,
@@ -201,6 +204,33 @@ test("trackFilterClear sends filter_clear with the exact reference keys", () => 
   );
   assert.equal(name, "filter_clear");
   assert.deepEqual(keysExcludingEnvironment(params), ["cleared_filter_count", "result_count"]);
+});
+
+// ---------------------------------------------------------------------------
+// FilterCategory / FilterOption are closed domains derived from FILTERS
+// ---------------------------------------------------------------------------
+
+test("trackFilterChange accepts every real (category, option) pair from FILTERS", () => {
+  // Runtime proof that `FilterCategory`/`FilterOption` (derived from
+  // `src/data/filters.ts`'s `FILTERS`) actually line up with the real filter
+  // data — not just that the types compile, but that every label/option
+  // combination the UI can produce is accepted end-to-end by the helper.
+  for (const filter of FILTERS) {
+    for (const option of filter.options) {
+      const { name, params } = captureEvent(() =>
+        trackFilterChange({
+          filterCategory: filter.label,
+          filterOption: option,
+          filterAction: "add",
+          activeFilterCount: 1,
+          resultCount: 1,
+        })
+      );
+      assert.equal(name, "filter_change");
+      assert.equal(params.filter_category, filter.label);
+      assert.equal(params.filter_option, option);
+    }
+  }
 });
 
 // ---------------------------------------------------------------------------
@@ -257,6 +287,28 @@ test("trackCompareSelectionChange (clear) omits dataset_name entirely", () => {
   );
   assert.deepEqual(keysExcludingEnvironment(params), ["selection_action", "selection_count"]);
   assert.equal("dataset_name" in params, false);
+});
+
+test("TrackCompareSelectionChangeParams is built from the CompareSelectionAction alias, not inlined literals", () => {
+  // `CompareSelectionAction` is exported from events.ts and re-exported from
+  // the barrel; it must be the single source of truth for the discriminated
+  // union below rather than a dead alias sitting next to hand-duplicated
+  // "add" | "remove" | "clear" literals. Compile-time-only guarantee, so
+  // verified as a source-text assertion.
+  const eventsSource = readFileSync(
+    fileURLToPath(new URL("../src/analytics/events.ts", import.meta.url)),
+    "utf8"
+  );
+  assert.match(
+    eventsSource,
+    /export type TrackCompareSelectionChangeParams =\s*\|\s*\{\s*selectionAction: Exclude<CompareSelectionAction, "clear">/,
+    "TrackCompareSelectionChangeParams must reference CompareSelectionAction via Exclude/Extract, not inline literals"
+  );
+  assert.match(
+    eventsSource,
+    /selectionAction: Extract<CompareSelectionAction, "clear">/,
+    "the clear branch of TrackCompareSelectionChangeParams must also reference CompareSelectionAction"
+  );
 });
 
 // ---------------------------------------------------------------------------
@@ -348,6 +400,34 @@ test("trackGuideClose sends guide_close with the exact reference keys", () => {
   const { name, params } = captureEvent(() => trackGuideClose({ screen: "compare" }));
   assert.equal(name, "guide_close");
   assert.deepEqual(keysExcludingEnvironment(params), ["screen"]);
+});
+
+test("trackGuideOpen accepts the third guide screen, dataset_detail", () => {
+  const { params } = captureEvent(() => trackGuideOpen({ screen: "dataset_detail" }));
+  assert.equal(params.screen, "dataset_detail");
+});
+
+test("GuideScreenName excludes 'background' at the type level (no guide button there)", () => {
+  // `background` is a valid runtime ScreenName elsewhere (content_load_error
+  // fires on it), but there is no guide button on the background page, so
+  // passing `screen: "background"` to trackGuideOpen/trackGuideClose must be
+  // a compile error, not merely something nobody happens to do. That's a
+  // compile-time-only guarantee (TS types are erased at runtime), so it's
+  // verified here as a source-text assertion instead of a runtime call.
+  const eventsSource = readFileSync(
+    fileURLToPath(new URL("../src/analytics/events.ts", import.meta.url)),
+    "utf8"
+  );
+  assert.match(
+    eventsSource,
+    /export type GuideScreenName = Exclude<ScreenName, "background">;/,
+    "events.ts must declare GuideScreenName = Exclude<ScreenName, \"background\"> and use it for TrackGuideParams"
+  );
+  assert.match(
+    eventsSource,
+    /export interface TrackGuideParams \{\s*screen: GuideScreenName;/,
+    "TrackGuideParams.screen must be typed GuideScreenName, not the wider ScreenName"
+  );
 });
 
 // ---------------------------------------------------------------------------

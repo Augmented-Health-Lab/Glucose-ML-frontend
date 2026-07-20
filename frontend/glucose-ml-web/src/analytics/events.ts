@@ -28,6 +28,7 @@ import {
   type RouteType,
   type ScreenName,
 } from "./params.ts";
+import { FILTERS } from "../data/filters.ts";
 
 // ---------------------------------------------------------------------------
 // Event-local literal unions (not shared enough to belong in params.ts)
@@ -41,6 +42,24 @@ export type CompareSection = "population" | "sources" | "cgm";
 export type SectionState = "expanded" | "collapsed";
 export type DetailView = "histogram" | "time_in_range";
 export type DatasetActionType = "download" | "request_access" | "source" | "helper_scripts";
+
+/**
+ * Closed domains derived from `src/data/filters.ts` (`FILTERS`, `as const`),
+ * the single source of truth for which filter categories and options exist
+ * in the UI. Deriving these from `FILTERS` rather than hand-declaring
+ * `string` means a future caller cannot accidentally pass free-form
+ * search-box text as a filter category/option — that would be a compile
+ * error, matching every other event helper in this file.
+ */
+export type FilterCategory = (typeof FILTERS)[number]["label"];
+export type FilterOption = (typeof FILTERS)[number]["options"][number];
+
+/**
+ * Guides only exist on `home`, `compare`, and `dataset_detail` — there is no
+ * guide button on the background page, so `background` is excluded here
+ * even though it is a valid `ScreenName` elsewhere.
+ */
+export type GuideScreenName = Exclude<ScreenName, "background">;
 
 // ---------------------------------------------------------------------------
 // page_view
@@ -87,8 +106,8 @@ export function trackScrollDepth(params: TrackScrollDepthParams): void {
 // ---------------------------------------------------------------------------
 
 export interface TrackFilterChangeParams {
-  filterCategory: string;
-  filterOption: string;
+  filterCategory: FilterCategory;
+  filterOption: FilterOption;
   filterAction: FilterAction;
   activeFilterCount: number;
   resultCount: number;
@@ -142,8 +161,12 @@ export function trackDatasetOpen(params: TrackDatasetOpenParams): void {
  * cannot pass a `dataset_name` for a `clear` action even by mistake.
  */
 export type TrackCompareSelectionChangeParams =
-  | { selectionAction: "add" | "remove"; datasetName: string; selectionCount: number }
-  | { selectionAction: "clear"; selectionCount: number };
+  | {
+      selectionAction: Exclude<CompareSelectionAction, "clear">;
+      datasetName: string;
+      selectionCount: number;
+    }
+  | { selectionAction: Extract<CompareSelectionAction, "clear">; selectionCount: number };
 
 export function trackCompareSelectionChange(params: TrackCompareSelectionChangeParams): void {
   sendEvent("compare_selection_change", {
@@ -225,7 +248,7 @@ export function trackDatasetAction(params: TrackDatasetActionParams): void {
 // ---------------------------------------------------------------------------
 
 export interface TrackGuideParams {
-  screen: ScreenName;
+  screen: GuideScreenName;
 }
 
 export function trackGuideOpen(params: TrackGuideParams): void {
