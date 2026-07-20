@@ -9,8 +9,8 @@ import LegendModal from "../dataset-detail/LegendModal";
 import GuideButton from "../../components/guide-button/GuideButton";
 import { fetchJson } from "../../utils/fetch-json";
 import {
+  canonicalDatasetName,
   findTableDataset,
-  isKnownDatasetName,
   normalizeDatasetName,
 } from "../../utils/dataset-names";
 import {
@@ -238,12 +238,15 @@ const HomePage = () => {
       // forward a title sourced from `selectedCards`, which is parsed
       // directly from the `?datasets=` query string with no membership
       // check. Guarding here — for both branches — keeps a stale/hand-edited
-      // link's arbitrary query text out of `dataset_name` without changing
-      // which chips render or which URL gets navigated to.
-      if (isKnownDatasetName(title)) {
+      // link's arbitrary query text out of `dataset_name`, by sending only
+      // the canonical spelling `canonicalDatasetName` resolves to (never the
+      // raw `title`), without changing which chips render or which URL gets
+      // navigated to.
+      const canonicalName = canonicalDatasetName(title);
+      if (canonicalName !== undefined) {
         trackCompareSelectionChange({
           selectionAction: checked ? "add" : "remove",
-          datasetName: title,
+          datasetName: canonicalName,
           selectionCount: nextSelectedCards.length,
         });
       }

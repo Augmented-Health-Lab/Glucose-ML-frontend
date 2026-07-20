@@ -9,7 +9,7 @@ import {
   makeHomeUrl,
   parseCompareDatasets,
 } from "../../utils/compare-data";
-import { isKnownDatasetName } from "../../utils/dataset-names";
+import { canonicalDatasetName } from "../../utils/dataset-names";
 import type {
   CompareDataset,
   DatasetDetailJson,
@@ -97,14 +97,17 @@ const ComparePage = () => {
     // `datasetName` here comes from `selectedNames`, which is parsed
     // straight out of the `?datasets=` query string (see
     // `parseCompareDatasets`) with no membership check of its own. Only
-    // forward it to GA4 once it's confirmed to name a real, known dataset —
-    // a stale/hand-edited link must never let arbitrary query-string text
-    // land in `dataset_name`. This never affects navigation below: the chip
-    // is removed and the URL updates the same way regardless.
-    if (isKnownDatasetName(datasetName)) {
+    // forward it to GA4 once it resolves to a real, known dataset — and send
+    // the canonical spelling `canonicalDatasetName` returns, never the raw
+    // query text, so a stale/hand-edited link (extra separators, whitespace,
+    // wrong casing) can't reach `dataset_name` verbatim. This never affects
+    // navigation below: the chip is removed and the URL updates the same way
+    // regardless.
+    const canonicalName = canonicalDatasetName(datasetName);
+    if (canonicalName !== undefined) {
       trackCompareSelectionChange({
         selectionAction: "remove",
-        datasetName,
+        datasetName: canonicalName,
         selectionCount: remaining.length,
       });
     }

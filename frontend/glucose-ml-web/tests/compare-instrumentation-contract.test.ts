@@ -72,23 +72,23 @@ test("CompareTable's details button tracks dataset_open with origin compare befo
 
   assert.match(
     body,
-    /trackDatasetOpen\(\{\s*datasetName:\s*dataset\.title,\s*origin:\s*"compare"\s*\}\)/
+    /trackDatasetOpen\(\{\s*datasetName:\s*canonicalName,\s*origin:\s*"compare"\s*\}\)/
   );
   const trackIndex = body.indexOf("trackDatasetOpen(");
   const navigateIndex = body.indexOf("navigate(");
   assert.ok(trackIndex !== -1 && navigateIndex !== -1 && trackIndex < navigateIndex);
 });
 
-test("CompareTable validates dataset.title against the known-dataset list before reporting dataset_open", () => {
+test("CompareTable resolves dataset.title to its canonical form before reporting dataset_open", () => {
   // buildCompareDataset (src/utils/compare-data.ts) falls back to the raw,
   // unvalidated ?datasets= query value (`?? title`) when no dataset record
   // matches, so dataset.title is not always trustworthy. Only a confirmed
-  // match may reach GA4 as dataset_name; navigate(...) must still fire
-  // either way.
+  // match may reach GA4 as dataset_name, and only its canonical spelling —
+  // never dataset.title itself; navigate(...) must still fire either way.
   assert.match(
     compareTableTsx,
-    /import\s*\{\s*isKnownDatasetName\s*\}\s*from\s*"\.\.\/\.\.\/utils\/dataset-names"/,
-    "CompareTable must import isKnownDatasetName from utils/dataset-names"
+    /import\s*\{\s*canonicalDatasetName\s*\}\s*from\s*"\.\.\/\.\.\/utils\/dataset-names"/,
+    "CompareTable must import canonicalDatasetName from utils/dataset-names"
   );
 
   const detailsButtonMatch = compareTableTsx.match(
@@ -97,11 +97,14 @@ test("CompareTable validates dataset.title against the known-dataset list before
   assert.ok(detailsButtonMatch, "details button onClick not found");
   const body = detailsButtonMatch[1] ?? "";
 
-  const guardIndex = body.indexOf("isKnownDatasetName(dataset.title)");
+  const resolveIndex = body.indexOf("canonicalDatasetName(dataset.title)");
+  const guardIndex = body.indexOf("canonicalName !== undefined");
   const trackIndex = body.indexOf("trackDatasetOpen(");
   const navigateIndex = body.indexOf("navigate(");
-  assert.ok(guardIndex !== -1, "isKnownDatasetName(dataset.title) guard not found");
-  assert.ok(guardIndex < trackIndex, "dataset.title must be validated before trackDatasetOpen is called");
+  assert.ok(resolveIndex !== -1, "canonicalDatasetName(dataset.title) resolution not found");
+  assert.ok(guardIndex !== -1, "canonicalName !== undefined guard not found");
+  assert.ok(resolveIndex < guardIndex && guardIndex < trackIndex, "dataset.title must be resolved and validated before trackDatasetOpen is called");
+  assert.match(body, /datasetName:\s*canonicalName/, "the canonical value, not raw dataset.title, must be sent");
   assert.ok(navigateIndex > trackIndex, "navigate must still run after the (possibly suppressed) tracking call");
 });
 
@@ -119,7 +122,7 @@ test("ComparePage's handleRemoveDataset reports a remove action with the resulti
   assert.match(body, /const remaining = selectedNames\.filter/);
   assert.match(body, /trackCompareSelectionChange\(\{/);
   assert.match(body, /selectionAction:\s*"remove"/);
-  assert.match(body, /datasetName,/);
+  assert.match(body, /datasetName:\s*canonicalName/);
   assert.match(body, /selectionCount:\s*remaining\.length/);
 
   // The event must be emitted exactly once, unconditionally, ahead of the
@@ -184,16 +187,16 @@ test("ComparePage's data-load catch tracks content_load_error alongside setState
 // proves nothing about whether the *value being sent* is trustworthy: it
 // never contains that substring regardless of whether the value was
 // validated. The only guarantee worth asserting is that the call is actually
-// gated on `isKnownDatasetName`, imported from a source outside the
+// gated on `canonicalDatasetName`, imported from a source outside the
 // analytics module, before the raw `datasetName` reaches
 // `trackCompareSelectionChange`.
 // ---------------------------------------------------------------------------
 
-test("ComparePage validates datasetName against the known-dataset list before reporting compare_selection_change", () => {
+test("ComparePage resolves datasetName to its canonical form before reporting compare_selection_change", () => {
   assert.match(
     comparePageTsx,
-    /import\s*\{\s*isKnownDatasetName\s*\}\s*from\s*"\.\.\/\.\.\/utils\/dataset-names"/,
-    "ComparePage must import isKnownDatasetName from utils/dataset-names"
+    /import\s*\{\s*canonicalDatasetName\s*\}\s*from\s*"\.\.\/\.\.\/utils\/dataset-names"/,
+    "ComparePage must import canonicalDatasetName from utils/dataset-names"
   );
 
   const handleRemoveMatch = comparePageTsx.match(
@@ -202,14 +205,17 @@ test("ComparePage validates datasetName against the known-dataset list before re
   assert.ok(handleRemoveMatch, "handleRemoveDataset not found");
   const body = handleRemoveMatch[1] ?? "";
 
-  const guardIndex = body.indexOf("isKnownDatasetName(datasetName)");
+  const resolveIndex = body.indexOf("canonicalDatasetName(datasetName)");
+  const guardIndex = body.indexOf("canonicalName !== undefined");
   const trackIndex = body.indexOf("trackCompareSelectionChange(");
-  assert.ok(guardIndex !== -1, "isKnownDatasetName(datasetName) guard not found in handleRemoveDataset");
+  assert.ok(resolveIndex !== -1, "canonicalDatasetName(datasetName) resolution not found in handleRemoveDataset");
+  assert.ok(guardIndex !== -1, "canonicalName !== undefined guard not found in handleRemoveDataset");
   assert.ok(trackIndex !== -1, "trackCompareSelectionChange call not found in handleRemoveDataset");
   assert.ok(
-    guardIndex < trackIndex,
-    "datasetName must be validated by isKnownDatasetName before trackCompareSelectionChange is called"
+    resolveIndex < guardIndex && guardIndex < trackIndex,
+    "datasetName must be resolved and validated before trackCompareSelectionChange is called"
   );
+  assert.match(body, /datasetName:\s*canonicalName/, "the canonical value, not raw datasetName, must be sent");
 
   // The navigation branches below must be unconditional on the validation
   // guard — removing an unrecognized name must still update the URL/chips

@@ -114,20 +114,20 @@ test("AnalyticsRouteTracker's page-view effect depends only on [pathname], never
 // The assertions below check the actual guarantee instead.
 // ---------------------------------------------------------------------------
 
-test("AnalyticsRouteTracker validates the decoded dataset path segment against a known-dataset list before use", () => {
+test("AnalyticsRouteTracker resolves the decoded dataset path segment to its canonical form before use", () => {
   assert.match(
     trackerSource,
-    /import\s*\{\s*isKnownDatasetName\s*\}\s*from\s*"\.\.\/utils\/dataset-names\.ts"/,
-    "AnalyticsRouteTracker must import isKnownDatasetName from ../utils/dataset-names.ts"
+    /import\s*\{\s*canonicalDatasetName\s*\}\s*from\s*"\.\.\/utils\/dataset-names\.ts"/,
+    "AnalyticsRouteTracker must import canonicalDatasetName from ../utils/dataset-names.ts"
   );
 
   const rawIndex = trackerSource.indexOf("getDatasetNameFromPath(pathname)");
-  const guardIndex = trackerSource.indexOf("isKnownDatasetName(");
+  const guardIndex = trackerSource.indexOf("canonicalDatasetName(");
   assert.ok(rawIndex !== -1, "getDatasetNameFromPath(pathname) call not found");
-  assert.ok(guardIndex !== -1, "isKnownDatasetName(...) guard not found");
+  assert.ok(guardIndex !== -1, "canonicalDatasetName(...) resolution not found");
   assert.ok(
     rawIndex < guardIndex,
-    "the raw decoded path segment must be validated by isKnownDatasetName before it is used"
+    "the raw decoded path segment must be resolved by canonicalDatasetName before it is used"
   );
 });
 

@@ -11,10 +11,11 @@
  * The `/dataset/<id>` path segment `getDatasetNameFromPath` (`./params.ts`)
  * decodes is arbitrary, attacker- or typo-controlled text — `params.ts` is
  * documented dependency-free and cannot validate it against the real
- * dataset list. This component checks it against the static
- * `isKnownDatasetName` predicate (`../utils/dataset-names.ts`) before ever
- * using it, so an unrecognized path segment is dropped rather than sent to
- * GA4 as `dataset_name`.
+ * dataset list. This component resolves it through the static
+ * `canonicalDatasetName` lookup (`../utils/dataset-names.ts`) before ever
+ * using it, so an unrecognized path segment is dropped, and a recognized one
+ * is replaced with its canonical spelling, rather than the raw decoded text
+ * ever being sent to GA4 as `dataset_name`.
  *
  * Two effects, both keyed on `pathname` alone:
  *
@@ -61,20 +62,20 @@ import { trackPageView, trackScrollDepth } from "./events.ts";
 import { initAnalytics } from "./gtag.ts";
 import { normalizePagePath, getRouteType, getDatasetNameFromPath } from "./params.ts";
 import { getScrollPercent, nextMilestones, type ScrollMilestone } from "./scroll-depth.ts";
-import { isKnownDatasetName } from "../utils/dataset-names.ts";
+import { canonicalDatasetName } from "../utils/dataset-names.ts";
 
 const AnalyticsRouteTracker = () => {
   const { pathname } = useLocation();
   const routeType = getRouteType(pathname);
   const rawDatasetName = getDatasetNameFromPath(pathname);
-  // See the file header: the raw decoded path segment must be validated
+  // See the file header: the raw decoded path segment must be resolved
   // against the known-dataset list before it is used for anything sent to
   // GA4 — an unrecognized value (stale link, typo, hand-edited URL) is
-  // dropped here rather than forwarded as `dataset_name`.
+  // dropped here, and a recognized one is replaced by its canonical
+  // spelling, rather than the raw decoded text ever being forwarded as
+  // `dataset_name`.
   const datasetName =
-    rawDatasetName !== undefined && isKnownDatasetName(rawDatasetName)
-      ? rawDatasetName
-      : undefined;
+    rawDatasetName !== undefined ? canonicalDatasetName(rawDatasetName) : undefined;
 
   // The most recently rendered pathname. Assigned during render, so it is
   // always up to date before any effect — cleanup or setup, for any
