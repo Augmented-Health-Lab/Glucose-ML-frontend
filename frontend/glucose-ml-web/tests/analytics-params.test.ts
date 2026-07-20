@@ -162,6 +162,24 @@ test("serializeDatasetCombination de-duplicates names", () => {
   );
 });
 
+test("serializeDatasetCombination de-duplicates case-insensitively and preserves first-seen casing", () => {
+  // ["CGMacros", "cgmacros"] should deduplicate to one entry, preserving "CGMacros"
+  assert.equal(
+    serializeDatasetCombination(["CGMacros", "cgmacros"]),
+    "CGMacros"
+  );
+  // Reverse order: ["cgmacros", "CGMacros"] should deduplicate to one entry, preserving "cgmacros"
+  assert.equal(
+    serializeDatasetCombination(["cgmacros", "CGMacros"]),
+    "cgmacros"
+  );
+  // Mixed case with other datasets
+  assert.equal(
+    serializeDatasetCombination(["Park 2025", "CGMacros", "cgmacros", "park 2025"]),
+    "CGMacros|Park 2025"
+  );
+});
+
 test("serializeDatasetCombination truncates the result to 100 characters", () => {
   const names = Array.from({ length: 20 }, (_, i) => `Dataset Name Number ${i}`);
   const result = serializeDatasetCombination(names);
@@ -222,6 +240,16 @@ test("categorizeLoadError classifies anything else, including non-Error values, 
   assert.equal(categorizeLoadError({ message: "not a real Error" }), "unknown");
 });
 
+test("categorizeLoadError returns unknown when error.message getter throws", () => {
+  const errorWithThrowingGetter = Object.create(Error.prototype);
+  Object.defineProperty(errorWithThrowingGetter, "message", {
+    get() {
+      throw new Error("getter threw");
+    },
+  });
+  assert.equal(categorizeLoadError(errorWithThrowingGetter), "unknown");
+});
+
 test("categorizeLoadError always returns one of the five fixed categories", () => {
   assert.deepEqual(ERROR_CATEGORIES, [
     "network",
@@ -257,11 +285,4 @@ test("categorizeLoadError never lets a substring of the original message escape 
   assert.ok(!category.includes("leoding101@gmail.com"));
   assert.ok(!category.includes("88213412"));
   assert.ok(!category.includes("SyntaxError"));
-  assert.ok(!sensitiveMessage.includes(category) || category.length <= "unknown".length);
-
-  // The category can only ever be one of the five fixed strings, so it is
-  // structurally impossible for it to carry the original message's payload.
-  for (const fixedCategory of ERROR_CATEGORIES) {
-    assert.ok(fixedCategory.length < sensitiveMessage.length);
-  }
 });

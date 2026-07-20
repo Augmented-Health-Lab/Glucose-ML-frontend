@@ -187,7 +187,15 @@ export function boundedCount(value: number): number {
 const MAX_SERIALIZED_LENGTH = 100;
 
 export function serializeDatasetCombination(names: readonly string[]): string {
-  const unique = Array.from(new Set(names));
+  // Deduplicate on lowercase key, preserving the original casing of first occurrence
+  const seen = new Map<string, string>();
+  for (const name of names) {
+    const key = name.toLowerCase();
+    if (!seen.has(key)) {
+      seen.set(key, name);
+    }
+  }
+  const unique = Array.from(seen.values());
   const sorted = unique.sort((a, b) =>
     a.localeCompare(b, undefined, { sensitivity: "base" })
   );
@@ -219,11 +227,20 @@ const PARSE_PATTERN = /json|unexpected token|parse/i;
 const MISSING_DATA_PATTERN = /missing[ _-]?data|no data (?:found|available)/i;
 
 export function categorizeLoadError(error: unknown): ErrorCategory {
-  if (!(error instanceof Error) || typeof error.message !== "string") {
+  if (!(error instanceof Error)) {
     return "unknown";
   }
 
-  const { message } = error;
+  let message: string | undefined;
+  try {
+    message = error.message;
+  } catch {
+    return "unknown";
+  }
+
+  if (typeof message !== "string") {
+    return "unknown";
+  }
 
   if (NETWORK_PATTERN.test(message)) return "network";
   if (NOT_FOUND_PATTERN.test(message)) return "not_found";
