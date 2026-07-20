@@ -2,6 +2,7 @@
 .idea/
 .vscode/
 .vercel/
+.worktrees/
 *.log
 .env
 .env.*
