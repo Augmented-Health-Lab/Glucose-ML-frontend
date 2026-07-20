@@ -6,6 +6,11 @@ import {
   getDestinationHostname,
   serializeDatasetNames,
 } from "../src/analytics/events.ts";
+import {
+  getNewScrollMilestones,
+  getRouteAnalyticsContext,
+  getSafeReferrerOrigin,
+} from "../src/analytics/route-analytics.ts";
 
 const analyticsSource = readFileSync(
   new URL("../src/analytics/google-analytics.ts", import.meta.url),
@@ -53,4 +58,48 @@ test("GA initialization is idempotent, manual, and failure-safe", () => {
   assert.match(analyticsSource, /send_page_view:\s*false/);
   assert.match(analyticsSource, /catch\s*\{\s*return false;\s*\}/s);
   assert.doesNotMatch(analyticsSource, /user_id|participant_id|cohort_id/);
+});
+
+test("route analytics recognizes only approved application paths", () => {
+  assert.deepEqual(getRouteAnalyticsContext("/"), {
+    pagePath: "/",
+    pageTitle: "Explore CGM datasets",
+    routeType: "home",
+  });
+  assert.deepEqual(getRouteAnalyticsContext("/dataset/AI-READI"), {
+    pagePath: "/dataset/AI-READI",
+    pageTitle: "AI-READI dataset",
+    routeType: "dataset_detail",
+    datasetName: "AI-READI",
+  });
+  assert.deepEqual(getRouteAnalyticsContext("/unknown/private-value"), {
+    pagePath: "/other",
+    pageTitle: "Glucose-ML",
+    routeType: "other",
+  });
+  assert.deepEqual(getRouteAnalyticsContext("/dataset/private-value"), {
+    pagePath: "/dataset/other",
+    pageTitle: "Dataset detail",
+    routeType: "dataset_detail",
+  });
+});
+
+test("scroll analytics returns only newly crossed milestones", () => {
+  assert.deepEqual(getNewScrollMilestones(new Set(), 500, 2000, 500), [25]);
+  assert.deepEqual(
+    getNewScrollMilestones(new Set([25, 50]), 1200, 2000, 500),
+    [75]
+  );
+  assert.deepEqual(
+    getNewScrollMilestones(new Set([25, 50, 75, 90]), 1500, 2000, 500),
+    []
+  );
+});
+
+test("initial referrers retain only a safe web origin", () => {
+  assert.equal(
+    getSafeReferrerOrigin("https://example.com/private?email=user@example.com"),
+    "https://example.com/"
+  );
+  assert.equal(getSafeReferrerOrigin("javascript:alert(1)"), undefined);
 });
