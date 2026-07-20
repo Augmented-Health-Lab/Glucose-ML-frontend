@@ -88,6 +88,13 @@ test("analytics parameters retain only bounded GA-safe primitives", () => {
 
 test("dataset combinations aggregate independent of selection order", () => {
   assert.equal(
+    serializeDatasetNames(["CGMacros", "AI-READI", "AZT1D"]),
+    "AI-READI|AZT1D|CGMacros"
+  );
+});
+
+test("dataset combinations discard unapproved names", () => {
+  assert.equal(
     serializeDatasetNames(["AZT1D", "private glucose 412", "AI-READI"]),
     "AI-READI|AZT1D"
   );
@@ -115,6 +122,70 @@ test("comparison events discard unapproved dataset names", () => {
       {
         action: "remove",
         selection_count: 2,
+        environment: "production",
+      },
+    ],
+  ]);
+});
+
+test("the fixed CGMacros alias passes every dataset event boundary", () => {
+  const events = captureAnalyticsEvents(() => {
+    trackCompareStart(["CGMacros"]);
+    trackCompareSelectionChange("remove", 0, "CGMacros");
+    trackDatasetOpen("CGMacros", "compare");
+    trackDetailViewChange("CGMacros", "time_in_range");
+    trackDatasetAction(
+      "CGMacros",
+      "helper_scripts",
+      "https://github.com/example/repo"
+    );
+  });
+
+  assert.deepEqual(events, [
+    [
+      "event",
+      "compare_start",
+      {
+        selection_count: 1,
+        dataset_names: "CGMacros",
+        environment: "production",
+      },
+    ],
+    [
+      "event",
+      "compare_selection_change",
+      {
+        action: "remove",
+        selection_count: 0,
+        dataset_name: "CGMacros",
+        environment: "production",
+      },
+    ],
+    [
+      "event",
+      "dataset_open",
+      {
+        dataset_name: "CGMacros",
+        origin: "compare",
+        environment: "production",
+      },
+    ],
+    [
+      "event",
+      "detail_view_change",
+      {
+        dataset_name: "CGMacros",
+        view: "time_in_range",
+        environment: "production",
+      },
+    ],
+    [
+      "event",
+      "dataset_action",
+      {
+        dataset_name: "CGMacros",
+        action: "helper_scripts",
+        destination_hostname: "github.com",
         environment: "production",
       },
     ],
@@ -205,6 +276,18 @@ test("route analytics recognizes only approved application paths", () => {
     pageTitle: "AI-READI dataset",
     routeType: "dataset_detail",
     datasetName: "AI-READI",
+  });
+  assert.deepEqual(getRouteAnalyticsContext("/dataset/CGMacros"), {
+    pagePath: "/dataset/CGMacros",
+    pageTitle: "CGMacros dataset",
+    routeType: "dataset_detail",
+    datasetName: "CGMacros",
+  });
+  assert.deepEqual(getRouteAnalyticsContext("/dataset/CGMacros_Dexcom"), {
+    pagePath: "/dataset/CGMacros%20Dexcom",
+    pageTitle: "CGMacros Dexcom dataset",
+    routeType: "dataset_detail",
+    datasetName: "CGMacros Dexcom",
   });
   assert.deepEqual(getRouteAnalyticsContext("/unknown/private-value"), {
     pagePath: "/other",

@@ -22,16 +22,25 @@ const PUBLIC_DATASET_NAMES = new Set([
   "PhysioCGM",
 ]);
 
+const PUBLIC_DATASET_ALIASES = new Map([
+  ["CGMacros", "CGMacros"],
+  ["CGMacros_Dexcom", "CGMacros Dexcom"],
+  ["CGMacros_Libre", "CGMacros Libre"],
+  ["Park2025", "Park 2025"],
+  ["T1DM-UOM", "T1D-UOM"],
+]);
+
 export function getPublicDatasetName(
   datasetName: string | undefined
 ): string | undefined {
-  return datasetName && PUBLIC_DATASET_NAMES.has(datasetName)
-    ? datasetName
-    : undefined;
+  if (!datasetName) return undefined;
+  if (PUBLIC_DATASET_NAMES.has(datasetName)) return datasetName;
+  return PUBLIC_DATASET_ALIASES.get(datasetName);
 }
 
 export function filterPublicDatasetNames(datasetNames: string[]): string[] {
-  return datasetNames.filter((datasetName) =>
-    PUBLIC_DATASET_NAMES.has(datasetName)
-  );
+  return datasetNames.flatMap((datasetName) => {
+    const publicDatasetName = getPublicDatasetName(datasetName);
+    return publicDatasetName ? [publicDatasetName] : [];
+  });
 }
