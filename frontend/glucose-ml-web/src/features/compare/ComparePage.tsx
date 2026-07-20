@@ -19,6 +19,12 @@ import type {
 import ComparingChips from "./ComparingChips";
 import CompareTable from "./CompareTable";
 import LegendModal from "../dataset-detail/LegendModal";
+import {
+  trackCompareSelectionChange,
+  trackContentLoadError,
+  trackGuideClose,
+  trackGuideOpen,
+} from "../../analytics";
 import "./compare-page.css";
 
 type LoadState =
@@ -69,6 +75,7 @@ const ComparePage = () => {
       .catch((error: unknown) => {
         if (controller.signal.aborted) return;
 
+        trackContentLoadError({ screen: "compare", error });
         setState({
           status: "error",
           data: [],
@@ -85,6 +92,12 @@ const ComparePage = () => {
   const isCurrentSelection = state.key === selectedKey;
   const handleRemoveDataset = (datasetName: string) => {
     const remaining = selectedNames.filter((name) => name !== datasetName);
+
+    trackCompareSelectionChange({
+      selectionAction: "remove",
+      datasetName,
+      selectionCount: remaining.length,
+    });
 
     if (remaining.length > 0) {
       navigate(makeCompareUrl(remaining));
@@ -122,7 +135,12 @@ const ComparePage = () => {
               onRemoveDataset={handleRemoveDataset}
               onAddDataset={handleAddDataset}
             />
-            <GuideButton onClick={() => setLegendOpen(true)} />
+            <GuideButton
+              onClick={() => {
+                trackGuideOpen({ screen: "compare" });
+                setLegendOpen(true);
+              }}
+            />
           </div>
           {selectedNames.length < 2 && (
             <p className="compare-page__single-note glm-body">
@@ -139,7 +157,13 @@ const ComparePage = () => {
             <CompareTable datasets={state.data} />
           )}
         </main>
-        <LegendModal open={legendOpen} onClose={() => setLegendOpen(false)} />
+        <LegendModal
+          open={legendOpen}
+          onClose={() => {
+            trackGuideClose({ screen: "compare" });
+            setLegendOpen(false);
+          }}
+        />
       </div>
     </AppShell>
   );

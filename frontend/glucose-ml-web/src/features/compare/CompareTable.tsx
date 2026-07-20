@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import type { CompareDataset } from "../../types/dataset";
 import RangeBars from "./RangeBars";
 import { FIGMA_COMPARE_ICONS } from "./figma-compare-icons";
+import { trackCompareSectionToggle, trackDatasetOpen } from "../../analytics";
 
 type Row = {
   label: string;
@@ -86,6 +87,10 @@ const CompareTable = ({ datasets }: { datasets: CompareDataset[] }) => {
   });
 
   const toggleSection = (section: SectionKey) => {
+    trackCompareSectionToggle({
+      section,
+      sectionState: expandedSections[section] ? "collapsed" : "expanded",
+    });
     setExpandedSections((current) => ({
       ...current,
       [section]: !current[section],
@@ -123,9 +128,10 @@ const CompareTable = ({ datasets }: { datasets: CompareDataset[] }) => {
             <button
               type="button"
               className="compare-table__details-button"
-              onClick={() =>
-                navigate(`/dataset/${encodeURIComponent(dataset.title)}`)
-              }
+              onClick={() => {
+                trackDatasetOpen({ datasetName: dataset.title, origin: "compare" });
+                navigate(`/dataset/${encodeURIComponent(dataset.title)}`);
+              }}
             >
               View dataset details &gt;
             </button>
