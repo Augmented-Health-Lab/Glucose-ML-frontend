@@ -63,5 +63,4 @@ export {
 
 export type { RouteType, Environment, ErrorCategory, ScreenName } from "./params.ts";
 
-// NOTE: `AnalyticsRouteTracker` is added to this barrel in a later task, once
-// `src/analytics/AnalyticsRouteTracker.tsx` exists.
+export { default as AnalyticsRouteTracker } from "./AnalyticsRouteTracker.tsx";
