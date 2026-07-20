@@ -5,6 +5,7 @@ import {
   normalizeDatasetAccess,
 } from "../../utils/access";
 import { getHelperScriptsUrl } from "../../utils/helper-scripts";
+import { trackDatasetAction } from "../../analytics";
 
 const COUNTRIES = {
   spain: { label: "Spain", icon: "/figma-assets/icon-spain.png" },
@@ -100,6 +101,13 @@ export default function DatasetHeader({ dataset, onBack }: Props) {
                 href={dataset.datasetLink}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  trackDatasetAction({
+                    datasetName: dataset.title,
+                    action: "request_access",
+                    href: dataset.datasetLink!,
+                  })
+                }
               >
                 <span
                   className="glm-button__icon detail-header__request-icon"
@@ -124,6 +132,13 @@ export default function DatasetHeader({ dataset, onBack }: Props) {
                   href={dataset.downloadLink}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() =>
+                    trackDatasetAction({
+                      datasetName: dataset.title,
+                      action: "download",
+                      href: dataset.downloadLink!,
+                    })
+                  }
                 >
                   <span
                     className="glm-button__icon glm-button__download-icon"
@@ -146,6 +161,13 @@ export default function DatasetHeader({ dataset, onBack }: Props) {
                   href={dataset.datasetLink}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() =>
+                    trackDatasetAction({
+                      datasetName: dataset.title,
+                      action: "source",
+                      href: dataset.datasetLink!,
+                    })
+                  }
                 >
                   <img src="/figma-assets/icon-search.svg" alt="" />
                   Dataset source
@@ -167,6 +189,13 @@ export default function DatasetHeader({ dataset, onBack }: Props) {
             href={helperScriptsUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() =>
+              trackDatasetAction({
+                datasetName: dataset.title,
+                action: "helper_scripts",
+                href: helperScriptsUrl,
+              })
+            }
           >
             Helper scripts
           </a>
