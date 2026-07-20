@@ -34,3 +34,16 @@ test("comparison exploration emits approved analytics events", () => {
   assert.match(table, /trackCompareSectionToggle\(/);
   assert.match(table, /trackDatasetOpen\(dataset\.title, "compare"\)/);
 });
+
+test("dataset details emit approved analytics events", () => {
+  const section = readSource("features/dataset-detail/CGMDataSection.tsx");
+  const header = readSource("features/dataset-detail/DatasetHeader.tsx");
+  const detail = readSource("features/dataset-detail/DatasetDetail.tsx");
+
+  assert.match(section, /trackDetailViewChange\(dataset\.title/);
+  assert.match(header, /trackDatasetAction\(dataset\.title, "request_access"/);
+  assert.match(header, /trackDatasetAction\(dataset\.title, "download"/);
+  assert.match(header, /trackDatasetAction\(dataset\.title, "source"/);
+  assert.match(header, /trackDatasetAction\(dataset\.title, "helper_scripts"/);
+  assert.match(detail, /trackContentLoadError\("dataset_detail"/);
+});

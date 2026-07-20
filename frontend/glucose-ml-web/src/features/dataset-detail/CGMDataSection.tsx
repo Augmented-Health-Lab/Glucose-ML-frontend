@@ -8,6 +8,7 @@ import CgmTabGroup from "./CgmTabGroup";
 import GlucoseRangeChart from "./GlucoseRangeChart";
 import HistogramChart from "./HistogramChart";
 import { formatCgmMetric } from "./cgm-metric-format";
+import { trackDetailViewChange } from "../../analytics/events";
 
 type Props = {
   dataset: DatasetDetail;
@@ -17,6 +18,15 @@ type TabKey = "hist" | "tir";
 
 export default function CGMDataSection({ dataset }: Props) {
   const [tab, setTab] = useState<TabKey>("hist");
+
+  const handleTabChange = (nextTab: TabKey) => {
+    if (nextTab === tab) return;
+
+    setTab(nextTab);
+    trackDetailViewChange(dataset.title,
+      nextTab === "hist" ? "histogram" : "time_in_range"
+    );
+  };
 
   const totalDaysRange = dataset.cgmSummary.totalDaysRange;
   const totalDaysDisplay =
@@ -62,7 +72,7 @@ export default function CGMDataSection({ dataset }: Props) {
       </div>
 
       <div className="cgm-data-section__tabs">
-        <CgmTabGroup active={tab} onChange={setTab} />
+        <CgmTabGroup active={tab} onChange={handleTabChange} />
       </div>
 
       <div className="cgm-data-section__chart">

@@ -22,6 +22,7 @@ import AuthorshipSection from "./AuthorshipSection";
 import { resolveDatasetAccess } from "../../utils/access";
 import { fetchJson } from "../../utils/fetch-json";
 import { findPublicationReferences } from "./publication-reference-data";
+import { trackContentLoadError } from "../../analytics/events";
 
 import "./dataset-detail.css";
 
@@ -486,6 +487,7 @@ export default function DatasetDetail({ dataset, onBack }: Props) {
     if (dataset) return;
 
     if (!id) {
+      trackContentLoadError("dataset_detail", "missing_dataset_id");
       setLoad({ status: "error", data: null, error: new Error("Missing dataset id in URL") });
       return;
     }
@@ -610,6 +612,12 @@ export default function DatasetDetail({ dataset, onBack }: Props) {
         setLoad({ status: "success", data: detail, error: null });
       } catch (err) {
         if (ac.signal.aborted) return;
+        trackContentLoadError(
+          "dataset_detail",
+          err instanceof Error && err.message.startsWith("Dataset not found")
+            ? "dataset_not_found"
+            : "static_data"
+        );
         setLoad({
           status: "error",
           data: null,
