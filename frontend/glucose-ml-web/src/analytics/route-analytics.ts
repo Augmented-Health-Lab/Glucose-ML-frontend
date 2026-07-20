@@ -1,3 +1,5 @@
+import { getPublicDatasetName } from "./public-datasets.ts";
+
 export type RouteAnalyticsContext = {
   pagePath: string;
   pageTitle: string;
@@ -10,30 +12,6 @@ export type RouteAnalyticsContext = {
     | "other";
   datasetName?: string;
 };
-
-const PUBLIC_DATASET_NAMES = new Set([
-  "Hall 2018",
-  "D1NAMO",
-  "Colas 2019",
-  "OhioT1DM",
-  "T1DEXI",
-  "T1DEXIP",
-  "BIGIDEAs",
-  "DiaTrend",
-  "ShanghaiT1DM",
-  "ShanghaiT2DM",
-  "T1DiabetesGranada",
-  "AI-READI",
-  "UCHTT1DM",
-  "HUPA-UCM",
-  "CGMacros Dexcom",
-  "CGMacros Libre",
-  "T1D-UOM",
-  "Bris-T1D Open",
-  "AZT1D",
-  "Park 2025",
-  "PhysioCGM",
-]);
 
 const STATIC_ROUTES: Record<string, RouteAnalyticsContext> = {
   "/": {
@@ -68,8 +46,10 @@ export function getRouteAnalyticsContext(
 
   if (pathname.startsWith("/dataset/")) {
     try {
-      const datasetName = decodeURIComponent(pathname.slice("/dataset/".length));
-      if (PUBLIC_DATASET_NAMES.has(datasetName)) {
+      const datasetName = getPublicDatasetName(
+        decodeURIComponent(pathname.slice("/dataset/".length))
+      );
+      if (datasetName) {
         return {
           pagePath: `/dataset/${encodeURIComponent(datasetName)}`,
           pageTitle: `${datasetName} dataset`,

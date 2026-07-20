@@ -1,7 +1,13 @@
 import { trackEvent } from "./google-analytics.ts";
+import {
+  filterPublicDatasetNames,
+  getPublicDatasetName,
+} from "./public-datasets.ts";
 
 export function serializeDatasetNames(datasetNames: string[]) {
-  return [...datasetNames].sort((a, b) => a.localeCompare(b)).join("|");
+  return filterPublicDatasetNames(datasetNames)
+    .sort((a, b) => a.localeCompare(b))
+    .join("|");
 }
 
 export function getDestinationHostname(url: string) {
@@ -38,7 +44,14 @@ export const trackFilterClear = (clearedFilterCount: number, resultCount: number
 export const trackDatasetOpen = (
   datasetName: string,
   origin: "home" | "compare"
-) => trackEvent("dataset_open", { dataset_name: datasetName, origin });
+) => {
+  const approvedDatasetName = getPublicDatasetName(datasetName);
+  if (!approvedDatasetName) return;
+  trackEvent("dataset_open", {
+    dataset_name: approvedDatasetName,
+    origin,
+  });
+};
 
 export const trackCompareSelectionChange = (
   action: "add" | "remove" | "clear",
@@ -47,14 +60,16 @@ export const trackCompareSelectionChange = (
 ) => trackEvent("compare_selection_change", {
   action,
   selection_count: selectionCount,
-  dataset_name: datasetName,
+  dataset_name: getPublicDatasetName(datasetName),
 });
 
-export const trackCompareStart = (datasetNames: string[]) =>
+export const trackCompareStart = (datasetNames: string[]) => {
+  const approvedDatasetNames = filterPublicDatasetNames(datasetNames);
   trackEvent("compare_start", {
-    selection_count: datasetNames.length,
-    dataset_names: serializeDatasetNames(datasetNames),
+    selection_count: approvedDatasetNames.length,
+    dataset_names: serializeDatasetNames(approvedDatasetNames),
   });
+};
 
 export const trackCompareSectionToggle = (
   section: "population" | "sources" | "cgm",
@@ -67,17 +82,28 @@ export const trackCompareSectionToggle = (
 export const trackDetailViewChange = (
   datasetName: string,
   view: "histogram" | "time_in_range"
-) => trackEvent("detail_view_change", { dataset_name: datasetName, view });
+) => {
+  const approvedDatasetName = getPublicDatasetName(datasetName);
+  if (!approvedDatasetName) return;
+  trackEvent("detail_view_change", {
+    dataset_name: approvedDatasetName,
+    view,
+  });
+};
 
 export const trackDatasetAction = (
   datasetName: string,
   action: "download" | "request_access" | "source" | "helper_scripts",
   destinationUrl: string
-) => trackEvent("dataset_action", {
-  dataset_name: datasetName,
-  action,
-  destination_hostname: getDestinationHostname(destinationUrl),
-});
+) => {
+  const approvedDatasetName = getPublicDatasetName(datasetName);
+  if (!approvedDatasetName) return;
+  trackEvent("dataset_action", {
+    dataset_name: approvedDatasetName,
+    action,
+    destination_hostname: getDestinationHostname(destinationUrl),
+  });
+};
 
 export const trackGuide = (
   action: "open" | "close",

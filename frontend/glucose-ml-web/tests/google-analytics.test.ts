@@ -5,6 +5,11 @@ import { sanitizeAnalyticsParameters } from "../src/analytics/google-analytics.t
 import {
   getDestinationHostname,
   serializeDatasetNames,
+  trackCompareSelectionChange,
+  trackCompareStart,
+  trackDatasetAction,
+  trackDatasetOpen,
+  trackDetailViewChange,
 } from "../src/analytics/events.ts";
 import {
   getNewScrollMilestones,
@@ -16,6 +21,51 @@ const analyticsSource = readFileSync(
   new URL("../src/analytics/google-analytics.ts", import.meta.url),
   "utf8"
 );
+const eventsSource = readFileSync(
+  new URL("../src/analytics/events.ts", import.meta.url),
+  "utf8"
+);
+const routeAnalyticsSource = readFileSync(
+  new URL("../src/analytics/route-analytics.ts", import.meta.url),
+  "utf8"
+);
+
+function captureAnalyticsEvents(run: () => void) {
+  const previousWindow = Object.getOwnPropertyDescriptor(globalThis, "window");
+  const previousDocument = Object.getOwnPropertyDescriptor(globalThis, "document");
+  const calls: unknown[][] = [];
+
+  Object.defineProperty(globalThis, "window", {
+    configurable: true,
+    value: {
+      location: { hostname: "glucose-ml-project.com" },
+      gtag: (...args: unknown[]) => calls.push(args),
+    },
+  });
+  Object.defineProperty(globalThis, "document", {
+    configurable: true,
+    value: {
+      head: { append: () => undefined },
+      querySelector: () => ({}),
+    },
+  });
+
+  try {
+    run();
+    return calls.filter(([command]) => command === "event");
+  } finally {
+    if (previousWindow) {
+      Object.defineProperty(globalThis, "window", previousWindow);
+    } else {
+      Reflect.deleteProperty(globalThis, "window");
+    }
+    if (previousDocument) {
+      Object.defineProperty(globalThis, "document", previousDocument);
+    } else {
+      Reflect.deleteProperty(globalThis, "document");
+    }
+  }
+}
 
 test("analytics parameters retain only bounded GA-safe primitives", () => {
   const raw = {
@@ -38,9 +88,93 @@ test("analytics parameters retain only bounded GA-safe primitives", () => {
 
 test("dataset combinations aggregate independent of selection order", () => {
   assert.equal(
-    serializeDatasetNames(["CGMacros", "AI-READI", "AZT1D"]),
-    "AI-READI|AZT1D|CGMacros"
+    serializeDatasetNames(["AZT1D", "private glucose 412", "AI-READI"]),
+    "AI-READI|AZT1D"
   );
+});
+
+test("comparison events discard unapproved dataset names", () => {
+  const events = captureAnalyticsEvents(() => {
+    trackCompareStart(["AZT1D", "patient@example.com", "AI-READI"]);
+    trackCompareSelectionChange("remove", 2, "patient@example.com");
+  });
+
+  assert.deepEqual(events, [
+    [
+      "event",
+      "compare_start",
+      {
+        selection_count: 2,
+        dataset_names: "AI-READI|AZT1D",
+        environment: "production",
+      },
+    ],
+    [
+      "event",
+      "compare_selection_change",
+      {
+        action: "remove",
+        selection_count: 2,
+        environment: "production",
+      },
+    ],
+  ]);
+});
+
+test("dataset domain events no-op for unapproved names", () => {
+  const events = captureAnalyticsEvents(() => {
+    trackDatasetOpen("patient@example.com", "home");
+    trackDetailViewChange("private glucose 412", "histogram");
+    trackDatasetAction(
+      "private glucose 412",
+      "source",
+      "https://example.com/private"
+    );
+    trackDatasetOpen("AI-READI", "home");
+    trackDetailViewChange("AI-READI", "histogram");
+    trackDatasetAction(
+      "AI-READI",
+      "source",
+      "https://example.com/private"
+    );
+  });
+
+  assert.deepEqual(events, [
+    [
+      "event",
+      "dataset_open",
+      {
+        dataset_name: "AI-READI",
+        origin: "home",
+        environment: "production",
+      },
+    ],
+    [
+      "event",
+      "detail_view_change",
+      {
+        dataset_name: "AI-READI",
+        view: "histogram",
+        environment: "production",
+      },
+    ],
+    [
+      "event",
+      "dataset_action",
+      {
+        dataset_name: "AI-READI",
+        action: "source",
+        destination_hostname: "example.com",
+        environment: "production",
+      },
+    ],
+  ]);
+});
+
+test("route and domain analytics consume one public dataset allowlist", () => {
+  assert.match(eventsSource, /from "\.\/public-datasets\.ts"/);
+  assert.match(routeAnalyticsSource, /from "\.\/public-datasets\.ts"/);
+  assert.doesNotMatch(routeAnalyticsSource, /const PUBLIC_DATASET_NAMES = new Set/);
 });
 
 test("destination tracking keeps only an http or https hostname", () => {
