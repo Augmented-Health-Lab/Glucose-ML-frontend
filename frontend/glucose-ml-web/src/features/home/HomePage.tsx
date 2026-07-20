@@ -20,6 +20,16 @@ import type {
   TableDataset,
 } from "../../types/dataset";
 import type { DatasetCardProps } from "./DatasetCard";
+import { filterDatasets } from "./filter-datasets";
+import {
+  trackCompareSelectionChange,
+  trackContentLoadError,
+  trackFilterChange,
+  trackFilterClear,
+  trackGuideClose,
+  trackGuideOpen,
+} from "../../analytics";
+import type { FilterAction, FilterCategory, FilterOption } from "../../analytics";
 import "./home-page.css";
 
 const FILTER_STORAGE_KEY = "home-filter-selections";
@@ -121,6 +131,7 @@ const HomePage = () => {
           return;
         }
 
+        trackContentLoadError({ screen: "home", error });
         setLoadError(error instanceof Error ? error.message : String(error));
       });
 
@@ -128,97 +139,74 @@ const HomePage = () => {
   }, []);
 
   // filter!!
-  const filteredDatasets = useMemo(() => {
-    if (Object.values(filterSelections).every((arr) => arr.length === 0)) {
-      return datasets;
-    }
+  const filteredDatasets = useMemo(
+    () => filterDatasets(datasets, filterSelections),
+    [filterSelections, datasets]
+  );
 
-    return datasets.filter((dataset) => {
-      return Object.entries(filterSelections).every(
-        ([filterLabel, selectedValues]) => {
-          if (selectedValues.length === 0) return true;
+  // Set by handleFilterOptionToggle and consumed by the very next
+  // handleFilterChange call. MultiSelect always invokes onOptionToggle
+  // immediately before onChange from within the same synchronous click
+  // handler (see MultiSelect.handleOptionClick), so this ref is never stale
+  // when handleFilterChange reads it — no async work can intervene. Reusing
+  // the exact `selected` array MultiSelect computed (rather than
+  // re-deriving it here from category/option/action) keeps the reported
+  // next state guaranteed identical to the state that actually gets
+  // committed, without duplicating MultiSelect's multi vs. single-select
+  // logic.
+  const pendingFilterToggleRef = useRef<{
+    category: FilterCategory;
+    option: FilterOption;
+    action: FilterAction;
+  } | null>(null);
 
-          switch (filterLabel) {
-            case "Data Sources": {
-              const sourceMap: Record<string, string> = {
-                "Continuous Glucose Monitor (CGM)": "G",
-                "Insulin Delivery System": "I",
-                "Wearable Tracker": "W",
-                "Mobile / Manual logs": "M",
-                Questionnaire: "Q",
-                "Clinical measurements": "C",
-              };
-              return selectedValues.every((filterValue) =>
-                dataset.sources.includes(sourceMap[filterValue])
-              );
-            }
-
-            case "Population": {
-              const typeMap: Record<string, string> = {
-                T1D: "T1D",
-                T2D: "T2D",
-                Prediabetic: "PreD",
-                "Non diabetic": "ND",
-              };
-
-              return selectedValues.every((filterValue) =>
-                dataset.types.includes(typeMap[filterValue])
-              );
-            }
-
-            case "Study duration": {
-              if (dataset.days === "TBD") return false;
-              const numDays = Number(dataset.days);
-              const filterValue = selectedValues[0];
-
-              switch (filterValue) {
-                case "7+ days":
-                  return numDays >= 7;
-                case "14+ days":
-                  return numDays >= 14;
-                case "1 month":
-                  return numDays >= 30;
-                case "2+ months":
-                  return numDays >= 60;
-                default:
-                  return false;
-              }
-            }
-
-            case "Sample size": {
-              const filterValue = selectedValues[0];
-              switch (filterValue) {
-                case "20+":
-                  return dataset.participants >= 20;
-                case "50+":
-                  return dataset.participants >= 50;
-                case "100+":
-                  return dataset.participants >= 100;
-                case "500+":
-                  return dataset.participants >= 500;
-                case "1000+":
-                  return dataset.participants >= 1000;
-                default:
-                  return false;
-              }
-            }
-
-            case "Access": {
-              const filterValue = selectedValues[0];
-              return dataset.access === filterValue;
-            }
-
-            default:
-              return true;
-          }
-        }
-      );
-    });
-  }, [filterSelections, datasets]);
+  // callback for filter option toggles (fired by MultiSelect before onChange)
+  const handleFilterOptionToggle = (
+    category: FilterCategory,
+    option: FilterOption,
+    action: FilterAction
+  ) => {
+    pendingFilterToggleRef.current = { category, option, action };
+  };
 
   // callback for filter
   const handleFilterChange = (label: string, selected: string[]) => {
-    setFilterSelections((prev) => ({ ...prev, [label]: selected }));
+    const nextFilterSelections = { ...filterSelections, [label]: selected };
+    const toggle = pendingFilterToggleRef.current;
+    pendingFilterToggleRef.current = null;
+
+    if (toggle && toggle.category === label) {
+      trackFilterChange({
+        filterCategory: toggle.category,
+        filterOption: toggle.option,
+        filterAction: toggle.action,
+        activeFilterCount: Object.values(nextFilterSelections).reduce(
+          (sum, arr) => sum + arr.length,
+          0
+        ),
+        resultCount: filterDatasets(datasets, nextFilterSelections).length,
+      });
+    }
+
+    setFilterSelections(nextFilterSelections);
+  };
+
+  // callback for clearing all filters at once (exactly one filter_clear event)
+  const handleClearFilters = () => {
+    const clearedFilterCount = Object.values(filterSelections).reduce(
+      (sum, arr) => sum + arr.length,
+      0
+    );
+    const nextFilterSelections = Object.fromEntries(
+      Object.keys(filterSelections).map((label) => [label, [] as string[]])
+    );
+
+    trackFilterClear({
+      clearedFilterCount,
+      resultCount: filterDatasets(datasets, nextFilterSelections).length,
+    });
+
+    setFilterSelections(nextFilterSelections);
   };
 
   // callback for card
@@ -238,6 +226,14 @@ const HomePage = () => {
       nextSelectedCards = selectedCards.filter((t) => t !== title);
     }
 
+    if (nextSelectedCards.length !== selectedCards.length) {
+      trackCompareSelectionChange({
+        selectionAction: checked ? "add" : "remove",
+        datasetName: title,
+        selectionCount: nextSelectedCards.length,
+      });
+    }
+
     navigate(makeHomeUrl(nextSelectedCards), { replace: true });
   };
 
@@ -246,6 +242,7 @@ const HomePage = () => {
   };
 
   const handleClearCompareSelection = () => {
+    trackCompareSelectionChange({ selectionAction: "clear", selectionCount: 0 });
     navigate(makeHomeUrl([]), { replace: true });
   };
 
@@ -293,6 +290,8 @@ const HomePage = () => {
             <FilterBar
               filterSelections={filterSelections}
               onFilterChange={handleFilterChange}
+              onFilterOptionToggle={handleFilterOptionToggle}
+              onClearFilters={handleClearFilters}
               filterButtonEnabled={hasFilter}
               resultCount={filteredDatasets.length}
               totalCount={datasets.length}
@@ -301,7 +300,12 @@ const HomePage = () => {
               <p>
                 Use checkboxes to compare datasets. Click a card for details.
               </p>
-              <GuideButton onClick={() => setLegendOpen(true)} />
+              <GuideButton
+                onClick={() => {
+                  trackGuideOpen({ screen: "home" });
+                  setLegendOpen(true);
+                }}
+              />
             </section>
           </section>
           {loadError && (
@@ -318,7 +322,13 @@ const HomePage = () => {
             onCardSelect={handleCardSelect}
           />
         </main>
-        <LegendModal open={legendOpen} onClose={() => setLegendOpen(false)} />
+        <LegendModal
+          open={legendOpen}
+          onClose={() => {
+            trackGuideClose({ screen: "home" });
+            setLegendOpen(false);
+          }}
+        />
         <CompareBar
           selectedCards={selectedCards}
           onRemoveSelection={handleRemoveCompareSelection}

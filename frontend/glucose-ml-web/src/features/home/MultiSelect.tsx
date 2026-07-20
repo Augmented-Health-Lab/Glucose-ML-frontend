@@ -33,6 +33,7 @@ interface MultiSelectProps {
   options: readonly string[];
   selected: string[];
   onChange: (selected: string[]) => void;
+  onOptionToggle?: (option: string, action: "add" | "remove") => void;
 }
 
 const MultiSelect = ({
@@ -42,6 +43,7 @@ const MultiSelect = ({
   options,
   selected,
   onChange,
+  onOptionToggle,
 }: MultiSelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -66,23 +68,19 @@ const MultiSelect = ({
   };
 
   const handleOptionClick = (option: string) => {
+    const isSelected = selected.includes(option);
     let newSelected: string[];
 
     if (multi) {
-      if (selected.includes(option)) {
-        newSelected = selected.filter((item) => item !== option);
-      } else {
-        newSelected = [...selected, option];
-      }
+      newSelected = isSelected
+        ? selected.filter((item) => item !== option)
+        : [...selected, option];
     } else {
-      if (selected.includes(option)) {
-        newSelected = [];
-      } else {
-        newSelected = [option];
-      }
+      newSelected = isSelected ? [] : [option];
       setIsOpen(false);
     }
 
+    onOptionToggle?.(option, isSelected ? "remove" : "add");
     onChange(newSelected);
   };
 

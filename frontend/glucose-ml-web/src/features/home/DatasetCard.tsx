@@ -10,6 +10,7 @@ import {
   normalizeDatasetAccess,
 } from "../../utils/access";
 import { getDatasetSourceLabels } from "../../utils/source-labels";
+import { trackDatasetOpen } from "../../analytics";
 
 export interface DatasetCardProps {
   title: string;
@@ -98,6 +99,7 @@ const DatasetCard = ({
   const navigate = useNavigate();
 
   const handleCardClick = () => {
+    trackDatasetOpen({ datasetName: title, origin: "home" });
     navigate(`/dataset/${title}`);
   };
 

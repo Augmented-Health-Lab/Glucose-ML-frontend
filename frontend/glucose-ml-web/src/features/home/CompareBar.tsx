@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { makeCompareUrl, MAX_COMPARE_DATASETS } from "../../utils/compare-data";
+import { trackCompareStart } from "../../analytics";
 
 type CompareBarProps = {
   selectedCards: string[];
@@ -83,6 +84,12 @@ const CompareBar = ({
           <Link
             className="home-compare-bar__button"
             to={makeCompareUrl(selectedCards)}
+            onClick={() =>
+              trackCompareStart({
+                selectionCount: selectedCards.length,
+                datasetNames: selectedCards,
+              })
+            }
           >
             Compare datasets ({selectedCards.length} selected)
           </Link>

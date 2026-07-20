@@ -26,6 +26,10 @@ const homePageTsx = readFileSync(
   new URL("../src/features/home/HomePage.tsx", import.meta.url),
   "utf8"
 );
+const filterDatasetsTs = readFileSync(
+  new URL("../src/features/home/filter-datasets.ts", import.meta.url),
+  "utf8"
+);
 const compareBarTsx = readFileSync(
   new URL("../src/features/home/CompareBar.tsx", import.meta.url),
   "utf8"
@@ -284,12 +288,12 @@ test("data source filter uses consistent wording and fits the full CGM label", (
   assert.match(filtersTs, /"Mobile \/ Manual logs"/);
   assert.match(filtersTs, /"Questionnaire"/);
   assert.match(filtersTs, /"Clinical measurements"/);
-  assert.match(homePageTsx, /"Continuous Glucose Monitor \(CGM\)":\s*"G"/);
-  assert.match(homePageTsx, /"Insulin Delivery System":\s*"I"/);
-  assert.match(homePageTsx, /"Wearable Tracker":\s*"W"/);
-  assert.match(homePageTsx, /"Mobile \/ Manual logs":\s*"M"/);
-  assert.match(homePageTsx, /Questionnaire:\s*"Q"/);
-  assert.match(homePageTsx, /"Clinical measurements":\s*"C"/);
+  assert.match(filterDatasetsTs, /"Continuous Glucose Monitor \(CGM\)":\s*"G"/);
+  assert.match(filterDatasetsTs, /"Insulin Delivery System":\s*"I"/);
+  assert.match(filterDatasetsTs, /"Wearable Tracker":\s*"W"/);
+  assert.match(filterDatasetsTs, /"Mobile \/ Manual logs":\s*"M"/);
+  assert.match(filterDatasetsTs, /Questionnaire:\s*"Q"/);
+  assert.match(filterDatasetsTs, /"Clinical measurements":\s*"C"/);
   assert.doesNotMatch(filtersTs, /label:\s*"Data types"/);
   assert.doesNotMatch(filtersTs, /"Glucose Monitor"/);
   assert.match(
