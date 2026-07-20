@@ -11,6 +11,7 @@ Add detailed, anonymous Google Analytics 4 instrumentation to the Glucose-ML Rea
 - The numeric GA4 Stream ID is not required by the browser integration.
 - Keep the existing Vercel Analytics integration as an independent traffic baseline.
 - Disable GA4's automatic initial page view and emit route-aware page views manually so the React single-page application records exactly one page view per navigation.
+- In GA4 Stream `1525054633`, disable Enhanced Measurement's **Page changes based on browser history events** option. Google documents that this setting can emit history-based page views even when `send_page_view` is false, which would duplicate the application's manual React Router events.
 - Deployed production and preview builds enable analytics immediately.
 - Local development does not send analytics unless `VITE_GA_DEBUG=true` is set. Debug mode also marks events for GA4 DebugView.
 - Add an `environment` event parameter derived from the hostname so production and preview traffic can be separated in GA4 reports.
@@ -47,7 +48,7 @@ Allowed domain values include public dataset names, fixed UI labels, fixed route
 - `page_view`: normalized path, page title, route type, dataset name when the route is a dataset detail page, and environment.
 - `scroll_depth`: 25, 50, 75, and 90 percent milestones, each emitted once per route visit and reset after navigation.
 
-SPA page views will be sent after route changes. Query-string values will not be copied wholesale into analytics. The compare route may report its selected public dataset names through the approved compare event parameters instead.
+SPA page views will be sent after route changes. `page_location` will be built from the current origin and a normalized, whitelisted route path; the initial `page_referrer` will be reduced to its web origin before sending. Query-string values will not be copied wholesale into analytics. The compare route may report its selected public dataset names through the approved compare event parameters instead.
 
 ### Dataset discovery
 
