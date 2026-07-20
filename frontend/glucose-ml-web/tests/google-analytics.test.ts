@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 import {
+  getAnalyticsEnvironment,
   initializeGoogleAnalytics,
   sanitizeAnalyticsParameters,
   shouldEnableAnalytics,
@@ -98,9 +99,32 @@ test("the gtag bootstrap queues Arguments objects in call order", () => {
     assert.equal(typeof window.gtag, "function");
     window.gtag?.("get", "G-7VEBP7G8TE", "client_id", "callback");
 
-    const getCall = dataLayer.at(-1);
-    assert.equal(Object.prototype.toString.call(getCall), "[object Arguments]");
-    assert.deepEqual(Array.from(getCall as ArrayLike<unknown>), [
+    assert.equal(dataLayer.length, 3);
+    assert.deepEqual(
+      dataLayer.map((record) => Object.prototype.toString.call(record)),
+      ["[object Arguments]", "[object Arguments]", "[object Arguments]"]
+    );
+
+    const [jsCall, configCall, getCall] = dataLayer.map((record) =>
+      Array.from(record as ArrayLike<unknown>)
+    );
+    assert.deepEqual(
+      [jsCall[0], configCall[0], getCall[0]],
+      ["js", "config", "get"]
+    );
+    assert.equal(jsCall.length, 2);
+    assert.equal(jsCall[0], "js");
+    assert.ok(jsCall[1] instanceof Date);
+    assert.deepEqual(configCall, [
+      "config",
+      "G-7VEBP7G8TE",
+      {
+        send_page_view: false,
+        anonymize_ip: true,
+        debug_mode: false,
+      },
+    ]);
+    assert.deepEqual(getCall, [
       "get",
       "G-7VEBP7G8TE",
       "client_id",
@@ -116,6 +140,59 @@ test("the gtag bootstrap queues Arguments objects in call order", () => {
       Object.defineProperty(globalThis, "document", previousDocument);
     } else {
       Reflect.deleteProperty(globalThis, "document");
+    }
+  }
+});
+
+test("analytics environment classifies only exact local and deployment hosts", () => {
+  const previousWindow = Object.getOwnPropertyDescriptor(globalThis, "window");
+  const cases = [
+    ["localhost", "local"],
+    ["127.0.0.1", "local"],
+    ["[::1]", "local"],
+    ["0.0.0.0", "local"],
+    ["glucose-ml-project.com", "production"],
+    ["www.glucose-ml-project.com", "production"],
+    ["glucose-ml-git-feature-example.vercel.app", "preview"],
+    ["localhost.example.com", "preview"],
+    ["notlocalhost", "preview"],
+  ] as const;
+
+  try {
+    for (const [hostname, expectedEnvironment] of cases) {
+      Object.defineProperty(globalThis, "window", {
+        configurable: true,
+        value: { location: { hostname } },
+      });
+
+      const environment = getAnalyticsEnvironment();
+      assert.equal(environment, expectedEnvironment, hostname);
+      if (expectedEnvironment === "local") {
+        assert.equal(
+          shouldEnableAnalytics({
+            isDev: false,
+            environment,
+            isDebug: false,
+          }),
+          false,
+          `${hostname} production preview without debug`
+        );
+        assert.equal(
+          shouldEnableAnalytics({
+            isDev: false,
+            environment,
+            isDebug: true,
+          }),
+          true,
+          `${hostname} production preview with debug`
+        );
+      }
+    }
+  } finally {
+    if (previousWindow) {
+      Object.defineProperty(globalThis, "window", previousWindow);
+    } else {
+      Reflect.deleteProperty(globalThis, "window");
     }
   }
 });

@@ -67,6 +67,13 @@ declare global {
 
 const DEFAULT_MEASUREMENT_ID = "G-7VEBP7G8TE";
 const MAX_PARAMETER_LENGTH = 100;
+const LOCAL_ANALYTICS_HOSTNAMES = new Set([
+  "localhost",
+  "127.0.0.1",
+  "[::1]",
+  "::1",
+  "0.0.0.0",
+]);
 let initializedMeasurementId: string | null = null;
 
 const viteEnv = (
@@ -109,9 +116,13 @@ function isAnalyticsEnabled() {
   });
 }
 
+function isLocalAnalyticsHostname(hostname: string) {
+  return LOCAL_ANALYTICS_HOSTNAMES.has(hostname);
+}
+
 export function getAnalyticsEnvironment(): "production" | "preview" | "local" {
   if (typeof window === "undefined") return "local";
-  if (["localhost", "127.0.0.1", "::1"].includes(window.location.hostname)) {
+  if (isLocalAnalyticsHostname(window.location.hostname)) {
     return "local";
   }
   return ["glucose-ml-project.com", "www.glucose-ml-project.com"].includes(
