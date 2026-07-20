@@ -9,6 +9,7 @@ import {
   makeHomeUrl,
   parseCompareDatasets,
 } from "../../utils/compare-data";
+import { isKnownDatasetName } from "../../utils/dataset-names";
 import type {
   CompareDataset,
   DatasetDetailJson,
@@ -93,11 +94,20 @@ const ComparePage = () => {
   const handleRemoveDataset = (datasetName: string) => {
     const remaining = selectedNames.filter((name) => name !== datasetName);
 
-    trackCompareSelectionChange({
-      selectionAction: "remove",
-      datasetName,
-      selectionCount: remaining.length,
-    });
+    // `datasetName` here comes from `selectedNames`, which is parsed
+    // straight out of the `?datasets=` query string (see
+    // `parseCompareDatasets`) with no membership check of its own. Only
+    // forward it to GA4 once it's confirmed to name a real, known dataset —
+    // a stale/hand-edited link must never let arbitrary query-string text
+    // land in `dataset_name`. This never affects navigation below: the chip
+    // is removed and the URL updates the same way regardless.
+    if (isKnownDatasetName(datasetName)) {
+      trackCompareSelectionChange({
+        selectionAction: "remove",
+        datasetName,
+        selectionCount: remaining.length,
+      });
+    }
 
     if (remaining.length > 0) {
       navigate(makeCompareUrl(remaining));

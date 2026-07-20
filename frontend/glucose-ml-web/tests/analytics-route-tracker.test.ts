@@ -97,8 +97,49 @@ test("AnalyticsRouteTracker's page-view effect depends only on [pathname], never
     trackerSource,
     /trackPageView\(\s*\{[\s\S]*?\}\s*\)\s*;[\s\S]*?\},\s*\[pathname\]\s*\)/
   );
-  assert.equal(trackerSource.includes("location.search"), false);
-  assert.equal(trackerSource.includes(".search"), false);
+});
+
+// ---------------------------------------------------------------------------
+// Privacy: dataset_name must be validated, not just "no .search" absence.
+//
+// The previous version of this contract asserted `trackerSource.includes(
+// ".search") === false` and treated that as proof the tracker never leaks
+// unvalidated data. That assertion was always true and always would be: the
+// leak this component is actually exposed to is not the query string at
+// all — it's `getDatasetNameFromPath` (params.ts) decoding an arbitrary
+// `/dataset/<id>` *path* segment with no membership check of its own
+// (params.ts is dependency-free by design and cannot import a dataset
+// list). Scanning for the substring ".search" says nothing about whether
+// that path-derived value is validated before being sent as `dataset_name`.
+// The assertions below check the actual guarantee instead.
+// ---------------------------------------------------------------------------
+
+test("AnalyticsRouteTracker validates the decoded dataset path segment against a known-dataset list before use", () => {
+  assert.match(
+    trackerSource,
+    /import\s*\{\s*isKnownDatasetName\s*\}\s*from\s*"\.\.\/utils\/dataset-names\.ts"/,
+    "AnalyticsRouteTracker must import isKnownDatasetName from ../utils/dataset-names.ts"
+  );
+
+  const rawIndex = trackerSource.indexOf("getDatasetNameFromPath(pathname)");
+  const guardIndex = trackerSource.indexOf("isKnownDatasetName(");
+  assert.ok(rawIndex !== -1, "getDatasetNameFromPath(pathname) call not found");
+  assert.ok(guardIndex !== -1, "isKnownDatasetName(...) guard not found");
+  assert.ok(
+    rawIndex < guardIndex,
+    "the raw decoded path segment must be validated by isKnownDatasetName before it is used"
+  );
+});
+
+test("AnalyticsRouteTracker sends the validated datasetName, not the raw decoded segment, to trackPageView and trackScrollDepth", () => {
+  const pageViewDatasetArg = trackerSource.match(/trackPageView\(\{[\s\S]*?datasetName,/);
+  const scrollDatasetArg = trackerSource.match(/trackScrollDepth\(\{[\s\S]*?datasetName\s*\}\)/);
+  assert.ok(pageViewDatasetArg, "trackPageView's datasetName argument not found");
+  assert.ok(scrollDatasetArg, "trackScrollDepth's datasetName argument not found");
+
+  // Neither call may reference the raw, unvalidated value directly.
+  assert.doesNotMatch(pageViewDatasetArg[0], /rawDatasetName/);
+  assert.doesNotMatch(scrollDatasetArg[0], /rawDatasetName/);
 });
 
 test("AnalyticsRouteTracker derives routeType and datasetName once and shares them between effects", () => {
@@ -204,4 +245,9 @@ test("App.tsx still mounts RouteScrollManager and the Vercel Analytics component
   assert.match(appSource, /<RouteScrollManager\s*\/>/);
   assert.match(appSource, /<Analytics\s*\/>/);
   assert.match(appSource, /from\s+"@vercel\/analytics\/react"/);
+});
+
+test("App.tsx imports AnalyticsRouteTracker from the barrel's directory form, not the index.ts specifier", () => {
+  assert.match(appSource, /import\s*\{\s*AnalyticsRouteTracker\s*\}\s*from\s*"\.\.\/analytics"/);
+  assert.doesNotMatch(appSource, /from\s*"\.\.\/analytics\/index/);
 });

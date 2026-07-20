@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { makeCompareUrl, MAX_COMPARE_DATASETS } from "../../utils/compare-data";
+import { isKnownDatasetName } from "../../utils/dataset-names";
 import { trackCompareStart } from "../../analytics";
 
 type CompareBarProps = {
@@ -17,6 +18,13 @@ const CompareBar = ({
 }: CompareBarProps) => {
   const hasSelections = selectedCards.length > 0;
   const canCompare = selectedCards.length >= 2;
+  // `selectedCards` is parsed straight out of the `?datasets=` query string
+  // (see `parseSelectedDatasets` in HomePage) with no membership check of
+  // its own. Only the subset that names a real, known dataset may ever
+  // reach GA4 as `dataset_combination` — a stale/hand-edited link must not
+  // let arbitrary query-string text land there. This is analytics-only:
+  // the rendered slots below still map over the full `selectedCards`.
+  const knownSelectedCardNames = selectedCards.filter(isKnownDatasetName);
   const emptySlotCount =
     selectedCards.length < MAX_COMPARE_DATASETS
       ? MAX_COMPARE_DATASETS - selectedCards.length
@@ -87,7 +95,7 @@ const CompareBar = ({
             onClick={() =>
               trackCompareStart({
                 selectionCount: selectedCards.length,
-                datasetNames: selectedCards,
+                datasetNames: knownSelectedCardNames,
               })
             }
           >

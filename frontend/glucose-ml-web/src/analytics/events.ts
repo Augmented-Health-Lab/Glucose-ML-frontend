@@ -55,11 +55,12 @@ export type FilterCategory = (typeof FILTERS)[number]["label"];
 export type FilterOption = (typeof FILTERS)[number]["options"][number];
 
 /**
- * Guides only exist on `home`, `compare`, and `dataset_detail` — there is no
- * guide button on the background page, so `background` is excluded here
- * even though it is a valid `ScreenName` elsewhere.
+ * Guides only exist on `home` and `compare` — `GuideButton`/`LegendModal`
+ * are mounted on those two screens only, not on the background page or the
+ * dataset-detail page, so both `background` and `dataset_detail` are
+ * excluded here even though they are valid `ScreenName` values elsewhere.
  */
-export type GuideScreenName = Exclude<ScreenName, "background">;
+export type GuideScreenName = Exclude<ScreenName, "background" | "dataset_detail">;
 
 // ---------------------------------------------------------------------------
 // page_view

@@ -13,11 +13,11 @@ GA4 does not expose custom event parameters in reports or Explorations until eac
 | Dimension name (suggested) | Event parameter | Value domain | Emitted on |
 | --- | --- | --- | --- |
 | Page Path | `page_path` | normalized path, no query string (e.g. `/dataset/CGMacros`) | `page_view` |
-| Page Title | `page_title` | `document.title` at navigation time | `page_view` |
+| Page Title | `page_title` | `document.title` at navigation time — **currently constant**: `index.html` sets one static `<title>` and nothing updates it per route, so every `page_view` sends the same string today. `route_type`/`page_path` carry the real per-route signal; don't register this dimension until per-route titles exist. | `page_view` |
 | Route Type | `route_type` | `home` \| `background` \| `about` \| `dataset_detail` \| `compare` \| `other` | `page_view`, `scroll_depth` |
 | Dataset Name | `dataset_name` | public dataset name (e.g. `CGMacros`) | `page_view`, `scroll_depth` (dataset-detail only), `dataset_open`, `compare_selection_change` (except `clear`), `detail_view_change`, `dataset_action` |
 | Scroll Percent | `percent` | `25` \| `50` \| `75` \| `90` | `scroll_depth` |
-| Filter Category | `filter_category` | fixed filter label from `src/data/filters.ts` (e.g. `Data sources`, `Population`) | `filter_change` |
+| Filter Category | `filter_category` | fixed filter label from `src/data/filters.ts` (e.g. `Data Sources`, `Population`) | `filter_change` |
 | Filter Option | `filter_option` | fixed filter option from `src/data/filters.ts` | `filter_change` |
 | Filter Action | `filter_action` | `add` \| `remove` | `filter_change` |
 | Active Filter Count | `active_filter_count` | integer, `0`–`999` | `filter_change` |
@@ -32,7 +32,7 @@ GA4 does not expose custom event parameters in reports or Explorations until eac
 | Detail View | `detail_view` | `histogram` \| `time_in_range` | `detail_view_change` |
 | Dataset Action | `action` | `download` \| `request_access` \| `source` \| `helper_scripts` | `dataset_action` |
 | Destination Host | `destination_host` | hostname only, no path/query (e.g. `github.com`) | `dataset_action` |
-| Screen | `screen` | `home` \| `compare` \| `dataset_detail` \| `background` | `guide_open`, `guide_close`, `content_load_error` |
+| Screen | `screen` | `content_load_error`: `home` \| `compare` \| `dataset_detail` \| `background`. `guide_open`/`guide_close`: `home` \| `compare` only — `GuideButton`/`LegendModal` aren't mounted on the dataset-detail or background pages, so those two values never appear on the guide events. | `guide_open`, `guide_close`, `content_load_error` |
 | Error Category | `error_category` | `network` \| `not_found` \| `parse` \| `missing_data` \| `unknown` | `content_load_error` |
 | Environment | `environment` | `production` \| `preview` \| `development` | every event |
 
@@ -83,7 +83,7 @@ Build each of the following in GA4 → Explore → Blank exploration, using **Fr
 **Technique:** Free form exploration.
 **Rows:** `screen`.
 **Values:** event count filtered to `guide_open`.
-**Segments:** one segment per `screen` value (`home`, `compare`, `dataset_detail`) that opened the guide, each followed by a secondary condition on a subsequent event in the same session (e.g. `filter_change`, `compare_start`, `dataset_action`) to see what visitors do right after consulting the guide.
+**Segments:** one segment per `screen` value (`home`, `compare` — the only two screens with a guide button; `dataset_detail` never appears on `guide_open`/`guide_close`, see the `Screen` row above) that opened the guide, each followed by a secondary condition on a subsequent event in the same session (e.g. `filter_change`, `compare_start`, `dataset_action`) to see what visitors do right after consulting the guide.
 **Breakdown:** add `guide_close` counts alongside `guide_open` per screen to gauge how long the guide stays open (session-level, not per-event duration).
 **Reads:** which screens' visitors rely on the guide most, and what they do immediately afterward.
 

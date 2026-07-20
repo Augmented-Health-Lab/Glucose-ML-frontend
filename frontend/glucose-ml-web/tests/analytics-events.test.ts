@@ -402,26 +402,24 @@ test("trackGuideClose sends guide_close with the exact reference keys", () => {
   assert.deepEqual(keysExcludingEnvironment(params), ["screen"]);
 });
 
-test("trackGuideOpen accepts the third guide screen, dataset_detail", () => {
-  const { params } = captureEvent(() => trackGuideOpen({ screen: "dataset_detail" }));
-  assert.equal(params.screen, "dataset_detail");
-});
-
-test("GuideScreenName excludes 'background' at the type level (no guide button there)", () => {
-  // `background` is a valid runtime ScreenName elsewhere (content_load_error
-  // fires on it), but there is no guide button on the background page, so
-  // passing `screen: "background"` to trackGuideOpen/trackGuideClose must be
-  // a compile error, not merely something nobody happens to do. That's a
-  // compile-time-only guarantee (TS types are erased at runtime), so it's
-  // verified here as a source-text assertion instead of a runtime call.
+test("GuideScreenName excludes 'background' and 'dataset_detail' at the type level (no guide button on either)", () => {
+  // `background` and `dataset_detail` are both valid runtime ScreenName
+  // values elsewhere (content_load_error fires on both), but GuideButton/
+  // LegendModal are only mounted on Home and Compare — there is no guide
+  // button on the background page or the dataset-detail page. Passing
+  // `screen: "background"` or `screen: "dataset_detail"` to
+  // trackGuideOpen/trackGuideClose must therefore be a compile error, not
+  // merely something nobody happens to do. That's a compile-time-only
+  // guarantee (TS types are erased at runtime), so it's verified here as a
+  // source-text assertion instead of a runtime call.
   const eventsSource = readFileSync(
     fileURLToPath(new URL("../src/analytics/events.ts", import.meta.url)),
     "utf8"
   );
   assert.match(
     eventsSource,
-    /export type GuideScreenName = Exclude<ScreenName, "background">;/,
-    "events.ts must declare GuideScreenName = Exclude<ScreenName, \"background\"> and use it for TrackGuideParams"
+    /export type GuideScreenName = Exclude<ScreenName, "background" \| "dataset_detail">;/,
+    'events.ts must declare GuideScreenName = Exclude<ScreenName, "background" | "dataset_detail"> and use it for TrackGuideParams'
   );
   assert.match(
     eventsSource,

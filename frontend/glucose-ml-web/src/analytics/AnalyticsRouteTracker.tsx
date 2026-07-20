@@ -2,7 +2,19 @@
  * The single component that drives GA4 page views and scroll-depth
  * milestones for the whole SPA. Renders nothing — it only observes
  * `useLocation()` and the window's scroll position and reports through the
- * typed helpers in `./events.ts` (via the public barrel, `./index.ts`).
+ * typed helpers in `./events.ts`, plus `initAnalytics` from `./gtag.ts`.
+ * Both are imported directly rather than through the public barrel
+ * (`./index.ts`): `./index.ts` itself re-exports this component, so routing
+ * the import through the barrel would make the two modules circularly
+ * dependent on each other.
+ *
+ * The `/dataset/<id>` path segment `getDatasetNameFromPath` (`./params.ts`)
+ * decodes is arbitrary, attacker- or typo-controlled text — `params.ts` is
+ * documented dependency-free and cannot validate it against the real
+ * dataset list. This component checks it against the static
+ * `isKnownDatasetName` predicate (`../utils/dataset-names.ts`) before ever
+ * using it, so an unrecognized path segment is dropped rather than sent to
+ * GA4 as `dataset_name`.
  *
  * Two effects, both keyed on `pathname` alone:
  *
@@ -45,14 +57,24 @@
 
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
-import { initAnalytics, trackPageView, trackScrollDepth } from "./index.ts";
+import { trackPageView, trackScrollDepth } from "./events.ts";
+import { initAnalytics } from "./gtag.ts";
 import { normalizePagePath, getRouteType, getDatasetNameFromPath } from "./params.ts";
 import { getScrollPercent, nextMilestones, type ScrollMilestone } from "./scroll-depth.ts";
+import { isKnownDatasetName } from "../utils/dataset-names.ts";
 
 const AnalyticsRouteTracker = () => {
   const { pathname } = useLocation();
   const routeType = getRouteType(pathname);
-  const datasetName = getDatasetNameFromPath(pathname);
+  const rawDatasetName = getDatasetNameFromPath(pathname);
+  // See the file header: the raw decoded path segment must be validated
+  // against the known-dataset list before it is used for anything sent to
+  // GA4 — an unrecognized value (stale link, typo, hand-edited URL) is
+  // dropped here rather than forwarded as `dataset_name`.
+  const datasetName =
+    rawDatasetName !== undefined && isKnownDatasetName(rawDatasetName)
+      ? rawDatasetName
+      : undefined;
 
   // The most recently rendered pathname. Assigned during render, so it is
   // always up to date before any effect — cleanup or setup, for any
@@ -112,6 +134,15 @@ const AnalyticsRouteTracker = () => {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    // Evaluate once immediately on route entry, not only on future `scroll`
+    // events: browsers dispatch no `scroll` event at all for a route whose
+    // content doesn't overflow the viewport, so without this call a short
+    // page would silently report zero scroll_depth milestones even though
+    // `getScrollPercent` (../analytics/scroll-depth.ts) is documented to
+    // return 100 — "immediately" — for exactly that case. `sentMilestones`
+    // is shared with the listener above, so a real scroll event crossing
+    // the same milestone right after this call cannot double-emit it.
+    handleScroll();
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };

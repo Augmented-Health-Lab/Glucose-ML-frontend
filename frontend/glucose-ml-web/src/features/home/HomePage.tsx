@@ -8,7 +8,11 @@ import DatasetGrid from "./DatasetGrid";
 import LegendModal from "../dataset-detail/LegendModal";
 import GuideButton from "../../components/guide-button/GuideButton";
 import { fetchJson } from "../../utils/fetch-json";
-import { findTableDataset, normalizeDatasetName } from "../../utils/dataset-names";
+import {
+  findTableDataset,
+  isKnownDatasetName,
+  normalizeDatasetName,
+} from "../../utils/dataset-names";
 import {
   makeHomeUrl,
   MAX_COMPARE_DATASETS,
@@ -227,11 +231,22 @@ const HomePage = () => {
     }
 
     if (nextSelectedCards.length !== selectedCards.length) {
-      trackCompareSelectionChange({
-        selectionAction: checked ? "add" : "remove",
-        datasetName: title,
-        selectionCount: nextSelectedCards.length,
-      });
+      // `title` is always a real dataset title on the `checked` (add) path —
+      // it comes straight from a rendered DatasetCard, which only ever
+      // renders titles from the fetched dataset list. On the uncheck
+      // (remove) path, though, `handleRemoveCompareSelection` below can
+      // forward a title sourced from `selectedCards`, which is parsed
+      // directly from the `?datasets=` query string with no membership
+      // check. Guarding here — for both branches — keeps a stale/hand-edited
+      // link's arbitrary query text out of `dataset_name` without changing
+      // which chips render or which URL gets navigated to.
+      if (isKnownDatasetName(title)) {
+        trackCompareSelectionChange({
+          selectionAction: checked ? "add" : "remove",
+          datasetName: title,
+          selectionCount: nextSelectedCards.length,
+        });
+      }
     }
 
     navigate(makeHomeUrl(nextSelectedCards), { replace: true });

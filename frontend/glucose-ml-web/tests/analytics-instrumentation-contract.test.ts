@@ -67,10 +67,15 @@ test("no file under src/features/ or src/components/ references window.gtag, dat
     }
     // Any import that reaches into the analytics module's internals
     // (gtag.ts, events.ts, params.ts) rather than the public barrel
-    // (`analytics` or `analytics/index`) is also a violation.
+    // (`analytics`, the directory form) is also a violation. This includes
+    // the barrel's own `index.ts` file explicitly named in the specifier
+    // (e.g. `"../../analytics/index.ts"`): every feature file must use the
+    // plain directory form so there's exactly one accepted way to reach the
+    // barrel, not two that happen to resolve to the same file — see
+    // src/app/App.tsx's history of using the odd form.
     for (const match of source.matchAll(/from\s+["']([^"']*analytics[^"']*)["']/g)) {
       const specifier = match[1];
-      if (/analytics\/(gtag|events|params|scroll-depth|AnalyticsRouteTracker)(\.tsx?)?$/.test(specifier)) {
+      if (/analytics\/(gtag|events|params|scroll-depth|AnalyticsRouteTracker|index)(\.tsx?)?$/.test(specifier)) {
         violations.push(`${relative}: imports analytics internals directly (${specifier})`);
       }
     }

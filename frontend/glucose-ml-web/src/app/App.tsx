@@ -6,7 +6,7 @@ import ComparePage from "../features/compare/ComparePage";
 import BackgroundPage from "../features/background/BackgroundPage";
 import AboutPage from "../features/about/AboutPage";
 import RouteScrollManager from "./RouteScrollManager";
-import { AnalyticsRouteTracker } from "../analytics/index.ts";
+import { AnalyticsRouteTracker } from "../analytics";
 
 // Main app with routing
 const App = () => {

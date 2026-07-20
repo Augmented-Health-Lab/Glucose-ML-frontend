@@ -79,6 +79,32 @@ test("CompareTable's details button tracks dataset_open with origin compare befo
   assert.ok(trackIndex !== -1 && navigateIndex !== -1 && trackIndex < navigateIndex);
 });
 
+test("CompareTable validates dataset.title against the known-dataset list before reporting dataset_open", () => {
+  // buildCompareDataset (src/utils/compare-data.ts) falls back to the raw,
+  // unvalidated ?datasets= query value (`?? title`) when no dataset record
+  // matches, so dataset.title is not always trustworthy. Only a confirmed
+  // match may reach GA4 as dataset_name; navigate(...) must still fire
+  // either way.
+  assert.match(
+    compareTableTsx,
+    /import\s*\{\s*isKnownDatasetName\s*\}\s*from\s*"\.\.\/\.\.\/utils\/dataset-names"/,
+    "CompareTable must import isKnownDatasetName from utils/dataset-names"
+  );
+
+  const detailsButtonMatch = compareTableTsx.match(
+    /className="compare-table__details-button"\s*onClick=\{\(\) => \{([\s\S]*?)\n\s*\}\}/
+  );
+  assert.ok(detailsButtonMatch, "details button onClick not found");
+  const body = detailsButtonMatch[1] ?? "";
+
+  const guardIndex = body.indexOf("isKnownDatasetName(dataset.title)");
+  const trackIndex = body.indexOf("trackDatasetOpen(");
+  const navigateIndex = body.indexOf("navigate(");
+  assert.ok(guardIndex !== -1, "isKnownDatasetName(dataset.title) guard not found");
+  assert.ok(guardIndex < trackIndex, "dataset.title must be validated before trackDatasetOpen is called");
+  assert.ok(navigateIndex > trackIndex, "navigate must still run after the (possibly suppressed) tracking call");
+});
+
 // ---------------------------------------------------------------------------
 // ComparePage: compare_selection_change on remove, with resulting count
 // ---------------------------------------------------------------------------
@@ -149,11 +175,50 @@ test("ComparePage's data-load catch tracks content_load_error alongside setState
 });
 
 // ---------------------------------------------------------------------------
-// The ?datasets= query string is never copied into an event; names/counts
-// are always derived from parsed state (selectedNames / remaining).
+// Privacy: handleRemoveDataset must not forward an unvalidated dataset name
+// to GA4. `datasetName` here is one hop removed from `location.search` (it
+// comes from `selectedNames`, which `parseCompareDatasets` derives from the
+// `?datasets=` query string with no membership check — see
+// `src/utils/compare-data.ts`), so a source-text scan for the literal
+// substring `location.search` inside the `trackCompareSelectionChange` call
+// proves nothing about whether the *value being sent* is trustworthy: it
+// never contains that substring regardless of whether the value was
+// validated. The only guarantee worth asserting is that the call is actually
+// gated on `isKnownDatasetName`, imported from a source outside the
+// analytics module, before the raw `datasetName` reaches
+// `trackCompareSelectionChange`.
 // ---------------------------------------------------------------------------
 
-test("compare instrumentation never forwards location.search into an analytics call", () => {
+test("ComparePage validates datasetName against the known-dataset list before reporting compare_selection_change", () => {
+  assert.match(
+    comparePageTsx,
+    /import\s*\{\s*isKnownDatasetName\s*\}\s*from\s*"\.\.\/\.\.\/utils\/dataset-names"/,
+    "ComparePage must import isKnownDatasetName from utils/dataset-names"
+  );
+
+  const handleRemoveMatch = comparePageTsx.match(
+    /const handleRemoveDataset = \(datasetName: string\) => \{([\s\S]*?)\n {2}\};/
+  );
+  assert.ok(handleRemoveMatch, "handleRemoveDataset not found");
+  const body = handleRemoveMatch[1] ?? "";
+
+  const guardIndex = body.indexOf("isKnownDatasetName(datasetName)");
+  const trackIndex = body.indexOf("trackCompareSelectionChange(");
+  assert.ok(guardIndex !== -1, "isKnownDatasetName(datasetName) guard not found in handleRemoveDataset");
+  assert.ok(trackIndex !== -1, "trackCompareSelectionChange call not found in handleRemoveDataset");
+  assert.ok(
+    guardIndex < trackIndex,
+    "datasetName must be validated by isKnownDatasetName before trackCompareSelectionChange is called"
+  );
+
+  // The navigation branches below must be unconditional on the validation
+  // guard — removing an unrecognized name must still update the URL/chips
+  // exactly as before, only the analytics call is suppressed.
+  const branchIndex = body.indexOf("if (remaining.length > 0)");
+  assert.ok(branchIndex !== -1 && branchIndex > trackIndex);
+});
+
+test("compare instrumentation never forwards location.search directly into an analytics call", () => {
   assert.doesNotMatch(comparePageTsx, /trackCompareSelectionChange\([^)]*location\.search/s);
   assert.doesNotMatch(comparePageTsx, /trackContentLoadError\([^)]*location\.search/s);
 });

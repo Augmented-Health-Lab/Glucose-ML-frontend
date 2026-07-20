@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import type { CompareDataset } from "../../types/dataset";
 import RangeBars from "./RangeBars";
 import { FIGMA_COMPARE_ICONS } from "./figma-compare-icons";
+import { isKnownDatasetName } from "../../utils/dataset-names";
 import { trackCompareSectionToggle, trackDatasetOpen } from "../../analytics";
 
 type Row = {
@@ -129,7 +130,15 @@ const CompareTable = ({ datasets }: { datasets: CompareDataset[] }) => {
               type="button"
               className="compare-table__details-button"
               onClick={() => {
-                trackDatasetOpen({ datasetName: dataset.title, origin: "compare" });
+                // `dataset.title` is usually a real dataset title, but
+                // `buildCompareDataset` (../../utils/compare-data.ts) falls
+                // back to the raw, unvalidated `?datasets=` query value when
+                // no dataset matches it. Only forward a confirmed-known name
+                // to GA4 as `dataset_name`; navigation is unaffected either
+                // way.
+                if (isKnownDatasetName(dataset.title)) {
+                  trackDatasetOpen({ datasetName: dataset.title, origin: "compare" });
+                }
                 navigate(`/dataset/${encodeURIComponent(dataset.title)}`);
               }}
             >

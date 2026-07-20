@@ -149,6 +149,36 @@ test("HomePage's handleCardSelect only reports compare_selection_change when the
   assert.ok(guardReturnIndex !== -1 && trackIndex !== -1 && guardReturnIndex < trackIndex);
 });
 
+test("HomePage's handleCardSelect validates title against the known-dataset list before reporting compare_selection_change", () => {
+  // On the uncheck (remove) path, `title` can originate from `selectedCards`
+  // (parsed straight from the ?datasets= query string by
+  // parseSelectedDatasets, with no membership check of its own) via
+  // handleRemoveCompareSelection below. Guarding here keeps a stale/
+  // hand-edited link's arbitrary query text out of dataset_name.
+  assert.match(
+    homePageTsx,
+    /import\s*\{[\s\S]*?isKnownDatasetName[\s\S]*?\}\s*from\s*"\.\.\/\.\.\/utils\/dataset-names"/,
+    "HomePage must import isKnownDatasetName from utils/dataset-names"
+  );
+
+  const handleSelectMatch = homePageTsx.match(
+    /const handleCardSelect = \(title: string, checked: boolean\) => \{([\s\S]*?)\n {2}\};/
+  );
+  assert.ok(handleSelectMatch, "handleCardSelect not found");
+  const body = handleSelectMatch[1] ?? "";
+
+  const guardIndex = body.indexOf("isKnownDatasetName(title)");
+  const trackIndex = body.indexOf("trackCompareSelectionChange(");
+  assert.ok(guardIndex !== -1, "isKnownDatasetName(title) guard not found");
+  assert.ok(trackIndex !== -1, "trackCompareSelectionChange call not found");
+  assert.ok(guardIndex < trackIndex, "title must be validated before trackCompareSelectionChange is called");
+
+  // navigate(...) below must run unconditionally on the validation guard —
+  // only the analytics call is suppressed for an unrecognized title.
+  const navigateIndex = body.indexOf("navigate(");
+  assert.ok(navigateIndex !== -1 && navigateIndex > trackIndex);
+});
+
 test("HomePage's handleClearCompareSelection reports a clear action with selection_count 0", () => {
   assert.match(
     homePageTsx,
@@ -180,9 +210,34 @@ test("DatasetCard tracks dataset_open with origin home before navigating", () =>
 test("CompareBar's Compare link tracks compare_start without blocking navigation", () => {
   assert.match(
     compareBarTsx,
-    /<Link[\s\S]*?onClick=\{\s*\(\)\s*=>\s*trackCompareStart\(\{[\s\S]*?selectionCount:\s*selectedCards\.length,[\s\S]*?datasetNames:\s*selectedCards,[\s\S]*?\}\)\s*\}[\s\S]*?<\/Link>/
+    /<Link[\s\S]*?onClick=\{\s*\(\)\s*=>\s*trackCompareStart\(\{[\s\S]*?selectionCount:\s*selectedCards\.length,[\s\S]*?datasetNames:\s*knownSelectedCardNames,[\s\S]*?\}\)\s*\}[\s\S]*?<\/Link>/
   );
   assert.doesNotMatch(compareBarTsx, /preventDefault/);
+});
+
+// ---------------------------------------------------------------------------
+// CompareBar: dataset_combination privacy — selectedCards is parsed straight
+// from the ?datasets= query string (see parseSelectedDatasets in HomePage)
+// with no membership check of its own, so only a validated subset may reach
+// GA4 as dataset_combination.
+// ---------------------------------------------------------------------------
+
+test("CompareBar validates selectedCards against the known-dataset list before reporting compare_start", () => {
+  assert.match(
+    compareBarTsx,
+    /import\s*\{\s*isKnownDatasetName\s*\}\s*from\s*"\.\.\/\.\.\/utils\/dataset-names"/,
+    "CompareBar must import isKnownDatasetName from utils/dataset-names"
+  );
+  assert.match(
+    compareBarTsx,
+    /const knownSelectedCardNames = selectedCards\.filter\(isKnownDatasetName\)/,
+    "CompareBar must derive knownSelectedCardNames via selectedCards.filter(isKnownDatasetName)"
+  );
+
+  // The rendered slots must still map over the full, unfiltered
+  // selectedCards — validation must only affect what's sent to GA4, never
+  // which chips render.
+  assert.match(compareBarTsx, /selectedCards\.map\(\(title\) => \(/);
 });
 
 test("CompareBar's disabled button branch does not call trackCompareStart", () => {
