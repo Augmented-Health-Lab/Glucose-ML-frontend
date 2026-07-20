@@ -22,3 +22,15 @@ test("home discovery flow emits approved analytics events", () => {
   assert.match(filterBar, /onClearFilters/);
   assert.doesNotMatch(filterBar, /Object\.keys\(filterSelections\)\.forEach/);
 });
+
+test("comparison exploration emits approved analytics events", () => {
+  const page = readSource("features/compare/ComparePage.tsx");
+  const table = readSource("features/compare/CompareTable.tsx");
+
+  assert.match(page, /trackCompareSelectionChange\("remove"/);
+  assert.match(page, /trackGuide\("open", "compare"\)/);
+  assert.match(page, /trackGuide\("close", "compare"\)/);
+  assert.match(page, /trackContentLoadError\("compare", "static_data"\)/);
+  assert.match(table, /trackCompareSectionToggle\(/);
+  assert.match(table, /trackDatasetOpen\(dataset\.title, "compare"\)/);
+});

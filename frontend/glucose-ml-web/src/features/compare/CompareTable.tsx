@@ -1,5 +1,9 @@
 import { useState, type ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  trackCompareSectionToggle,
+  trackDatasetOpen,
+} from "../../analytics/events";
 import type { CompareDataset } from "../../types/dataset";
 import RangeBars from "./RangeBars";
 import { FIGMA_COMPARE_ICONS } from "./figma-compare-icons";
@@ -86,10 +90,17 @@ const CompareTable = ({ datasets }: { datasets: CompareDataset[] }) => {
   });
 
   const toggleSection = (section: SectionKey) => {
+    const expanded = !expandedSections[section];
+    trackCompareSectionToggle(section, expanded);
     setExpandedSections((current) => ({
       ...current,
-      [section]: !current[section],
+      [section]: expanded,
     }));
+  };
+
+  const handleDatasetOpen = (dataset: CompareDataset) => {
+    trackDatasetOpen(dataset.title, "compare");
+    navigate(`/dataset/${encodeURIComponent(dataset.title)}`);
   };
 
   const renderSection = (section: SectionKey, title: string) => (
@@ -123,9 +134,7 @@ const CompareTable = ({ datasets }: { datasets: CompareDataset[] }) => {
             <button
               type="button"
               className="compare-table__details-button"
-              onClick={() =>
-                navigate(`/dataset/${encodeURIComponent(dataset.title)}`)
-              }
+              onClick={() => handleDatasetOpen(dataset)}
             >
               View dataset details &gt;
             </button>

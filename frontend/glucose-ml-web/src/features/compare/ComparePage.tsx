@@ -2,6 +2,11 @@ import { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import AppShell from "../../components/app-shell/AppShell";
 import GuideButton from "../../components/guide-button/GuideButton";
+import {
+  trackCompareSelectionChange,
+  trackContentLoadError,
+  trackGuide,
+} from "../../analytics/events";
 import { fetchJson } from "../../utils/fetch-json";
 import {
   buildCompareDataset,
@@ -69,6 +74,7 @@ const ComparePage = () => {
       .catch((error: unknown) => {
         if (controller.signal.aborted) return;
 
+        trackContentLoadError("compare", "static_data");
         setState({
           status: "error",
           data: [],
@@ -86,6 +92,8 @@ const ComparePage = () => {
   const handleRemoveDataset = (datasetName: string) => {
     const remaining = selectedNames.filter((name) => name !== datasetName);
 
+    trackCompareSelectionChange("remove", remaining.length, datasetName);
+
     if (remaining.length > 0) {
       navigate(makeCompareUrl(remaining));
       return;
@@ -96,6 +104,16 @@ const ComparePage = () => {
 
   const handleAddDataset = () => {
     navigate(makeHomeUrl(selectedNames));
+  };
+
+  const handleOpenGuide = () => {
+    trackGuide("open", "compare");
+    setLegendOpen(true);
+  };
+
+  const handleCloseGuide = () => {
+    trackGuide("close", "compare");
+    setLegendOpen(false);
   };
 
   return (
@@ -122,7 +140,7 @@ const ComparePage = () => {
               onRemoveDataset={handleRemoveDataset}
               onAddDataset={handleAddDataset}
             />
-            <GuideButton onClick={() => setLegendOpen(true)} />
+            <GuideButton onClick={handleOpenGuide} />
           </div>
           {selectedNames.length < 2 && (
             <p className="compare-page__single-note glm-body">
@@ -139,7 +157,7 @@ const ComparePage = () => {
             <CompareTable datasets={state.data} />
           )}
         </main>
-        <LegendModal open={legendOpen} onClose={() => setLegendOpen(false)} />
+        <LegendModal open={legendOpen} onClose={handleCloseGuide} />
       </div>
     </AppShell>
   );
