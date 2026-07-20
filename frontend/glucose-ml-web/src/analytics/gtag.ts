@@ -47,45 +47,98 @@ interface AnalyticsEnv {
 }
 
 /**
- * Test-only override for `getEnv()`. `import.meta.env` cannot be faked from
- * a separate test module under plain `node --test` (each ES module owns its
- * own `import.meta`, and the module namespace this file exports is
- * read-only from the outside), so `resetAnalyticsForTests` accepts an
- * optional fake `env` in its place. Production code never passes this.
+ * TEST-ONLY escape hatch for `getEnv()`. `import.meta.env` cannot be faked
+ * from a separate test module under plain `node --test` (each ES module
+ * owns its own `import.meta`, and the module namespace this file exports is
+ * read-only from the outside), so the mechanical `initAnalytics`/`sendEvent`
+ * tests install a fake env here via `__setAnalyticsEnvForTests` instead.
+ * Production code never touches this.
+ *
+ * This must never be re-exported from the public `src/analytics/index.ts`
+ * barrel (a later task) and must never be imported by application code —
+ * only by this module's own test file.
  */
-export interface AnalyticsTestOverrides {
-  env?: AnalyticsEnv;
-}
-
 let envOverrideForTests: AnalyticsEnv | undefined;
+
+/**
+ * TEST-ONLY. Installs (or clears, when passed `undefined`) a fake env in
+ * place of `import.meta.env`. See `envOverrideForTests` above for why this
+ * seam exists and why it must stay test-only.
+ */
+export function __setAnalyticsEnvForTests(env: AnalyticsEnv | undefined): void {
+  envOverrideForTests = env;
+}
 
 function getEnv(): AnalyticsEnv | undefined {
   if (envOverrideForTests) return envOverrideForTests;
   return import.meta.env;
 }
 
-function getMeasurementId(): string {
-  const raw = getEnv()?.VITE_GA_MEASUREMENT_ID;
+// ---------------------------------------------------------------------------
+// Pure enablement / measurement-id logic
+// ---------------------------------------------------------------------------
+
+/**
+ * Plain-value input to `shouldEnableAnalytics`, mirroring the handful of
+ * `import.meta.env` fields the enablement decision depends on.
+ */
+export interface AnalyticsEnablementInput {
+  prod: boolean;
+  gaDebug: string | undefined;
+  measurementId: string | undefined;
+}
+
+/**
+ * Pure enablement decision, independent of `import.meta.env`/`getEnv()`.
+ * Enabled when `prod` is `true` or `gaDebug` is `"true"`; disabled
+ * otherwise. Disabled regardless of the above when `measurementId` is
+ * explicitly blank or whitespace-only. (Leaving `measurementId` `undefined`
+ * is different: `resolveMeasurementId` falls back to
+ * `FALLBACK_MEASUREMENT_ID` in that case, and analytics stays enabled.)
+ */
+export function shouldEnableAnalytics({
+  prod,
+  gaDebug,
+  measurementId,
+}: AnalyticsEnablementInput): boolean {
+  const flagEnabled = prod === true || gaDebug === "true";
+  if (!flagEnabled) return false;
+
+  if (typeof measurementId === "string" && measurementId.trim() === "") {
+    return false;
+  }
+
+  return true;
+}
+
+/**
+ * Pure normalizer: trims `raw` and falls back to `FALLBACK_MEASUREMENT_ID`
+ * when it is `undefined`, not a string, or blank/whitespace-only.
+ */
+export function resolveMeasurementId(raw: string | undefined): string {
   const trimmed = typeof raw === "string" ? raw.trim() : "";
   return trimmed === "" ? FALLBACK_MEASUREMENT_ID : trimmed;
+}
+
+function getMeasurementId(): string {
+  return resolveMeasurementId(getEnv()?.VITE_GA_MEASUREMENT_ID);
 }
 
 // ---------------------------------------------------------------------------
 // isAnalyticsEnabled
 // ---------------------------------------------------------------------------
 
+/**
+ * Thin wrapper: lazily reads the relevant `import.meta.env` fields and
+ * delegates the actual decision to the pure `shouldEnableAnalytics`.
+ */
 export function isAnalyticsEnabled(): boolean {
   const env = getEnv();
-  const flagEnabled = env?.PROD === true || env?.VITE_GA_DEBUG === "true";
-  if (!flagEnabled) return false;
-
-  // An explicitly blank/whitespace-only measurement id disables analytics.
-  // (Leaving it unset is different: getMeasurementId() falls back to
-  // FALLBACK_MEASUREMENT_ID in that case, and analytics stays enabled.)
-  const rawId = env?.VITE_GA_MEASUREMENT_ID;
-  if (typeof rawId === "string" && rawId.trim() === "") return false;
-
-  return true;
+  return shouldEnableAnalytics({
+    prod: env?.PROD === true,
+    gaDebug: env?.VITE_GA_DEBUG,
+    measurementId: env?.VITE_GA_MEASUREMENT_ID,
+  });
 }
 
 // ---------------------------------------------------------------------------
@@ -166,12 +219,10 @@ export function sendEvent(name: string, params: EventParams = {}): void {
 
 /**
  * Test-only utility: clears the idempotency flags so `initAnalytics()` can
- * be exercised again, and optionally installs a fake `env` in place of
- * `import.meta.env` for the duration of the test. Production code never
- * calls this.
+ * be exercised again. Production code never calls this. Does not touch the
+ * env override — see `__setAnalyticsEnvForTests` for that separate concern.
  */
-export function resetAnalyticsForTests(overrides?: AnalyticsTestOverrides): void {
+export function resetAnalyticsForTests(): void {
   scriptInjected = false;
   configured = false;
-  envOverrideForTests = overrides?.env;
 }

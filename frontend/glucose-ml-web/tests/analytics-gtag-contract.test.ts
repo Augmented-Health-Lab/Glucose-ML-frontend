@@ -118,60 +118,71 @@ installFakes();
 const gtagModule = await import("../src/analytics/gtag.ts");
 uninstallFakes();
 
-const { initAnalytics, sendEvent, isAnalyticsEnabled, resetAnalyticsForTests } =
-  gtagModule;
+const {
+  initAnalytics,
+  sendEvent,
+  resetAnalyticsForTests,
+  shouldEnableAnalytics,
+  __setAnalyticsEnvForTests,
+} = gtagModule;
 
 test.after(() => {
   uninstallFakes();
 });
 
 // ---------------------------------------------------------------------------
-// isAnalyticsEnabled
+// shouldEnableAnalytics — pure enablement truth table. Plain booleans and
+// strings in, no globalThis mutation, no module-state reset, no env
+// override: this is the seam-free portion the reviewer asked for.
 // ---------------------------------------------------------------------------
 
-test("isAnalyticsEnabled is false under the real (unset) test environment", () => {
-  resetAnalyticsForTests();
-  assert.equal(isAnalyticsEnabled(), false);
+test("shouldEnableAnalytics is false when nothing is set", () => {
+  assert.equal(
+    shouldEnableAnalytics({ prod: false, gaDebug: undefined, measurementId: undefined }),
+    false
+  );
 });
 
-test("isAnalyticsEnabled is true when the env override sets PROD", () => {
-  resetAnalyticsForTests({ env: { PROD: true } });
-  assert.equal(isAnalyticsEnabled(), true);
-  resetAnalyticsForTests();
+test("shouldEnableAnalytics is true when prod is true", () => {
+  assert.equal(
+    shouldEnableAnalytics({ prod: true, gaDebug: undefined, measurementId: undefined }),
+    true
+  );
 });
 
-test("isAnalyticsEnabled is true when the env override sets VITE_GA_DEBUG to 'true'", () => {
-  resetAnalyticsForTests({ env: { VITE_GA_DEBUG: "true" } });
-  assert.equal(isAnalyticsEnabled(), true);
-  resetAnalyticsForTests();
+test("shouldEnableAnalytics is true when gaDebug is 'true'", () => {
+  assert.equal(
+    shouldEnableAnalytics({ prod: false, gaDebug: "true", measurementId: undefined }),
+    true
+  );
 });
 
-test("isAnalyticsEnabled is false when neither PROD nor VITE_GA_DEBUG is set", () => {
-  resetAnalyticsForTests({ env: { VITE_GA_DEBUG: "false" } });
-  assert.equal(isAnalyticsEnabled(), false);
-  resetAnalyticsForTests();
+test("shouldEnableAnalytics is false when neither prod nor gaDebug is enabling", () => {
+  assert.equal(
+    shouldEnableAnalytics({ prod: false, gaDebug: "false", measurementId: undefined }),
+    false
+  );
 });
 
-test("isAnalyticsEnabled is false when the measurement id is blank", () => {
-  resetAnalyticsForTests({
-    env: { PROD: true, VITE_GA_MEASUREMENT_ID: "" },
-  });
-  assert.equal(isAnalyticsEnabled(), false);
-  resetAnalyticsForTests();
+test("shouldEnableAnalytics is false when the measurement id is blank", () => {
+  assert.equal(
+    shouldEnableAnalytics({ prod: true, gaDebug: undefined, measurementId: "" }),
+    false
+  );
 });
 
-test("isAnalyticsEnabled is false when the measurement id is whitespace-only", () => {
-  resetAnalyticsForTests({
-    env: { PROD: true, VITE_GA_MEASUREMENT_ID: "   " },
-  });
-  assert.equal(isAnalyticsEnabled(), false);
-  resetAnalyticsForTests();
+test("shouldEnableAnalytics is false when the measurement id is whitespace-only", () => {
+  assert.equal(
+    shouldEnableAnalytics({ prod: true, gaDebug: undefined, measurementId: "   " }),
+    false
+  );
 });
 
-test("isAnalyticsEnabled is true when the measurement id is simply unset (uses the fallback)", () => {
-  resetAnalyticsForTests({ env: { PROD: true } });
-  assert.equal(isAnalyticsEnabled(), true);
-  resetAnalyticsForTests();
+test("shouldEnableAnalytics is true when the measurement id is simply unset (fallback applies elsewhere)", () => {
+  assert.equal(
+    shouldEnableAnalytics({ prod: true, gaDebug: undefined, measurementId: undefined }),
+    true
+  );
 });
 
 // ---------------------------------------------------------------------------
@@ -179,7 +190,8 @@ test("isAnalyticsEnabled is true when the measurement id is simply unset (uses t
 // ---------------------------------------------------------------------------
 
 test("initAnalytics is idempotent: two calls inject exactly one script and issue exactly one config call", () => {
-  resetAnalyticsForTests({ env: { PROD: true } });
+  resetAnalyticsForTests();
+  __setAnalyticsEnvForTests({ PROD: true });
   const fakes = installFakes();
   try {
     initAnalytics();
@@ -193,11 +205,13 @@ test("initAnalytics is idempotent: two calls inject exactly one script and issue
   } finally {
     uninstallFakes();
     resetAnalyticsForTests();
+    __setAnalyticsEnvForTests(undefined);
   }
 });
 
 test("initAnalytics config call includes send_page_view: false and omits debug_mode by default", () => {
-  resetAnalyticsForTests({ env: { PROD: true } });
+  resetAnalyticsForTests();
+  __setAnalyticsEnvForTests({ PROD: true });
   const fakes = installFakes();
   try {
     initAnalytics();
@@ -210,11 +224,13 @@ test("initAnalytics config call includes send_page_view: false and omits debug_m
   } finally {
     uninstallFakes();
     resetAnalyticsForTests();
+    __setAnalyticsEnvForTests(undefined);
   }
 });
 
 test("initAnalytics config call includes debug_mode: true only when VITE_GA_DEBUG is 'true'", () => {
-  resetAnalyticsForTests({ env: { PROD: true, VITE_GA_DEBUG: "true" } });
+  resetAnalyticsForTests();
+  __setAnalyticsEnvForTests({ PROD: true, VITE_GA_DEBUG: "true" });
   const fakes = installFakes();
   try {
     initAnalytics();
@@ -226,11 +242,13 @@ test("initAnalytics config call includes debug_mode: true only when VITE_GA_DEBU
   } finally {
     uninstallFakes();
     resetAnalyticsForTests();
+    __setAnalyticsEnvForTests(undefined);
   }
 });
 
 test("initAnalytics uses the fallback measurement id in the injected script src by default", () => {
-  resetAnalyticsForTests({ env: { PROD: true } });
+  resetAnalyticsForTests();
+  __setAnalyticsEnvForTests({ PROD: true });
   const fakes = installFakes();
   try {
     initAnalytics();
@@ -239,13 +257,13 @@ test("initAnalytics uses the fallback measurement id in the injected script src 
   } finally {
     uninstallFakes();
     resetAnalyticsForTests();
+    __setAnalyticsEnvForTests(undefined);
   }
 });
 
 test("initAnalytics uses a trimmed custom VITE_GA_MEASUREMENT_ID in the injected script src", () => {
-  resetAnalyticsForTests({
-    env: { PROD: true, VITE_GA_MEASUREMENT_ID: "  G-CUSTOM123  " },
-  });
+  resetAnalyticsForTests();
+  __setAnalyticsEnvForTests({ PROD: true, VITE_GA_MEASUREMENT_ID: "  G-CUSTOM123  " });
   const fakes = installFakes();
   try {
     initAnalytics();
@@ -254,11 +272,13 @@ test("initAnalytics uses a trimmed custom VITE_GA_MEASUREMENT_ID in the injected
   } finally {
     uninstallFakes();
     resetAnalyticsForTests();
+    __setAnalyticsEnvForTests(undefined);
   }
 });
 
 test("initAnalytics does nothing when analytics is disabled", () => {
   resetAnalyticsForTests();
+  __setAnalyticsEnvForTests(undefined);
   const fakes = installFakes();
   try {
     initAnalytics();
@@ -271,13 +291,14 @@ test("initAnalytics does nothing when analytics is disabled", () => {
 });
 
 test("resetAnalyticsForTests clears the idempotency flags so a fresh initAnalytics call injects again", () => {
-  resetAnalyticsForTests({ env: { PROD: true } });
+  resetAnalyticsForTests();
+  __setAnalyticsEnvForTests({ PROD: true });
   const firstFakes = installFakes();
   initAnalytics();
   assert.equal(firstFakes.scriptElements.length, 1);
   uninstallFakes();
 
-  resetAnalyticsForTests({ env: { PROD: true } });
+  resetAnalyticsForTests();
   const secondFakes = installFakes();
   try {
     initAnalytics();
@@ -285,6 +306,7 @@ test("resetAnalyticsForTests clears the idempotency flags so a fresh initAnalyti
   } finally {
     uninstallFakes();
     resetAnalyticsForTests();
+    __setAnalyticsEnvForTests(undefined);
   }
 });
 
@@ -293,7 +315,8 @@ test("resetAnalyticsForTests clears the idempotency flags so a fresh initAnalyti
 // ---------------------------------------------------------------------------
 
 test("sendEvent records one gtag event call with environment merged in", () => {
-  resetAnalyticsForTests({ env: { PROD: true } });
+  resetAnalyticsForTests();
+  __setAnalyticsEnvForTests({ PROD: true });
   const fakes = installFakes("www.glucose-ml-project.com");
   try {
     sendEvent("page_view", { page_path: "/" });
@@ -307,11 +330,13 @@ test("sendEvent records one gtag event call with environment merged in", () => {
   } finally {
     uninstallFakes();
     resetAnalyticsForTests();
+    __setAnalyticsEnvForTests(undefined);
   }
 });
 
 test("sendEvent strips undefined, null, and empty-string parameters", () => {
-  resetAnalyticsForTests({ env: { PROD: true } });
+  resetAnalyticsForTests();
+  __setAnalyticsEnvForTests({ PROD: true });
   const fakes = installFakes();
   try {
     sendEvent("filter_change", {
@@ -334,11 +359,13 @@ test("sendEvent strips undefined, null, and empty-string parameters", () => {
   } finally {
     uninstallFakes();
     resetAnalyticsForTests();
+    __setAnalyticsEnvForTests(undefined);
   }
 });
 
 test("sendEvent no-ops without throwing when disabled", () => {
   resetAnalyticsForTests();
+  __setAnalyticsEnvForTests(undefined);
   const fakes = installFakes();
   try {
     assert.doesNotThrow(() => sendEvent("page_view", { page_path: "/" }));
@@ -350,14 +377,17 @@ test("sendEvent no-ops without throwing when disabled", () => {
 });
 
 test("sendEvent no-ops without throwing when window is undefined", () => {
-  resetAnalyticsForTests({ env: { PROD: true } });
+  resetAnalyticsForTests();
+  __setAnalyticsEnvForTests({ PROD: true });
   uninstallFakes();
   assert.doesNotThrow(() => sendEvent("page_view", { page_path: "/" }));
   resetAnalyticsForTests();
+  __setAnalyticsEnvForTests(undefined);
 });
 
 test("sendEvent no-ops without throwing when window.gtag is missing", () => {
-  resetAnalyticsForTests({ env: { PROD: true } });
+  resetAnalyticsForTests();
+  __setAnalyticsEnvForTests({ PROD: true });
   const fakes = installFakes();
   try {
     // @ts-expect-error - deliberately deleting gtag to simulate a blocked/unset state
@@ -366,11 +396,13 @@ test("sendEvent no-ops without throwing when window.gtag is missing", () => {
   } finally {
     uninstallFakes();
     resetAnalyticsForTests();
+    __setAnalyticsEnvForTests(undefined);
   }
 });
 
 test("sendEvent no-ops without throwing when gtag itself throws", () => {
-  resetAnalyticsForTests({ env: { PROD: true } });
+  resetAnalyticsForTests();
+  __setAnalyticsEnvForTests({ PROD: true });
   const fakes = installFakes();
   fakes.window.gtag = () => {
     throw new Error("blocked by an extension");
@@ -380,5 +412,6 @@ test("sendEvent no-ops without throwing when gtag itself throws", () => {
   } finally {
     uninstallFakes();
     resetAnalyticsForTests();
+    __setAnalyticsEnvForTests(undefined);
   }
 });
