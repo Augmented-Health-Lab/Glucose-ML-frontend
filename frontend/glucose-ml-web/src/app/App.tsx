@@ -6,12 +6,14 @@ import ComparePage from "../features/compare/ComparePage";
 import BackgroundPage from "../features/background/BackgroundPage";
 import AboutPage from "../features/about/AboutPage";
 import RouteScrollManager from "./RouteScrollManager";
+import { AnalyticsRouteTracker } from "../analytics";
 
 // Main app with routing
 const App = () => {
   return (
     <BrowserRouter>
       <RouteScrollManager />
+      <AnalyticsRouteTracker />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/background" element={<BackgroundPage />} />

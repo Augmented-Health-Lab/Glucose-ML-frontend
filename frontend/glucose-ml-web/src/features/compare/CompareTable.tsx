@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import type { CompareDataset } from "../../types/dataset";
 import RangeBars from "./RangeBars";
 import { FIGMA_COMPARE_ICONS } from "./figma-compare-icons";
+import { canonicalDatasetName } from "../../utils/dataset-names";
+import { trackCompareSectionToggle, trackDatasetOpen } from "../../analytics";
 
 type Row = {
   label: string;
@@ -86,6 +88,10 @@ const CompareTable = ({ datasets }: { datasets: CompareDataset[] }) => {
   });
 
   const toggleSection = (section: SectionKey) => {
+    trackCompareSectionToggle({
+      section,
+      sectionState: expandedSections[section] ? "collapsed" : "expanded",
+    });
     setExpandedSections((current) => ({
       ...current,
       [section]: !current[section],
@@ -123,9 +129,21 @@ const CompareTable = ({ datasets }: { datasets: CompareDataset[] }) => {
             <button
               type="button"
               className="compare-table__details-button"
-              onClick={() =>
-                navigate(`/dataset/${encodeURIComponent(dataset.title)}`)
-              }
+              onClick={() => {
+                // `dataset.title` is usually a real dataset title, but
+                // `buildCompareDataset` (../../utils/compare-data.ts) falls
+                // back to the raw, unvalidated `?datasets=` query value when
+                // no dataset matches it. Only forward a confirmed-known
+                // name to GA4 as `dataset_name` — and only its canonical
+                // spelling, never `dataset.title` itself, so a fuzzy match
+                // (extra separators/whitespace/casing) can't reach GA4
+                // verbatim; navigation is unaffected either way.
+                const canonicalName = canonicalDatasetName(dataset.title);
+                if (canonicalName !== undefined) {
+                  trackDatasetOpen({ datasetName: canonicalName, origin: "compare" });
+                }
+                navigate(`/dataset/${encodeURIComponent(dataset.title)}`);
+              }}
             >
               View dataset details &gt;
             </button>

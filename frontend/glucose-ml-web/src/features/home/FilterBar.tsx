@@ -1,27 +1,39 @@
 import "./filter-bar.css";
 import { FILTERS } from "../../data/filters";
 import MultiSelect from "./MultiSelect";
+import type { FilterAction, FilterCategory, FilterOption } from "../../analytics";
 
 interface FilterBarProps {
   filterSelections: { [key: string]: string[] };
   onFilterChange: (label: string, selected: string[]) => void;
+  onFilterOptionToggle: (
+    category: FilterCategory,
+    option: FilterOption,
+    action: FilterAction
+  ) => void;
+  onClearFilters: () => void;
   filterButtonEnabled: boolean;
   resultCount: number;
   totalCount: number;
 }
 
+// A verified (not asserted) narrowing: `option` always comes from the very
+// `options` list passed to a given filter's MultiSelect, so checking
+// membership in that list is a genuine runtime proof that `option` is a
+// `FilterOption` — not an unchecked cast.
+function isFilterOption(options: readonly string[], value: string): value is FilterOption {
+  return options.includes(value);
+}
+
 const FilterBar = ({
   filterSelections,
   onFilterChange,
+  onFilterOptionToggle,
+  onClearFilters,
   filterButtonEnabled,
   resultCount,
   totalCount,
 }: FilterBarProps) => {
-  // clear all filters
-  const handleClear = () => {
-    Object.keys(filterSelections).forEach((label) => onFilterChange(label, []));
-  };
-
   return (
     <section className="home-filter-row" aria-label="Dataset filters">
       <div className="home-filter-row__left">
@@ -37,6 +49,11 @@ const FilterBar = ({
               onChange={(selected: string[]) =>
                 onFilterChange(f.label, selected)
               }
+              onOptionToggle={(option, action) => {
+                if (isFilterOption(f.options, option)) {
+                  onFilterOptionToggle(f.label, option, action);
+                }
+              }}
             />
           ))}
         </div>
@@ -44,7 +61,7 @@ const FilterBar = ({
           className="home-filter-row__clear"
           type="button"
           disabled={!filterButtonEnabled}
-          onClick={handleClear}
+          onClick={onClearFilters}
         >
           Clear all filters
         </button>

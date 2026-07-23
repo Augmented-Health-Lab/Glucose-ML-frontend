@@ -22,6 +22,7 @@ import AuthorshipSection from "./AuthorshipSection";
 import { resolveDatasetAccess } from "../../utils/access";
 import { fetchJson } from "../../utils/fetch-json";
 import { findPublicationReferences } from "./publication-reference-data";
+import { trackContentLoadError } from "../../analytics";
 
 import "./dataset-detail.css";
 
@@ -195,7 +196,7 @@ function DetailLayout({
               </div>
 
               <div className="dataset-detail-page__right">
-                <CGMDataSection dataset={dataset} />
+                <CGMDataSection dataset={dataset} datasetName={dataset.title} />
                 <AuthorshipSection references={dataset.publicationReferences} />
               </div>
             </div>
@@ -610,6 +611,7 @@ export default function DatasetDetail({ dataset, onBack }: Props) {
         setLoad({ status: "success", data: detail, error: null });
       } catch (err) {
         if (ac.signal.aborted) return;
+        trackContentLoadError({ screen: "dataset_detail", error: err });
         setLoad({
           status: "error",
           data: null,

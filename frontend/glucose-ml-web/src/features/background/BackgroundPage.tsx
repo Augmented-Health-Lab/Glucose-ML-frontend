@@ -11,6 +11,7 @@ import {
   type BackgroundCgmGroupKey,
 } from "./background-cgm-chart";
 import { selectActiveAnchorHref } from "./background-scroll-navigation";
+import { trackContentLoadError } from "../../analytics";
 import "./background-page.css";
 
 const anchorItems = [
@@ -169,8 +170,9 @@ const BackgroundPage = () => {
         setChartData(data);
         setChartLoadFailed(false);
       })
-      .catch(() => {
+      .catch((error: unknown) => {
         if (!controller.signal.aborted) {
+          trackContentLoadError({ screen: "background", error });
           setChartLoadFailed(true);
         }
       });
