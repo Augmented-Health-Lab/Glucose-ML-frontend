@@ -6,7 +6,7 @@ const populationOptionLabels: Record<string, string> = {
   T1D: "Type 1 Diabetes",
   T2D: "Type 2 Diabetes",
   Prediabetic: "Prediabetes",
-  "Non diabetic": "No diabeties",
+  "Non diabetic": "No diabetes",
 };
 
 const accessOptionLabels: Record<string, string> = {

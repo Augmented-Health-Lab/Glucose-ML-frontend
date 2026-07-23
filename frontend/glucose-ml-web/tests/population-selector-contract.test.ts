@@ -23,7 +23,7 @@ test("population selector uses the labels from Figma frame 251:2836", () => {
   assert.match(multiSelectTsx, /T1D:\s*"Type 1 Diabetes"/);
   assert.match(multiSelectTsx, /T2D:\s*"Type 2 Diabetes"/);
   assert.match(multiSelectTsx, /Prediabetic:\s*"Prediabetes"/);
-  assert.match(multiSelectTsx, /"Non diabetic":\s*"No diabeties"/);
+  assert.match(multiSelectTsx, /"Non diabetic":\s*"No diabetes"/);
   assert.match(multiSelectTsx, /getOptionLabel\(label,\s*option\)/);
   assert.doesNotMatch(multiSelectTsx, /<RoundIcon/);
 });
