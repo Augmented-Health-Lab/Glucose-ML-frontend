@@ -5,33 +5,8 @@ import {
   normalizeDatasetAccess,
 } from "../../utils/access";
 import { getHelperScriptsUrl } from "../../utils/helper-scripts";
+import { getDatasetCountry } from "../../utils/dataset-country";
 import { trackDatasetAction } from "../../analytics";
-
-const COUNTRIES = {
-  spain: { label: "Spain", icon: "/figma-assets/icon-spain.png" },
-  switzerland: { label: "Switzerland", icon: "/figma-assets/icon-switzerland.png" },
-  china: { label: "China", icon: "/figma-assets/icon-china.png" },
-  chile: { label: "Chile", icon: "/figma-assets/icon-chile.png" },
-  uk: { label: "United Kingdom", icon: "/figma-assets/icon-united-kingdom.png" },
-  us: { label: "United States", icon: "/figma-assets/icon-united-states.png" },
-} as const;
-
-// Keys are dataset titles normalized by normalizeTitle below.
-const DATASET_COUNTRIES: Record<string, (typeof COUNTRIES)[keyof typeof COUNTRIES]> = {
-  colas2019: COUNTRIES.spain,
-  t1diabetesgranada: COUNTRIES.spain,
-  hupaucm: COUNTRIES.spain,
-  d1namo: COUNTRIES.switzerland,
-  shanghait1dm: COUNTRIES.china,
-  shanghait2dm: COUNTRIES.china,
-  uchtt1dm: COUNTRIES.chile,
-  t1duom: COUNTRIES.uk,
-  brist1dopen: COUNTRIES.uk,
-};
-
-function normalizeTitle(title: string): string {
-  return title.replace(/[\s_-]+/g, "").toLowerCase();
-}
 
 type Props = {
   dataset: {
@@ -58,7 +33,7 @@ export default function DatasetHeader({ dataset, onBack }: Props) {
   const accessType = normalizeDatasetAccess(dataset.access) ?? "Controlled";
   const isControlledAccess = accessType === "Controlled";
   const helperScriptsUrl = getHelperScriptsUrl(dataset.title);
-  const country = DATASET_COUNTRIES[normalizeTitle(dataset.title)] ?? COUNTRIES.us;
+  const country = getDatasetCountry(dataset.title);
 
   return (
     <header className="detail-header">
