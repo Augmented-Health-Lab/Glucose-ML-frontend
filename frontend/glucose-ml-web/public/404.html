@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page not found — Glucose-ML</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/svg+xml" sizes="any" href="/glucose-ml-icon.svg" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <!-- Deliberately self-contained apart from the webfont, which degrades to
+         system-ui: this page must render even when the hashed app bundle is
+         missing or a deploy is mid-rollout. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        background: #f6f7f7;
+        color: #1e1f22;
+        font-family: Inter, system-ui, -apple-system, sans-serif;
+      }
+      main { width: 100%; max-width: 1440px; margin: 0 auto; padding: 48px 60px; }
+      img { height: 48px; margin-bottom: 56px; }
+      h1 { font-size: 60px; line-height: 1.09; font-weight: 700; letter-spacing: -0.025em; }
+      p { margin-top: 20px; max-width: 46ch; font-size: 19px; line-height: 1.55; color: #59636e; }
+      a {
+        display: inline-block;
+        margin-top: 36px;
+        padding: 13px 26px;
+        border-radius: 6px;
+        background: #2f8c88;
+        color: #fff;
+        font-size: 17px;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      a:hover { background: #3ba7a1; }
+      a:focus-visible { outline: 3px solid #1e1f22; outline-offset: 3px; }
+      @media (max-width: 700px) {
+        main { padding: 32px 24px; }
+        h1 { font-size: 38px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <img src="/glucose-ml-logo.svg" alt="Glucose-ML" />
+      <h1>Page not found</h1>
+      <p>
+        This address doesn't match any page on Glucose-ML. If you followed a
+        link to a dataset, its name may have changed.
+      </p>
+      <a href="/">Browse the datasets</a>
+    </main>
+  </body>
+</html>

@@ -18,6 +18,88 @@ test("public title and site name use the approved Glucose-ML copy", () => {
   assert.doesNotMatch(indexHtml, /glucose-ml-web/);
 });
 
+const APPROVED_DESCRIPTION =
+  "Explore, discover, and access public continuous glucose monitoring " +
+  "datasets to develop next-generation solutions for diabetes prevention " +
+  "and care.";
+
+test("the page description matches the on-page hero copy", () => {
+  assert.match(
+    indexHtml,
+    new RegExp(`<meta name="description" content="${APPROVED_DESCRIPTION}" />`)
+  );
+
+  const heroCopy = readFileSync(
+    new URL("src/features/home/PageTitle.tsx", appRoot),
+    "utf8"
+  )
+    .replace(/\s+/g, " ");
+  assert.ok(
+    heroCopy.includes(APPROVED_DESCRIPTION),
+    "meta description has drifted from the homepage hero copy"
+  );
+});
+
+test("Open Graph tags restate the approved title, description, and URL", () => {
+  assert.match(
+    indexHtml,
+    /<meta property="og:title" content="Glucose-ML: Public CGM Datasets for Research" \/>/
+  );
+  assert.match(
+    indexHtml,
+    new RegExp(
+      `<meta property="og:description" content="${APPROVED_DESCRIPTION}" />`
+    )
+  );
+  assert.match(
+    indexHtml,
+    /<meta property="og:url" content="https:\/\/www\.glucose-ml-project\.com\/" \/>/
+  );
+  assert.match(indexHtml, /<meta property="og:type" content="website" \/>/);
+});
+
+test("the share image is declared with matching real dimensions", () => {
+  assert.match(
+    indexHtml,
+    /<meta property="og:image" content="https:\/\/www\.glucose-ml-project\.com\/og-image\.png" \/>/
+  );
+  assert.match(indexHtml, /<meta property="og:image:width" content="1200" \/>/);
+  assert.match(indexHtml, /<meta property="og:image:height" content="630" \/>/);
+  assert.match(
+    indexHtml,
+    /<meta name="twitter:card" content="summary_large_image" \/>/
+  );
+
+  // Crawlers reject a declared size that disagrees with the file.
+  assert.deepEqual(readPngSize(new URL("public/og-image.png", appRoot)), {
+    width: 1200,
+    height: 630,
+  });
+});
+
+test("the share image carries alt text", () => {
+  const alt = indexHtml.match(/<meta property="og:image:alt" content="([^"]+)"/);
+  assert.ok(alt, "og:image:alt is missing");
+  assert.ok(alt[1].length > 40);
+});
+
+test("an unresolvable dataset marks itself noindex", () => {
+  const detail = readFileSync(
+    new URL("src/features/dataset-detail/DatasetDetail.tsx", appRoot),
+    "utf8"
+  );
+  const errorBranch = detail.slice(detail.indexOf('load.status === "error"'));
+
+  assert.match(errorBranch, /<meta name="robots" content="noindex" \/>/);
+});
+
+test("the canonical link matches the JSON-LD site URL", () => {
+  assert.match(
+    indexHtml,
+    /<link rel="canonical" href="https:\/\/www\.glucose-ml-project\.com\/" \/>/
+  );
+});
+
 test("the SVG favicon uses the supplied square icon", () => {
   assert.match(
     indexHtml,

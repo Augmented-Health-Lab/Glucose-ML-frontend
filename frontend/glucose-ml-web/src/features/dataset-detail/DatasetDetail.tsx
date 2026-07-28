@@ -655,6 +655,10 @@ export default function DatasetDetail({ dataset, onBack }: Props) {
   if (load.status === "error") {
     return (
       <AppShell>
+        {/* /dataset/<unknown> still resolves to index.html with a 200, so tell
+            crawlers not to index it rather than leaving a soft 404 behind.
+            React 19 hoists this into <head>. */}
+        <meta name="robots" content="noindex" />
         <div className="dataset-detail-page">
           <main className="dataset-detail-page__status glm-body">
             <p>
