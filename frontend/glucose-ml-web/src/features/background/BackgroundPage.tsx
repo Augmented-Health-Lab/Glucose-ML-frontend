@@ -310,7 +310,18 @@ const BackgroundPage = () => {
 
         <section id="diabetes" className="background-section background-section--teal">
           <div className="background-page__inner">
-            <h2>What is Diabetes?</h2>
+            <div className="background-heading-row">
+              <h2>What is Diabetes?</h2>
+              <a
+                className="background-learn-more"
+                href="https://www.cdc.gov/diabetes/about/index.html"
+                rel="noreferrer"
+                target="_blank"
+              >
+                Learn more
+                <img src="/figma-assets/icon-arrow-up-right.png" alt="" />
+              </a>
+            </div>
             <div className="background-copy background-copy--full">
               <p>
                 Diabetes is a long-lasting health condition that affects how a
@@ -346,15 +357,6 @@ const BackgroundPage = () => {
                   Prediabetes is preventable and reversible with lifestyle changes.
                 </li>
               </ul>
-              <a
-                className="background-learn-more"
-                href="https://www.cdc.gov/diabetes/about/index.html"
-                rel="noreferrer"
-                target="_blank"
-              >
-                Learn more
-                <img src="/figma-assets/icon-arrow-up-right.png" alt="" />
-              </a>
             </div>
           </div>
         </section>
@@ -362,7 +364,18 @@ const BackgroundPage = () => {
         <section id="cgm" className="background-section background-section--white">
           <div className="background-page__inner background-split">
             <div className="background-copy">
-              <h2>What is a Continuous Glucose Monitor (CGM)?</h2>
+              <div className="background-heading-row">
+                <h2>What is a Continuous Glucose Monitor (CGM)?</h2>
+                <a
+                  className="background-learn-more"
+                  href="https://www.cdc.gov/diabetes/about/index.html"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Learn more
+                  <img src="/figma-assets/icon-arrow-up-right.png" alt="" />
+                </a>
+              </div>
               <p>
                 A CGM is a wearable technology that continuously tracks glucose
                 levels throughout the day and night. It measures the glucose level
@@ -387,15 +400,6 @@ const BackgroundPage = () => {
                 for research and development of technology and interventions for
                 diabetes prevention and care.
               </p>
-              <a
-                className="background-learn-more background-learn-more--split"
-                href="https://www.cdc.gov/diabetes/about/index.html"
-                rel="noreferrer"
-                target="_blank"
-              >
-                Learn more
-                <img src="/figma-assets/icon-arrow-up-right.png" alt="" />
-              </a>
             </div>
             <img
               className="background-image background-image--monitor"
@@ -412,7 +416,7 @@ const BackgroundPage = () => {
                 <div className="background-heading-row">
                   <h2>What does CGM data look like?</h2>
                   <a
-                    className="background-learn-more background-learn-more--inline"
+                    className="background-learn-more"
                     href="https://www.hellolingo.com/blog/what-is-a-glucose-spike"
                     rel="noreferrer"
                     target="_blank"
@@ -504,7 +508,18 @@ const BackgroundPage = () => {
 
         <section id="glossary" className="background-section background-section--white">
           <div className="background-page__inner">
-            <h2>What are common CGM Metrics?</h2>
+            <div className="background-heading-row">
+              <h2>What are common CGM Metrics?</h2>
+              <a
+                className="background-learn-more"
+                href="https://diabetesjournals.org/care/article/42/8/1593/36184/Clinical-Targets-for-Continuous-Glucose-Monitoring"
+                rel="noreferrer"
+                target="_blank"
+              >
+                Learn more
+                <img src="/figma-assets/icon-arrow-up-right.png" alt="" />
+              </a>
+            </div>
             <div id="background-metric-cards" className="background-glossary-grid">
               {primaryMetricTerms.map((term) => (
                 <article className="background-glossary-card" key={term.term}>
@@ -539,17 +554,6 @@ const BackgroundPage = () => {
                   aria-hidden="true"
                 />
               </button>
-              {showAllMetrics ? (
-                <a
-                  className="background-learn-more background-learn-more--inline"
-                  href="https://diabetesjournals.org/care/article/42/8/1593/36184/Clinical-Targets-for-Continuous-Glucose-Monitoring"
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  Learn more
-                  <img src="/figma-assets/icon-arrow-up-right.png" alt="" />
-                </a>
-              ) : null}
             </div>
           </div>
         </section>
