@@ -5,7 +5,11 @@
   "outputDirectory": "frontend/glucose-ml-web/dist",
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/(background|about|compare)",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/dataset/:id",
       "destination": "/index.html"
     }
   ]

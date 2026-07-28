@@ -154,35 +154,52 @@ test("background data and metrics learn more links use the requested sources", (
   assert.equal(backgroundPageTsx.split(cgmMetricsHref).length - 1, 1);
 });
 
-test("background metrics learn more is available only in the expanded action row", () => {
+test("background metrics learn more sits in the section heading row", () => {
   const glossaryStart = backgroundPageTsx.indexOf('id="glossary"');
   const glossaryEnd = backgroundPageTsx.indexOf('id="models"');
   const glossarySection = backgroundPageTsx.slice(glossaryStart, glossaryEnd);
-  const actionsIndex = glossarySection.indexOf(
-    'className="background-glossary-actions"'
+  const headingRowIndex = glossarySection.indexOf(
+    'className="background-heading-row"'
   );
-  const toggleIndex = glossarySection.indexOf(
-    'className="background-glossary-toggle"',
-    actionsIndex
-  );
-  const conditionalIndex = glossarySection.indexOf(
-    "{showAllMetrics ? (",
-    toggleIndex
+  const gridIndex = glossarySection.indexOf(
+    'className="background-glossary-grid"'
   );
   const learnMoreIndex = glossarySection.indexOf(
-    'href="https://diabetesjournals.org/care/article/42/8/1593/36184/Clinical-Targets-for-Continuous-Glucose-Monitoring"',
-    conditionalIndex
+    'href="https://diabetesjournals.org/care/article/42/8/1593/36184/Clinical-Targets-for-Continuous-Glucose-Monitoring"'
   );
 
   assert.ok(glossaryStart !== -1);
   assert.ok(glossaryEnd !== -1);
-  assert.ok(actionsIndex !== -1);
-  assert.ok(toggleIndex > actionsIndex);
-  assert.ok(conditionalIndex > toggleIndex);
-  assert.ok(learnMoreIndex > conditionalIndex);
+  assert.ok(headingRowIndex !== -1);
+  assert.ok(learnMoreIndex > headingRowIndex);
+  assert.ok(learnMoreIndex < gridIndex);
+  assert.doesNotMatch(glossarySection, /\{showAllMetrics \? \(\s*<a/);
+});
+
+test("every background learn more link is right aligned in its section heading row", () => {
+  const headingRows = backgroundPageTsx.match(
+    /className="background-heading-row"[\s\S]*?<\/div>/g
+  );
+  const learnMoreCount =
+    backgroundPageTsx.split('className="background-learn-more"').length - 1;
+
+  assert.equal(headingRows?.length, 4);
+  for (const row of headingRows ?? []) {
+    const headingIndex = row.indexOf("<h2>");
+    const linkIndex = row.indexOf('className="background-learn-more"');
+
+    assert.ok(headingIndex !== -1);
+    assert.ok(linkIndex > headingIndex);
+  }
+  assert.equal(learnMoreCount, 4);
+  assert.doesNotMatch(backgroundPageTsx, /background-learn-more--/);
   assert.match(
     backgroundPageCss,
-    /\.background-glossary-actions\s*\{[^}]*display:\s*flex[^}]*justify-content:\s*space-between[^}]*flex-wrap:\s*nowrap/s
+    /\.background-heading-row\s*\{[^}]*display:\s*flex[^}]*justify-content:\s*space-between/s
+  );
+  assert.doesNotMatch(
+    backgroundPageCss,
+    /\.background-learn-more\s*\{[^}]*position:\s*absolute/s
   );
 });
 
