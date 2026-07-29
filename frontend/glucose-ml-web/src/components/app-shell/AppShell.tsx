@@ -58,7 +58,7 @@ const MoreMenu = () => {
       >
         More
         <span
-          className="app-shell-more__chevron"
+          className="app-shell-link__icon app-shell-more__chevron"
           aria-hidden="true"
         />
       </button>
