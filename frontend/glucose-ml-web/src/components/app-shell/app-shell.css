@@ -13,8 +13,8 @@
   position: relative;
   width: 100%;
   height: var(--glm-nav-height);
-  overflow: hidden;
   background: var(--glm-color-grey-border);
+  z-index: 20;
 }
 
 .app-shell-logo {
@@ -99,6 +99,99 @@
   -webkit-mask-image: url("/figma-assets/nav-about.svg");
 }
 
+.app-shell-more {
+  position: relative;
+  display: inline-flex;
+}
+
+.app-shell-more__trigger {
+  gap: 4px;
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.app-shell-more__trigger--open {
+  color: #2f8c88;
+}
+
+.app-shell-more__chevron {
+  width: 12px;
+  height: 12px;
+  flex: 0 0 auto;
+  background-color: currentColor;
+  mask: url("/figma-assets/icon-compare-chevron-down.svg") center / contain
+    no-repeat;
+  -webkit-mask: url("/figma-assets/icon-compare-chevron-down.svg") center /
+    contain no-repeat;
+  transition: transform 150ms ease;
+}
+
+.app-shell-more__trigger--open .app-shell-more__chevron {
+  transform: rotate(180deg);
+}
+
+.app-shell-more__panel {
+  position: absolute;
+  /* Drop below the nav bar (not just below the trigger) so the panel floats
+     against the page background with clear space above it. */
+  top: calc(var(--glm-nav-height) - 28px + 12px);
+  right: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid var(--glm-color-grey-border);
+  border-radius: 12px;
+  background: var(--glm-color-grey-border);
+  filter: drop-shadow(0 4px 2px rgba(4, 33, 31, 0.15));
+}
+
+.app-shell-more__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: normal;
+  color: #484848;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+a.app-shell-more__item:hover {
+  color: #2f8c88;
+}
+
+.app-shell-more__item--disabled {
+  color: #9aa4a3;
+  cursor: default;
+}
+
+.app-shell-more__icon--faq {
+  mask-image: url("/figma-assets/nav-faq.svg");
+  -webkit-mask-image: url("/figma-assets/nav-faq.svg");
+}
+
+.app-shell-more__icon--feedback {
+  mask-image: url("/figma-assets/nav-more-feedback.svg");
+  -webkit-mask-image: url("/figma-assets/nav-more-feedback.svg");
+}
+
+.app-shell-more__icon--source {
+  mask-image: url("/figma-assets/nav-more-source.svg");
+  -webkit-mask-image: url("/figma-assets/nav-more-source.svg");
+}
+
+.app-shell-more__icon--community {
+  mask-image: url("/figma-assets/nav-community.svg");
+  -webkit-mask-image: url("/figma-assets/nav-community.svg");
+}
+
 @media (max-width: 680px) {
   .app-shell-nav {
     display: flex;
@@ -134,5 +227,10 @@
 
   .app-shell-link {
     font-size: 14px;
+  }
+
+  /* The nav is a static flex row here, so measure the gap from the trigger. */
+  .app-shell-more__panel {
+    top: calc(100% + 16px);
   }
 }
